@@ -1,4 +1,5 @@
 # README
 
-[![Build
-Status](https://travis-ci.org/zack/lvm-test.svg?branch=master)](https://travis-ci.org/zack/lvm-test)
+[![Build Status](https://travis-ci.org/LiteracyVolunteersOfMA/lvm-rails.svg?branch=master)](https://travis-ci.org/LiteracyVolunteersOfMA/lvm-rails)
+
+This is a service learning project for CS4500 Spring 2017.
