@@ -3,5 +3,23 @@
   <%= @student.name %>
 </p>
 
+<p>
+  <strong>Tutor:</strong>
+  <% if !@match.nil? %>
+    <%= Tutor.find(@match.tutor_id).name %>
+  <% else %>
+    No Tutor
+  <% end %>
+</p>
+
+<p>
+  <strong>Coordinator:</strong>
+  <% if !@enrollment.nil? %>
+    <%= Coordinator.find(@enrollment.coordinator_id).name %>
+  <% else %>
+    No Coordinator
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

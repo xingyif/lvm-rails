@@ -5,6 +5,18 @@ class CoordinatorsController < ApplicationController
 
   def show
     @coordinator = Coordinator.find(params[:id])
+    @students = students
+    @tutors = tutors
+  end
+
+  def students
+    match_params = { coordinator_id: params[:id], end: nil }
+    Enrollment.where(match_params).to_a.map { |e| Student.find(e.student_id) }
+  end
+
+  def tutors
+    match_params = { coordinator_id: params[:id], end: nil }
+    VolunteerJob.where(match_params).to_a.map { |v| Tutor.find(v.tutor_id) }
   end
 
   def new
@@ -45,6 +57,9 @@ class CoordinatorsController < ApplicationController
   private
 
   def coordinator_params
-    params.require(:coordinator).permit(:name, :email)
+    params.require(:coordinator).permit(
+      :name,
+      :email
+    )
   end
 end
