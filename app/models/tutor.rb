@@ -3,6 +3,12 @@ class Tutor < ApplicationRecord
 
   before_save { email.downcase! }
 
+  has_many :matches
+  has_many :students, through: :matches
+
+  has_many :volunteer_jobs
+  has_many :coordinators, through: :volunteer_jobs
+
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }

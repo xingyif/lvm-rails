@@ -10,13 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122012039) do
+ActiveRecord::Schema.define(version: 20170122213919) do
 
   create_table "coordinators", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "coordinator_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["coordinator_id"], name: "index_enrollments_on_coordinator_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "tutor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_matches_on_student_id"
+    t.index ["tutor_id"], name: "index_matches_on_tutor_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -30,6 +48,15 @@ ActiveRecord::Schema.define(version: 20170122012039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "email"
+  end
+
+  create_table "volunteer_jobs", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.integer  "coordinator_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["coordinator_id"], name: "index_volunteer_jobs_on_coordinator_id"
+    t.index ["tutor_id"], name: "index_volunteer_jobs_on_tutor_id"
   end
 
 end
