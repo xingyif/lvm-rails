@@ -1,0 +1,26 @@
+# This is the configuration used to check the rubocop source code.
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'db/schema.rb'
+    - 'config/**/*'
+    - 'bin/**/*'
+  TargetRubyVersion: 2.2
+
+Style/Encoding:
+  EnforcedStyle: when_needed
+  Enabled: true
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+
+Documentation:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
