@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122213919) do
+ActiveRecord::Schema.define(version: 20170122224400) do
 
   create_table "coordinators", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20170122213919) do
     t.integer  "coordinator_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.date     "start"
+    t.date     "end"
     t.index ["coordinator_id"], name: "index_enrollments_on_coordinator_id"
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
@@ -33,6 +35,8 @@ ActiveRecord::Schema.define(version: 20170122213919) do
     t.integer  "tutor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "start"
+    t.date     "end"
     t.index ["student_id"], name: "index_matches_on_student_id"
     t.index ["tutor_id"], name: "index_matches_on_tutor_id"
   end
@@ -55,6 +59,8 @@ ActiveRecord::Schema.define(version: 20170122213919) do
     t.integer  "coordinator_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.date     "start"
+    t.date     "end"
     t.index ["coordinator_id"], name: "index_volunteer_jobs_on_coordinator_id"
     t.index ["tutor_id"], name: "index_volunteer_jobs_on_tutor_id"
   end

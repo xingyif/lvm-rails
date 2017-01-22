@@ -8,5 +8,39 @@
   <%= @coordinator.email %>
 </p>
 
+<p>
+  <strong>Tutors:</strong>
+  <% if !@tutors.empty? %>
+    <table>
+      <% @tutors.each do |t| %>
+        <tr>
+          <td>
+            <%= t.name %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    No Tutors
+  <% end %>
+</p>
+
+<p>
+  <strong>Students:</strong>
+  <% if !@students.empty? %>
+    <table>
+      <% @students.each do |s| %>
+        <tr>
+          <td>
+            <%= student.name %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    No Students
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_coordinator_path(@coordinator) %> |
 <%= link_to 'Back', coordinators_path %>

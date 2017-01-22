@@ -5,6 +5,9 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
+
+    @match = Match.where(student_id: params[:id], end: nil).take
+    @enrollment = Enrollment.where(student_id: params[:id], end: nil).take
   end
 
   def new
@@ -45,6 +48,8 @@ class StudentsController < ApplicationController
   private
 
   def student_params
-    params.require(:student).permit(:name, :string)
+    params.require(:student).permit(
+      :name
+    )
   end
 end
