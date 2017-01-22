@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   resources :tutors
   resources :students
+  resources :coordinators
 end
