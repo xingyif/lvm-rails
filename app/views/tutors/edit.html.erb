@@ -1,0 +1,30 @@
+<h1>Editing tutor</h1>
+
+<%= form_for :tutor, url: tutor_path(@tutor), method: :patch do |f| %>
+
+  <% if @tutor.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@tutor.errors.count, "error") %> prohibited
+        this tutor from being saved:
+      </h2>
+      <ul>
+        <% @tutor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', tutors_path %>
