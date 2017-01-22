@@ -9,13 +9,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.1'
+gem 'rainbow', '< 2.2.1'
+gem 'rubocop', '~> 0.47.1', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.5'
   gem 'pry'
+  gem 'rspec-rails', '~> 3.5'
   gem 'sqlite3'
 end
 
