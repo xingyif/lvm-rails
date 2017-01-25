@@ -5,10 +5,14 @@
 
 <p>
   <strong>Tutor:</strong>
-  <% if !@match.nil? %>
-    <%= Tutor.find(@match.tutor_id).name %>
-  <% else %>
-    No Tutor
+  <%= form_tag('set_tutor', method: 'put') do %>
+    <% if !@match.nil? %>
+      <%= select_tag(:tutor_id, options_for_select(tutor_options, @match.tutor_id)) %>
+    <% else %>
+      <%= select_tag(:tutor_id, options_for_select(tutor_options)) %>
+    <% end %>
+    <%= submit_tag('Set Tutor') %>
+    <%= hidden_field_tag(:student_id, @student.id) %>
   <% end %>
 </p>
 
