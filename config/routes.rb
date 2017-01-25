@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
+  put 'students/set_tutor'
+
   resources :tutors
   resources :students
   resources :coordinators

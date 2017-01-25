@@ -1,4 +1,6 @@
 class StudentsController < ApplicationController
+  helper_method :tutor_options
+
   def index
     @students = Student.all
   end
@@ -6,7 +8,7 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find(params[:id])
 
-    @match = Match.where(student_id: params[:id], end: nil).take
+    @match = current_match(params[:id])
     @enrollment = Enrollment.where(student_id: params[:id], end: nil).take
   end
 
@@ -43,6 +45,44 @@ class StudentsController < ApplicationController
     @student.destroy
 
     redirect_to students_path
+  end
+
+  def tutor_options
+    tutors = Tutor.all.to_a.map { |t| [t.name, t.id] }
+    tutors.insert(0, ['No Tutor', 0])
+  end
+
+  def set_tutor
+    tutor_id = params[:tutor_id].to_i
+    student_id = params[:student_id].to_i
+    if should_update_tutor(student_id, tutor_id)
+      unmatch_current_tutor(student_id)
+      start_match_with_tutor(student_id, tutor_id) if tutor_id != 0
+    end
+    redirect_to Student.find(student_id)
+  end
+
+  def should_update_tutor(student_id, tutor_id)
+    tutor_id.zero? ||
+      !current_match(student_id) ||
+      (tutor_id != 0 && tutor_is_existing_tutor(student_id, tutor_id))
+  end
+
+  def tutor_is_existing_tutor(student_id, tutor_id)
+    current_tutor = current_match(student_id)
+    current_tutor && tutor_id != current_tutor.tutor_id
+  end
+
+  def unmatch_current_tutor(student_id)
+    Match.where(student_id: student_id, end: nil).update_all(end: Date.today)
+  end
+
+  def start_match_with_tutor(student_id, tutor_id)
+    Match.create(student_id: student_id, tutor_id: tutor_id, start: Date.today)
+  end
+
+  def current_match(student_id)
+    Match.where(student_id: student_id, end: nil).take
   end
 
   private
