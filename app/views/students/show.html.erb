@@ -13,6 +13,7 @@
     <% end %>
     <%= submit_tag('Set Tutor') %>
     <%= hidden_field_tag(:student_id, @student.id) %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <% end %>
 </p>
 
