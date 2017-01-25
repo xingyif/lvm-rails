@@ -1,4 +1,6 @@
 class TutorsController < ApplicationController
+  helper_method :student_options
+
   def index
     @tutors = Tutor.all
   end
@@ -52,6 +54,21 @@ class TutorsController < ApplicationController
     @tutor.destroy
 
     redirect_to tutors_path
+  end
+
+  def student_options
+    matched_student_ids = Match.where(end: nil).to_a.map(&:student_id)
+    all_students_arr = Student.all.to_a
+    untutored_students = all_students_arr
+                         .reject { |s| matched_student_ids.include? s.id }
+    untutored_students.map { |t| [t.name, t.id] }
+  end
+
+  def add_student
+    student_id = params[:student_id]
+    tutor_id = params[:tutor_id]
+    Match.create(student_id: student_id, tutor_id: tutor_id, start: Date.today)
+    redirect_to Tutor.find(tutor_id)
   end
 
   private
