@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   put 'students/set_tutor'
+  put 'tutors/add_student'
 
   resources :tutors
   resources :students

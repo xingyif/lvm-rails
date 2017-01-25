@@ -47,11 +47,6 @@ class StudentsController < ApplicationController
     redirect_to students_path
   end
 
-  def tutor_options
-    tutors = Tutor.all.to_a.map { |t| [t.name, t.id] }
-    tutors.insert(0, ['No Tutor', 0])
-  end
-
   def set_tutor
     tutor_id = params[:tutor_id].to_i
     student_id = params[:student_id].to_i
@@ -60,6 +55,19 @@ class StudentsController < ApplicationController
       start_match_with_tutor(student_id, tutor_id) if tutor_id != 0
     end
     redirect_to Student.find(student_id)
+  end
+
+  def tutor_options
+    tutors = Tutor.all.to_a.map { |t| [t.name, t.id] }
+    tutors.insert(0, ['No Tutor', 0])
+  end
+
+  private
+
+  def student_params
+    params.require(:student).permit(
+      :name
+    )
   end
 
   def should_update_tutor(student_id, tutor_id)
@@ -83,13 +91,5 @@ class StudentsController < ApplicationController
 
   def current_match(student_id)
     Match.where(student_id: student_id, end: nil).take
-  end
-
-  private
-
-  def student_params
-    params.require(:student).permit(
-      :name
-    )
   end
 end
