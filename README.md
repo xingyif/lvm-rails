@@ -82,3 +82,25 @@ rails server
 ```
 
 The application should be running and accessible at http://localhost:3000 !
+
+(create -> drop -> migrate)
+* When ERROR: ActiveRecord::PendingMigrationError shows up:
+  Migrations are pending. To resolve this issue, run: bin/rails db:migrate RAILS_ENV=development shows up
+  DO:
+    ```
+    rake db:migrate
+    ```
+    
+    ```
+    bundle install
+    ```
+    
+    
+Now you're all set to run the rails server:
+
+```
+rails server
+```
+
+The application should be running and accessible at http://localhost:3000 !
+
