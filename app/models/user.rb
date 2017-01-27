@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_numericality_of :role, in: 0..2
+
   # Role management as follows
   # 0 => tutor (default)
   # 1 => coordinator
@@ -18,10 +20,6 @@ class User < ApplicationRecord
 
   def admin?
     role == 2
-  end
-
-  def tutor_level?
-    role >= 0
   end
 
   def coordinator_level?
