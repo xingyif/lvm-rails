@@ -1,6 +1,8 @@
 # README
 
 [![Build Status](https://travis-ci.org/LiteracyVolunteersOfMA/lvm-rails.svg?branch=master)](https://travis-ci.org/LiteracyVolunteersOfMA/lvm-rails)
+[![Code Climate](https://codeclimate.com/github/LiteracyVolunteersOfMA/lvm-rails/badges/gpa.svg)](https://codeclimate.com/github/LiteracyVolunteersOfMA/lvm-rails)
+[![Coverage Status](https://coveralls.io/repos/github/LiteracyVolunteersOfMA/lvm-rails/badge.svg?branch=master)](https://coveralls.io/github/LiteracyVolunteersOfMA/lvm-rails?branch=master)
 
 This is a service learning project for CS4500 Spring 2017.
 
@@ -90,12 +92,12 @@ The application should be running and accessible at http://localhost:3000 !
     ```
     rake db:migrate
     ```
-    
+
     ```
     bundle install
     ```
-    
-    
+
+
 Now you're all set to run the rails server:
 
 ```
@@ -103,4 +105,3 @@ rails server
 ```
 
 The application should be running and accessible at http://localhost:3000 !
-

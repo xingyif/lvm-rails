@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'coveralls', require: false
 gem 'devise', '~> 4.2'
 gem 'jquery-rails', '~> 4.2'
 gem 'rails', '~> 5.0'
