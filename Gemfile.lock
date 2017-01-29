@@ -40,8 +40,16 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     ast (2.3.0)
+<<<<<<< HEAD
     awesome_print (1.7.0)
+=======
+    autoprefixer-rails (6.7.0)
+      execjs
+>>>>>>> LVM-285 Integrate bootstrap gem for styling
     bcrypt (3.1.11)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.3)
     coderay (1.1.1)
     concurrent-ruby (1.0.4)
@@ -211,6 +219,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+<<<<<<< HEAD
   awesome_print (~> 1.7)
   coveralls
   devise (~> 4.2)
@@ -219,6 +228,17 @@ DEPENDENCIES
   pg (~> 0.19)
   pry (~> 0.10)
   rails (~> 5.0)
+=======
+  bootstrap-sass (~> 3.3.6)
+  devise
+  jbuilder (~> 2.5)
+  jquery-rails
+  listen (~> 3.0.5)
+  pg
+  pry
+  puma (~> 3.0)
+  rails (~> 5.0.1)
+>>>>>>> LVM-285 Integrate bootstrap gem for styling
   rainbow (< 2.2.1)
   rspec-rails (~> 3.5)
   rubocop (~> 0.47)
