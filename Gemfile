@@ -12,6 +12,7 @@ gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.1'
 gem 'rainbow', '< 2.2.1'
 gem 'rubocop', '~> 0.47.1', require: false
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
