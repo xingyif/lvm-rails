@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe VolunteerJob, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'associations' do
+    it 'should belong to a coordinator' do
+      should belong_to(:coordinator)
+    end
+
+    it 'should belong to a tutor' do
+      should belong_to(:tutor)
+    end
+  end
 end
