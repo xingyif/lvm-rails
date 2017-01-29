@@ -10,12 +10,8 @@ gem 'devise', '~> 4.2'
 gem 'jquery-rails', '~> 4.2'
 gem 'rails', '~> 5.0'
 gem 'rainbow', '< 2.2.1'
-<<<<<<< HEAD
-gem 'rubocop', '~> 0.47', require: false
-=======
 gem 'rubocop', '~> 0.47', require: false
 gem 'bootstrap-sass', '~> 3.3.6'
->>>>>>> LVM-285 Integrate bootstrap gem for styling
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5.0'
 gem 'uglifier', '~> 3.0'
