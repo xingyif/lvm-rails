@@ -13,3 +13,13 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.navbar-brand {
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  img {
+    display: inline-block;
+    height: 42px;
+  }
+}
