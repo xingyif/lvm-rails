@@ -20,6 +20,7 @@ group :development, :test do
   gem 'awesome_print', '~> 1.7'
   gem 'faker', '~> 1.7'
   gem 'pry', '~> 0.10'
+  gem 'rails-controller-testing', '~>1.0.1'
   gem 'rspec-rails', '~> 3.5'
   gem 'seed-fu', '~> 2.3'
   gem 'shoulda-matchers', '~> 3.1'
