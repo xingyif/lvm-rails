@@ -12,3 +12,13 @@ notifications:
 
 script:
   bundle exec rspec spec && bundle exec rubocop
+
+deploy: 
+  provider: elasticbeanstalk
+  app: lvm-rails-production
+  env: Sample-env
+  bucket_name: elasticbeanstalk-us-east-1-373469085898
+  region: us-east-1
+  on:
+    repo: LiteracyVolunteersOfMA/lvm-rails
+    all_branches: true  
