@@ -13,6 +13,7 @@ gem 'rails', '~> 5.0'
 gem 'rainbow', '< 2.2.1'
 gem 'rubocop', '~> 0.47', require: false
 gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
 gem 'turbolinks', '~> 5.0'
 gem 'uglifier', '~> 3.0'
 
