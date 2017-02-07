@@ -91,6 +91,18 @@ rails server
 
 The application should be running and accessible at `http://localhost:3000`!
 
+## Seeding the database
+Run `rake db:seed_fu` to seed the database with:
+* 20 students
+* 20 tutors
+* 20 coordinators
+* A random assortment of relationships between students/tutors/coordinators
+* 3 user accounts
+  * tutor@email.com (role: tutor)
+  * coordinator@email.com (role: coordinator)
+  * admin@email.com (role: admin)
+  * all passwords are "password"
+
 ## Troubleshooting
 
 * If you get "ActiveRecord::PendingMigrationError", this means that you need to
