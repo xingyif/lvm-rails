@@ -3,7 +3,7 @@ require 'coveralls'
 require 'shoulda/matchers'
 require 'support/controller_helpers'
 
-Coveralls.wear!
+Coveralls.wear!('rails')
 
 ::Bundler.require(:default, :test)
 Shoulda::Matchers.configure do |config|
