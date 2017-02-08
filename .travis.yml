@@ -13,7 +13,10 @@ notifications:
 script:
   bundle exec rspec spec && bundle exec rubocop
 
-deploy: 
+after_success:
+  ./scripts/sync_repos.sh
+
+deploy:
   provider: elasticbeanstalk
   app: lvm-rails-production
   env: Sample-env
@@ -21,4 +24,4 @@ deploy:
   region: us-east-1
   on:
     repo: LiteracyVolunteersOfMA/lvm-rails
-    all_branches: true  
+    all_branches: true
