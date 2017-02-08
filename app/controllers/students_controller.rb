@@ -7,9 +7,8 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
-
     @match = current_match(params[:id])
-    @enrollment = Enrollment.where(student_id: params[:id], end: nil).take
+    @enrollment = current_enrollment(params[:id])
   end
 
   def new
@@ -57,11 +56,6 @@ class StudentsController < ApplicationController
     redirect_to Student.find(student_id)
   end
 
-  def tutor_options
-    tutors = Tutor.all.to_a.map { |t| [t.name, t.id] }
-    tutors.insert(0, ['No Tutor', 0])
-  end
-
   private
 
   def student_params
@@ -70,7 +64,15 @@ class StudentsController < ApplicationController
     )
   end
 
+  def tutor_options
+    tutors = Tutor.all.to_a.map { |t| [t.name, t.id] }
+    tutors.insert(0, ['No Tutor', 0])
+  end
+
   def should_update_tutor(student_id, tutor_id)
+    # If the selection was "No tutor" (id is 0)
+    # or the student doesn't have a tutor
+    # or the student does have one and this tutor isn't it
     tutor_id.zero? ||
       !current_match(student_id) ||
       (tutor_id != 0 && tutor_is_existing_tutor(student_id, tutor_id))
@@ -91,5 +93,9 @@ class StudentsController < ApplicationController
 
   def current_match(student_id)
     Match.where(student_id: student_id, end: nil).take
+  end
+
+  def current_enrollment(student_id)
+    Enrollment.where(student_id: student_id, end: nil).take
   end
 end

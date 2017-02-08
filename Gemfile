@@ -19,6 +19,7 @@ gem 'uglifier', '~> 3.0'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.7'
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
   gem 'pry', '~> 0.10'
   gem 'rails-controller-testing', '~>1.0.1'
