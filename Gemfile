@@ -17,21 +17,25 @@ gem 'simple_form'
 gem 'turbolinks', '~> 5.0'
 gem 'uglifier', '~> 3.0'
 
-group :development, :test do
-  gem 'awesome_print', '~> 1.7'
+group :test do
+  gem 'database_cleaner', '~> 1.5.3'
   gem 'factory_girl_rails', '~> 4.0'
-  gem 'faker', '~> 1.7'
-  gem 'pry', '~> 0.10'
   gem 'rails-controller-testing', '~>1.0.1'
   gem 'rspec-rails', '~> 3.5'
-  gem 'seed-fu', '~> 2.3'
   gem 'shoulda-matchers', '~> 3.1'
-  gem 'sqlite3', '~> 1.3'
 end
 
 group :development do
   gem 'spring', '~> 2.0'
   gem 'spring-watcher-listen', '~> 2.0'
+end
+
+group :development, :test do
+  gem 'awesome_print', '~> 1.7'
+  gem 'faker', '~> 1.7'
+  gem 'pry', '~> 0.10'
+  gem 'seed-fu', '~> 2.3'
+  gem 'sqlite3', '~> 1.3'
 end
 
 group :production do

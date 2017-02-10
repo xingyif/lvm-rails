@@ -2,6 +2,9 @@ require 'bundler/setup'
 require 'coveralls'
 require 'shoulda/matchers'
 require 'support/controller_helpers'
+require 'support/database_cleaner'
+
+ENV['RAILS_ENV'] ||= 'test'
 
 Coveralls.wear!('rails')
 
