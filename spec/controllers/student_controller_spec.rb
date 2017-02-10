@@ -229,7 +229,7 @@ RSpec.describe StudentsController, type: :controller do
 
             it 'does not set up a new match for the student' do
               put :set_tutor, tutor_id: @new_tutor, student_id: @student
-              # That is, the student started with and ended with exactlt 1 match
+              # That is, the student started with and ended with exactly 1 match
               expect(Match.where(student_id: @student).length).to eq(1)
             end
           end
