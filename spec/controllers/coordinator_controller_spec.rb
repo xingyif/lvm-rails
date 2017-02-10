@@ -15,7 +15,7 @@ RSpec.describe CoordinatorsController, type: :controller do
         get :show, id: @coordinator
         expect(assigns(:coordinator)).to eq(@coordinator)
       end
-      
+
       it 'populates an enrollment' do
         enrollment = Enrollment.where(coordinator_id: @coordinator.id).take
         get :show, id: @coordinator
@@ -109,7 +109,8 @@ RSpec.describe CoordinatorsController, type: :controller do
 
         it 'assigns the updated coordinator as @coordinator' do
           post :update, id: @coordinator.id, coordinator: @new_coordinator_attrs
-          expect(assigns(:coordinator).name).to eq(@new_coordinator_attrs[:name])
+          expect(assigns(:coordinator).name)
+            .to eq(@new_coordinator_attrs[:name])
         end
 
         it 'redirects to the coordinator view' do
