@@ -123,12 +123,13 @@ RSpec.describe StudentsController, type: :controller do
       context 'with valid attributes' do
         it 'saves the new student in the database' do
           post :update, params: { id: @student, student: @new_student_attrs }
-          expect(Student.last.name).to eq(@new_student_attrs[:name])
+          expect(Student.last.first_name).to eq(@new_student_attrs[:first_name])
         end
 
         it 'assigns the updated student as @student' do
           post :update, params: { id: @student, student: @new_student_attrs }
-          expect(assigns(:student).name).to eq(@new_student_attrs[:name])
+          expect(assigns(:student).first_name)
+            .to eq(@new_student_attrs[:first_name])
         end
 
         it 'redirects to the student view' do
@@ -229,10 +230,8 @@ RSpec.describe StudentsController, type: :controller do
             end
 
             it 'does not set up a new match for the student' do
-              put :set_tutor, params: {
-                tutor_id: @new_tutor, student_id: @student
-              }
-              # That is, the student started with and ended with exactly 1 match
+              put :set_tutor, tutor_id: @new_tutor, student_id: @student
+              # That is, the student started with and ended with exactlt 1 match
               expect(Match.where(student_id: @student).length).to eq(1)
             end
           end

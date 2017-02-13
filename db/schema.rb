@@ -42,9 +42,39 @@ ActiveRecord::Schema.define(version: 20170202173111) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.date     "dob"
+    t.string   "gender"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.boolean  "mail_ok"
+    t.string   "email"
+    t.boolean  "email_ok"
+    t.string   "cell_phone"
+    t.boolean  "cell_ok"
+    t.boolean  "cell_lvm_ok"
+    t.string   "home_phone"
+    t.boolean  "home_ok"
+    t.boolean  "home_lvm_ok"
+    t.string   "work_number"
+    t.boolean  "work_ok"
+    t.boolean  "work_lvm_ok"
+    t.string   "alternate_number"
+    t.string   "emergency_name"
+    t.string   "emergency_number"
+    t.string   "referral"
+    t.string   "why_lvm"
+    t.string   "race"
+    t.boolean  "is_hispanic"
+    t.string   "native_language"
+    t.string   "origin_country"
+    t.integer  "availability"
+    t.integer  "tutor_preference"
   end
 
   create_table "tutors", force: :cascade do |t|

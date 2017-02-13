@@ -5,6 +5,5 @@ class Student < ApplicationRecord
   has_many :enrollments
   has_many :coordinators, through: :enrollments
 
-  validates :name, presence: true,
-                   length: { minimum: 3 }
+  validates :first_name, presence: true, length: { minimum: 3 }
 end
