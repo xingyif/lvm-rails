@@ -73,10 +73,30 @@ class TutorsController < ApplicationController
 
   private
 
+  # rubocop:disable MethodLength
   def tutor_params
     params.require(:tutor).permit(
-      :name,
-      :email
+      :address,
+      :affiliate,
+      :cell_phone,
+      :city,
+      :dob,
+      :education,
+      :email,
+      :employment,
+      :first_name,
+      :gender,
+      :last_name,
+      :native_language,
+      :occupation,
+      :orientation,
+      :phone,
+      :race,
+      :referral,
+      :state,
+      :training_type,
+      :training,
+      :zip
     )
   end
 end

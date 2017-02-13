@@ -1,0 +1,118 @@
+
+  <% if @tutor.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@tutor.errors.count, "error") %> prohibited
+        this tutor from being saved:
+      </h2>
+      <ul>
+        <% @tutor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.input :first_name %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :last_name %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :dob, as: :date, label: "Date of Birth",
+                                   start_year: Date.today.year - 70,
+                                   end_year: Date.today.year - 12 %>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= f.label "Gender" %><br>
+        <%= collection_radio_buttons(:tutor, :gender, [["male", "Male"] ,["female", "Female"]], :first, :last) do |b| %>
+          <label class="radio-inline">
+            <%= b.radio_button %> <%= b.text %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-5">
+      <%= f.input :address %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :city %>
+    </div>
+    <div class="col-md-1">
+      <%= f.input :state, collection: us_states %>
+    </div>
+    <div class="col-md-2">
+      <%= f.input :zip %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :phone %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :cell_phone %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :email %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.input :orientation, as: :date %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :training, as: :date %>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.label "Training Type" %><br>
+        <%= collection_radio_buttons(:tutor, :training_type, [["ABE", "ABE"] ,["ESOL", "ESOL"]], :first, :last) do |b| %>
+          <label class="radio-inline">
+            <%= b.radio_button %> <%= b.text %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :affiliate, collection: affiliate %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.input :native_language, collection: native_language %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :race, collection: race %>
+    </div>
+    <div class="col-md-5">
+      <%= f.input :education, collection: education %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.input :referral, collection: referral %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :employment, collection: employment %>
+    </div>
+    <div class="col-md-5">
+      <%= f.input :occupation %>
+    </div>
+  </div>
+
+  <hr>
+  <%= f.button :submit %>
