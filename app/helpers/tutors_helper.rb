@@ -98,4 +98,10 @@ module TutorsHelper
       ['Boston', 'Boston']
     ]
   end
+
+  module_function :affiliate,
+                  :education,
+                  :employment,
+                  :referral,
+                  :native_language
 end

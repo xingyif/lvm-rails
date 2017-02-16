@@ -70,4 +70,7 @@ module ApplicationHelper
       ['White', 'White']
     ]
   end
+
+  module_function :race,
+                  :us_states
 end

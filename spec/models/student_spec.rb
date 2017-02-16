@@ -22,4 +22,12 @@ RSpec.describe Student, type: :model do
   describe 'validations' do
     # TODO: add validation
   end
+
+  describe '#name' do
+    it 'concatenates first_name and last_name' do
+      student = create(:student, first_name: 'Test', last_name: 'Testerson')
+      full_name = 'Test Testerson'
+      expect(student.name).to eq(full_name)
+    end
+  end
 end
