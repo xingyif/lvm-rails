@@ -62,5 +62,4 @@ class CoordinatorsController < ApplicationController
     match_params = { coordinator_id: params[:id], end: nil }
     VolunteerJob.where(match_params).to_a.map { |v| Tutor.find(v.tutor_id) }
   end
-
 end
