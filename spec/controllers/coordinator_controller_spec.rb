@@ -16,12 +16,6 @@ RSpec.describe CoordinatorsController, type: :controller do
         expect(assigns(:coordinator)).to eq(@coordinator)
       end
 
-      it 'populates an enrollment' do
-        enrollment = Enrollment.where(coordinator_id: @coordinator.id).take
-        get :show, id: @coordinator
-        expect(assigns(:enrollment)).to eq(enrollment)
-      end
-
       it 'renders the :show view' do
         get :show, id: @coordinator
         expect(response).to render_template :show
