@@ -123,18 +123,21 @@ RSpec.describe CoordinatorsController, type: :controller do
 
       context 'with valid attributes' do
         it 'saves the new coordinator in the database' do
-          post :update, params: { id: @coordinator.id, coordinator: @new_coordinator_attrs }
+          post :update, params: { id: @coordinator.id,
+                                  coordinator: @new_coordinator_attrs }
           expect(Coordinator.last.name).to eq(@new_coordinator_attrs[:name])
         end
 
         it 'assigns the updated coordinator as @coordinator' do
-          post :update, params: { id: @coordinator.id, coordinator: @new_coordinator_attrs }
+          post :update, params: { id: @coordinator.id,
+                                  coordinator: @new_coordinator_attrs }
           expect(assigns(:coordinator).name)
             .to eq(@new_coordinator_attrs[:name])
         end
 
         it 'redirects to the coordinator view' do
-          post :update, params: { id: @coordinator.id, coordinator: @new_coordinator_attrs }
+          post :update, params: { id: @coordinator.id,
+                                  coordinator: @new_coordinator_attrs }
           expect(response).to redirect_to(@coordinator)
         end
       end
