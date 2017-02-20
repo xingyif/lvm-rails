@@ -9,16 +9,6 @@ class CoordinatorsController < ApplicationController
     @tutors = tutors
   end
 
-  def students
-    match_params = { coordinator_id: params[:id], end: nil }
-    Enrollment.where(match_params).to_a.map { |e| Student.find(e.student_id) }
-  end
-
-  def tutors
-    match_params = { coordinator_id: params[:id], end: nil }
-    VolunteerJob.where(match_params).to_a.map { |v| Tutor.find(v.tutor_id) }
-  end
-
   def new
     @coordinator = Coordinator.new
   end
@@ -61,5 +51,15 @@ class CoordinatorsController < ApplicationController
       :name,
       :email
     )
+  end
+
+  def students
+    match_params = { coordinator_id: params[:id], end: nil }
+    Enrollment.where(match_params).to_a.map { |e| Student.find(e.student_id) }
+  end
+
+  def tutors
+    match_params = { coordinator_id: params[:id], end: nil }
+    VolunteerJob.where(match_params).to_a.map { |v| Tutor.find(v.tutor_id) }
   end
 end
