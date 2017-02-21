@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20170221223417) do
     t.date     "training"
     t.date     "dob"
     t.string   "other_phone"
+    t.date     "intake"
     t.string   "email_other"
   end
 

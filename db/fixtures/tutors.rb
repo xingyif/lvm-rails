@@ -14,17 +14,18 @@ require 'tutors_helper'
     t.employment        = TutorsHelper.employment.sample[0]
     t.first_name        = Faker::Name.first_name
     t.gender            = %w(Male Female).sample
+    t.home_phone        = Faker::Base.numerify('(###) ###-####')
+    t.intake            = Faker::Date.between(3.months.ago, 2.months.ago)
     t.last_name         = Faker::Name.last_name
     t.native_language   = TutorsHelper.native_language.sample[0]
     t.occupation        = Faker::Company.profession
     t.orientation       = Faker::Date.between(1.month.ago, 1.week.ago)
-    t.home_phone        = Faker::Base.numerify('(###) ###-####')
     t.other_phone       = Faker::Base.numerify('(###) ###-####')
     t.race              = ApplicationHelper.race.sample[0]
     t.referral          = TutorsHelper.referral.sample[0]
     t.state             = Faker::Address.state
-    t.training_type     = %w(ABE ESOL).sample
     t.training          = Faker::Date.between(1.month.ago, 1.week.ago)
+    t.training_type     = %w(ABE ESOL).sample
     t.zip               = Faker::Base.numerify('#####')
   end
 end
