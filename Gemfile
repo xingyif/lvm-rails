@@ -10,6 +10,7 @@ gem 'coveralls', require: false
 gem 'devise', '~> 4.2'
 gem 'faker', '~> 1.7'
 gem 'jquery-rails', '~> 4.2'
+gem 'jquery-ui-rails', '~> 6.0.1'
 gem 'rails', '~> 5.0'
 gem 'rainbow', '< 2.2.1'
 gem 'rubocop', '~> 0.47', require: false
