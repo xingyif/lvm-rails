@@ -14,7 +14,8 @@ class Tutor < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
   validates :cell_phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }
-  validates :phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }
+  validates :home_phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }
+  validates :other_phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }
   validates :zip, allow_blank: true, format: { with: VALID_ZIP_REGEX }
 
   validates :first_name, presence: true

@@ -27,16 +27,42 @@ RSpec.describe Tutor, type: :model do
       end
     end
 
-    describe 'phone numbers' do
+    describe 'home_phone' do
       it 'validates format' do
-        should allow_value('(555) 555-5555').for(:phone)
-        should allow_value('555-555-5555').for(:phone)
-        should_not allow_value('43-4343-4444').for(:phone)
-        should_not allow_value('434-3433-4444').for(:phone)
-        should_not allow_value('434-434-444').for(:phone)
-        should_not allow_value('4333-433-4444').for(:phone)
-        should_not allow_value('(232) 343-99439').for(:phone)
-        should_not allow_value('(abc) 123-defg').for(:phone)
+        should allow_value('(555) 555-5555').for(:home_phone)
+        should allow_value('555-555-5555').for(:home_phone)
+        should_not allow_value('43-4343-4444').for(:home_phone)
+        should_not allow_value('434-3433-4444').for(:home_phone)
+        should_not allow_value('434-434-444').for(:home_phone)
+        should_not allow_value('4333-433-4444').for(:home_phone)
+        should_not allow_value('(232) 343-99439').for(:home_phone)
+        should_not allow_value('(abc) 123-defg').for(:home_phone)
+      end
+    end
+
+    describe 'cell_phone' do
+      it 'validates format' do
+        should allow_value('(555) 555-5555').for(:cell_phone)
+        should allow_value('555-555-5555').for(:cell_phone)
+        should_not allow_value('43-4343-4444').for(:cell_phone)
+        should_not allow_value('434-3433-4444').for(:cell_phone)
+        should_not allow_value('434-434-444').for(:cell_phone)
+        should_not allow_value('4333-433-4444').for(:cell_phone)
+        should_not allow_value('(232) 343-99439').for(:cell_phone)
+        should_not allow_value('(abc) 123-defg').for(:cell_phone)
+      end
+    end
+
+    describe 'other_phone' do
+      it 'validates format' do
+        should allow_value('(555) 555-5555').for(:other_phone)
+        should allow_value('555-555-5555').for(:other_phone)
+        should_not allow_value('43-4343-4444').for(:other_phone)
+        should_not allow_value('434-3433-4444').for(:other_phone)
+        should_not allow_value('434-434-444').for(:other_phone)
+        should_not allow_value('4333-433-4444').for(:other_phone)
+        should_not allow_value('(232) 343-99439').for(:other_phone)
+        should_not allow_value('(abc) 123-defg').for(:other_phone)
       end
     end
 
