@@ -9,9 +9,15 @@ class Tutor < ApplicationRecord
   has_many :volunteer_jobs
   has_many :coordinators, through: :volunteer_jobs
 
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+  validates :email_preferred, presence: true,
+                              length: { maximum: 255 },
+                              format: { with: VALID_EMAIL_REGEX },
+                              uniqueness: { case_sensitive: false }
+
+  validates :email_other, length: { maximum: 255 },
+                          format: { with: VALID_EMAIL_REGEX },
+                          uniqueness: { case_sensitive: false },
+                          allow_blank: true
 
   validates :cell_phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }
   validates :home_phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }

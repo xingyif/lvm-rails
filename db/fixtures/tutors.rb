@@ -9,7 +9,8 @@ require 'tutors_helper'
     t.city              = Faker::Address.city
     t.dob               = Faker::Date.between(65.years.ago, 18.years.ago)
     t.education         = TutorsHelper.education.sample[0]
-    t.email             = Faker::Internet.email
+    t.email_other       = Faker::Internet.email
+    t.email_preferred   = Faker::Internet.email
     t.employment        = TutorsHelper.employment.sample[0]
     t.first_name        = Faker::Name.first_name
     t.gender            = %w(Male Female).sample

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221180140) do
+ActiveRecord::Schema.define(version: 20170221223417) do
 
   create_table "coordinators", force: :cascade do |t|
     t.string   "name"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20170221180140) do
   create_table "tutors", force: :cascade do |t|
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "email"
+    t.string   "email_preferred"
     t.string   "affiliate"
     t.string   "first_name"
     t.string   "last_name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20170221180140) do
     t.date     "training"
     t.date     "dob"
     t.string   "other_phone"
+    t.string   "email_other"
   end
 
   create_table "users", force: :cascade do |t|

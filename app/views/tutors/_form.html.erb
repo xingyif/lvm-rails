@@ -66,8 +66,12 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <%= f.input :email %>
+    <div class="col-md-6">
+      <%= f.input :email_preferred, label: "Preferred email" %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.input :email_other, label: "Other email" %>
     </div>
   </div>
 
