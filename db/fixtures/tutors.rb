@@ -17,7 +17,8 @@ require 'tutors_helper'
     t.native_language   = TutorsHelper.native_language.sample[0]
     t.occupation        = Faker::Company.profession
     t.orientation       = Faker::Date.between(1.month.ago, 1.week.ago)
-    t.phone             = Faker::Base.numerify('(###) ###-####')
+    t.home_phone        = Faker::Base.numerify('(###) ###-####')
+    t.other_phone       = Faker::Base.numerify('(###) ###-####')
     t.race              = ApplicationHelper.race.sample[0]
     t.referral          = TutorsHelper.referral.sample[0]
     t.state             = Faker::Address.state

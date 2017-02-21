@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202173111) do
+ActiveRecord::Schema.define(version: 20170221180140) do
 
   create_table "coordinators", force: :cascade do |t|
     t.string   "name"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20170202173111) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.string   "phone"
+    t.string   "home_phone"
     t.string   "cell_phone"
     t.string   "gender"
     t.string   "native_language"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20170202173111) do
     t.date     "orientation"
     t.date     "training"
     t.date     "dob"
+    t.string   "other_phone"
   end
 
   create_table "users", force: :cascade do |t|
