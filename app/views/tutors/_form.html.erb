@@ -1,118 +1,173 @@
 
-  <% if @tutor.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@tutor.errors.count, "error") %> prohibited
-        this tutor from being saved:
-      </h2>
-      <ul>
-        <% @tutor.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @tutor.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@tutor.errors.count, "error") %> prohibited
+      this tutor from being saved:
+    </h2>
+    <ul>
+      <% @tutor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form role="form">
 
   <div class="row">
-    <div class="col-md-3">
+    <div class ="col-md-12">
       <%= f.input :first_name %>
     </div>
-    <div class="col-md-4">
+  </div>
+
+  <div class="row">
+    <div class ="col-md-12">
       <%= f.input :last_name %>
     </div>
-    <div class="col-md-3">
-      <%= f.input :dob, as: :date, label: "Date of Birth",
-                                   start_year: Date.today.year - 70,
-                                   end_year: Date.today.year - 12 %>
-    </div>
-    <div class="col-md-2">
-      <div class="form-group">
-        <%= f.label "Gender" %><br>
-        <%= collection_radio_buttons(:tutor, :gender, [["male", "Male"] ,["female", "Female"]], :first, :last) do |b| %>
-          <label class="radio-inline">
-            <%= b.radio_button %> <%= b.text %>
-          </label>
-        <% end %>
-      </div>
+  </div>
+
+  <div class="row">
+    <div class ="col-md-12">
+      <%= f.input :address, label: "Street Address" %>
     </div>
   </div>
 
-  <hr>
-
   <div class="row">
-    <div class="col-md-5">
-      <%= f.input :address %>
-    </div>
-    <div class="col-md-3">
+    <div class="col-md-8">
       <%= f.input :city %>
     </div>
-    <div class="col-md-1">
-      <%= f.input :state, collection: us_states %>
-    </div>
+
     <div class="col-md-2">
-      <%= f.input :zip %>
+      <%= f.input :zip, label: "Zip", maxlength: 5 %>
+    </div>
+
+    <div class="col-md-2">
+      <%= f.input :state, collection: us_states, selected: "MA" %>
     </div>
   </div>
 
   <div class="row">
+    <div class="col-md-12">
+      <p class="help-block"> At least one phone number is required.</p>
+    </div>
+
     <div class="col-md-4">
       <%= f.input :home_phone %>
     </div>
+
     <div class="col-md-4">
       <%= f.input :cell_phone %>
     </div>
+
     <div class="col-md-4">
+      <%= f.input :other_phone %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <%= f.input :email %>
     </div>
   </div>
 
-  <hr>
-
   <div class="row">
-    <div class="col-md-3">
-      <%= f.input :orientation, as: :date %>
-    </div>
-    <div class="col-md-3">
-      <%= f.input :training, as: :date %>
-    </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
       <div class="form-group">
-        <%= f.label "Training Type" %><br>
-        <%= collection_radio_buttons(:tutor, :training_type, [["ABE", "ABE"] ,["ESOL", "ESOL"]], :first, :last) do |b| %>
+        <label class="control-label"> Gender </label>
+        <div class="input-group">
           <label class="radio-inline">
-            <%= b.radio_button %> <%= b.text %>
+            <input type="radio" name="inlineRadioOptions" id="female" value="female"> Female
           </label>
-        <% end %>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="male" value="male"> Male
+          </label>
+        </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <%= f.input :affiliate, collection: affiliate %>
+
+    <div class="col-md-6">
+      <div class="pull-right">
+        <label class="control-label" for="dob"> Date of Birth </label>
+        <input type="text" class="form-control datepicker" id="dob" name="dob" placeholder="MM/DD/YYYY">
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-3">
-      <%= f.input :native_language, collection: native_language %>
+    <div class="col-md-12">
+      <%= f.input :native_language, collection: native_language, selected: "English" %>
     </div>
-    <div class="col-md-4">
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <%= f.input :race, collection: race %>
     </div>
-    <div class="col-md-5">
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :orientation, as: :date, html5: true, label: "Orientation Date" %>
+    </div>
+
+    <div class="col-md-4">
+      <div class="pull-right">
+        <%= f.input :training, as: :date, html5: true, label: "Training Date" %>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="pull-right">
+        <div class="form-group">
+          <label class="control-label"> Training Type </label>
+          <div class="input-group">
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="abe" value="ABE"> ABE
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="esol" value="ESOL"> ESOL
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :referral, collection: referral %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p class="help-block"> If other:</p>
+    </div>
+
+    <div class="col-md-12">
+      <%= f.input :referral, label: false %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <%= f.input :education, collection: education %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-3">
-      <%= f.input :referral, collection: referral %>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-12">
       <%= f.input :employment, collection: employment %>
-    </div>
-    <div class="col-md-5">
-      <%= f.input :occupation %>
     </div>
   </div>
 
-  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :occupation, label: "Specific Occupation" %>
+    </div>
+  </div>
+
   <%= f.button :submit %>
+
+</form>
