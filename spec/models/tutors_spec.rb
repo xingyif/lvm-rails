@@ -76,26 +76,45 @@ RSpec.describe Tutor, type: :model do
       end
     end
 
-    describe 'email' do
+    describe 'email_preferred' do
       it 'validates presence' do
-        should validate_presence_of(:email)
+        should validate_presence_of(:email_preferred)
       end
 
       it 'validates length' do
-        should validate_length_of(:email)
+        should validate_length_of(:email_preferred)
           .is_at_most(255)
       end
 
       it 'validates format' do
-        should allow_value('email@address.foo').for(:email)
-        should_not allow_value('foo').for(:email)
-        should_not allow_value('foo@').for(:email)
-        should_not allow_value('foo@address').for(:email)
-        should_not allow_value('address.foo').for(:email)
+        should allow_value('email@address.foo').for(:email_preferred)
+        should_not allow_value('foo').for(:email_preferred)
+        should_not allow_value('foo@').for(:email_preferred)
+        should_not allow_value('foo@address').for(:email_preferred)
+        should_not allow_value('address.foo').for(:email_preferred)
       end
 
       it 'validates uniqueness' do
-        should validate_uniqueness_of(:email).case_insensitive
+        should validate_uniqueness_of(:email_preferred).case_insensitive
+      end
+    end
+
+    describe 'email_other' do
+      it 'validates length' do
+        should validate_length_of(:email_other)
+          .is_at_most(255)
+      end
+
+      it 'validates format' do
+        should allow_value('email@address.foo').for(:email_other)
+        should_not allow_value('foo').for(:email_other)
+        should_not allow_value('foo@').for(:email_other)
+        should_not allow_value('foo@address').for(:email_other)
+        should_not allow_value('address.foo').for(:email_other)
+      end
+
+      it 'validates uniqueness' do
+        should validate_uniqueness_of(:email_other).case_insensitive
       end
     end
   end
