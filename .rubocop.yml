@@ -20,6 +20,7 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
+    - 'db/fixtures/*.rb'
 
 Documentation:
   Enabled: false

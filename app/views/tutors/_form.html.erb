@@ -16,6 +16,19 @@
 <form role="form">
 
   <div class="row">
+    <div class="col-md-6">
+      <!-- Affiliate will go here -->
+    </div>
+
+    <div class="col-md-6">
+      <div class="pull-right">
+        <label class="control-label" for="intakeDate"> Intake Date </label>
+        <input type="text" class="form-control datepicker" id="intakeDate" name="intake_date" placeholder="MM/DD/YYYY">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class ="col-md-12">
       <%= f.input :first_name %>
     </div>
@@ -112,27 +125,29 @@
 
   <div class="row">
     <div class="col-md-4">
-      <%= f.input :orientation, as: :date, html5: true, label: "Orientation Date" %>
-    </div>
-
-    <div class="col-md-4">
-      <div class="pull-right">
-        <%= f.input :training, as: :date, html5: true, label: "Training Date" %>
+      <div class="form-group">
+        <label class="control-label" for="dob"> Orientation Date</label>
+        <input type="text" class="form-control datepicker" id="orientationDate" name="orientation_date" placeholder="MM/DD/YYYY">
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="pull-right">
-        <div class="form-group">
-          <label class="control-label"> Training Type </label>
-          <div class="input-group">
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="abe" value="ABE"> ABE
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="esol" value="ESOL"> ESOL
-            </label>
-          </div>
+      <div class="form-group">
+        <label class="control-label" for="dob"> Training Date</label>
+        <input type="text" class="form-control datepicker" id="trainingDate" name="training_date" placeholder="MM/DD/YYYY">
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label class="control-label"> Training Type </label>
+        <div class="input-group">
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="abe" value="ABE"> ABE
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="esol" value="ESOL"> ESOL
+          </label>
         </div>
       </div>
     </div>
