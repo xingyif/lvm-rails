@@ -19,13 +19,12 @@ script:
 after_success:
   ./scripts/sync_repos.sh
 
-# TODO re-enable when https://cs5500-jira.ccs.neu.edu/browse/LVM-320 is closed
-# deploy:
-#   provider: elasticbeanstalk
-#   app: lvm-rails-production
-#   env: Sample-env
-#   bucket_name: elasticbeanstalk-us-east-1-373469085898
-#   region: us-east-1
-#   on:
-#     repo: LiteracyVolunteersOfMA/lvm-rails
-#     all_branches: true
+deploy:
+  provider: elasticbeanstalk
+  app: lvm-rails
+  env: production
+  bucket_name: elasticbeanstalk-us-east-1-373469085898
+  region: us-east-1
+  on:
+    repo: LiteracyVolunteersOfMA/lvm-rails
+    all_branches: true
