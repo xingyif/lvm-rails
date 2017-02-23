@@ -1,3 +1,4 @@
+# rubocop:disable ModuleLength
 module TutorsHelper
   # rubocop:disable Style/WordArray, MethodLength
   def native_language
@@ -99,9 +100,15 @@ module TutorsHelper
     ]
   end
 
+  def language_proficiencies
+    # Returns a hash like { "English => "None", "Spanish" => "None" }
+    Hash[(native_language.map { |e| e[0] }).collect { |v| [v, 'None'] }]
+  end
+
   module_function :affiliate,
                   :education,
                   :employment,
-                  :referral,
-                  :native_language
+                  :language_proficiencies,
+                  :native_language,
+                  :referral
 end

@@ -3,29 +3,26 @@ require 'tutors_helper'
 
 20.times do
   Tutor.seed do |t|
-    t.address           = Faker::Address.street_address
-    t.affiliate         = TutorsHelper.affiliate.sample[0]
-    t.cell_phone        = Faker::Base.numerify('(###) ###-####')
-    t.city              = Faker::Address.city
-    t.dob               = Faker::Date.between(65.years.ago, 18.years.ago)
-    t.education         = TutorsHelper.education.sample[0]
-    t.email_other       = Faker::Internet.email
-    t.email_preferred   = Faker::Internet.email
-    t.employment        = TutorsHelper.employment.sample[0]
-    t.first_name        = Faker::Name.first_name
-    t.gender            = %w(Male Female).sample
-    t.home_phone        = Faker::Base.numerify('(###) ###-####')
-    t.intake            = Faker::Date.between(3.months.ago, 2.months.ago)
-    t.last_name         = Faker::Name.last_name
-    t.native_language   = TutorsHelper.native_language.sample[0]
-    t.occupation        = Faker::Company.profession
-    t.orientation       = Faker::Date.between(1.month.ago, 1.week.ago)
-    t.other_phone       = Faker::Base.numerify('(###) ###-####')
-    t.race              = ApplicationHelper.race.sample[0]
-    t.referral          = TutorsHelper.referral.sample[0]
-    t.state             = Faker::Address.state
-    t.training          = Faker::Date.between(1.month.ago, 1.week.ago)
-    t.training_type     = %w(ABE ESOL).sample
-    t.zip               = Faker::Base.numerify('#####')
+    t.address1                = Faker::Address.street_address
+    t.address2                = Faker::Address.secondary_address
+    t.cell_phone              = Faker::Base.numerify('(###) ###-####')
+    t.city                    = Faker::Address.city
+    t.country_of_birth        = Faker::Address.country
+    t.date_of_birth           = Faker::Date.between(80.years.ago, 18.years.ago)
+    t.email_preferred         = Faker::Internet.email
+    t.emergency_contact_email = Faker::Internet.email
+    t.emergency_contact_name  = Faker::Name.name
+    t.emergency_contact_phone = Faker::Base.numerify('(###) ###-####')
+    t.hispanic_or_latino      = [true, false].sample
+    t.first_name              = Faker::Name.first_name
+    t.home_phone              = Faker::Base.numerify('(###) ###-####')
+    t.language_proficiencies  = TutorsHelper.language_proficiencies.to_json
+    t.last_name               = Faker::Name.last_name
+    t.native_language         = TutorsHelper.native_language.sample[0]
+    t.occupation              = Faker::Company.profession
+    t.race                    = ApplicationHelper.race.sample[0]
+    t.smartt_id               = Faker::Base.numerify('####-######')
+    t.state                   = ApplicationHelper.us_states.sample[0]
+    t.zip                     = Faker::Base.numerify('#####')
   end
 end
