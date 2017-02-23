@@ -37,21 +37,21 @@ RSpec.describe 'coordinators/new.html.erb', type: :view do
 
     describe 'name text entry field' do
       it 'checks for presence of empty text field for name' do
-       expect(rendered).to have_field('coordinator_name', text: nil)
+        expect(rendered).to have_field('coordinator_name', text: nil)
       end
     end
 
     xdescribe 'name text entry field filled' do
       it 'checks for presence of filled in text field' do
-	visit new_coordinator_path
-	fill_in 'coordinator_name', with: 'JoeJoe'
+        visit new_coordinator_path
+        fill_in 'coordinator_name', with: 'JoeJoe'
         expect(rendered).to have_field('coordinator_name', text: 'JoeJoe')
       end
     end
 
     describe 'email text entry field' do
       it 'checks for presence of empty text field for email' do
-        expect(rendered).to have_field('coordinator_email', text:nil)
+        expect(rendered).to have_field('coordinator_email', text: nil)
       end
     end
 
