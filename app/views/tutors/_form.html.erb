@@ -41,8 +41,12 @@
   </div>
 
   <div class="row">
-    <div class ="col-md-12">
-      <%= f.input :address, label: "Street Address" %>
+    <div class ="col-md-6">
+      <%= f.input :address1, label: "Address 1" %>
+    </div>
+
+    <div class ="col-md-6">
+      <%= f.input :address2, label: "Address 2" %>
     </div>
   </div>
 
@@ -177,7 +181,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <%= f.input :employment, collection: employment %>
+      <%= f.input :employment_status, collection: employment %>
     </div>
   </div>
 
