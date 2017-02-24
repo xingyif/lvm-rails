@@ -1,33 +1,22 @@
-<%= form_for :coordinator, url: coordinators_path do |f| %>
-
-  <% if @coordinator.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@coordinator.errors.count, "error") %> prohibited
-        this coordinator from being saved:
-      </h2>
-      <ul>
-        <% @coordinator.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to coordinators_path do %>
+          <span class="glyphicon glyphicon-arrow-left"></span>
+          <span class="h4">Back</span>
         <% end %>
-      </ul>
+      </div>
+      <div class="col-xs-6 text-left">
+        <span class="h4">Add New Coordinator</span>
+      </div>
     </div>
-  <% end %>
+    <hr>
+    <%= simple_form_for :coordinator, url: coordinators_path do |f| %>
 
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
+      <%= render partial: 'form', locals: {f: f} %>
 
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
+    <% end %>
 
-  <p>
-    <%= f.submit %>
-  </p>
-
-<% end %>
-
-<%= link_to 'Back', coordinators_path %>
+  </div>
+</div>
