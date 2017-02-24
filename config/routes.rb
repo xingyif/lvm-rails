@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :tutors
   resources :students
   resources :coordinators
+  resources :affiliates
 end

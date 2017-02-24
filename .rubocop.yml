@@ -9,6 +9,7 @@ AllCops:
     - 'bin/**/*'
     - 'db/fixtures/users.rb'
     - 'db/migrate/*.rb'
+    - 'out/**/*'
   TargetRubyVersion: 2.2
 
 Style/Encoding:

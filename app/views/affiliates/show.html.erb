@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @affiliate.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @affiliate.address %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @affiliate.phone_number %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @affiliate.email %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @affiliate.website %>
+</p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @affiliate.twitter %>
+</p>
+
+<%= link_to 'Edit', edit_affiliate_path(@affiliate) %> |
+<%= link_to 'Back', affiliates_path %>
