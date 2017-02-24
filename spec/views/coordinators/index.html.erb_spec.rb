@@ -5,13 +5,13 @@ RSpec.describe 'coordinators/index.html.erb', type: :view do
   describe 'populate page and links' do
     before do
       @coordinators = [Coordinator.create(name: 'Joe Lally',
-                                        email: 'email@email.com'),
-                      Coordinator.create(name: 'Tom Smith',
-                                        email: 'tom@yahoo.com'),
-                      Coordinator.create(name: 'John Doe',
-                                        email: 'john@gmail.com'),
-                      Coordinator.create(name: 'Jane White',
-                                        email: 'jane@email.com')]
+                                          email: 'email@email.com'),
+                       Coordinator.create(name: 'Tom Smith',
+                                          email: 'tom@yahoo.com'),
+                       Coordinator.create(name: 'John Doe',
+                                          email: 'john@gmail.com'),
+                       Coordinator.create(name: 'Jane White',
+                                          email: 'jane@email.com')]
       render
     end
 
