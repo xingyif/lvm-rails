@@ -3,6 +3,7 @@ class Tutor < ApplicationRecord
   VALID_PHONE_REGEX  = /\A\(?[0-9]{3}\)?(-|\s)?[0-9]{3}-[0-9]{4}\z/
   VALID_ZIP_REGEX    = /\A[0-9]{5}\z/
   VALID_SMARTT_REGEX = /\A[0-9]{4}-[0-9]{6}\z/
+  LAST_NAME_ID_REGEX = /\A[0-9]{1,5}\z/
 
   has_many :matches
   has_many :students, through: :matches
@@ -34,11 +35,14 @@ class Tutor < ApplicationRecord
   # can't use presence: true for bool
   validates_inclusion_of :hispanic_or_latino, in: [true, false]
 
-  validates :cell_phone,  format: { with: VALID_PHONE_REGEX }
-  validates :home_phone,  format: { with: VALID_PHONE_REGEX }
-  validates :other_phone, format: { with: VALID_PHONE_REGEX }, allow_blank: true
-  validates :smartt_id,   format: { with: VALID_SMARTT_REGEX }
-  validates :zip,         format: { with: VALID_ZIP_REGEX }
+  validates :cell_phone,   format: { with: VALID_PHONE_REGEX }
+  validates :home_phone,   format: { with: VALID_PHONE_REGEX }
+  validates :last_name_id, format: { with: LAST_NAME_ID_REGEX },
+                           allow_blank: true
+  validates :other_phone,  format: { with: VALID_PHONE_REGEX },
+                           allow_blank: true
+  validates :smartt_id,    format: { with: VALID_SMARTT_REGEX }
+  validates :zip,          format: { with: VALID_ZIP_REGEX }
 
   validates :email_preferred, length: { maximum: 255 },
                               format: { with: VALID_EMAIL_REGEX },
