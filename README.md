@@ -111,3 +111,13 @@ Run `rake db:seed_fu` to seed the database with:
     ```
     rake db:migrate
     ```
+ or do:
+  (If you did and if you don't have any important data in the database, you should destroy your database and recreate it using existing migrations. These commands in this order:)
+ ```
+ rake db:drop
+
+ rake db:create
+
+ rake db:migrate
+
+ ```
