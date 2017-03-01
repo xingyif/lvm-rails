@@ -16,12 +16,12 @@ gem 'rainbow', '< 2.2.1'
 gem 'rubocop', '~> 0.47', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'seed-fu', '~> 2.3'
-gem 'simple_form'
+gem 'simple_form', '~> 3.4.0'
 gem 'turbolinks', '~> 5.0'
 gem 'uglifier', '~> 3.0'
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '~> 2.12.1'
   gem 'database_cleaner', '~> 1.5.3'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rails-controller-testing', '~>1.0.1'

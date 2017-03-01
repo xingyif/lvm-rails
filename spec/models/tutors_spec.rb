@@ -172,6 +172,15 @@ RSpec.describe Tutor, type: :model do
       end
     end
 
+    describe 'last_name_id' do
+      it 'validates format' do
+        should allow_value('01234').for(:last_name_id)
+        should allow_value('0').for(:last_name_id)
+        should_not allow_value('012345').for(:last_name_id)
+        should_not allow_value('O1234').for(:last_name_id)
+      end
+    end
+
     describe 'native_language' do
       it 'validates presence' do
         should validate_presence_of(:native_language)
@@ -206,6 +215,15 @@ RSpec.describe Tutor, type: :model do
     describe 'smartt_id' do
       it 'validates presence' do
         should validate_presence_of(:smartt_id)
+      end
+
+      it 'validates format' do
+        should allow_value('0000-000000').for(:smartt_id)
+        should_not allow_value('0000-00000').for(:smartt_id)
+        should_not allow_value('0000000000').for(:smartt_id)
+        should_not allow_value('O000-000000').for(:smartt_id)
+        should_not allow_value('00000-00000').for(:smartt_id)
+        should_not allow_value('0000-0000000').for(:smartt_id)
       end
     end
 

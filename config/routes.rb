@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   put 'students/set_tutor'
   put 'tutors/add_student'
 
-  resources :tutors
-  resources :students
-  resources :coordinators
   resources :affiliates
+  resources :coordinators
+  resources :students
+  resources :tutors
 end

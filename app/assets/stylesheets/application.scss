@@ -12,8 +12,8 @@
  *
  */
 
-@import "bootstrap";
 @import "bootstrap-sprockets";
+@import "bootstrap";
 @import "jquery-ui/core";
 @import "jquery-ui/datepicker";
 @import "jquery-ui/theme";
@@ -26,4 +26,18 @@
     display: inline-block;
     height: 42px;
   }
+}
+
+.simple_form.tutor {
+  margin-bottom: 20px;
+}
+
+.radio-label {
+  display: block;
+}
+
+.collection_radio_buttons {
+  font-weight: normal;
+  padding-left: 5px;
+  padding-right: 10px;
 }

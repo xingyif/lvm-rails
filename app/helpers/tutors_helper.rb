@@ -34,6 +34,17 @@ module TutorsHelper
     ]
   end
 
+  def language_proficiency
+    # [ 'None', 'Beginner', 'Intermediate', 'Advanced', 'Native', 'Native']
+    [
+      ['None', 'None'],
+      ['Beginner', 'Beginner'],
+      ['Intermediate', 'Intermediate'],
+      ['Advanced', 'Advanced'],
+      ['Native', 'Native']
+    ]
+  end
+
   def education
     [
       ['US High School Diploma', 'US High School Diploma'],
@@ -103,6 +114,43 @@ module TutorsHelper
   def language_proficiencies
     # Returns a hash like { "English => "None", "Spanish" => "None" }
     Hash[(native_language.map { |e| e[0] }).collect { |v| [v, 'None'] }]
+  end
+
+  def general_contact_preferences
+    [
+      ['Cell Phone', 'Cell Phone'],
+      ['Home Phone', 'Home Phone'],
+      ['Work Phone', 'Work Phone'],
+      ['Email', 'Email'],
+      ['Mail', 'Mail']
+    ]
+  end
+
+  def roster_contact_preferences
+    [
+      ['Cell Phone', 'Cell Phone'],
+      ['Home Phone', 'Home Phone'],
+      ['Work Phone', 'Work Phone'],
+      ['Email', 'Email'],
+      ['Mail', 'Mail'],
+      ['None', 'None']
+    ]
+  end
+
+  def status_options
+    [
+      ['Active', 'Active'],
+      ['Waiting for re-match', 'Waiting for re-match'],
+      ['Waiting for 1st match', 'Waiting for 1st match'],
+      ['On hold', 'On hold'],
+      ['Exited', 'Exited'],
+      ['Unable to contact', 'Unable to contact'],
+      ['Declined match', 'Declined match'],
+      ['Moved', 'Moved'],
+      ['No show to appointment', 'No show to appointment'],
+      ['Dropped out of training', 'Dropped out of training'],
+      ['Cannot match', 'Cannot match']
+    ]
   end
 
   module_function :affiliate,

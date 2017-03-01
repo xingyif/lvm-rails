@@ -31,7 +31,11 @@ class TutorsController < ApplicationController
   end
 
   def create
-    @tutor = Tutor.new(tutor_params)
+    clean_params = tutor_params.clone
+    clean_params['language_proficiencies'] =
+      params.to_unsafe_h['language_proficiencies'] ||
+      params['tutor']['language_proficiencies']
+    @tutor = Tutor.new(clean_params)
 
     if @tutor.save
       redirect_to @tutor
@@ -104,12 +108,13 @@ class TutorsController < ApplicationController
       :hispanic_or_latino,
       :hobbies,
       :home_phone,
+      :intake_date,
       :language_proficiencies,
       :last_name,
       :last_name_id,
       :native_language,
       :occupation,
-      :orientation,
+      :orientation_date,
       :other_phone,
       :past_occupation,
       :preferred_contact_class_listing,
@@ -120,6 +125,7 @@ class TutorsController < ApplicationController
       :race,
       :reference,
       :referral,
+      :referral_other,
       :release_on_file,
       :release_sign_date,
       :smartt_id,
@@ -128,7 +134,7 @@ class TutorsController < ApplicationController
       :status_changed_by,
       :status_date_of_change,
       :teachable_subjects,
-      :training,
+      :training_date,
       :training_type,
       :zip
     )

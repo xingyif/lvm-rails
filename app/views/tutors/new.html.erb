@@ -1,22 +1,24 @@
 <div class="row">
-  <div class="col-sm-12 col-md-6 col-md-offset-3">
-    <div class="row">
-      <div class="col-xs-6">
-        <%= link_to tutors_path do %>
-          <span class="glyphicon glyphicon-arrow-left"></span>
-          <span class="h4">Back</span>
-        <% end %>
-      </div>
-      <div class="col-xs-6 text-right">
-        <span class="h4">Add New Tutor</span>
-      </div>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="pull-left">
+      <%= link_to tutors_path do %>
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        <span class="h4">Back</span>
+      <% end %>
     </div>
+
+    <div class="pull-right">
+      <span class="h4">Add New Tutor</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
     <hr>
     <%= simple_form_for :tutor, url: tutors_path do |f| %>
-
       <%= render partial: 'form', locals: {f: f} %>
-
     <% end %>
-
   </div>
 </div>

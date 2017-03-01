@@ -245,7 +245,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print (~> 1.7)
   bootstrap-sass (~> 3.3.6)
-  capybara
+  capybara (~> 2.12.1)
   coveralls
   database_cleaner (~> 1.5.3)
   devise (~> 4.2)
@@ -263,7 +263,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   seed-fu (~> 2.3)
   shoulda-matchers (~> 3.1)
-  simple_form
+  simple_form (~> 3.4.0)
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
   sqlite3 (~> 1.3)
