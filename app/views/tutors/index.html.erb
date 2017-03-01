@@ -1,15 +1,35 @@
 <h2>Tutors</h2>
 
-<table>
+<table class="table table-striped">
+  <thead class="thead-inverse">
   <tr>
-    <th>Title</th>
-    <th>Text</th>
+    <th>First Name </th>
+    <th>Last Name </th>
+    <th>Address </th>
+    <th>Home Phone </th>
+    <th>Cell Phone </th>
+    <th>Email Preferred</th>
+    <th>Native Language </th>
+    <th>Training Date </th>
+    <th>Training Type </th>
+    <th>Specific Occupation </th>
     <th colspan="2"></th>
   </tr>
+  </thead>
 
   <% @tutors.each do |tutor| %>
     <tr>
-      <td><%= tutor.first_name %> <%= tutor.last_name %></td>
+      <td><%= tutor.first_name %></td>
+      <td><%= tutor.last_name %></td>
+      <td><%= tutor.address1%> <%= tutor.address2 %> <%= tutor.city %>
+        <%= tutor.state %> <%= tutor.zip %></td>
+      <td><%= tutor.home_phone%></td>
+      <td><%= tutor.cell_phone%></td>
+      <td><%= tutor.email_preferred%></td>
+      <td><%= tutor.native_language%></td>
+      <td><%= tutor.training%></td>
+      <td><%= tutor.training_type%></td>
+      <td><%= tutor.occupation%></td>
       <td><%= link_to 'Show', tutor_path(tutor) %></td>
       <td><%= link_to 'Edit', edit_tutor_path(tutor) %></td>
       <td><%= link_to 'Destroy', tutor_path(tutor),
