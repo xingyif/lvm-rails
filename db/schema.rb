@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170225153047) do
 
   create_table "affiliates", force: :cascade do |t|
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170225153047) do
     t.string   "last_name"
     t.date     "dob"
     t.string   "gender"
-    t.string   "address"
+    t.string   "address1"
     t.string   "city"
     t.string   "state"
     t.string   "zip"
@@ -86,6 +87,8 @@ ActiveRecord::Schema.define(version: 20170225153047) do
     t.string   "origin_country"
     t.integer  "availability"
     t.integer  "tutor_preference"
+    t.string   "address2"
+    t.integer  "smartt_id"
   end
 
   create_table "tutors", force: :cascade do |t|
