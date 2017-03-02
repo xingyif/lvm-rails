@@ -33,10 +33,7 @@ class TutorsController < ApplicationController
   # rubocop:disable MethodLength
   def create
     calculate_preferences(params)
-    clean_params = tutor_params.clone
-    clean_params['language_proficiencies'] =
-      params.to_unsafe_h['language_proficiencies'] ||
-      params['tutor']['language_proficiencies']
+    clean_params = update_params_with_proficiencies(tutor_params.clone, params)
     @tutor = Tutor.new(clean_params)
 
     if @tutor.save
@@ -47,10 +44,11 @@ class TutorsController < ApplicationController
   end
 
   def update
+    calculate_preferences(params)
+    clean_params = update_params_with_proficiencies(tutor_params.clone, params)
     @tutor = Tutor.find(params[:id])
 
-    calculate_preferences(params)
-    if @tutor.update(tutor_params)
+    if @tutor.update(clean_params)
       redirect_to @tutor
     else
       render 'edit'
@@ -89,6 +87,13 @@ class TutorsController < ApplicationController
     params[:tutor][:availability] = PreferencesHelper.squash(times)
     params[:tutor][:age_preference] = PreferencesHelper.squash(age)
     params[:tutor][:category_preference] = PreferencesHelper.squash(category)
+  end
+
+  def update_params_with_proficiencies(clean_params, params)
+    clean_params['language_proficiencies'] =
+      params.to_unsafe_h['language_proficiencies'].to_json ||
+      params['tutor']['language_proficiencies'].to_json
+    clean_params
   end
 
   def tutor_params
