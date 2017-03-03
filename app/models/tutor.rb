@@ -54,4 +54,16 @@ class Tutor < ApplicationRecord
   def name
     [first_name, last_name].join(' ')
   end
+
+  def current_availability_array
+    availability ? PreferencesHelper.explode(availability) : []
+  end
+
+  def category_preference_array
+    category_preference ? PreferencesHelper.explode(category_preference) : []
+  end
+
+  def age_preference_array
+    age_preference ? PreferencesHelper.explode(age_preference) : []
+  end
 end

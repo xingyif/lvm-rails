@@ -41,3 +41,87 @@
   padding-left: 5px;
   padding-right: 10px;
 }
+
+.tutor_availability {
+  span.checkbox:nth-child(7n+3) {
+    margin-top: 15px;
+  }
+
+  span.checkbox:nth-child(3)::before {
+    content: "Morning \A";
+    display: block;
+    font-weight: bold;
+  }
+
+  span.checkbox:nth-child(10)::before {
+    content: "Afternoon \A";
+    display: block;
+    font-weight: bold;
+  }
+
+  span.checkbox:nth-child(17)::before {
+    content: "Evening \A";
+    display: block;
+    font-weight: bold;
+  }
+}
+
+.tutor_age_preference {
+  span.checkbox:nth-child(10) {
+    margin-top: 15px;
+  }
+
+  span.checkbox:nth-child(3)::before {
+    content: "Male";
+    display: block;
+    font-weight: bold;
+  }
+
+  span.checkbox:nth-child(10)::before {
+    content: "Female";
+    display: block;
+    font-weight: bold;
+  }
+}
+
+.tutor_availability {
+  span.checkbox:nth-child(7n+3) {
+    margin-top: 15px;
+  }
+
+  span.checkbox:nth-child(3)::before {
+    content: "Morning \A";
+    display: block;
+    font-weight: bold;
+  }
+
+  span.checkbox:nth-child(10)::before {
+    content: "Afternoon \A";
+    display: block;
+    font-weight: bold;
+  }
+
+  span.checkbox:nth-child(17)::before {
+    content: "Evening \A";
+    display: block;
+    font-weight: bold;
+  }
+}
+
+.tutor_age_preference {
+  span.checkbox:nth-child(10) {
+    margin-top: 15px;
+  }
+
+  span.checkbox:nth-child(3)::before {
+    content: "Male";
+    display: block;
+    font-weight: bold;
+  }
+
+  span.checkbox:nth-child(10)::before {
+    content: "Female";
+    display: block;
+    font-weight: bold;
+  }
+}

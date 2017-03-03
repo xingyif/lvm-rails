@@ -30,7 +30,9 @@ class TutorsController < ApplicationController
     @tutor = Tutor.find(params[:id])
   end
 
+  # rubocop:disable MethodLength
   def create
+    calculate_preferences(params)
     clean_params = tutor_params.clone
     clean_params['language_proficiencies'] =
       params.to_unsafe_h['language_proficiencies'] ||
@@ -47,6 +49,7 @@ class TutorsController < ApplicationController
   def update
     @tutor = Tutor.find(params[:id])
 
+    calculate_preferences(params)
     if @tutor.update(tutor_params)
       redirect_to @tutor
     else
@@ -78,14 +81,26 @@ class TutorsController < ApplicationController
 
   private
 
-  # rubocop:disable MethodLength
+  def calculate_preferences(params)
+    times = params[:tutor][:availability]
+    age = params[:tutor][:age_preference]
+    category = params[:tutor][:category_preference]
+
+    params[:tutor][:availability] = PreferencesHelper.squash(times)
+    params[:tutor][:age_preference] = PreferencesHelper.squash(age)
+    params[:tutor][:category_preference] = PreferencesHelper.squash(category)
+  end
+
   def tutor_params
     params.require(:tutor).permit(
       :address1,
       :address2,
-      :affiliate,
       :affiliate_date_of_event,
       :affiliate_event_participation,
+      :affiliate,
+      :age_preference,
+      :availability,
+      :category_preference,
       :cell_phone,
       :city,
       :colleges_attended,
@@ -110,8 +125,8 @@ class TutorsController < ApplicationController
       :home_phone,
       :intake_date,
       :language_proficiencies,
-      :last_name,
       :last_name_id,
+      :last_name,
       :native_language,
       :occupation,
       :orientation_date,
@@ -130,12 +145,13 @@ class TutorsController < ApplicationController
       :release_sign_date,
       :smartt_id,
       :state,
-      :status,
       :status_changed_by,
       :status_date_of_change,
+      :status,
       :teachable_subjects,
       :training_date,
       :training_type,
+      :training,
       :zip
     )
   end

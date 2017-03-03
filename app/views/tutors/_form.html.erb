@@ -140,7 +140,7 @@
     </div>
 
     <div class="col-md-4">
-      <%= f.input :race, collection: race %>
+      <%= f.input :race, collection: race, required: false %>
     </div>
 
     <div class="col-md-4">
@@ -166,6 +166,32 @@
   </div>
 
   <hr>
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.input :availability,
+                  as: :check_boxes,
+                  collection: availability_times,
+                  checked: @tutor.current_availability_array,
+                  required: false %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :age_preference,
+                  as: :check_boxes,
+                  collection: age_preference,
+                  checked: @tutor.age_preference_array,
+                  label: "Student Preference",
+                  required: false %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :category_preference,
+                  as: :check_boxes,
+                  collection: category_preference,
+                  checked: @tutor.category_preference_array,
+                  label: "I feel comfortable working with the following student categories:",
+                  required: false %>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-4">

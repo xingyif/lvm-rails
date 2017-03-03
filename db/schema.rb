@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20170225153047) do
+ActiveRecord::Schema.define(version: 20170301012331) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -150,6 +149,9 @@ ActiveRecord::Schema.define(version: 20170225153047) do
     t.string   "affiliate_event_participation"
     t.date     "affiliate_date_of_event"
     t.string   "referral_other"
+    t.integer  "availability"
+    t.integer  "age_preference"
+    t.integer  "category_preference"
   end
 
   create_table "users", force: :cascade do |t|

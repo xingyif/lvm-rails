@@ -251,9 +251,57 @@ RSpec.describe Tutor, type: :model do
   describe 'methods' do
     describe '#name' do
       it 'concatenates first_name and last_name' do
-        student = create(:student, first_name: 'Test', last_name: 'Testerson')
+        tutor = create(:tutor, first_name: 'Test', last_name: 'Testerson')
         full_name = 'Test Testerson'
-        expect(student.name).to eq(full_name)
+        expect(tutor.name).to eq(full_name)
+      end
+    end
+
+    describe '#current_availability_array' do
+      context 'with no value for availability' do
+        it 'produces an empty array' do
+          tutor = create(:tutor, availability: nil)
+          expect(tutor.current_availability_array).to eq []
+        end
+      end
+
+      context 'when the tutor has an availability value' do
+        it 'produces an array representing availability as powers of two' do
+          tutor = create(:tutor, availability: 21)
+          expect(tutor.current_availability_array).to eq [1, 0, 4, 0, 16]
+        end
+      end
+    end
+
+    describe '#category_preference_array' do
+      context 'with no value for category_preference' do
+        it 'produces an empty array' do
+          tutor = create(:tutor, category_preference: nil)
+          expect(tutor.current_availability_array).to eq []
+        end
+      end
+
+      context 'when the tutor has a category_preference value' do
+        it 'produces an array representing that preference as powers of two' do
+          tutor = create(:tutor, category_preference: 14)
+          expect(tutor.category_preference_array).to eq [0, 2, 4, 8]
+        end
+      end
+    end
+
+    describe '#age_preference_array' do
+      context 'with no value for age_preference' do
+        it 'produces an empty array' do
+          tutor = create(:tutor, age_preference: nil)
+          expect(tutor.age_preference_array).to eq []
+        end
+      end
+
+      context 'when the tutor has a category_preference value' do
+        it 'produces an array representing that preference as powers of two' do
+          tutor = create(:tutor, age_preference: 19)
+          expect(tutor.age_preference_array).to eq [1, 2, 0, 0, 16]
+        end
       end
     end
   end
