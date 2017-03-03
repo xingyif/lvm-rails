@@ -1,52 +1,404 @@
-<p>
-  <strong>Name:</strong>
-  <%= @tutor.first_name %> <%= @tutor.last_name %>
-</p>
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-md-offset-3">
 
-<p>
-  <strong>Email:</strong>
-  <%= @tutor.email_preferred %>
-</p>
 
-<p>
-  <strong>Coordinator:</strong>
-  <% if !@coordinator.nil? %>
-    <%= @coordinator.name %>
-  <% else %>
-    No Coordinator
-  <% end %>
-</p>
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to tutors_path do %>
+          <span class="glyphicon glyphicon-arrow-left"></span>
+          <span class="h4">Back</span>
+        <% end %>
+      </div>
+      <div class="col-xs-6 text-right">
+        <span class="h4">
+          <% if @tutor.affiliate %>
+            <strong><%= @tutor.affiliate %></strong>
+          <% else %>
+              <strong>No Affiliate</strong>
+          <% end %>
+        </span>
+      </div>
+    </div>
+    <hr>
 
-<p>
-  <strong>Students:</strong>
-  <% if !@students.empty? %>
-    <table>
-      <% @students.each do |s| %>
-        <tr>
-          <td>
-            <%= s.name %>
-          </td>
-        </tr>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Name</strong><br>
+        <%= @tutor.first_name %> <%= @tutor.last_name %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Gender</strong><br>
+        <%= @tutor.gender %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Date of birth</strong><br>
+        <%= @tutor.date_of_birth %>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-4">
+        <strong>SMARTT ID</strong><br>
+        <%= @tutor.smartt_id %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Last Name ID</strong><br>
+        <%= @tutor.last_name_id %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Status</strong><br>
+        <%= @tutor.status %>
+      </div>
+    </div>
+    <hr>
+    <!-- ================================================================= -->
+    <div class="row">
+        <h4 class="col-md-12"><strong>Background</strong></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Native language</strong><br>
+        <%= @tutor.native_language %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Race</strong><br>
+        <%= @tutor.race %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Hispanic?</strong><br>
+        <%= @tutor.hispanic_or_latino %>
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Country of birth</strong><br>
+        <%= @tutor.country_of_birth %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Country leave date</strong><br>
+        <%= @tutor.country_leave_date %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Country returned date</strong><br>
+        <%= @tutor.country_return_date %>
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Criminal conviction</strong><br>
+        <%= @tutor.criminal_conviction %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Release on file</strong><br>
+        <%= @tutor.release_on_file %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Release sign date</strong><br>
+        <%= @tutor.release_sign_date %>
+      </div>
+    </div>
+    <hr>
+    <!-- ================================================================= -->
+    <div class="row">
+        <h4 class="col-md-12"><strong>Contact</strong></h4>
+    </div>
+
+    <div class="row">
+      <strong class="col-md-12">Contact preferences</strong>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>General contact:</strong><br>
+        <%= @tutor.preferred_contact_method %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Class roster:</strong><br>
+        <%= @tutor.preferred_contact_class_listing %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Data collection:</strong><br>
+        <%= @tutor.preferred_contact_data_collection %>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+
+      <div class="col-md-6">
+        <strong>Email</strong><br>
+        <table>
+          <tr>
+            <td>preferred:</td>
+            <td class="col-md-9"><%= @tutor.email_preferred %></td>
+          </tr>
+          <tr>
+            <td>other:</td>
+            <td class="col-md-9"><%= @tutor.email_other %></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="col-md-6">
+        <strong>Phone</strong><br>
+        <table>
+          <tr>
+            <td>home:</td>
+            <td class="col-md-9"><%= @tutor.home_phone %></td>
+          </tr>
+          <tr>
+            <td>cell:</td>
+            <td class="col-md-9"><%= @tutor.cell_phone %></td>
+          </tr>
+          <tr>
+            <td>other:</td>
+            <td class="col-md-9"><%= @tutor.other_phone %></td>
+          </tr>
+        </table>
+
+      </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Address</strong><br>
+        <%= @tutor.address1 %>, <%= @tutor.address2 %><br>
+        <%= @tutor.city %>,  <%= @tutor.state %>   <%= @tutor.zip %><br>
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <h4 class="col-md-12"><strong>Emergency Contact</strong></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Name:</strong><br>
+        <%= @tutor.emergency_contact_phone %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Phone Number:</strong><br>
+        <%= @tutor.emergency_contact_name %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Email:</strong><br>
+        <%= @tutor.emergency_contact_email %>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <hr>
+    <div class="row">
+      <h4 class="col-md-12"><strong>Students</strong></h4>
+    </div>
+
+    <div class="row">
+      <div class="table-responsive col-md-12">
+        <table class="table table-striped">
+           <thead>
+             <tr>
+              <th>Name</th>
+              <th>Email</th>
+             <tr>
+           </thead>
+           <tbody>
+             <% if !@students.empty? %>
+                 <% @students.each do |s| %>
+                   <tr>
+                     <td> <%= s.name %> </td>
+                     <td> <%= s.email %> </td>
+                   </tr>
+                 <% end %>
+             <% else %>
+               No Students
+             <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row col-md-12">
+      <% if !student_options.empty? %>
+        <%= form_tag('add_student', method: 'put') do %>
+          <%= select_tag(:student_id, options_for_select(student_options)) %>
+          <%= submit_tag('Add Student') %>
+          <%= hidden_field_tag(:tutor_id, @tutor.id) %>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <% end %>
+      <% else %>
+        No unmatched students
       <% end %>
-    </table>
-  <% else %>
-    No Students
-  <% end %>
-</p>
+    </div>
+    <br>
 
-<p>
-  <strong>Add Student:</strong>
-  <% if !student_options.empty? %>
-    <%= form_tag('add_student', method: 'put') do %>
-      <%= select_tag(:student_id, options_for_select(student_options)) %>
-      <%= submit_tag('Add Student') %>
-      <%= hidden_field_tag(:tutor_id, @tutor.id) %>
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <% end %>
-  <% else %>
-    No unmatched students
-  <% end %>
-</p>
+    <hr>
+    <!-- ================================================================= -->
+    <div class="row">
+        <h4 class="col-md-12"><strong>Training</strong></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Orientation Date:</strong><br>
+        <%= @tutor.orientation_date %>
+      </div>
 
-<%= link_to 'Edit', edit_tutor_path(@tutor) %> |
-<%= link_to 'Back', tutors_path %>
+      <div class="col-md-4">
+        <strong>Training Type:</strong><br>
+        <%= @tutor.training_type %>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Training Date:</strong><br>
+        <%= @tutor.training_date %>
+      </div>
+    </div>
+
+    <hr>
+    <!-- ================================================================= -->
+    <div class="row">
+        <h4 class="col-md-12"><strong>Education</strong></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Education:</strong><br>
+        <%= @tutor.education %>
+      </div>
+
+      <div class="col-md-6">
+        <strong>Colleges Attended:</strong><br>
+        <%= @tutor.colleges_attended %>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Educational Accomplishments:</strong><br>
+        <%= @tutor.educational_accomplishments %>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Previous Teaching Experience:</strong><br>
+        <%= @tutor.previous_teaching_experience %>
+      </div>
+
+      <div class="col-md-6">
+        <strong>Previous Teaching Experience:</strong><br>
+        <%= @tutor.previous_volunteer_experience %>
+      </div>
+    </div>
+    <hr>
+    <!-- ================================================================= -->
+
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Teachable Subjects:</strong><br>
+        <%= @tutor.teachable_subjects %>
+      </div>
+
+      <div class="col-md-6">
+        <strong>Hobbies:</strong><br>
+        <%= @tutor.hobbies %>
+      </div>
+    </div>
+
+
+    <hr>
+    <!-- ================================================================= -->
+    <div class="row">
+        <h4 class="col-md-12"><strong>Employment</strong></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Employment Status:</strong><br>
+        <%= @tutor.employment_status %>
+      </div>
+
+      <div class="col-md-6">
+        <strong>Employer Name:</strong><br>
+        <%= @tutor.employer_name %>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Specific Occupation:</strong><br>
+        <%= @tutor.occupation %>
+      </div>
+
+      <div class="col-md-6">
+        <strong>Past Occupation:</strong><br>
+        <%= @tutor.past_occupation %>
+      </div>
+
+    </div>
+
+    <hr>
+    <!-- ================================================================= -->
+    <div class="row">
+        <h4 class="col-md-12"><strong>Language Proficiencies</strong></h4>
+    </div>
+
+    <hr>
+    <!-- ================================================================= -->
+    <div class="row">
+        <h4 class="col-md-12"><strong>Affiliate</strong></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Affiliate:</strong><br>
+        <%= @tutor.affiliate %>
+      </div>
+
+      <div class="col-md-5">
+        <strong>Event Participation:</strong><br>
+        <%= @tutor.affiliate_event_participation %>
+      </div>
+
+      <div class="col-md-3">
+        <strong>Event Date:</strong><br>
+        <%= @tutor.affiliate_date_of_event %>
+      </div>
+    </div>
+
+    <hr>
+    <br>
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to tutors_path do %>
+          <span class="glyphicon glyphicon-arrow-left"></span>
+          <span class="h4">Back</span>
+        <% end %>
+      </div>
+      <div class="col-xs-6 text-right">
+        <%= link_to edit_tutor_path(@tutor) do %>
+          <span class="h4">Edit</span>
+          <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+      </div>
+    </div>
+    <br>
+    <br>
+
+  </div>
+</div>
