@@ -7,6 +7,8 @@ class Coordinator < ApplicationRecord
   has_many :volunteer_jobs
   has_many :tutors, through: :volunteer_jobs
 
+  has_many :affiliates
+
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
