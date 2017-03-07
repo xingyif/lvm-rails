@@ -5,6 +5,8 @@ class Student < ApplicationRecord
   has_many :enrollments
   has_many :coordinators, through: :enrollments
 
+  has_many :affiliates
+
   validates :first_name, presence: true
   # validates :last_name, presence: true
   # validates :dob, presence: true
