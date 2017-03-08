@@ -100,8 +100,6 @@ class TutorsController < ApplicationController
     params.require(:tutor).permit(
       :address1,
       :address2,
-      :affiliate_date_of_event,
-      :affiliate_event_participation,
       :affiliate,
       :age_preference,
       :availability,
