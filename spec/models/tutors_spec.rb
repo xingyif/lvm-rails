@@ -17,6 +17,10 @@ RSpec.describe Tutor, type: :model do
     it 'coordinators through volunteer_jobs' do
       should have_many(:coordinators).through(:volunteer_jobs)
     end
+
+    it 'should have many tutor_comments' do
+      should have_many(:tutor_comments)
+    end
   end
 
   describe 'validations' do

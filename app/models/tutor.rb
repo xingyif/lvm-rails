@@ -12,6 +12,7 @@ class Tutor < ApplicationRecord
   has_many :coordinators, through: :volunteer_jobs
 
   has_many :affiliates
+  has_many :tutor_comments
 
   validates :address1,                presence: true
   validates :address2,                presence: true
