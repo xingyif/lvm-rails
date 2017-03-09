@@ -53,7 +53,7 @@
     </div>
 
     <div class="col-md-2">
-      <%= f.input :zip, label: "Zip Code", placeholder: "#####", maxlength: 5, required: false %>
+      <%= f.input :zip, label: "Zip Code", placeholder: "#####", maxlength: 5, required: false, input_html: { class: "mask_zip" } %>
     </div>
 
     <div class="col-md-2">
@@ -67,25 +67,25 @@
     </div>
 
     <div class="col-md-4">
-      <%= f.input :home_phone, maxlength: 12, placeholder: "###-###-####", required: false %>
+      <%= f.input :home_phone, maxlength: 14, placeholder: "(###) ###-####", required: false, input_html: { class: "mask_phone" } %>
     </div>
 
     <div class="col-md-4">
-      <%= f.input :cell_phone, maxlength: 12, placeholder: "###-###-####", required: false %>
+      <%= f.input :cell_phone, maxlength: 14, placeholder: "(###) ###-####", required: false, input_html: { class: "mask_phone" } %>
     </div>
 
     <div class="col-md-4">
-      <%= f.input :other_phone, maxlength: 12, placeholder: "###-###-####", required: false %>
+      <%= f.input :other_phone, maxlength: 14, placeholder: "(###) ###-####", required: false, input_html: { class: "mask_phone" } %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6">
-      <%= f.input :email_preferred, label: "Preferred email", maxlength: 255, required: false %>
+      <%= f.input :email_preferred, as: :string, label: "Preferred email", maxlength: 255, required: false, input_html: { class: "mask_email" } %>
     </div>
 
     <div class="col-md-6">
-      <%= f.input :email_other, label: "Other email", maxlength: 255, required: false %>
+      <%= f.input :email_other, as: :string, label: "Other email", maxlength: 255, required: false, input_html: { class: "mask_email" } %>
     </div>
   </div>
 
@@ -306,7 +306,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <%= f.input :smartt_id, label: "SMARTT ID", placeholder: "####-######", maxlength: 11, required: false %>
+      <%= f.input :smartt_id, label: "SMARTT ID", placeholder: "####-######", maxlength: 11, required: false, input_html: { class: "mask_smartt_id" } %>
     </div>
 
     <div class="col-md-6">
@@ -324,11 +324,11 @@
 
   <div class="row">
     <div class="col-md-6">
-      <%= f.input :emergency_contact_phone, maxlength: 12, placeholder: "###-###-####", required: false %>
+      <%= f.input :emergency_contact_phone, maxlength: 14, placeholder: "(###) ###-####", required: false, input_html: { class: "mask_phone" } %>
     </div>
 
     <div class="col-md-6">
-      <%= f.input :emergency_contact_email, maxlength: 255, required: false %>
+      <%= f.input :emergency_contact_email, as: :string, maxlength: 255, required: false, input_html: { class: "mask_email" } %>
     </div>
   </div>
 
@@ -371,6 +371,13 @@
 </form>
 
 <script>$('.datepicker').datepicker({ 'dateFormat': 'yy-mm-dd' });</script>
+<script>
+  $('.mask_zip').inputmask("99999", { "placeholder": "#" });
+  $('.mask_phone').inputmask("(999) 999-9999", { "placeholder": "#" });
+  $('.mask_smartt_id').inputmask("9999-999999", { "placeholder": "#" });
+  $('.mask_email').inputmask({ alias: "email" });
+</script>
+
 <%= javascript_tag do %>
   var lp = JSON.parse('<%= @tutor.language_proficiencies? ? @tutor.language_proficiencies.html_safe : {} %>');
   for (var language in lp) {
