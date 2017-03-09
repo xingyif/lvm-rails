@@ -1,0 +1,24 @@
+<% if @tutor_comment.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@tutor_comment.errors.count, "error") %> prohibited
+      this tutor from being saved:
+    </h2>
+    <ul>
+      <% @tutor_comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form role="form">
+  <div class="row">
+    <%= f.hidden_field :tutor_id, value: @tutor.id %>
+    <div class="col-md-12">
+      <%= f.input :content, required: false, as: :text %>
+    </div>
+  </div>
+
+  <%= f.button :submit %>
+</form>

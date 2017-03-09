@@ -96,6 +96,14 @@ ActiveRecord::Schema.define(version: 20170308185448) do
     t.index ["affiliate_id"], name: "index_students_on_affiliate_id"
   end
 
+  create_table "tutor_comments", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.text     "content",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tutor_id"], name: "index_tutor_comments_on_tutor_id"
+  end
+
   create_table "tutors", force: :cascade do |t|
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
