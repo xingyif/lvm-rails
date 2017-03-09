@@ -14,7 +14,7 @@
           <% if @tutor.affiliate %>
             <strong><%= @tutor.affiliate %></strong>
           <% else %>
-              <strong>No Affiliate</strong>
+            <strong>No Affiliate</strong>
           <% end %>
         </span>
       </div>
@@ -58,7 +58,7 @@
     <hr>
     <!-- ================================================================= -->
     <div class="row">
-        <h4 class="col-md-12"><strong>Background</strong></h4>
+      <h4 class="col-md-12"><strong>Background</strong></h4>
     </div>
     <div class="row">
       <div class="col-md-4">
@@ -115,7 +115,7 @@
     <hr>
     <!-- ================================================================= -->
     <div class="row">
-        <h4 class="col-md-12"><strong>Contact</strong></h4>
+      <h4 class="col-md-12"><strong>Contact</strong></h4>
     </div>
 
     <div class="row">
@@ -214,23 +214,23 @@
     <div class="row">
       <div class="table-responsive col-md-12">
         <table class="table table-striped">
-           <thead>
-             <tr>
+          <thead>
+            <tr>
               <th>Name</th>
               <th>Email</th>
-             <tr>
-           </thead>
-           <tbody>
-             <% if !@students.empty? %>
-                 <% @students.each do |s| %>
-                   <tr>
-                     <td> <%= s.name %> </td>
-                     <td> <%= s.email %> </td>
-                   </tr>
-                 <% end %>
-             <% else %>
-               No Students
-             <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% if !@students.empty? %>
+              <% @students.each do |s| %>
+                <tr>
+                  <td> <%= s.name %> </td>
+                  <td> <%= s.email %> </td>
+                </tr>
+              <% end %>
+            <% else %>
+              No Students
+            <% end %>
           </tbody>
         </table>
       </div>
@@ -253,7 +253,7 @@
     <hr>
     <!-- ================================================================= -->
     <div class="row">
-        <h4 class="col-md-12"><strong>Training</strong></h4>
+      <h4 class="col-md-12"><strong>Training</strong></h4>
     </div>
     <div class="row">
       <div class="col-md-4">
@@ -275,7 +275,7 @@
     <hr>
     <!-- ================================================================= -->
     <div class="row">
-        <h4 class="col-md-12"><strong>Education</strong></h4>
+      <h4 class="col-md-12"><strong>Education</strong></h4>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -326,7 +326,7 @@
     <hr>
     <!-- ================================================================= -->
     <div class="row">
-        <h4 class="col-md-12"><strong>Employment</strong></h4>
+      <h4 class="col-md-12"><strong>Employment</strong></h4>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -354,35 +354,13 @@
     </div>
 
     <hr>
-    <!-- ================================================================= -->
+
     <div class="row">
-        <h4 class="col-md-12"><strong>Language Proficiencies</strong></h4>
+      <h4 class="col-md-12"><strong>Language Proficiencies</strong></h4>
     </div>
 
     <hr>
-    <!-- ================================================================= -->
-    <div class="row">
-        <h4 class="col-md-12"><strong>Affiliate</strong></h4>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <strong>Affiliate:</strong><br>
-        <%= @tutor.affiliate %>
-      </div>
 
-      <div class="col-md-5">
-        <strong>Event Participation:</strong><br>
-        <%= @tutor.affiliate_event_participation %>
-      </div>
-
-      <div class="col-md-3">
-        <strong>Event Date:</strong><br>
-        <%= @tutor.affiliate_date_of_event %>
-      </div>
-    </div>
-
-    <hr>
-    <br>
     <div class="row">
       <div class="col-xs-6">
         <%= link_to tutors_path do %>

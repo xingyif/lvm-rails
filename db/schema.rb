@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306043954) do
+ActiveRecord::Schema.define(version: 20170308185448) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -152,8 +152,6 @@ ActiveRecord::Schema.define(version: 20170306043954) do
     t.boolean  "criminal_conviction"
     t.boolean  "release_on_file"
     t.date     "release_sign_date"
-    t.string   "affiliate_event_participation"
-    t.date     "affiliate_date_of_event"
     t.string   "referral_other"
     t.integer  "availability"
     t.integer  "age_preference"
