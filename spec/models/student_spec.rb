@@ -17,6 +17,10 @@ RSpec.describe Student, type: :model do
     it 'coordinators through enrollments' do
       should have_many(:coordinators).through(:enrollments)
     end
+
+    it 'should have many exams' do
+      should have_many(:exams)
+    end
   end
 
   describe 'validations' do

@@ -4,6 +4,7 @@ class Student < ApplicationRecord
 
   has_many :enrollments
   has_many :coordinators, through: :enrollments
+  has_many :exams
 
   has_many :affiliates
 

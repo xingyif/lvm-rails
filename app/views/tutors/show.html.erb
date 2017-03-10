@@ -3,15 +3,15 @@
     <div class="row">
       <div class="col-xs-6">
         <%= link_to tutors_path do %>
-          <span class="glyphicon glyphicon-arrow-left"></span>
-          <span class="h4">Back</span>
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            <span class="h4">Back</span>
         <% end %>
       </div>
 
       <div class="col-xs-6 text-right">
         <span class="h4">
-          <% if @tutor.affiliate %>
-            <label><%= @tutor.affiliate %></label>
+          <% if @tutor.affiliate_id %>
+            <label><%= Affiliate.find(@tutor.affiliate_id).name %></label>
           <% else %>
             <label>No Affiliate</label>
           <% end %>
@@ -212,22 +212,22 @@
       <div class="table-responsive col-md-12">
         <table class="table table-striped">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
           </thead>
           <tbody>
-            <% if !@students.empty? %>
+          <% if !@students.empty? %>
               <% @students.each do |s| %>
-                <tr>
-                  <td> <%= s.name %> </td>
-                  <td> <%= s.email %> </td>
-                </tr>
+                  <tr>
+                    <td> <%= s.name %> </td>
+                    <td> <%= s.email %> </td>
+                  </tr>
               <% end %>
-            <% else %>
+          <% else %>
               No Students
-            <% end %>
+          <% end %>
           </tbody>
         </table>
       </div>
@@ -235,14 +235,14 @@
 
     <div class="row col-md-12">
       <% if !student_options.empty? %>
-        <%= form_tag('add_student', method: 'put') do %>
-          <%= select_tag(:student_id, options_for_select(student_options)) %>
-          <%= submit_tag('Add Student') %>
-          <%= hidden_field_tag(:tutor_id, @tutor.id) %>
-          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <% end %>
+          <%= form_tag('add_student', method: 'put') do %>
+              <%= select_tag(:student_id, options_for_select(student_options)) %>
+              <%= submit_tag('Add Student') %>
+              <%= hidden_field_tag(:tutor_id, @tutor.id) %>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <% end %>
       <% else %>
-        No unmatched students
+          No unmatched students
       <% end %>
     </div>
 
@@ -359,6 +359,21 @@
     <hr>
 
     <div class="row">
+      <h4 class="col-md-12"><strong>Affiliate</strong></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <% if @tutor.affiliate_id %>
+            <label><%= Affiliate.find(@tutor.affiliate_id).name %></label>
+        <% else %>
+            <label>No Affiliate</label>
+        <% end %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
       <div class="col-md-6">
         <h4>
           <label> Tutor Comments </label>
@@ -373,22 +388,22 @@
     </div>
 
     <% if @tutor.tutor_comments.length > 0 %>
-      <% for c in @tutor.tutor_comments %>
-        <div class="row">
-          <div class="col-md-10">
-            <%= c.content %>
-          </div>
+        <% for c in @tutor.tutor_comments %>
+            <div class="row">
+              <div class="col-md-10">
+                <%= c.content %>
+              </div>
 
-          <div class="col-md-2">
-            <div class="pull-right">
-              <%= link_to 'Edit', edit_tutor_comment_path(c) %>
-              <%= link_to 'Delete ', c, method: :delete, data: { confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}" } %>
+              <div class="col-md-2">
+                <div class="pull-right">
+                  <%= link_to 'Edit', edit_tutor_comment_path(c) %>
+                  <%= link_to 'Delete ', c, method: :delete, data: {confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}"} %>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      <% end %>
-    <% else  %>
-      No Tutor Comments
+        <% end %>
+    <% else %>
+        No Tutor Comments
     <% end %>
 
     <hr>

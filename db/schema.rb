@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 20170308185448) do
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
+  create_table "exams", force: :cascade do |t|
+    t.string   "score"
+    t.date     "exam_date"
+    t.string   "subject"
+    t.integer  "student_id"
+    t.integer  "tutor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_exams_on_student_id"
+    t.index ["tutor_id"], name: "index_exams_on_tutor_id"
+  end
+
   create_table "matches", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "tutor_id"
@@ -93,7 +105,9 @@ ActiveRecord::Schema.define(version: 20170308185448) do
     t.string   "address2"
     t.integer  "smartt_id"
     t.integer  "affiliate_id"
+    t.integer  "exam_id"
     t.index ["affiliate_id"], name: "index_students_on_affiliate_id"
+    t.index ["exam_id"], name: "index_students_on_exam_id"
   end
 
   create_table "tutor_comments", force: :cascade do |t|
@@ -108,7 +122,6 @@ ActiveRecord::Schema.define(version: 20170308185448) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.string   "email_preferred",                   null: false
-    t.string   "affiliate"
     t.string   "first_name",                        null: false
     t.string   "last_name",                         null: false
     t.string   "address1",                          null: false
@@ -165,7 +178,9 @@ ActiveRecord::Schema.define(version: 20170308185448) do
     t.integer  "age_preference"
     t.integer  "category_preference"
     t.integer  "affiliate_id"
+    t.integer  "exam_id"
     t.index ["affiliate_id"], name: "index_tutors_on_affiliate_id"
+    t.index ["exam_id"], name: "index_tutors_on_exam_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -4,6 +4,10 @@
 </p>
 
 <p>
+  <strong><%= link_to 'Exams', exams_path %></strong>
+</p>
+
+<p>
   <strong>Tutor:</strong>
   <%= form_tag('set_tutor', method: 'put') do %>
     <% if !@match.nil? %>

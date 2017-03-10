@@ -4,13 +4,20 @@ require 'spec_helper'
 RSpec.describe 'tutors/show.html.erb', type: :view do
   xdescribe 'populate page and links' do
     before do
-      @tutor = Tutor.create(
+      @tutor1 = Tutor.create(
         first_name: 'Viviano', last_name: 'Cantu',
         email_preferred: 'email@email.com',
         address1: '200 Huntington St', city: 'Boston', state: 'MA',
         zip: '02120', home_phone: '1112223333', cell_phone: '4445556666',
         affiliate: 'Affiliate1', gender: 'male', native_language: 'English',
         race: 'white'
+      )
+      @tutor2 = Tutor.create(
+        first_name: 'Viviano', last_name: 'Cantu',
+        email_preferred: 'email@email.com',
+        address1: '200 Huntington St', city: 'Boston', state: 'MA',
+        zip: '02120', home_phone: '1112223333', cell_phone: '4445556666',
+        gender: 'male', native_language: 'English', race: 'white'
       )
       @students = [Student.create(first_name: 'Mike', last_name: 'White'),
                    Student.create(first_name: 'Alex', last_name: 'Jones')]
@@ -40,6 +47,7 @@ RSpec.describe 'tutors/show.html.erb', type: :view do
 
       it 'presence of affiliate' do
         expect(rendered).to match(/Affiliate1/)
+        expect(rendered).to match(/No Affiliate/)
       end
 
       it 'presence of gender' do

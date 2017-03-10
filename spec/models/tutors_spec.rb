@@ -21,6 +21,10 @@ RSpec.describe Tutor, type: :model do
     it 'should have many tutor_comments' do
       should have_many(:tutor_comments)
     end
+
+    it 'should have many exams' do
+      should have_many(:exams)
+    end
   end
 
   describe 'validations' do

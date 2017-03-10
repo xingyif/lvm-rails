@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :affiliates
   resources :coordinators
+  resources :exams
   resources :students
   resources :tutors
   resources :tutor_comments
