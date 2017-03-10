@@ -5,6 +5,7 @@ require 'tutors_helper'
   Tutor.seed do |t|
     t.address1                = Faker::Address.street_address
     t.address2                = Faker::Address.secondary_address
+    t.affiliate_id            = rand(10)
     t.cell_phone              = Faker::Base.numerify('(###) ###-####')
     t.city                    = Faker::Address.city
     t.country_of_birth        = Faker::Address.country
@@ -13,8 +14,8 @@ require 'tutors_helper'
     t.emergency_contact_email = Faker::Internet.email
     t.emergency_contact_name  = Faker::Name.name
     t.emergency_contact_phone = Faker::Base.numerify('(###) ###-####')
-    t.hispanic_or_latino      = [true, false].sample
     t.first_name              = Faker::Name.first_name
+    t.hispanic_or_latino      = [true, false].sample
     t.home_phone              = Faker::Base.numerify('(###) ###-####')
     t.language_proficiencies  = TutorsHelper.language_proficiencies.to_json
     t.last_name               = Faker::Name.last_name
