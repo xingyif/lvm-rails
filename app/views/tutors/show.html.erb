@@ -234,9 +234,9 @@
     </div>
 
     <div class="row col-md-12">
-      <% if !student_options.empty? %>
+      <% if !@student_options.empty? %>
           <%= form_tag('add_student', method: 'put') do %>
-              <%= select_tag(:student_id, options_for_select(student_options)) %>
+              <%= select_tag(:student_id, options_for_select(@student_options)) %>
               <%= submit_tag('Add Student') %>
               <%= hidden_field_tag(:tutor_id, @tutor.id) %>
               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -354,6 +354,31 @@
 
     <div class="row">
       <h4 class="col-md-12"><label>Language Proficiencies</label></h4>
+      <% languages = JSON.parse(@tutor.language_proficiencies).delete_if {|k,v| v == "None"} %>
+      <% if !languages.empty? %>
+        <div class="table-responsive col-md-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Language</th>
+                <th>Proficiency</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% languages.each do |l| %>
+              <tr>
+                <td> <%= l[0] %> </td>
+                <td> <%= l[1] %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <% else %>
+        <div class="col-md-12">
+          No language proficiency data on file.
+        </div>
+      <% end %>
     </div>
 
     <hr>

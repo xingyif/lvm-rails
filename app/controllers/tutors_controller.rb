@@ -1,7 +1,5 @@
 # rubocop:disable ClassLength
 class TutorsController < ApplicationController
-  helper_method :student_options
-
   def index
     @tutors = Tutor.all
   end
@@ -10,6 +8,7 @@ class TutorsController < ApplicationController
     @tutor = Tutor.find(params[:id])
     @coordinator = coordinator
     @students = students
+    @student_options = student_options
   end
 
   def coordinator
