@@ -47,7 +47,7 @@ RSpec.describe Tutor, type: :model do
 
       it 'validates format' do
         should allow_value('(555) 555-5555').for(:cell_phone)
-        should allow_value('555-555-5555').for(:cell_phone)
+        should_not allow_value('555-555-5555').for(:cell_phone)
         should_not allow_value('43-4343-4444').for(:cell_phone)
         should_not allow_value('434-3433-4444').for(:cell_phone)
         should_not allow_value('434-434-444').for(:cell_phone)
@@ -158,7 +158,7 @@ RSpec.describe Tutor, type: :model do
 
       it 'validates format' do
         should allow_value('(555) 555-5555').for(:home_phone)
-        should allow_value('555-555-5555').for(:home_phone)
+        should_not allow_value('555-555-5555').for(:home_phone)
         should_not allow_value('43-4343-4444').for(:home_phone)
         should_not allow_value('434-3433-4444').for(:home_phone)
         should_not allow_value('434-434-444').for(:home_phone)
@@ -182,8 +182,9 @@ RSpec.describe Tutor, type: :model do
 
     describe 'last_name_id' do
       it 'validates format' do
+        should allow_value('0123').for(:last_name_id)
         should allow_value('01234').for(:last_name_id)
-        should allow_value('0').for(:last_name_id)
+        should_not allow_value('012').for(:last_name_id)
         should_not allow_value('012345').for(:last_name_id)
         should_not allow_value('O1234').for(:last_name_id)
       end
@@ -204,7 +205,7 @@ RSpec.describe Tutor, type: :model do
     describe 'other_phone' do
       it 'validates format' do
         should allow_value('(555) 555-5555').for(:other_phone)
-        should allow_value('555-555-5555').for(:other_phone)
+        should_not allow_value('555-555-5555').for(:other_phone)
         should_not allow_value('43-4343-4444').for(:other_phone)
         should_not allow_value('434-3433-4444').for(:other_phone)
         should_not allow_value('434-434-444').for(:other_phone)

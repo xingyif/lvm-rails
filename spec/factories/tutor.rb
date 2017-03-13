@@ -20,6 +20,8 @@ FactoryGirl.define do
     race { ApplicationHelper.race.sample[0] }
     smartt_id { Faker::Base.numerify('####-######') }
     state { ApplicationHelper.us_states.sample[0] }
+    training_date { Faker::Date.between(10.years.ago, 1.day.ago) }
+    training_type %w(ABE ESOL).sample
     zip { Faker::Base.numerify('#####') }
   end
 
@@ -44,6 +46,8 @@ FactoryGirl.define do
     race { ApplicationHelper.race.sample[0] }
     smartt_id { Faker::Base.numerify('####-######') }
     state { ApplicationHelper.us_states.sample[0] }
+    training_date { Faker::Date.between(10.years.ago, 1.day.ago) }
+    training_type %w(ABE ESOL).sample
     zip { Faker::Base.numerify('#####') }
     after(:create) do |tutor|
       tutor.coordinators << FactoryGirl.create(:coordinator)
