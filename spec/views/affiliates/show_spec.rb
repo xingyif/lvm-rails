@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe 'affiliates/show', type: :view do
   before(:each) do
@@ -20,5 +21,15 @@ RSpec.describe 'affiliates/show', type: :view do
     expect(rendered).to match(/Email/)
     expect(rendered).to match(/Website/)
     expect(rendered).to match(/Twitter/)
+  end
+
+  it 'contains the Back link' do
+    render
+    assert_select 'a[href=?]', affiliates_path
+  end
+
+  it 'contains the Edit link' do
+    render
+    assert_select 'a[href=?]', edit_affiliate_path(@affiliate)
   end
 end
