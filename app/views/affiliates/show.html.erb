@@ -1,34 +1,65 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to affiliates_path do %>
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            <span class="h4">Back</span>
+        <% end %>
+      </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @affiliate.name %>
-</p>
+      <div class="col-xs-6 text-right">
+        <span class="h4">
+          <label><%= @affiliate.name %></label>
+        </span>
+      </div>
+    </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @affiliate.address %>
-</p>
+    <hr>
 
-<p>
-  <strong>Phone number:</strong>
-  <%= @affiliate.phone_number %>
-</p>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Affiliate Name</label><br>
+        <%= @affiliate.name %>
+      </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @affiliate.email %>
-</p>
+      <div class="col-md-4">
+        <label>Address </label><br>
+        <%= @affiliate.address %>
+      </div>
 
-<p>
-  <strong>Website:</strong>
-  <%= @affiliate.website %>
-</p>
+      <div class="col-md-4">
+        <label>Phone Number</label><br>
+        <%= @affiliate.phone_number %>
+      </div>
+    </div>
 
-<p>
-  <strong>Twitter:</strong>
-  <%= @affiliate.twitter %>
-</p>
+    <div class="row">
+      <div class="col-md-4">
+        <label>Email</label><br>
+        <%= @affiliate.email %>
+      </div>
 
-<%= link_to 'Edit', edit_affiliate_path(@affiliate) %> |
-<%= link_to 'Back', affiliates_path %>
+      <div class="col-md-4">
+        <label>Website</label><br>
+        <%= @affiliate.website %>
+      </div>
+
+      <div class="col-md-4">
+        <label>Twitter Handle</label><br>
+        <%= @affiliate.twitter %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= link_to edit_affiliate_path(@affiliate) do %>
+          <span class="h4">Edit</span>
+          <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
