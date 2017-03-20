@@ -5,5 +5,4 @@ class TutoringSession < ApplicationRecord
   validates :location,     presense: true
   validates :start_time,   presense: true
   validates :end_time,     presense: true
-
 end
