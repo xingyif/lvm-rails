@@ -154,7 +154,8 @@ class TutorsController < ApplicationController
       :training_date,
       :training_type,
       :training,
-      :zip
+      :zip,
+      all_tags: []
     )
   end
 end

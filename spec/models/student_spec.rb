@@ -21,6 +21,14 @@ RSpec.describe Student, type: :model do
     it 'should have many exams' do
       should have_many(:exams)
     end
+
+    it 'should have many taggings' do
+      should have_many(:taggings)
+    end
+
+    it 'should have many tags through taggings' do
+      should have_many(:tags).through(:taggings)
+    end
   end
 
   describe 'validations' do

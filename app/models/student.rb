@@ -8,6 +8,9 @@ class Student < ApplicationRecord
 
   has_many :affiliates
 
+  has_many :taggings
+  has_many :tags, through: :taggings
+
   validates :first_name, presence: true
   # validates :last_name, presence: true
   # validates :dob, presence: true

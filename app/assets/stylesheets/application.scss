@@ -17,6 +17,7 @@
 @import "jquery-ui/core";
 @import "jquery-ui/datepicker";
 @import "jquery-ui/theme";
+@import "chosen.min";
 
 .navbar-brand {
   padding-top: 4px;
@@ -124,4 +125,32 @@
     display: block;
     font-weight: bold;
   }
+}
+
+// Tags
+span.tag {
+  color: white;
+  background: #8882d8;
+  border-radius: 10px;
+  padding: 4px 10px;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+    position: relative;
+    margin: 3px 5px 3px 0;
+    padding: 5px 25px 5px 10px;
+    border: none;
+    max-width: 100%;
+    border-radius: 10px;
+    background-color: #73d2ff;
+    background-image: none;
+    background-size: 100% 19px;
+    box-shadow: none;
+    color: #6b6b6b;
+    line-height: 13px;
+    cursor: default;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    top: 6px;
 }

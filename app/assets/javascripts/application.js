@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require bootstrap
 //= require jquery.inputmask.bundle.min
+//= require jquery.chosen.min
 //= require_tree .

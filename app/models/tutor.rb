@@ -15,6 +15,9 @@ class Tutor < ApplicationRecord
   has_many :affiliates
   has_many :tutor_comments
 
+  has_many :taggings
+  has_many :tags, through: :taggings
+
   validates :address1,                presence: true
   validates :address2,                presence: true
   validates :cell_phone,              presence: true
@@ -73,5 +76,15 @@ class Tutor < ApplicationRecord
 
   def age_preference_array
     age_preference ? PreferencesHelper.explode(age_preference) : []
+  end
+
+  def all_tags=(names)
+    self.tags = names.reject(&:empty?).uniq.map do |name|
+      Tag.where(name: name.strip).first_or_create!
+    end
+  end
+
+  def all_tags
+    tags.map(&:name)
   end
 end

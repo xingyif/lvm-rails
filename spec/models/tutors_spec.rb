@@ -25,6 +25,14 @@ RSpec.describe Tutor, type: :model do
     it 'should have many exams' do
       should have_many(:exams)
     end
+
+    it 'should have many taggings' do
+      should have_many(:taggings)
+    end
+
+    it 'should have many tags through taggings' do
+      should have_many(:tags).through(:taggings)
+    end
   end
 
   describe 'validations' do
@@ -310,6 +318,45 @@ RSpec.describe Tutor, type: :model do
         it 'produces an array representing that preference as powers of two' do
           tutor = create(:tutor, age_preference: 19)
           expect(tutor.age_preference_array).to eq [1, 2, 0, 0, 16]
+        end
+      end
+    end
+
+    describe '#all_tags' do
+      before do
+        @tutor = create(:tutor)
+        @tag = Tag.create(name: 'Donor')
+        Tagging.create(tutor_id: @tutor.id, tag_id: @tag.id)
+      end
+
+      context 'getter' do
+        it 'produces the tags for a given tutor as an array of strings' do
+          expect(@tutor.all_tags).to eq ['Donor']
+        end
+      end
+
+      context 'setter' do
+        it 'adds a new tag to the tag list' do
+          @tutor.all_tags = ['Another Tag', 'Donor']
+          expect(@tutor.all_tags).to eq ['Donor', 'Another Tag']
+        end
+
+        it 'removes a tag that was already present' do
+          @tutor.all_tags = ['Another Tag']
+          expect(@tutor.all_tags).to eq ['Another Tag']
+          expect(Tagging.where(tutor_id: @tutor.id).count).to eq 1
+        end
+
+        it 'does not duplicate an already added tag' do
+          @tutor.all_tags = ['Another Tag', 'Donor', 'Another Tag', 'Another']
+          expect(@tutor.all_tags).to eq ['Donor', 'Another Tag', 'Another']
+          expect(Tagging.where(tutor_id: @tutor.id).count).to eq 3
+        end
+
+        it 'rejects empty values in the array' do
+          @tutor.all_tags = ['Another Tag', '', 'Donor', '']
+          expect(@tutor.all_tags).to eq ['Donor', 'Another Tag']
+          expect(Tagging.where(tutor_id: @tutor.id).count).to eq 2
         end
       end
     end
