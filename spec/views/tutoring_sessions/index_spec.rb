@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.xdescribe 'tutoring_sessions/index', type: :view do
   before(:each) do
-    @tutoring_session = create(:tutoring_sessions)
+    @tutoring_session = create(:tutoring_session)
     assign(:tutoring_sessions, [@tutoring_session])
   end
 
