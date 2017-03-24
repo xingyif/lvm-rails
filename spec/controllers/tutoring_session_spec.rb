@@ -102,19 +102,19 @@ RSpec.describe 'TutoringSessionsController', type: :controller do
       context 'with valid attributes' do
         it 'saves the updated tutoring_sessions to the database' do
           post :update, params: { id: @tutoring_session,
-                                 tutoring_sessions: @tutoring_session_attrs }
+                                  tutoring_sessions: @tutoring_session_attrs }
           expect(TutoringSession.last).to eq(@tutoring_session)
         end
 
         it 'assigns the updated tutoring_sessions as @tutoring_sessions' do
           post :update, params: { id: @tutoring_session,
-                                 tutoring_sessions: @tutoring_session_attrs }
+                                  tutoring_sessions: @tutoring_session_attrs }
           expect(assigns(:tutoring_sessions)).to eq(@tutoring_session)
         end
 
         it 'redirects to the tutoring_sessions view' do
           post :update, params: { id: @tutoring_session,
-                                 tutoring_sessions: @tutoring_session_attrs }
+                                  tutoring_sessions: @tutoring_session_attrs }
           expect(response).to redirect_to(@tutoring_session)
         end
       end
@@ -126,13 +126,13 @@ RSpec.describe 'TutoringSessionsController', type: :controller do
 
         it 'assigns the existing tutoring_sessions as @tutoring_sessions' do
           post :update, params: { id: @tutoring_session,
-                                 tutoring_sessions: @tutoring_session_attrs }
+                                  tutoring_sessions: @tutoring_session_attrs }
           expect(assigns(:tutoring_sessions)).to eq(@tutoring_session)
         end
 
         it 're-renders the :edit view' do
           post :update, params: { id: @tutoring_session,
-                                 tutoring_sessions: @tutoring_session_attrs }
+                                  tutoring_sessions: @tutoring_session_attrs }
           expect(response).to render_template :edit
         end
       end

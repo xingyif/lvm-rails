@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316233723) do
-
+ActiveRecord::Schema.define(version: 20170318210627) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -31,7 +30,7 @@ ActiveRecord::Schema.define(version: 20170316233723) do
     t.datetime "updated_at",    null: false
     t.integer  "affiliate_id"
     t.string   "phone_number"
-    t.date     "dob"
+    t.date     "date_of_birth"
     t.index ["affiliate_id"], name: "index_coordinators_on_affiliate_id"
   end
 
@@ -136,6 +135,19 @@ ActiveRecord::Schema.define(version: 20170316233723) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tutor_id"], name: "index_tutor_comments_on_tutor_id"
+  end
+
+  create_table "tutoring_sessions", force: :cascade do |t|
+    t.string   "location"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text     "session_comment"
+    t.integer  "student_id"
+    t.integer  "tutor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["student_id"], name: "index_tutoring_sessions_on_student_id"
+    t.index ["tutor_id"], name: "index_tutoring_sessions_on_tutor_id"
   end
 
   create_table "tutors", force: :cascade do |t|
