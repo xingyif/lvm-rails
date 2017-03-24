@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tutoring Sessions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Location</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @tutoring_session.each do |tutoring_session| %>
+      <tr>
+        <td><%= tutoring_session.location %></td>
+        <td><%= tutoring_session.start_time %></td>
+        <td><%= tutoring_session.end_time %></td>
+        <td><%= link_to 'Show', tutoring_session %></td>
+        <td><%= link_to 'Edit', edit_tutoring_session_path(tutoring_session) %></td>
+        <td><%= link_to 'Destroy', tutoring_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back to Home Page', root_path %> |
+<%= link_to 'New Tutoring Session', new_tutoring_session_path %>

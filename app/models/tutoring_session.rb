@@ -5,6 +5,6 @@ class TutoringSession < ApplicationRecord
   validates :location,     presence: true
   validates :start_time,   presence: true
   validates :end_time,     presence: true
-  validates :student,      presence: true
-  validates :tutor,        presence: true
+  # validates :student,      presence: true
+  # validates :tutor,        presence: true
 end
