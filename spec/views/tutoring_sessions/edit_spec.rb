@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.xdescribe 'tutoring_sessions/edit', type: :view do
   before(:each) do
-    @tutoring_session = create(:tutoring_session)
+    @tutoring_session = create(:tutoring_sessions)
   end
 
-  it 'renders the edit tutoring_session form' do
+  it 'renders the edit tutoring_sessions form' do
     render
 
     expect(rendered).to match(@tutoring_session.location)

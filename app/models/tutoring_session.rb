@@ -2,7 +2,9 @@ class TutoringSession < ApplicationRecord
   belongs_to :tutor
   belongs_to :student
 
-  validates :location,     presense: true
-  validates :start_time,   presense: true
-  validates :end_time,     presense: true
+  validates :location,     presence: true
+  validates :start_time,   presence: true
+  validates :end_time,     presence: true
+  validates :student,      presence: true
+  validates :tutor,        presence: true
 end
