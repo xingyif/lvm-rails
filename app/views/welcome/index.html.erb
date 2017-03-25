@@ -4,18 +4,28 @@
   </div>
 
   <div class='row centered'>
-    <div class='col-md-2 text-center'>
-      <%= link_to 'Students', { controller: 'students' }, class: 'button' %>
-    </div>
-    <div class='col-md-2 text-center'>
-      <%= link_to 'Tutors', { controller: 'tutors' }, class: 'button' %>
-    </div>
+    <% if @see_students %>
+      <div class='col-md-2 text-center'>
+        <%= link_to 'Students', { controller: 'students' }, class: 'button' %>
+      </div>
+    <% end %>
 
-    <div class='col-md-2 text-center'>
-      <%= link_to 'Coordinators', { controller: 'coordinators' }, class: 'button' %>
-    </div>
-    <div class='col-md-2 text-center'>
-      <%= link_to 'Affiliates', { controller: 'affiliates' }, class: 'button' %>
-    </div>
+    <% if @see_tutors %>
+      <div class='col-md-2 text-center'>
+        <%= link_to 'Tutors', { controller: 'tutors' }, class: 'button' %>
+      </div>
+    <% end %>
+
+    <% if @see_coordinators %>
+      <div class='col-md-2 text-center'>
+        <%= link_to 'Coordinators', { controller: 'coordinators' }, class: 'button' %>
+      </div>
+    <% end %>
+
+    <% if @see_affiliates %>
+      <div class='col-md-2 text-center'>
+        <%= link_to 'Affiliates', { controller: 'affiliates' }, class: 'button' %>
+      </div>
+    <% end %>
   </div>
 </div>

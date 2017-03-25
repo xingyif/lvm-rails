@@ -2,6 +2,8 @@ class Coordinator < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PHONE_REGEX = /\A\([0-9]{3}\) [0-9]{3}-[0-9]{4}\z/
 
+  belongs_to :user
+
   has_many :enrollments
   has_many :students, through: :enrollments
 

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe 'welcome/index.html.erb', type: :view do
   describe 'links' do
     before do
+      assign(:see_affiliates, true)
+      assign(:see_coordinators, true)
+      assign(:see_students, true)
+      assign(:see_tutors, true)
       render
     end
 

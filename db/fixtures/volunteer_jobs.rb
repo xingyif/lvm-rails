@@ -1,10 +1,9 @@
-tutors = [*1..20].shuffle
-coordinators = [*1..20].shuffle
+tutors = [*1..100].shuffle
 
-15.times do
+100.times do
   VolunteerJob.seed do |v|
     v.tutor_id = tutors.pop
-    v.coordinator_id = coordinators.pop
+    v.coordinator_id = rand(13) + 1
     v.start = Date.today
   end
 end

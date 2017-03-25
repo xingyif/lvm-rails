@@ -223,26 +223,26 @@ span.tag {
 }
 
 .chosen-container-multi .chosen-choices li.search-choice {
-    position: relative;
-    margin: 3px 5px 3px 0;
-    padding: 5px 25px 5px 10px;
-    border: none;
-    max-width: 100%;
-    border-radius: 10px;
-    background-color: #8882d8;
-    background-image: none;
-    background-size: 100% 19px;
-    box-shadow: none;
-    color: white;
-    line-height: 13px;
-    cursor: default;
+  position: relative;
+  margin: 3px 5px 3px 0;
+  padding: 5px 25px 5px 10px;
+  border: none;
+  max-width: 100%;
+  border-radius: 10px;
+  background-color: #8882d8;
+  background-image: none;
+  background-size: 100% 19px;
+  box-shadow: none;
+  color: white;
+  line-height: 13px;
+  cursor: default;
 }
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
-    top: 4px;
-    background: none;
-    font-size: 16px;
-    color: #dcdcdc;
+  top: 4px;
+  background: none;
+  font-size: 16px;
+  color: #dcdcdc;
 }
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close::before {

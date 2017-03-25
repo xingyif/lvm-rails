@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'students/index.html.erb', type: :view do
   describe 'populate page and links' do
     before do
+      assign(:can_edit, true)
       @students = [create(:student, first_name: 'Joe', last_name: 'Lally',
                                     gender: 'male'),
                    create(:student, first_name: 'Tim', last_name: 'Bradley',

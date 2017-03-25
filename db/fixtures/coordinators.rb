@@ -1,4 +1,4 @@
-20.times do
+13.times do
   Coordinator.seed do |c|
     c.first_name = Faker::Name.first_name
     c.last_name = Faker::Name.last_name

@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <div class="row index-header">
   <div class="col-md-12 title">
-    Students
+    <span> Students </span>
   </div>
 </div>
 
@@ -43,8 +41,8 @@
   </tbody>
 </table>
 
-<%= link_to 'Home', root_path %> |
-<%= link_to 'New Student', new_student_path %>
+<%= link_to 'Home', root_path %>
+<% if @show_new_student_link %> | <%= link_to 'New Student', new_student_path %> <% end %>
 
 <script>
 // Because turbolinks gets the page from the cache instead of making another

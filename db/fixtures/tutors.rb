@@ -1,7 +1,7 @@
 require 'application_helper'
 require 'tutors_helper'
 
-20.times do
+100.times do
   Tutor.seed do |t|
     t.address1                = Faker::Address.street_address
     t.address2                = Faker::Address.secondary_address

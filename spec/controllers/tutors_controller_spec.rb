@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe TutorsController, type: :controller do
-  before do
-    sign_in_auth
-  end
-
   describe 'helpers' do
+    before do
+      user = User.new(role: 2)
+      sign_in_auth(user)
+    end
+
     describe '#student_options' do
       it 'populates a list of unmatched students' do
         @s = create(:student)
@@ -18,22 +19,75 @@ RSpec.describe TutorsController, type: :controller do
 
   describe 'endpoints' do
     describe 'GET #index' do
-      it 'populates an array of all tutors' do
-        tutors = [create(:tutor)]
-        get :index
-        expect(assigns(:tutors)).to eq(tutors)
+      before do
+        create(:affiliate, id: 1)
+
+        create(:coordinator, affiliate_id: 1, id: 1)
+
+        create(:tutor, affiliate_id: 1, id: 1)
+        create(:tutor, affiliate_id: 2, id: 2)
+
+        Tutor.find(1).coordinators << Coordinator.find(1)
+
+        @all_tutors = [Tutor.find(1), Tutor.find(2)]
+        @coordinator_tutors = [Tutor.find(1)]
       end
 
-      it 'renders the :index view' do
-        get :index
+      describe 'as admin' do
+        before do
+          user = User.new(role: 2)
+          sign_in_auth(user)
+        end
 
-        expect(response).to render_template :index
+        it 'populates an array of all tutors' do
+          get :index
+          expect(assigns(:tutors)).to eq(@all_tutors)
+        end
+
+        it 'renders the :index view' do
+          get :index
+
+          expect(response).to render_template :index
+        end
+      end
+
+      describe 'as coordinator' do
+        before do
+          user = User.new(role: 1, coordinator_id: 1)
+          sign_in_auth(user)
+        end
+
+        it 'populates an array of affiliate tutors' do
+          get :index
+          expect(assigns(:tutors)).to eq(@coordinator_tutors)
+        end
+
+        it 'renders the :index view' do
+          get :index
+
+          expect(response).to render_template :index
+        end
+      end
+
+      describe 'as tutor' do
+        before do
+          user = User.new(role: 0, tutor_id: 1)
+          sign_in_auth(user)
+        end
+
+        it 'redirects to the welcome view' do
+          get :index
+
+          expect(response).to redirect_to root_path
+        end
       end
     end
 
     describe 'GET #show' do
       before do
         @tutor = create(:employed_tutor)
+        user = User.new(role: 2)
+        sign_in_auth(user)
       end
 
       it 'populates the specified tutor' do
@@ -63,6 +117,11 @@ RSpec.describe TutorsController, type: :controller do
     end
 
     describe 'GET #new' do
+      before do
+        user = User.new(role: 2)
+        sign_in_auth(user)
+      end
+
       it 'populates a new tutor' do
         get :new
         expect(assigns(:tutor)).to be_a_new(Tutor)
@@ -76,6 +135,8 @@ RSpec.describe TutorsController, type: :controller do
 
     describe 'GET #edit' do
       before do
+        user = User.new(role: 2)
+        sign_in_auth(user)
         @tutor = create(:tutor)
       end
 
@@ -92,6 +153,8 @@ RSpec.describe TutorsController, type: :controller do
 
     describe 'POST #create' do
       before do
+        user = User.new(role: 2)
+        sign_in_auth(user)
         @tutor_attrs = attributes_for(:tutor)
       end
 
@@ -131,6 +194,8 @@ RSpec.describe TutorsController, type: :controller do
 
     describe 'PUT #update' do
       before do
+        user = User.new(role: 2)
+        sign_in_auth(user)
         @tutor = create(:tutor)
         @new_tutor_attrs = attributes_for(:tutor)
       end
@@ -171,6 +236,8 @@ RSpec.describe TutorsController, type: :controller do
 
     describe 'PATCH #update_tags' do
       before do
+        user = User.new(role: 2)
+        sign_in_auth(user)
         @tutor = create(:tutor)
         @params = { id: @tutor.id, tutor: { 'all_tags' => ['', 'test'] } }
       end
@@ -190,6 +257,11 @@ RSpec.describe TutorsController, type: :controller do
     end
 
     describe 'DELETE #destroy' do
+      before do
+        user = User.new(role: 2)
+        sign_in_auth(user)
+      end
+
       it 'destroys the tutor' do
         tutor = create(:tutor)
         expect { delete :destroy, params: { id: tutor } }
@@ -204,6 +276,8 @@ RSpec.describe TutorsController, type: :controller do
 
     describe 'PUT #add_student' do
       before do
+        user = User.new(role: 2)
+        sign_in_auth(user)
         @tutor = create(:tutor)
         @student = create(:student)
       end

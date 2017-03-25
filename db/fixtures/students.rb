@@ -1,4 +1,4 @@
-20.times do
+100.times do
   Student.seed do |s|
     s.first_name = Faker::Name.first_name
     s.last_name  = Faker::Name.last_name

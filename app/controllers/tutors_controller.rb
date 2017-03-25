@@ -1,11 +1,13 @@
 # rubocop:disable ClassLength
 class TutorsController < ApplicationController
+  before_action :ensure_coordinator_or_admin!
+
   def index
-    @tutors = Tutor.all
+    @tutors = Tutor.of(current_user)
   end
 
   def show
-    @tutor = Tutor.find(params[:id])
+    @tutor = Tutor.of(current_user).find(params[:id])
     @coordinator = coordinator
     @students = students
     @student_options = student_options
@@ -18,11 +20,13 @@ class TutorsController < ApplicationController
 
   def students
     match_params = { tutor_id: params[:id], end: nil }
-    Match.where(match_params).to_a.map { |m| Student.find(m.student_id) }
+    Match.where(match_params).to_a.map do |m|
+      Student.of(current_user).find(m.student_id)
+    end
   end
 
   def update_tags
-    @tutor = Tutor.find(params[:id])
+    @tutor = Tutor.of(current_user).find(params[:id])
     @tutor.all_tags = params[:tutor][:all_tags]
 
     redirect_to tutor_path(@tutor)
@@ -33,7 +37,7 @@ class TutorsController < ApplicationController
   end
 
   def edit
-    @tutor = Tutor.find(params[:id])
+    @tutor = Tutor.of(current_user).find(params[:id])
   end
 
   # rubocop:disable MethodLength
@@ -52,7 +56,7 @@ class TutorsController < ApplicationController
   def update
     calculate_preferences(params)
     clean_params = update_params_with_proficiencies(tutor_params.clone, params)
-    @tutor = Tutor.find(params[:id])
+    @tutor = Tutor.of(current_user).find(params[:id])
 
     if @tutor.update(clean_params)
       redirect_to @tutor
@@ -62,7 +66,7 @@ class TutorsController < ApplicationController
   end
 
   def destroy
-    @tutor = Tutor.find(params[:id])
+    @tutor = Tutor.of(current_user).find(params[:id])
     @tutor.destroy
 
     redirect_to tutors_path
@@ -70,7 +74,7 @@ class TutorsController < ApplicationController
 
   def student_options
     matched_student_ids = Match.where(end: nil).to_a.map(&:student_id)
-    all_students_arr = Student.all.to_a
+    all_students_arr = Student.of(current_user).to_a
     untutored_students = all_students_arr
                          .reject { |s| matched_student_ids.include? s.id }
     untutored_students.map { |t| [t.name, t.id] }
@@ -80,7 +84,7 @@ class TutorsController < ApplicationController
     student_id = params[:student_id]
     tutor_id = params[:tutor_id]
     Match.create(student_id: student_id, tutor_id: tutor_id, start: Date.today)
-    redirect_to Tutor.find(tutor_id)
+    redirect_to Tutor.of(current_user).find(tutor_id)
   end
 
   private

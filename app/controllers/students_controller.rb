@@ -1,13 +1,16 @@
 # rubocop:disable ClassLength, MethodLength
 class StudentsController < ApplicationController
+  before_action :ensure_coordinator_or_admin!
   helper_method :tutor_options
+  helper_method :tutor?
 
   def index
-    @students = Student.all
+    @show_new_student_link = !current_user.role.zero?
+    @students = Student.of(current_user)
   end
 
   def show
-    @student = Student.find(params[:id])
+    @student = Student.of(current_user).find(params[:id])
     @match = current_match(params[:id])
     @enrollment = current_enrollment(params[:id])
   end
@@ -17,7 +20,8 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    @student = Student.find(params[:id])
+    @can_edit = !current_user.role.zero?
+    @student = Student.of(current_user).find(params[:id])
   end
 
   def create
@@ -33,7 +37,7 @@ class StudentsController < ApplicationController
 
   def update
     calculate_preferences(params)
-    @student = Student.find(params[:id])
+    @student = Student.of(current_user).find(params[:id])
 
     if @student.update(student_params)
       redirect_to @student
@@ -43,14 +47,14 @@ class StudentsController < ApplicationController
   end
 
   def update_tags
-    @student = Student.find(params[:id])
+    @student = Student.of(current_user).find(params[:id])
     @student.all_tags = params[:student][:all_tags]
 
     redirect_to tutor_path(@student)
   end
 
   def destroy
-    @student = Student.find(params[:id])
+    @student = Student.of(current_user).find(params[:id])
     @student.destroy
 
     redirect_to students_path
@@ -63,7 +67,7 @@ class StudentsController < ApplicationController
       unmatch_current_tutor(student_id)
       start_match_with_tutor(student_id, tutor_id) if tutor_id != 0
     end
-    redirect_to Student.find(student_id)
+    redirect_to Student.of(current_user).find(student_id)
   end
 
   private
@@ -144,7 +148,7 @@ class StudentsController < ApplicationController
   end
 
   def tutor_options
-    tutors = Tutor.all.to_a.map { |t| [t.name, t.id] }
+    tutors = Tutor.of(current_user).to_a.map { |t| [t.name, t.id] }
     tutors.insert(0, ['No Tutor', 0])
   end
 

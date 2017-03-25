@@ -375,4 +375,63 @@ RSpec.describe Tutor, type: :model do
       end
     end
   end
+
+  describe '#of' do
+    before do
+      create(:affiliate, id: 1)
+      create(:affiliate, id: 2)
+
+      create(:coordinator, affiliate_id: 1, id: 1)
+
+      create(:tutor, affiliate_id: 1, id: 1)
+      create(:tutor, affiliate_id: 2, id: 2)
+
+      Tutor.find(1).coordinators << Coordinator.find(1)
+    end
+
+    describe 'when current user is tutor' do
+      before do
+        @user = User.new(tutor_id: 1,
+                         role: 0,
+                         email: 't@b.co',
+                         password: 'abcdef',
+                         password_confirmation: 'abcdef')
+      end
+
+      it 'returns no tutors' do
+        tutors = Student.of(@user)
+        expect(tutors).to be(nil)
+      end
+    end
+
+    describe 'when current user is coordinator' do
+      before do
+        @user = User.new(coordinator_id: 1,
+                         role: 1,
+                         email: 'c@b.co',
+                         password: 'abcdef',
+                         password_confirmation: 'abcdef')
+      end
+
+      it 'returns only tutors of coordinator affiliate' do
+        tutors = Tutor.of(@user)
+        expect(tutors.count).to eq(1)
+        expect(tutors.first.id).to eq(1)
+      end
+    end
+
+    describe 'when current user is admin' do
+      before do
+        @user = User.new(role: 2,
+                         email: 'a@b.co',
+                         password: 'abcdef',
+                         password_confirmation: 'abcdef')
+      end
+
+      it 'returns all tutors' do
+        tutors = Tutor.of(@user)
+        expect(tutors.count).to eq(2)
+      end
+    end
+  end
 end

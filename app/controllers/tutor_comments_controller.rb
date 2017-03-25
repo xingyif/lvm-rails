@@ -3,7 +3,7 @@ class TutorCommentsController < ApplicationController
 
   def new
     @tutor_comment = TutorComment.new
-    @tutor = Tutor.find(params[:tutor])
+    @tutor = Tutor.of(current_user).find(params[:tutor])
   end
 
   def create
@@ -12,26 +12,26 @@ class TutorCommentsController < ApplicationController
     if @tutor_comment.save
       redirect_to tutor_path(tutor_comment_params[:tutor_id])
     else
-      @tutor = Tutor.find(tutor_comment_params[:tutor_id])
+      @tutor = Tutor.of(current_user).find(tutor_comment_params[:tutor_id])
       render :new
     end
   end
 
   def edit
-    @tutor = Tutor.find(@tutor_comment.tutor_id)
+    @tutor = Tutor.of(current_user).find(@tutor_comment.tutor_id)
   end
 
   def update
     if @tutor_comment.update(tutor_comment_params)
       redirect_to tutor_path(tutor_comment_params[:tutor_id])
     else
-      @tutor = Tutor.find(tutor_comment_params[:tutor_id])
+      @tutor = Tutor.of(current_user).find(tutor_comment_params[:tutor_id])
       render :edit
     end
   end
 
   def destroy
-    @tutor = Tutor.find(@tutor_comment.tutor_id)
+    @tutor = Tutor.of(current_user).find(@tutor_comment.tutor_id)
     @tutor_comment.destroy
 
     redirect_to tutor_path(@tutor)

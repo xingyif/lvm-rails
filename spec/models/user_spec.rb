@@ -10,11 +10,6 @@ RSpec.describe User, type: :model do
       expect(@user.role).to eq(0)
       expect(@user.tutor?).to be_truthy
     end
-
-    it 'does not have any permission levels' do
-      expect(@user.coordinator_level?).to be_falsey
-      expect(@user.admin_level?).to be_falsey
-    end
   end
 
   context 'coordinator' do
@@ -25,11 +20,6 @@ RSpec.describe User, type: :model do
     it 'ensures coordinators have role 1' do
       expect(@user.role).to eq(1)
       expect(@user.coordinator?).to be_truthy
-    end
-
-    it 'correctly defines the access level for coordinators' do
-      expect(@user.coordinator_level?).to be_truthy
-      expect(@user.admin_level?).to be_falsey
     end
   end
 
@@ -42,10 +32,39 @@ RSpec.describe User, type: :model do
       expect(@user.role).to eq(2)
       expect(@user.admin?).to be_truthy
     end
+  end
 
-    it 'correctly defines the access level for coordinators' do
-      expect(@user.coordinator_level?).to be_truthy
-      expect(@user.admin_level?).to be_truthy
+  describe 'single_account_type' do
+    before(:each) do
+      @user = User.new(role: 0,
+                       email: 'a@b.co',
+                       password: 'abcdef',
+                       password_confirmation: 'abcdef')
+    end
+
+    describe 'when the user is associated with only a tutor' do
+      it 'validate' do
+        @user.tutor_id = 1
+        @user.save
+        expect(User.count).to eq(1)
+      end
+    end
+
+    describe 'when the user is associated with only a coordinator' do
+      it 'validate' do
+        @user.coordinator_id = 1
+        @user.save
+        expect(User.count).to eq(1)
+      end
+    end
+
+    describe 'when the user is associated with a tutor and coordinator' do
+      it 'does not validate' do
+        @user.tutor_id = 1
+        @user.coordinator_id = 1
+        @user.save
+        expect(User.count).to eq(0)
+      end
     end
   end
 end

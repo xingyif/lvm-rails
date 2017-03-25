@@ -4,7 +4,8 @@ RSpec.describe WelcomeController, type: :controller do
   describe '#index' do
     describe 'when authenticated' do
       before do
-        sign_in_auth
+        user = User.new(role: 2)
+        sign_in_auth(user)
       end
 
       it 'renders the index template' do

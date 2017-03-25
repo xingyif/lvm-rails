@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_coordinator_or_admin!, only: [:index, :show]
 
   def index
     @tags = Tag.all
@@ -7,11 +8,11 @@ class TagsController < ApplicationController
 
   def show
     @tagged_students = Tagging.where(tag_id: @tag.id, tutor_id: nil).map do |t|
-      Student.find(t.student_id)
+      Student.of(current_user).find(t.student_id)
     end
 
     @tagged_tutors = Tagging.where(tag_id: @tag.id, student_id: nil).map do |t|
-      Tutor.find(t.tutor_id)
+      Tutor.of(current_user).find(t.tutor_id)
     end
 
     respond_to do |format|

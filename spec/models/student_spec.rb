@@ -127,7 +127,8 @@ RSpec.describe Student, type: :model do
 
   describe '#name' do
     it 'concatenates first_name and last_name' do
-      student = create(:student, first_name: 'Test', last_name: 'Testerson',
+      student = create(:student, first_name: 'Test',
+                                 last_name: 'Testerson',
                                  gender: 'male')
       full_name = 'Test Testerson'
       expect(student.name).to eq(full_name)
@@ -240,6 +241,68 @@ RSpec.describe Student, type: :model do
     it 'returns the danger contextual class for exited students' do
       @student = create(:student, status: 'Exited')
       expect(@student.status_class_indicator).to eq 'danger'
+    end
+  end
+
+  describe '#of' do
+    before do
+      create(:affiliate, id: 1)
+      create(:affiliate, id: 2)
+
+      create(:tutor, affiliate_id: 1, id: 1)
+      create(:coordinator, affiliate_id: 1, id: 1)
+
+      create(:student, id: 1)
+      create(:student, id: 2)
+      create(:student, id: 3)
+
+      Student.find(1).tutors << Tutor.find(1)
+      Student.find(1).coordinators << Coordinator.find(1)
+      Student.find(2).coordinators << Coordinator.find(1)
+    end
+
+    describe 'when current user is tutor' do
+      before do
+        @user = User.new(tutor_id: 1,
+                         role: 0,
+                         email: 't@b.co',
+                         password: 'abcdef',
+                         password_confirmation: 'abcdef')
+      end
+
+      it 'returns no students' do
+        students = Student.of(@user)
+        expect(students).to be(nil)
+      end
+    end
+
+    describe 'when current user is coordinator' do
+      before do
+        @user = User.new(coordinator_id: 1,
+                         role: 1,
+                         email: 'c@b.co',
+                         password: 'abcdef',
+                         password_confirmation: 'abcdef')
+      end
+
+      it 'returns only students of coordinator affiliate' do
+        students = Student.of(@user)
+        expect(students.count).to eq(2)
+      end
+    end
+
+    describe 'when current user is admin' do
+      before do
+        @user = User.new(role: 2,
+                         email: 'a@b.co',
+                         password: 'abcdef',
+                         password_confirmation: 'abcdef')
+      end
+
+      it 'returns all students' do
+        students = Student.of(@user)
+        expect(students.count).to eq(3)
+      end
     end
   end
 end

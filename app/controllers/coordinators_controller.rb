@@ -1,4 +1,6 @@
 class CoordinatorsController < ApplicationController
+  before_action :ensure_admin!
+
   def index
     @coordinators = Coordinator.all
   end
@@ -58,11 +60,15 @@ class CoordinatorsController < ApplicationController
 
   def students
     match_params = { coordinator_id: params[:id], end: nil }
-    Enrollment.where(match_params).to_a.map { |e| Student.find(e.student_id) }
+    Enrollment.where(match_params).to_a.map do |e|
+      Student.of(current_user).find(e.student_id)
+    end
   end
 
   def tutors
     match_params = { coordinator_id: params[:id], end: nil }
-    VolunteerJob.where(match_params).to_a.map { |v| Tutor.find(v.tutor_id) }
+    VolunteerJob.where(match_params).to_a.map do |v|
+      Tutor.of(current_user).find(v.tutor_id)
+    end
   end
 end

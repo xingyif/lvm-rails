@@ -4,12 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_one :coordinator
+  has_one :tutor
+
+  validate :single_account_type
   validates_numericality_of :role, in: 0..2
 
-  # Role management as follows
-  # 0 => tutor (default)
-  # 1 => coordinator
-  # 2 => admin
   def tutor?
     role.zero?
   end
@@ -22,11 +22,8 @@ class User < ApplicationRecord
     role == 2
   end
 
-  def coordinator_level?
-    role >= 1
-  end
-
-  def admin_level?
-    role >= 2
+  def single_account_type
+    return unless coordinator_id && tutor_id
+    errors.add(:account_type, "Can't be tutor and coordinator")
   end
 end

@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe TutorCommentsController, type: :controller do
   describe 'endpoints' do
     before do
-      sign_in_auth
+      user = User.new(role: 2)
+      sign_in_auth(user)
       @tutor = create(:tutor)
     end
 
