@@ -1,20 +1,26 @@
-<h2>Tutors</h2>
+<p id="notice"><%= notice %></p>
+
+<div class="row index-header">
+  <div class="col-md-12 title">
+    Tutors
+  </div>
+</div>
 
 <table class="table table-striped">
   <thead class="thead-inverse">
-  <tr>
-    <th>First Name </th>
-    <th>Last Name </th>
-    <th>Address </th>
-    <th>Home Phone </th>
-    <th>Cell Phone </th>
-    <th>Email Preferred</th>
-    <th>Native Language </th>
-    <th>Training Date </th>
-    <th>Training Type </th>
-    <th>Specific Occupation </th>
-    <th colspan="2"></th>
-  </tr>
+    <tr>
+      <th>First Name </th>
+      <th>Last Name </th>
+      <th>Address </th>
+      <th>Home Phone </th>
+      <th>Cell Phone </th>
+      <th>Email Preferred</th>
+      <th>Native Language </th>
+      <th>Training Date </th>
+      <th>Training Type </th>
+      <th>Specific Occupation </th>
+      <th colspan="2"></th>
+    </tr>
   </thead>
 
   <% @tutors.each do |tutor| %>
@@ -22,7 +28,7 @@
       <td><%= tutor.first_name %></td>
       <td><%= tutor.last_name %></td>
       <td><%= tutor.address1%> <%= tutor.address2 %> <%= tutor.city %>
-        <%= tutor.state %> <%= tutor.zip %></td>
+      <%= tutor.state %> <%= tutor.zip %></td>
       <td><%= tutor.home_phone%></td>
       <td><%= tutor.cell_phone%></td>
       <td><%= tutor.email_preferred%></td>
@@ -39,4 +45,5 @@
   <% end %>
 </table>
 
-<%= link_to 'Back', root_path %>
+<%= link_to 'Home', root_path %> |
+<%= link_to 'New Tutor', new_tutor_path %>
