@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'tutoring_sessions/index', type: :view do
   before(:each) do
     @tutoring_session = create(:tutoring_session, location: 'library',
-                               start_time: '2017-03-03',
-                               end_time: '2017-03-03')
+                                                  start_time: '2017-03-03',
+                                                  end_time: '2017-03-03')
     assign(:tutoring_sessions, [@tutoring_session])
   end
 
