@@ -49,7 +49,9 @@ class CoordinatorsController < ApplicationController
   def coordinator_params
     params.require(:coordinator).permit(
       :name,
-      :email
+      :email,
+      :phone_number,
+      :date_of_birth
     )
   end
 

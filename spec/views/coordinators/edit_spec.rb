@@ -1,63 +1,16 @@
-# spec/views/products/show.html.erb_spec.rb
-
 require 'rails_helper'
-require 'spec_helper'
 
-RSpec.describe 'coordinators/edit.html.erb', type: :view do
-  describe 'populate page' do
-    before do
-      @coordinator = Coordinator.create(name: 'Joe Lally',
-                                        email: 'email@email.com')
-      render
-    end
+RSpec.describe 'coordinators/edit', type: :view do
+  before(:each) do
+    @coordinator = create(:coordinator, phone_number: '(999) 999-9999')
+  end
 
-    describe 'presence of title' do
-      it 'checks for title' do
-        expect(rendered).to match(/Editing coordinator/)
-      end
-    end
+  it 'renders the edit coordinator form' do
+    render
 
-    describe 'presence of name label' do
-      it 'checks for name label' do
-        expect(rendered).to match(/Name/)
-      end
-    end
-
-    describe 'presence of coordinators' do
-      it 'checks for coordinators name' do
-        expect(rendered).to match(/Joe Lally/)
-      end
-    end
-
-    describe 'presence of email label' do
-      it 'checks for email label' do
-        expect(rendered).to match(/Email/)
-      end
-    end
-
-    describe 'presence of email' do
-      it 'checks for coordinators email' do
-        expect(rendered).to match(/email@email.com/)
-      end
-    end
-
-    describe 'links' do
-      it 'checks for link back' do
-        assert_select 'a[href=?]', coordinators_path
-      end
-    end
-
-    describe 'save button' do
-      it 'checks for presence of save button' do
-        expect(rendered).to have_button('Save')
-      end
-    end
-
-    xdescribe 'click links' do
-      it 'checks for link path after clicking' do
-        visit edit_coordinator_path(@coordinator)
-        current_path.should eq(edit_coordinator_path(@coordinator))
-      end
-    end
+    expect(rendered).to match(@coordinator.name)
+    expect(rendered).to match(@coordinator.date_of_birth.strftime('%Y-%m-%d'))
+    expect(rendered).to match(@coordinator.email)
+    expect(rendered).to match(/\(999\) 999-9999/)
   end
 end

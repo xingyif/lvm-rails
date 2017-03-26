@@ -1,22 +1,27 @@
-<h2>Coordinators</h2>
+<p id="notice"><%= notice %></p>
+
+<h1>Coordinators</h1>
 
 <table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th colspan="2"></th>
-  </tr>
-
-  <% @coordinators.each do |coordinator| %>
+  <thead>
     <tr>
-      <td><%= coordinator.name %></td>
-      <td><%= link_to 'Show', coordinator_path(coordinator) %></td>
-      <td><%= link_to 'Edit', edit_coordinator_path(coordinator) %></td>
-      <td><%= link_to 'Destroy', coordinator_path(coordinator),
-        method: :delete,
-        data: { confirm: 'Are you sure?' } %></td>
+      <th>Name</th>
     </tr>
-  <% end %>
+  </thead>
+
+  <tbody>
+    <% @coordinators.each do |coordinator| %>
+      <tr>
+        <td><%= coordinator.name %></td>
+        <td><%= link_to 'Show', coordinator %></td>
+        <td><%= link_to 'Edit', edit_coordinator_path(coordinator) %></td>
+        <td><%= link_to 'Delete', coordinator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<%= link_to 'Back', root_path %>
+<br>
+
+<%= link_to 'New Coordinator', new_coordinator_path %> |
+<%= link_to 'Home', root_path %>

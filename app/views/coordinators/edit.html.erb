@@ -1,35 +1,6 @@
-<h1>Editing coordinator</h1>
+<h1>Editing Exam</h1>
 
-<%= form_for :coordinator, url: coordinator_path(@coordinator), method: :patch do |f| %>
+<%= render 'form', coordinator: @coordinator %>
 
-  <% if @coordinator.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@coordinator.errors.count, "error") %> prohibited
-        this coordinator from being saved:
-      </h2>
-      <ul>
-        <% @coordinator.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
-
-<% end %>
-
-<%= link_to 'Back', coordinators_path %>
+<%= link_to 'Cancel', @coordinator %> |
+<%= link_to 'Back to Coordinators', coordinators_path %>

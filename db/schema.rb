@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317034439) do
+ActiveRecord::Schema.define(version: 20170316233723) do
+
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -30,7 +31,7 @@ ActiveRecord::Schema.define(version: 20170317034439) do
     t.datetime "updated_at",    null: false
     t.integer  "affiliate_id"
     t.string   "phone_number"
-    t.date     "date_of_birth"
+    t.date     "dob"
     t.index ["affiliate_id"], name: "index_coordinators_on_affiliate_id"
   end
 
