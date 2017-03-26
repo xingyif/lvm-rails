@@ -105,12 +105,6 @@ module TutorsHelper
     ]
   end
 
-  def affiliate
-    [
-      ['Boston', 'Boston']
-    ]
-  end
-
   def language_proficiencies
     # Returns a hash like { "English => "None", "Spanish" => "None" }
     Hash[(native_language.map { |e| e[0] }).collect { |v| [v, 'None'] }]
@@ -153,8 +147,7 @@ module TutorsHelper
     ]
   end
 
-  module_function :affiliate,
-                  :education,
+  module_function :education,
                   :employment,
                   :language_proficiencies,
                   :native_language,

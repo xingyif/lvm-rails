@@ -1,11 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe TutorsController, type: :controller do
-  describe 'endpoints' do
-    before do
-      sign_in_auth
-    end
+  before do
+    sign_in_auth
+  end
 
+  describe 'helpers' do
+    describe '#student_options' do
+      it 'populates a list of unmatched students' do
+        @s = create(:student)
+        @matched = create(:student)
+        Match.create(student_id: @matched.id)
+        expect(controller.send(:student_options)).to eq [[@s.name, @s.id]]
+      end
+    end
+  end
+
+  describe 'endpoints' do
     describe 'GET #index' do
       it 'populates an array of all tutors' do
         tutors = [create(:tutor)]
