@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   put 'students/set_tutor'
   put 'tutors/add_student'
-  post 'tags', to: 'tags#create'
 
   resources :affiliates
   resources :coordinators
@@ -15,4 +14,5 @@ Rails.application.routes.draw do
   resources :tutors
   resources :tutor_comments
   resources :tutoring_sessions
+  resources :tags
 end

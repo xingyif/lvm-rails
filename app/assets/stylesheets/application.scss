@@ -18,6 +18,7 @@
 @import "jquery-ui/datepicker";
 @import "jquery-ui/theme";
 @import "chosen.min";
+@import "dataTables.bootstrap.min";
 
 .navbar-brand {
   padding-top: 4px;
@@ -153,4 +154,8 @@ span.tag {
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
     top: 6px;
+}
+
+td > a:hover, td > a:focus {
+  text-decoration: none;
 }
