@@ -143,17 +143,29 @@ span.tag {
     border: none;
     max-width: 100%;
     border-radius: 10px;
-    background-color: #73d2ff;
+    background-color: #8882d8;
     background-image: none;
     background-size: 100% 19px;
     box-shadow: none;
-    color: #6b6b6b;
+    color: white;
     line-height: 13px;
     cursor: default;
 }
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
-    top: 6px;
+    top: 4px;
+    background: none;
+    font-size: 16px;
+    color: #dcdcdc;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close::before {
+  content: "x";
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close:hover {
+  background: none;
+  text-decoration: none;
 }
 
 td > a:hover, td > a:focus {

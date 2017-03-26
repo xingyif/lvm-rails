@@ -21,6 +21,13 @@ class TutorsController < ApplicationController
     Match.where(match_params).to_a.map { |m| Student.find(m.student_id) }
   end
 
+  def update_tags
+    @tutor = Tutor.find(params[:id])
+    @tutor.all_tags = params[:tutor][:all_tags]
+
+    redirect_to tutor_path(@tutor)
+  end
+
   def new
     @tutor = Tutor.new
   end

@@ -57,7 +57,16 @@
 
     <hr>
 
-    <h4>Tags</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Tags</h4>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= link_to tutor_path(@tutor), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add-tag'} do %>
+         <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Add or Remove Tags</button>
+        <% end %>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-md-12">
@@ -467,4 +476,35 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="add-tag" class="modal fade" role="dialog" aria-labelledby="addTag" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+         <h3>Update Tags</h3>
+       </div>
+       <%= simple_form_for @tutor, url: update_tags_path(@tutor), method: :patch do |f| %>
+        <div class="modal-body">
+          <div class="row">
+           <div class="col-md-12">
+             <p class="help-block">Select tags from the list or create a new tag by typing in a word or phrase and then hitting the comma key.</p>
+             <%= f.input :all_tags,
+                         label: false,
+                         as: :select,
+                         collection: Tag.order(:name).map{ |i| [i.name, i.name]},
+                         input_html: {multiple: true},
+                         required: false %>
+           </div>
+         </div>
+       </div>
+       <div class="modal-footer">
+         <%= f.button :submit, 'Update', class: "btn btn-primary" %>
+         <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+       </div>
+     <% end %>
+    </div>
+  </div>
+  <script>initChosenTagSelect();</script>
 </div>

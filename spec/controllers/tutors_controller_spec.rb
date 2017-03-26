@@ -158,6 +158,26 @@ RSpec.describe TutorsController, type: :controller do
       end
     end
 
+    describe 'PATCH #update_tags' do
+      before do
+        @tutor = create(:tutor)
+        @params = { id: @tutor.id, tutor: { 'all_tags' => ['', 'test'] } }
+      end
+
+      context 'with valid attributes' do
+        it 'updates the tags for a tutor' do
+          patch :update_tags, params: @params
+          expect(Tutor.last.tags).to eq([Tag.last])
+          expect(Tag.last.name).to eq 'test'
+        end
+
+        it 'redirects to the tutor view' do
+          post :update, params: @params
+          expect(response).to redirect_to(@tutor)
+        end
+      end
+    end
+
     describe 'DELETE #destroy' do
       it 'destroys the tutor' do
         tutor = create(:tutor)
