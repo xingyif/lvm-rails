@@ -35,7 +35,7 @@ class TutoringSessionsController < ApplicationController
 
   def destroy
     @tutoring_session.destroy
-    redirect_to tutoring_session_url,
+    redirect_to tutoring_sessions_url,
                 notice: 'Tutoring session was successfully destroyed.'
   end
 

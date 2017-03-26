@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.xdescribe 'tutoring_sessions/new', type: :view do
+RSpec.describe 'tutoring_sessions/new', type: :view do
   before(:each) do
-    assign(:tutoring_session, Coordinator.new)
+    assign(:tutoring_session, TutoringSession.new)
   end
 
   it 'should renders the new form' do

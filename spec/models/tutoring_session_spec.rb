@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'Tutoring_Session', type: :model do
-  xdescribe 'associations' do
+RSpec.describe TutoringSession, type: :model do
+  describe 'associations' do
     it 'should belong to a student' do
       should belong_to(:student)
     end
@@ -11,7 +11,7 @@ RSpec.describe 'Tutoring_Session', type: :model do
     end
   end
 
-  xdescribe 'validations' do
+  describe 'validations' do
     it 'validates location presence' do
       should validate_presence_of(:location)
     end
@@ -20,9 +20,6 @@ RSpec.describe 'Tutoring_Session', type: :model do
     end
     it 'validates end_time presence' do
       should validate_presence_of(:end_time)
-    end
-    it 'validates comment presence' do
-      should validate_presence_of(:comment)
     end
   end
 end

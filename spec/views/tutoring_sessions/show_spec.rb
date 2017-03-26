@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.xdescribe 'tutoring_sessions/show' do
+RSpec.describe 'tutoring_sessions/show' do
   before(:each) do
     @tutoring_session = assign(:tutoring_session, create(:tutoring_session))
   end
