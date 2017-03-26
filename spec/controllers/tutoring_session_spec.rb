@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe 'TutoringSessionController', type: :controller do
+RSpec.describe TutoringSessionsController, type: :controller do
   let(:valid_session) { {} }
-  xdescribe 'endpoints' do
+  describe 'endpoints' do
     before do
       sign_in_auth
       @tutoring_session = create(:tutoring_session)
       @tutoring_session_attrs = attributes_for(:tutoring_session)
     end
 
-    xdescribe 'GET #index' do
-      it 'populates an array of tutoring_sessions' do
+    describe 'GET #index' do
+      it 'populates an array of tutoring_session' do
         get :index
-        expect(assigns(:tutoring_sessions)).to eq([@tutoring_session])
+        expect(assigns(:tutoring_session)).to eq([@tutoring_session])
       end
 
       it 'renders the index template' do
@@ -21,7 +21,7 @@ RSpec.describe 'TutoringSessionController', type: :controller do
       end
     end
 
-    xdescribe 'GET #show' do
+    describe 'GET #show' do
       it 'shows the specified tutoring_session' do
         get :show, params: { id: @tutoring_session }
         expect(assigns(:tutoring_session)).to eq(@tutoring_session)
@@ -33,7 +33,7 @@ RSpec.describe 'TutoringSessionController', type: :controller do
       end
     end
 
-    xdescribe 'GET #new' do
+    describe 'GET #new' do
       it 'creates a new tutoring_session' do
         get :new
         expect(assigns(:tutoring_session)).to be_a_new(TutoringSession)
@@ -45,7 +45,7 @@ RSpec.describe 'TutoringSessionController', type: :controller do
       end
     end
 
-    xdescribe 'GET #edit' do
+    describe 'GET #edit' do
       it 'modifies the specific tutoring_session' do
         get :edit, params: { id: @tutoring_session }
         expect(assigns(:tutoring_session)).to eq(@tutoring_session)
@@ -57,7 +57,7 @@ RSpec.describe 'TutoringSessionController', type: :controller do
       end
     end
 
-    xdescribe 'POST #create' do
+    describe 'POST #create' do
       context 'with valid attributes' do
         it 'saves the new tutoring_session to the database' do
           post :create, params: { tutoring_session: @tutoring_session_attrs },
@@ -98,7 +98,7 @@ RSpec.describe 'TutoringSessionController', type: :controller do
       end
     end
 
-    xdescribe 'POST #update' do
+    describe 'POST #update' do
       context 'with valid attributes' do
         it 'saves the updated tutoring_session to the database' do
           post :update, params: { id: @tutoring_session,
@@ -138,7 +138,7 @@ RSpec.describe 'TutoringSessionController', type: :controller do
       end
     end
 
-    xdescribe 'DELETE #destroy' do
+    describe 'DELETE #destroy' do
       it 'destroys the tutoring_session' do
         expect { delete :destroy, params: { id: @tutoring_session } }
           .to change(TutoringSession, :count).by(-1)

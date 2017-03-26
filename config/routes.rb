@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   resources :students
   resources :tutors
   resources :tutor_comments
+  resources :tutoring_sessions
 end
