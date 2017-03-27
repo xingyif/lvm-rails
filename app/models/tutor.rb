@@ -10,7 +10,6 @@ class Tutor < ApplicationRecord
 
   has_many :volunteer_jobs
   has_many :coordinators, through: :volunteer_jobs
-  has_many :assessments
 
   has_many :affiliates
   has_many :tutor_comments
