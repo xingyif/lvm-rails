@@ -20,6 +20,10 @@
 @import "chosen.min";
 @import "dataTables.bootstrap.min";
 
+body {
+  position: relative;
+}
+
 .navbar-brand {
   padding-top: 4px;
   padding-bottom: 4px;
@@ -181,12 +185,39 @@
   }
 }
 
+section {
+  margin-top: 50px;
+}
+
+label.control-label {
+  color: #6d6d6d;
+}
+
+.nav-pills > li > a {
+  color: #6d6d6d;
+}
+
+.nav-pills > li.active {
+  a, a:hover, a:focus {
+    border-left: 2px solid #8882d8;
+    color: #8882d8;
+    background-color: white;
+  }
+}
+
+.margin-right-sm {
+  margin-right: 10px;
+}
+
+
 // Tags
 span.tag {
   color: white;
   background: #8882d8;
   border-radius: 10px;
   padding: 4px 10px;
+  margin: 5px 0;
+  display: inline-block;
 }
 
 .chosen-container-multi .chosen-choices li.search-choice {

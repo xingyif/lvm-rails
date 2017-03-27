@@ -1,479 +1,509 @@
 <div class="row">
-  <div class="col-sm-12 col-md-6 col-md-offset-3">
+  <div class="col-md-3">
     <div class="row">
-      <div class="col-xs-6">
-        <%= link_to tutors_path do %>
-            <span class="glyphicon glyphicon-arrow-left"></span>
-            <span class="h4">Back</span>
-        <% end %>
-      </div>
-
-      <div class="col-xs-6 text-right">
-        <span class="h4">
-          <% if @tutor.affiliate_id %>
-            <label><%= Affiliate.find(@tutor.affiliate_id).name %></label>
-          <% else %>
-            <label>No Affiliate</label>
-          <% end %>
-        </span>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Name</label><br>
-        <%= @tutor.first_name %> <%= @tutor.last_name %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Gender</label><br>
-        <%= @tutor.gender %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Date of birth</label><br>
-        <%= @tutor.date_of_birth %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>SMARTT ID</label><br>
-        <%= @tutor.smartt_id %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Last Name ID</label><br>
-        <%= @tutor.last_name_id %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Status</label><br>
-        <%= @tutor.status %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-6">
-        <h4>Tags</h4>
-      </div>
-      <div class="col-md-6 text-right">
-        <%= link_to tutor_path(@tutor), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add-tag'} do %>
-         <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Add or Remove Tags</button>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <% if !@tutor.all_tags.empty? %>
-          <% @tutor.all_tags.each do |name| %>
-            <%= link_to tags_path do %>
-              <span class='tag'><%= name %></span>
-            <% end %>
-          <% end %>
-        <% else %>
-          <span>No tags added.</span>
-        <% end %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Background</label></h4>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Native language</label><br>
-        <%= @tutor.native_language %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Race</label><br>
-        <%= @tutor.race %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Hispanic?</label><br>
-        <%= @tutor.hispanic_or_latino %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Country of birth</label><br>
-        <%= @tutor.country_of_birth %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Country leave date</label><br>
-        <%= @tutor.country_leave_date %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Country returned date</label><br>
-        <%= @tutor.country_return_date %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Criminal conviction</label><br>
-        <%= @tutor.criminal_conviction %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Release on file</label><br>
-        <%= @tutor.release_on_file %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Release sign date</label><br>
-        <%= @tutor.release_sign_date %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Contact</label></h4>
-    </div>
-
-    <div class="row">
-      <label class="col-md-12">Contact preferences</label>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>General contact:</label><br>
-        <%= @tutor.preferred_contact_method %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Class roster:</label><br>
-        <%= @tutor.preferred_contact_class_listing %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Data collection:</label><br>
-        <%= @tutor.preferred_contact_data_collection %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Email</label><br>
-        <table>
-          <tr>
-            <td>preferred:</td>
-            <td class="col-md-9"><%= @tutor.email_preferred %></td>
-          </tr>
-          <tr>
-            <td>other:</td>
-            <td class="col-md-9"><%= @tutor.email_other %></td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="col-md-6">
-        <label>Phone</label><br>
-        <table>
-          <tr>
-            <td>home:</td>
-            <td class="col-md-9"><%= @tutor.home_phone %></td>
-          </tr>
-          <tr>
-            <td>cell:</td>
-            <td class="col-md-9"><%= @tutor.cell_phone %></td>
-          </tr>
-          <tr>
-            <td>other:</td>
-            <td class="col-md-9"><%= @tutor.other_phone %></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Address</label><br>
-        <%= @tutor.address1 %>, <%= @tutor.address2 %><br>
-        <%= @tutor.city %>,  <%= @tutor.state %>   <%= @tutor.zip %><br>
-      </div>
-    </div>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Emergency Contact</label></h4>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Name:</label><br>
-        <%= @tutor.emergency_contact_phone %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Phone Number:</label><br>
-        <%= @tutor.emergency_contact_name %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Email:</label><br>
-        <%= @tutor.emergency_contact_email %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Students</label></h4>
-    </div>
-
-    <div class="row">
-      <div class="table-responsive col-md-12">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% if !@students.empty? %>
-              <% @students.each do |s| %>
-                  <tr>
-                    <td> <%= s.name %> </td>
-                    <td> <%= s.email %> </td>
-                  </tr>
-              <% end %>
-          <% else %>
-              No Students
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="row col-md-12">
-      <% if !@student_options.empty? %>
-          <%= form_tag('add_student', method: 'put') do %>
-              <%= select_tag(:student_id, options_for_select(@student_options)) %>
-              <%= submit_tag('Add Student') %>
-              <%= hidden_field_tag(:tutor_id, @tutor.id) %>
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-          <% end %>
-      <% else %>
-          No unmatched students
-      <% end %>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Training</label></h4>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Orientation Date:</label><br>
-        <%= @tutor.orientation_date %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Training Type:</label><br>
-        <%= @tutor.training_type %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Training Date:</label><br>
-        <%= @tutor.training_date %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Education</label></h4>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Education:</label><br>
-        <%= @tutor.education %>
-      </div>
-
-      <div class="col-md-6">
-        <label>Colleges Attended:</label><br>
-        <%= @tutor.colleges_attended %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Educational Accomplishments:</label><br>
-        <%= @tutor.educational_accomplishments %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Previous Teaching Experience:</label><br>
-        <%= @tutor.previous_teaching_experience %>
-      </div>
-
-      <div class="col-md-6">
-        <label>Previous Teaching Experience:</label><br>
-        <%= @tutor.previous_volunteer_experience %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Teachable Subjects:</label><br>
-        <%= @tutor.teachable_subjects %>
-      </div>
-
-      <div class="col-md-6">
-        <label>Hobbies:</label><br>
-        <%= @tutor.hobbies %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Employment</label></h4>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Employment Status:</label><br>
-        <%= @tutor.employment_status %>
-      </div>
-
-      <div class="col-md-6">
-        <label>Employer Name:</label><br>
-        <%= @tutor.employer_name %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Specific Occupation:</label><br>
-        <%= @tutor.occupation %>
-      </div>
-
-      <div class="col-md-6">
-        <label>Past Occupation:</label><br>
-        <%= @tutor.past_occupation %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><label>Language Proficiencies</label></h4>
-      <% languages = JSON.parse(@tutor.language_proficiencies).delete_if {|k,v| v == "None"} %>
-      <% if !languages.empty? %>
-        <div class="table-responsive col-md-12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Language</th>
-                <th>Proficiency</th>
-              </tr>
-            </thead>
-            <tbody>
-            <% languages.each do |l| %>
-              <tr>
-                <td> <%= l[0] %> </td>
-                <td> <%= l[1] %> </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <% else %>
-        <div class="col-md-12">
-          No language proficiency data on file.
-        </div>
-      <% end %>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <h4 class="col-md-12"><strong>Affiliate</strong></h4>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <% if @tutor.affiliate_id %>
-            <label><%= Affiliate.find(@tutor.affiliate_id).name %></label>
-        <% else %>
-            <label>No Affiliate</label>
-        <% end %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-6">
-        <h4>
-          <label> Tutor Comments </label>
-        </h4>
-      </div>
-
-      <div class="col-md-6">
-        <div class="pull-right">
-          <h4><%= link_to 'Add Comment', new_tutor_comment_path(tutor: @tutor) %></h4>
-        </div>
-      </div>
-    </div>
-
-    <% if @tutor.tutor_comments.length > 0 %>
-        <% for c in @tutor.tutor_comments %>
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
             <div class="row">
-              <div class="col-md-10">
-                <%= c.content %>
+              <div class="col-xs-6">
+                <%= link_to tutors_path do %>
+                  <span class="glyphicon glyphicon-arrow-left"></span>
+                  <span class="h4">Back</span>
+                <% end %>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-xs-6 text-right">
+                <%= link_to edit_tutor_path(@tutor) do %>
+                  <span class="h4">Edit</span>
+                  <span class="glyphicon glyphicon-edit"></span>
+                <% end %>
+              </div>
+            </div>
+            <h3 class="text-center">
+              <%= @tutor.name %><br>
+              <small>
+                Affiliate:
+                <% if @tutor.affiliate_id %>
+                    <label><%= Affiliate.find(@tutor.affiliate_id).name %></label>
+                <% else %>
+                    <label>No Affiliate</label>
+                <% end %>
+              </small><br>
+              <button class="btn btn-sm btn-<%= @tutor.status_class_indicator %> disabled"><%= @tutor.status.blank? ? "Status Unknown" : @tutor.status %></button>
+            </h3>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6">
+                <span class="text-muted">SMARTT ID: </span><b><%= @tutor.smartt_id %></b>
+              </div>
+              <div class="col-sm-6">
+                <span class="text-muted">Last Name ID: </span><b><%= @tutor.last_name_id %></b>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-home"></span>
+              </div>
+              <div class="col-xs-10">
+                <%= @tutor.address1 %><%= @tutor.address2 ? ', ' + @tutor.address2 : '' %><br>
+                <%= @tutor.city %>,  <%= @tutor.state %> <%= @tutor.zip %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-earphone"></span>
+              </div>
+              <div class="col-xs-10">
+                <% if !@tutor.home_phone.blank? %>
+                  <p>Home: <%= @tutor.home_phone %></p>
+                <% end %>
+                <% if !@tutor.cell_phone.blank? %>
+                  <p>Cell: <%= @tutor.cell_phone %></p>
+                <% end %>
+                <% if !@tutor.other_phone.blank? %>
+                  <p>Other: <%= @tutor.other_phone %></p>
+                <% end %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-envelope"></span>
+              </div>
+              <div class="col-xs-10">
+                <p><%= 'Preferred: ' unless @tutor.email_other.blank? %><%= @tutor.email_preferred %></p>
+                <% if !@tutor.email_other.blank? %>
+                  <p>Other: <%= @tutor.email_other %></p>
+                <% end %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-6">
+                <span>Preferred General Contact:</span>
+              </div>
+              <div class="col-xs-6">
+                <%= @tutor.preferred_contact_method %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <span>Preferred Roster Contact:</span>
+              </div>
+              <div class="col-xs-6">
+                <%= @tutor.preferred_contact_class_listing %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <span>Preferred Collection Contact:</span>
+              </div>
+              <div class="col-xs-6">
+                <%= @tutor.preferred_contact_data_collection %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Comments</h4>
+              </div>
+
+              <div class="col-md-6">
                 <div class="pull-right">
-                  <%= link_to 'Edit', edit_tutor_comment_path(c) %>
-                  <%= link_to 'Delete ', c, method: :delete, data: {confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}"} %>
+                  <%= link_to new_tutor_comment_path(tutor: @tutor) do %>
+                    <button class="btn btn-default">Add Comment</button>
+                  <% end %>
                 </div>
               </div>
             </div>
-        <% end %>
-    <% else %>
-        No Tutor Comments
-    <% end %>
+            <hr>
 
-    <hr>
+            <% if @tutor.tutor_comments.length > 0 %>
+                <% for c in @tutor.tutor_comments %>
+                  <div class="panel panel-default">
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-time"></span>
+                            <%= c.updated_at.strftime('%D') %> <span class="text-muted"><%= '(Edited)' if c.created_at != c.updated_at %></span>
+                          </div>
+                          <div class="col-xs-6 text-right">
+                            <%= link_to edit_tutor_comment_path(c), class: 'margin-right-sm' do %>
+                              <span class="glyphicon glyphicon-pencil"></span>
+                            <% end %>
+                            <%= link_to c, method: :delete, data: {confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}"} do %>
+                              <span class="glyphicon glyphicon-remove text-danger"></span>
+                            <% end %>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <%= c.content %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+            <% else %>
+                No Tutor Comments
+            <% end %>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </div>
+
+  <div class="col-md-7">
     <div class="row">
-      <div class="col-xs-6">
-        <%= link_to tutors_path do %>
-          <span class="glyphicon glyphicon-arrow-left"></span>
-          <span class="h4">Back</span>
-        <% end %>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>Students</h4>
+              </div>
+              <div class="col-sm-6 text-right">
+                <% if !@student_options.empty? %>
+                    <%= form_tag('add_student', method: 'put') do %>
+                        <%= select_tag(:student_id, options_for_select(@student_options)) %>
+                        <%= submit_tag('Add Student') %>
+                        <%= hidden_field_tag(:tutor_id, @tutor.id) %>
+                        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <% end %>
+                <% else %>
+                    No unmatched students
+                <% end %>
+              </div>
+            </div>
+            <hr>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if !@students.empty? %>
+                    <% @students.each do |s| %>
+                        <tr>
+                          <td> <%= s.name %> </td>
+                          <td> <%= s.email %> </td>
+                        </tr>
+                    <% end %>
+                <% else %>
+                    No Students
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="col-xs-6 text-right">
-        <%= link_to edit_tutor_path(@tutor) do %>
-          <span class="h4">Edit</span>
-          <span class="glyphicon glyphicon-edit"></span>
-        <% end %>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>General Information</h4>
+            <hr>
+
+            <div class="row text-center">
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Background</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-4">
+                        <b>Date of Birth</b>
+                        <p><%= @tutor.date_of_birth.strftime('%D') %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Gender</b>
+                        <p><%= @tutor.gender ? @tutor.gender.capitalize : '' %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Hispanic?</b>
+                        <p><%= @tutor.hispanic_or_latino ? 'Yes' : 'No' %></p>
+                      </div>
+                    </div>
+                    <div class="row text-center">
+                      <div class="col-sm-4">
+                        <b>Native Language</b>
+                        <p><%= @tutor.native_language %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Race</b>
+                        <p><%= @tutor.race %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Birth Country</b>
+                        <p><%= @tutor.country_of_birth %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Training</div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Orientation Date:</label><br>
+                        <%= @tutor.orientation_date %>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Training Type:</label><br>
+                        <%= @tutor.training_type %>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Training Date:</label><br>
+                        <%= @tutor.training_date %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-center">
+              <div class="col-xs-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Education</div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Level:</label><br>
+                        <%= @tutor.education %>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Colleges Attended:</label><br>
+                        <%= @tutor.colleges_attended %>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Educational Accomplishments:</label><br>
+                        <%= @tutor.educational_accomplishments %>
+                      </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label>Previous Teaching Experience:</label><br>
+                        <%= @tutor.previous_teaching_experience %>
+                      </div>
+
+                      <div class="col-md-3">
+                        <label>Previous Teaching Experience:</label><br>
+                        <%= @tutor.previous_volunteer_experience %>
+                      </div>
+
+                      <div class="col-md-3">
+                        <label>Teachable Subjects:</label><br>
+                        <%= @tutor.teachable_subjects %>
+                      </div>
+
+                      <div class="col-md-3">
+                        <label>Hobbies:</label><br>
+                        <%= @tutor.hobbies %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-center">
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Employment</div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Employment Status:</label><br>
+                        <%= @tutor.employment_status %>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label>Employer Name:</label><br>
+                        <%= @tutor.employer_name %>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Specific Occupation:</label><br>
+                        <%= @tutor.occupation %>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label>Past Occupation:</label><br>
+                        <%= @tutor.past_occupation %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Crimial Record</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <% if @tutor.criminal_conviction.blank? && @tutor.release_on_file.blank? %>
+                        <div class="col-xs-12">
+                          No criminal conviction information on file.
+                        </div>
+                      <% else %>
+                        <% if !@tutor.criminal_conviction.blank? %>
+                          <div class="col-sm-4">
+                            <b>Criminal Conviction?</b>
+                            <p><%= @tutor.criminal_conviction ? 'Yes' : 'No' %></p>
+                          </div>
+                        <% end %>
+                        <% if !@tutor.release_on_file.blank? %>
+                          <div class="col-sm-4">
+                            <b>Release on file?</b>
+                            <p><%= @tutor.release_on_file ? 'Yes' : 'No' %></p>
+                          </div>
+                        <% end %>
+                        <% if !@tutor.release_sign_date.blank? %>
+                          <div class="col-sm-4">
+                            <b>Release Sign Date</b>
+                            <p><%= @tutor.release_sign_date.strftime('%D') %></p>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Tags</h4>
+              </div>
+
+              <div class="col-md-6">
+                <div class="pull-right">
+                  <%= link_to tutor_path(@tutor), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add-tag'} do %>
+                    <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Tags</button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="text-center">
+              <% if !@tutor.all_tags.empty? %>
+                <% @tutor.all_tags.each do |name| %>
+                  <span class='tag'><%= name %></span>
+                <% end %>
+              <% else %>
+                <span>No tags added.</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4 class="text-center">Language Proficiencies</h4>
+            <hr>
+            <% languages = JSON.parse(@tutor.language_proficiencies).delete_if {|k,v| v == "None"} %>
+            <% if !languages.empty? %>
+              <div class="table-responsive col-md-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Language</th>
+                      <th>Proficiency</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% languages.each do |l| %>
+                    <tr>
+                      <td> <%= l[0] %> </td>
+                      <td> <%= l[1] %> </td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            <% else %>
+                No language proficiency data on file.
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4 class="text-center">Emergency Contact</h4>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-user"></span>
+              </div>
+              <div class="col-xs-10">
+                <%= @tutor.emergency_contact_name %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-earphone"></span>
+              </div>
+              <div class="col-xs-10">
+                <%= @tutor.emergency_contact_phone %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-envelope"></span>
+              </div>
+              <div class="col-xs-10">
+                <%= @tutor.emergency_contact_email %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

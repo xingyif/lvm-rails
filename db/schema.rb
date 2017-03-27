@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318210627) do
+ActiveRecord::Schema.define(version: 20170322174949) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -186,7 +186,7 @@ ActiveRecord::Schema.define(version: 20170318210627) do
     t.string   "status"
     t.string   "status_date_of_change"
     t.string   "status_changed_by"
-    t.string   "smartt_id",                         null: false
+    t.string   "smartt_id"
     t.string   "last_name_id"
     t.string   "employer_name"
     t.string   "past_occupation"
@@ -211,6 +211,11 @@ ActiveRecord::Schema.define(version: 20170318210627) do
     t.integer  "category_preference"
     t.integer  "affiliate_id"
     t.integer  "exam_id"
+    t.boolean  "meet_at_local_library"
+    t.string   "where_can_meet"
+    t.integer  "transportation"
+    t.string   "preferred_student_level"
+    t.string   "other_preferences"
     t.index ["affiliate_id"], name: "index_tutors_on_affiliate_id"
     t.index ["exam_id"], name: "index_tutors_on_exam_id"
   end

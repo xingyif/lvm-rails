@@ -35,7 +35,6 @@ class Tutor < ApplicationRecord
   validates :native_language,         presence: true
   validates :occupation,              presence: true
   validates :race,                    presence: true
-  validates :smartt_id,               presence: true
   validates :state,                   presence: true
   validates :zip,                     presence: true
 
@@ -48,7 +47,8 @@ class Tutor < ApplicationRecord
                            allow_blank: true
   validates :other_phone,  format: { with: VALID_PHONE_REGEX },
                            allow_blank: true
-  validates :smartt_id,    format: { with: VALID_SMARTT_REGEX }
+  validates :smartt_id,    format: { with: VALID_SMARTT_REGEX },
+                           allow_blank: true
   validates :zip,          format: { with: VALID_ZIP_REGEX }
 
   validates :email_preferred, length: { maximum: 255 },
@@ -78,6 +78,10 @@ class Tutor < ApplicationRecord
     age_preference ? PreferencesHelper.explode(age_preference) : []
   end
 
+  def transportation_preference_array
+    transportation ? PreferencesHelper.explode(transportation) : []
+  end
+
   def all_tags=(names)
     self.tags = names.reject(&:empty?).uniq.map do |name|
       Tag.where(name: name.strip).first_or_create!
@@ -86,5 +90,19 @@ class Tutor < ApplicationRecord
 
   def all_tags
     tags.map(&:name)
+  end
+
+  # rubocop:disable CyclomaticComplexity, PerceivedComplexity
+  def status_class_indicator
+    active  = ['Active']
+    info    = ['Waiting for re-match', 'Waiting for 1st match', 'On hold']
+    warning = ['Declined match', 'Unable to contact', 'Cannot match', 'Moved']
+    danger  = ['Exited', 'No show to appointment', 'Dropped out of training']
+
+    klass = ('success' if active.include? status)  ||
+            ('info'    if info.include? status)    ||
+            ('warning' if warning.include? status) ||
+            ('danger'  if danger.include? status)
+    klass
   end
 end

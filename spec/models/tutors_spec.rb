@@ -230,10 +230,6 @@ RSpec.describe Tutor, type: :model do
     end
 
     describe 'smartt_id' do
-      it 'validates presence' do
-        should validate_presence_of(:smartt_id)
-      end
-
       it 'validates format' do
         should allow_value('0000-000000').for(:smartt_id)
         should_not allow_value('0000-00000').for(:smartt_id)
@@ -358,6 +354,28 @@ RSpec.describe Tutor, type: :model do
           expect(@tutor.all_tags).to eq ['Donor', 'Another Tag']
           expect(Tagging.where(tutor_id: @tutor.id).count).to eq 2
         end
+      end
+    end
+
+    describe '#status_class_indicator' do
+      it 'returns the success contextual class for active tutors' do
+        @tutor = create(:tutor, status: 'Active')
+        expect(@tutor.status_class_indicator).to eq 'success'
+      end
+
+      it 'returns the info contextual class for waiting tutors' do
+        @tutor = create(:tutor, status: 'On hold')
+        expect(@tutor.status_class_indicator).to eq 'info'
+      end
+
+      it 'returns the warning contextual class for problematic tutors' do
+        @tutor = create(:tutor, status: 'Moved')
+        expect(@tutor.status_class_indicator).to eq 'warning'
+      end
+
+      it 'returns the danger contextual class for exited tutors' do
+        @tutor = create(:tutor, status: 'Exited')
+        expect(@tutor.status_class_indicator).to eq 'danger'
       end
     end
   end

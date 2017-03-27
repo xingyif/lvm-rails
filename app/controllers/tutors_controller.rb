@@ -89,10 +89,12 @@ class TutorsController < ApplicationController
     times = params[:tutor][:availability]
     age = params[:tutor][:age_preference]
     category = params[:tutor][:category_preference]
+    transportation = params[:tutor][:transportation]
 
     params[:tutor][:availability] = PreferencesHelper.squash(times)
     params[:tutor][:age_preference] = PreferencesHelper.squash(age)
     params[:tutor][:category_preference] = PreferencesHelper.squash(category)
+    params[:tutor][:transportation] = PreferencesHelper.squash(transportation)
   end
 
   def update_params_with_proficiencies(clean_params, params)
@@ -136,20 +138,23 @@ class TutorsController < ApplicationController
       :language_proficiencies,
       :last_name_id,
       :last_name,
+      :meet_at_local_library,
       :native_language,
       :occupation,
       :orientation_date,
       :other_phone,
+      :other_preferences,
       :past_occupation,
       :preferred_contact_class_listing,
       :preferred_contact_data_collection,
       :preferred_contact_method,
+      :preferred_student_level,
       :previous_teaching_experience,
       :previous_volunteer_experience,
       :race,
       :reference,
-      :referral,
       :referral_other,
+      :referral,
       :release_on_file,
       :release_sign_date,
       :smartt_id,
@@ -161,6 +166,8 @@ class TutorsController < ApplicationController
       :training_date,
       :training_type,
       :training,
+      :transportation,
+      :where_can_meet,
       :zip,
       all_tags: []
     )

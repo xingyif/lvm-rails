@@ -23,6 +23,10 @@ module PreferencesHelper
   CEREBRAL_P  = 2**5
   HOMELESS    = 2**6
 
+  TRANSPORTATION_WALK = 2**0
+  TRANSPORTATION_PUB  = 2**1
+  TRANSPORTATION_CAR  = 2**2
+
   MORNING_MON   = 2**0
   MORNING_TUE   = 2**1
   MORNING_WED   = 2**2
@@ -100,6 +104,14 @@ module PreferencesHelper
       ['an adult with speech impairment', SPEECH_IMP],
       ['an adult with cerebral palsy', CEREBRAL_P],
       ['an adult who is or was homeless', HOMELESS]
+    ]
+  end
+
+  def transportation_preference
+    [
+      ['Walk', TRANSPORTATION_WALK],
+      ['Public', TRANSPORTATION_PUB],
+      ['Car', TRANSPORTATION_CAR]
     ]
   end
 

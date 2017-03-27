@@ -147,6 +147,15 @@ module TutorsHelper
     ]
   end
 
+  def preferred_student_level
+    [
+      ['No Preference', 'No Preference'],
+      ['Beginner', 'Beginner'],
+      ['Intermediate', 'Intermediate'],
+      ['Advanced', 'Advanced']
+    ]
+  end
+
   module_function :education,
                   :employment,
                   :language_proficiencies,

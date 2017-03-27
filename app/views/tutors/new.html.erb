@@ -1,5 +1,18 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-3 hidden-sm hidden-xs">
+    <div class="affix" id="form-navigation">
+      <h5>Form Navigation</h5>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#lvmInfo">LVM Information</a></li>
+        <li><a href="#contactInfo">Contact Information</a></li>
+        <li><a href="#personalInfo">Personal Information</a></li>
+        <li><a href="#preferences">Preferences</a></li>
+        <li><a href="#experience">Education and Experience</a></li>
+        <li><a href="#languageProficiencies">Language Proficiencies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
     <div class="pull-left">
       <%= link_to tutors_path do %>
         <span class="glyphicon glyphicon-arrow-left"></span>
@@ -22,3 +35,7 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  $('body').scrollspy({ target: "#form-navigation" });
+</script>
