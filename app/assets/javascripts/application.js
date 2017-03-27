@@ -17,6 +17,5 @@
 //= require bootstrap
 //= require jquery.inputmask.bundle.min
 //= require jquery.chosen.min
-//= require jquery.dataTables.min
-//= require dataTables.bootstrap.min
+//= require datatables.min
 //= require_tree .

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322174949) do
+ActiveRecord::Schema.define(version: 20170327130342) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20170322174949) do
     t.string   "home_phone"
     t.boolean  "home_ok"
     t.boolean  "home_lvm_ok"
-    t.string   "work_number"
+    t.string   "work_phone"
     t.boolean  "work_ok"
     t.boolean  "work_lvm_ok"
     t.string   "alternate_number"
