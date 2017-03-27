@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   patch 'tutors/:id/tags/update', to: 'tutors#update_tags', as: 'update_tags'
 
   resources :affiliates
+  resources :assessments
   resources :coordinators
-  resources :exams
   resources :students
   resources :tutors
   resources :tutor_comments

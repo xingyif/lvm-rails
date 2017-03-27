@@ -1,5 +1,5 @@
-module ExamsHelper
-  def exam_subject
+module AssessmentsHelper
+  def assessment_subject
     [
       ['English Literature', 'English Literature'],
       ['US Culture and History', 'US Culture and History'],
@@ -11,5 +11,5 @@ module ExamsHelper
     ]
   end
 
-  module_function :exam_subject
+  module_function :assessment_subject
 end

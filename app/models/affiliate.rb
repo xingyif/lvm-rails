@@ -12,5 +12,5 @@ class Affiliate < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :name, presence: true, length: { maximum: 100 }
   validates :address, presence: true, length: { maximum: 200 }
-  validates :phone_number, presence: true, length: { maximum: 11 }
+  validates :phone_number, presence: true, length: { maximum: 14 }
 end

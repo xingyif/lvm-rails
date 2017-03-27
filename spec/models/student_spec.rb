@@ -18,8 +18,8 @@ RSpec.describe Student, type: :model do
       should have_many(:coordinators).through(:enrollments)
     end
 
-    it 'should have many exams' do
-      should have_many(:exams)
+    it 'should have many assessments' do
+      should have_many(:assessments)
     end
 
     it 'should have many taggings' do

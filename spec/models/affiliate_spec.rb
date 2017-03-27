@@ -72,7 +72,7 @@ RSpec.describe Affiliate, type: :model do
 
       it 'phone number length' do
         should validate_length_of(:phone_number)
-          .is_at_most(11)
+          .is_at_most(14)
       end
     end
   end

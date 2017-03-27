@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'exams/show' do
+RSpec.describe 'assessments/show' do
   before(:each) do
-    @exam = assign(:exam, create(:exam))
+    @assessment = assign(:assessment, create(:assessment))
   end
 
   it 'displays the attributes in <p>' do

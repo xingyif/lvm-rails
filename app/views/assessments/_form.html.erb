@@ -1,9 +1,9 @@
-<%= simple_form_for(@exam) do |f| %>
+<%= simple_form_for(@assessment) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :score %>
-    <%= f.input :exam_date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", as: :string, required:
+    <%= f.input :date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", as: :string, required:
         false %>
     <%= f.input :subject %>
   </div>
