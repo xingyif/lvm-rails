@@ -1,17 +1,21 @@
-<h1>Welcome</h1>
+<div class="dashboard">
+  <div class='row centered'>
+    <h1> Welcome </h1>
+  </div>
 
-<h2> Students </h2>
-<%= link_to 'All students', controller: 'students' %>
-<%= link_to 'New student', new_student_path %>
+  <div class='row centered'>
+    <div class='col-md-2 text-center'>
+      <%= link_to 'Students', { controller: 'students' }, class: 'button' %>
+    </div>
+    <div class='col-md-2 text-center'>
+      <%= link_to 'Tutors', { controller: 'tutors' }, class: 'button' %>
+    </div>
 
-<h2> Tutors </h2>
-<%= link_to 'All tutors', controller: 'tutors' %>
-<%= link_to 'New tutor', new_tutor_path %>
-
-<h2> Coordinators </h2>
-<%= link_to 'All coordinators', controller: 'coordinators' %>
-<%= link_to 'New coordinator', new_coordinator_path %>
-
-<h2> Affiliates </h2>
-<%= link_to 'All affiliates', controller: 'affiliates' %>
-<%= link_to 'New affiliate', new_affiliate_path %>
+    <div class='col-md-2 text-center'>
+      <%= link_to 'Coordinators', { controller: 'coordinators' }, class: 'button' %>
+    </div>
+    <div class='col-md-2 text-center'>
+      <%= link_to 'Affiliates', { controller: 'affiliates' }, class: 'button' %>
+    </div>
+  </div>
+</div>
