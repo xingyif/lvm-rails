@@ -22,10 +22,6 @@ RSpec.describe Tutor, type: :model do
       should have_many(:tutor_comments)
     end
 
-    it 'should have many assessments' do
-      should have_many(:assessments)
-    end
-
     it 'should have many taggings' do
       should have_many(:taggings)
     end
