@@ -2,7 +2,7 @@ class TutoringSessionsController < ApplicationController
   before_action :set_tutoring_session, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tutoring_session = TutoringSession.all
+    @tutoring_sessions = TutoringSession.all
   end
 
   def show; end

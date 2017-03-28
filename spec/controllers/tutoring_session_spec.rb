@@ -12,7 +12,7 @@ RSpec.describe TutoringSessionsController, type: :controller do
     describe 'GET #index' do
       it 'populates an array of tutoring_session' do
         get :index
-        expect(assigns(:tutoring_session)).to eq([@tutoring_session])
+        expect(assigns(:tutoring_sessions)).to eq([@tutoring_session])
       end
 
       it 'renders the index template' do
