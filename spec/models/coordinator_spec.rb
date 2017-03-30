@@ -31,6 +31,23 @@ RSpec.describe Coordinator, type: :model do
       end
     end
 
+    describe 'phone_number' do
+      it 'validates presence' do
+        should validate_presence_of(:phone_number)
+      end
+
+      it 'validates format' do
+        should allow_value('(555) 555-5555').for(:phone_number)
+        should_not allow_value('555-555-5555').for(:phone_number)
+        should_not allow_value('43-4343-4444').for(:phone_number)
+        should_not allow_value('434-3433-4444').for(:phone_number)
+        should_not allow_value('434-434-444').for(:phone_number)
+        should_not allow_value('4333-433-4444').for(:phone_number)
+        should_not allow_value('(232) 343-99439').for(:phone_number)
+        should_not allow_value('(abc) 123-defg').for(:phone_number)
+      end
+    end
+
     describe 'email' do
       it 'validates presence' do
         should validate_presence_of(:email)
