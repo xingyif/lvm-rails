@@ -14,9 +14,5 @@ RSpec.describe 'tutors/index', type: :view do
     expect(rendered).to match(/\(999\) 999-9999/)
     expect(rendered).to match(/\(888\) 888-8888/)
     expect(rendered).to match(@tutor.email_preferred)
-    expect(rendered).to match(@tutor.native_language)
-    expect(rendered).to match(@tutor.training_date.strftime('%Y-%m-%d'))
-    expect(rendered).to match(@tutor.training_type)
-    expect(rendered).to match(@tutor.occupation)
   end
 end
