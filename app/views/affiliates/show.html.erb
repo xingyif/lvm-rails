@@ -44,7 +44,10 @@
                       </div>
                       <div class="col-sm-4">
                         <b>Address</b>
-                        <p><%= @affiliate.address %></p>
+                        <p><%= @affiliate.address %>
+                           <%= @affiliate.city %>
+                           <%= @affiliate.state %>
+                           <%= @affiliate.zip %></p>
                       </div>
                       <div class="col-sm-4">
                         <b>Phone Number</b>

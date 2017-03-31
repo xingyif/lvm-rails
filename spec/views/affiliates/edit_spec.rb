@@ -9,8 +9,11 @@ RSpec.describe 'affiliates/edit', type: :view do
     render
 
     expect(rendered).to match(@affiliate.name)
-    expect(rendered).to match(@affiliate.email)
     expect(rendered).to match(/\(999\) 999-9999/)
+    expect(rendered).to match(@affiliate.state)
+    expect(rendered).to match(@affiliate.city)
+    expect(rendered).to match(@affiliate.zip)
+    expect(rendered).to match(@affiliate.email)
     expect(rendered).to match(@affiliate.address)
   end
 end

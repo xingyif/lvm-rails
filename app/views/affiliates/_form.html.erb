@@ -22,25 +22,39 @@
         <%= f.input :name, label: "Affiliate Name", maxlength: 255, required: true %>
       </div>
 
+      <div class="col-md-4">
+        <%= f.input :phone_number, maxlength: 14, placeholder: "(###) ###-####", required: true, input_html: { class: "mask_phone" } %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :email, maxlength: 255, required: true, input_html: { class: "mask_email" } %>
+      </div>
+    </div>
+
+    <div class="row">
       <div class = "col-md-4">
         <%= f.input :address, maxlength: 255, required: true %>
       </div>
 
       <div class="col-md-4">
-        <%= f.input :phone_number, maxlength: 14, placeholder: "(###) ###-####", required: true, input_html: { class: "mask_phone" } %>
+        <%= f.input :city, maxlength: 255, required: true %>
+      </div>
+
+      <div class="col-md-2">
+        <%= f.input :zip, label: "Zip Code", placeholder: "#####", maxlength: 5, required: true, input_html: { class: "mask_zip" } %>
+      </div>
+
+      <div class="col-md-2">
+        <%= f.input :state, collection: us_states, selected: "MA", required: true %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-4">
-        <%= f.input :email, maxlength: 255, required: true, input_html: { class: "mask_email" } %>
-      </div>
-
-      <div class="col-md-4">
+      <div class="col-md-6">
         <%= f.input :website, maxlength: 255, required: false %>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <%= f.input :twitter, maxlength: 255, required: false %>
       </div>
     </div>
@@ -50,4 +64,5 @@
 <script>
   $('.mask_phone').inputmask("(999) 999-9999", { "placeholder": "#" });
   $('.mask_email').inputmask({ alias: "email" });
+  $('.mask_zip').inputmask("99999", { "placeholder": "#" });
 </script>

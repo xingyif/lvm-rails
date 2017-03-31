@@ -23,7 +23,10 @@
     <% @affiliates.each do |affiliate| %>
       <tr>
         <td><%= affiliate.name %></td>
-        <td><%= affiliate.address %></td>
+        <td><%= affiliate.address %>
+         <%= affiliate.city %>
+         <%= affiliate.state %>
+         <%= affiliate.zip %></td>
         <td><%= affiliate.phone_number %></td>
         <td><%= affiliate.email %></td>
         <td><%= affiliate.website %></td>

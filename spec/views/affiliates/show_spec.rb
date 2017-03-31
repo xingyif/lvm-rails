@@ -3,24 +3,18 @@ require 'spec_helper'
 
 RSpec.describe 'affiliates/show', type: :view do
   before(:each) do
-    @affiliate = assign(:affiliate, Affiliate.create!(
-                                      name: 'Name',
-                                      address: 'Address',
-                                      phone_number: 'PhoneNumber',
-                                      email: 'Email@g.com',
-                                      website: 'Website',
-                                      twitter: 'Twitter'
-    ))
+    @affiliate = create(:affiliate, phone_number: '(999) 999-9999')
   end
 
   it 'renders attributes in <p>' do
     render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Address/)
-    expect(rendered).to match(/PhoneNumber/)
-    expect(rendered).to match(/Email/)
-    expect(rendered).to match(/Website/)
-    expect(rendered).to match(/Twitter/)
+    expect(rendered).to match(@affiliate.name)
+    expect(rendered).to match(/\(999\) 999-9999/)
+    expect(rendered).to match(@affiliate.state)
+    expect(rendered).to match(@affiliate.city)
+    expect(rendered).to match(@affiliate.zip)
+    expect(rendered).to match(@affiliate.email)
+    expect(rendered).to match(@affiliate.address)
   end
 
   it 'contains the Back link' do

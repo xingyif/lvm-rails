@@ -30,7 +30,7 @@ RSpec.describe Affiliate, type: :model do
           .is_at_most(255)
       end
 
-      it 'email formate' do
+      it 'email format' do
         should allow_value('email@email.com').for(:email)
         should_not allow_value('foo').for(:email)
         should_not allow_value('foo@').for(:email)
@@ -73,6 +73,32 @@ RSpec.describe Affiliate, type: :model do
       it 'phone number length' do
         should validate_length_of(:phone_number)
           .is_at_most(14)
+      end
+    end
+
+    describe 'state' do
+      it 'validates presence' do
+        should validate_presence_of(:state)
+      end
+    end
+
+    describe 'city' do
+      it 'validates presence' do
+        should validate_presence_of(:city)
+      end
+    end
+
+    describe 'zip' do
+      it 'validates presence' do
+        should validate_presence_of(:zip)
+      end
+
+      it 'validates format' do
+        should allow_value('03923').for(:zip)
+        should allow_value('54321').for(:zip)
+        should_not allow_value('1234').for(:zip)
+        should_not allow_value('123456').for(:zip)
+        should_not allow_value('abcde').for(:zip)
       end
     end
   end
