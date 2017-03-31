@@ -1,64 +1,76 @@
 <div class="row">
-  <div class="col-sm-12 col-md-6 col-md-offset-3">
+  <div class="col-md-7">
     <div class="row">
-      <div class="col-xs-6">
-        <%= link_to affiliates_path do %>
-            <span class="glyphicon glyphicon-arrow-left"></span>
-            <span class="h4">Back</span>
-        <% end %>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6">
+                <%= link_to affiliates_path do %>
+                  <span class="glyphicon glyphicon-arrow-left"></span>
+                  <span class="h4">Back</span>
+                <% end %>
+              </div>
+
+              <div class="col-xs-6 text-right">
+                <%= link_to edit_affiliate_path(@affiliate) do %>
+                  <span class="h4">Edit</span>
+                  <span class="glyphicon glyphicon-edit"></span>
+                <% end %>
+              </div>
+            </div>
+            <h3 class="text-center">
+              <%= @affiliate.name %><br>
+            </h3>
+          </div>
+        </div>
       </div>
 
-      <div class="col-xs-6 text-right">
-        <span class="h4">
-          <label><%= @affiliate.name %></label>
-        </span>
-      </div>
-    </div>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>General Information</h4>
+            <hr>
 
-    <hr>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Affiliate Name</label><br>
-        <%= @affiliate.name %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Address </label><br>
-        <%= @affiliate.address %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Phone Number</label><br>
-        <%= @affiliate.phone_number %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <label>Email</label><br>
-        <%= @affiliate.email %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Website</label><br>
-        <%= @affiliate.website %>
-      </div>
-
-      <div class="col-md-4">
-        <label>Twitter Handle</label><br>
-        <%= @affiliate.twitter %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-4">
-        <%= link_to edit_affiliate_path(@affiliate) do %>
-          <span class="h4">Edit</span>
-          <span class="glyphicon glyphicon-edit"></span>
-        <% end %>
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Information</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-4">
+                        <b>Affiliate Name</b>
+                        <p><%= @affiliate.name %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Address</b>
+                        <p><%= @affiliate.address %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Phone Number</b>
+                        <p><%= @affiliate.phone_number %></p>
+                      </div>
+                    </div>
+                    <div class="row text-center">
+                       <div class="col-sm-4">
+                        <b>Email</b>
+                        <p><%= @affiliate.email %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Website</b>
+                        <p><%= @affiliate.website %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Twitter</b>
+                        <p><%= @affiliate.twitter %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
