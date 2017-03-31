@@ -1,16 +1,53 @@
-<%= simple_form_for(@affiliate) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :address %>
-    <%= f.input :phone_number %>
-    <%= f.input :email %>
-    <%= f.input :website %>
-    <%= f.input :twitter %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+<% if @affiliate.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@affiliate.errors.count, "error") %> prohibited
+      this affiliate from being saved:
+    </h2>
+    <ul>
+    <% @affiliate.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<form role="form">
+
+  <section id="contactInfo">
+    <h4>Information</h4>
+    <hr>
+    <div class="row">
+      <div class ="col-md-4">
+        <%= f.input :name, label: "Affiliate Name", maxlength: 255, required: true %>
+      </div>
+
+      <div class = "col-md-4">
+        <%= f.input :address, maxlength: 255, required: true %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :phone_number, maxlength: 14, placeholder: "(###) ###-####", required: true, input_html: { class: "mask_phone" } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :email, maxlength: 255, required: true, input_html: { class: "mask_email" } %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :website, maxlength: 255, required: false %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :twitter, maxlength: 255, required: false %>
+      </div>
+    </div>
+  </section>
+</form>
+
+<script>
+  $('.mask_phone').inputmask("(999) 999-9999", { "placeholder": "#" });
+  $('.mask_email').inputmask({ alias: "email" });
+</script>

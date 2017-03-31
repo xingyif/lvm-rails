@@ -1,6 +1,23 @@
-<h1>Editing Affiliate</h1>
+<div class="row">
+  <div class="col-md-3 hidden-sm hidden-xs">
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to affiliates_path do %>
+          <span class="glyphicon glyphicon-arrow-left"></span>
+          <span class="h4">Back</span>
+        <% end %>
+      </div>
+      <div class="col-xs-6 text-right">
+        <span class="h4">Edit Affiliate</span>
+      </div>
+    </div>
+    <hr>
 
-<%= render 'form', affiliates: @affiliate %>
+    <%= simple_form_for :affiliate, url: affiliate_path(@affiliate), method: :patch do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
 
-<%= link_to 'Show', @affiliate %> |
-<%= link_to 'Back', affiliates_path %>
+  </div>
+</div>
