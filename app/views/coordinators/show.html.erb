@@ -1,23 +1,60 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-7">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6">
+                <%= link_to coordinators_path do %>
+                  <span class="glyphicon glyphicon-arrow-left"></span>
+                  <span class="h4">Back</span>
+                <% end %>
+              </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @coordinator.name %>
-</p>
+              <div class="col-xs-6 text-right">
+                <%= link_to edit_coordinator_path(@coordinator) do %>
+                  <span class="h4">Edit</span>
+                  <span class="glyphicon glyphicon-edit"></span>
+                <% end %>
+              </div>
+            </div>
+            <h3 class="text-center">
+              <%= @coordinator.name %><br>
+              <small>
+                Affiliate:
+                <% if @coordinator.affiliate_id %>
+                    <label><%= Coordinator.find(@coordinator.affiliate_id).name %></label>
+                <% else %>
+                    <label>No Affiliate</label>
+                <% end %>
+              </small><br>
+            </h3>
 
-<p>
-  <strong>Date of Birth:</strong>
-  <%= @coordinator.date_of_birth %>
-</p>
+            <hr>
 
-<p>
-  <strong>Email:</strong>
-  <%= @coordinator.email %>
-</p>
-
-<p>
-  <strong>Phone Number:</strong>
-  <%= @coordinator.phone_number %>
-</p>
-<%= link_to 'Edit', edit_coordinator_path(@coordinator) %> |
-<%= link_to 'Back to Coordinators', coordinators_path %>
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">General Information</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-6">
+                        <b>Email Address</b>
+                        <p><%= @coordinator.email %></p>
+                      </div>
+                      <div class="col-sm-6">
+                        <b>Phone Number</b>
+                        <p><%= @coordinator.phone_number %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
