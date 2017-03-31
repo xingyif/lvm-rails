@@ -1,6 +1,23 @@
-<h1>Editing Coordinator</h1>
+<div class="row">
+  <div class="col-md-3 hidden-sm hidden-xs">
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to coordinators_path do %>
+          <span class="glyphicon glyphicon-arrow-left"></span>
+          <span class="h4">Back</span>
+        <% end %>
+      </div>
+      <div class="col-xs-6 text-right">
+        <span class="h4">Edit Coordinator</span>
+      </div>
+    </div>
+    <hr>
 
-<%= render 'form', coordinator: @coordinator %>
+    <%= simple_form_for :coordinator, url: coordinator_path(@coordinator), method: :patch do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
 
-<%= link_to 'Cancel', @coordinator %> |
-<%= link_to 'Back to Coordinators', coordinators_path %>
+  </div>
+</div>

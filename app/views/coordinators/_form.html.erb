@@ -1,18 +1,44 @@
-<%= simple_form_for(@coordinator) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :date_of_birth, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", as: :string, required: false %>
-    <%= f.input :email, as: :string, label: "email", maxlength: 255, required: false, input_html: { class: "mask_email" } %>
-    <%= f.input :phone_number, maxlength: 14, placeholder: "(###) ###-####", required: false, input_html: { class: "mask_phone" } %>
-
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+<% if @coordinator.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@coordinator.errors.count, "error") %> prohibited
+      this coordinator from being saved:
+    </h2>
+    <ul>
+    <% @coordinator.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<form role="form">
+
+  <section id="contactInfo">
+    <h4>Information</h4>
+    <hr>
+    <div class="row">
+      <div class ="col-md-6">
+        <%= f.input :name, maxlength: 255, required: true %>
+      </div>
+
+      <div class = "col-md-6"
+        <div class="form-group">
+          <%= f.input :date_of_birth, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", required: true %>
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :email, maxlength: 255, required: true, input_html: { class: "mask_email" } %>
+      </div>
+
+      <div class="col-md-6">
+        <%= f.input :phone_number, maxlength: 14, placeholder: "(###) ###-####", required: true, input_html: { class: "mask_phone" } %>
+      </div>
+    </div>
+  </section>
+</form>
 
 <script>$('.datepicker').datepicker({ 'dateFormat': 'yy-mm-dd' });</script>
 <script>
