@@ -6,8 +6,10 @@ RSpec.describe 'students/show.html.erb', type: :view do
       @coordinator = create(:coordinator)
       @tutors = [Tutor.create(first_name: 'Bob', last_name: 'Smith'),
                  Tutor.create(first_name: 'Tom', last_name: 'Brady')]
-      @students = [Student.create(first_name: 'Mike', last_name: 'White'),
-                   Student.create(first_name: 'Alex', last_name: 'Fallah')]
+      @students = [Student.create(first_name: 'Mike', last_name: 'White',
+                                  gender: 'male'),
+                   Student.create(first_name: 'Alex', last_name: 'Fallah',
+                                  gender: 'female')]
       render
     end
 

@@ -1,3 +1,4 @@
+# rubocop:disable ClassLength, MethodLength
 class StudentsController < ApplicationController
   helper_method :tutor_options
 
@@ -21,6 +22,7 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
+    calculate_preferences(params)
 
     if @student.save
       redirect_to @student
@@ -31,6 +33,7 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
+    calculate_preferences(params)
 
     if @student.update(student_params)
       redirect_to @student
@@ -58,9 +61,69 @@ class StudentsController < ApplicationController
 
   private
 
+  def calculate_preferences(params)
+    times = params[:student][:availability]
+    age = params[:student][:age_preference]
+    transportation = params[:student][:transportation]
+
+    params[:student][:availability] = PreferencesHelper.squash(times)
+    params[:student][:age_preference] = PreferencesHelper.squash(age)
+    params[:student][:transportation] = PreferencesHelper.squash(transportation)
+  end
+
   def student_params
     params.require(:student).permit(
-      :first_name
+      :first_name,
+      :last_name,
+      :dob,
+      :gender,
+      :address1,
+      :address2,
+      :city,
+      :state,
+      :zip,
+      :mail_ok,
+      :email,
+      :email_ok,
+      :cell_phone,
+      :cell_ok,
+      :cell_lvm_ok,
+      :home_phone,
+      :home_ok,
+      :home_lvm_ok,
+      :work_phone,
+      :work_lvm_ok,
+      :work_lvm_ok,
+      :alternate_number,
+      :emergency_name,
+      :emergency_number,
+      :referral,
+      :why_lvm,
+      :race,
+      :is_hispanic,
+      :native_language,
+      :origin_country,
+      :availability,
+      :smartt_id,
+      :affiliate,
+      :status,
+      :status_date_of_change,
+      :status_changed_by,
+      :last_name_id,
+      :preferred_contact,
+      :immigrant_status,
+      :education,
+      :services_requested,
+      :additional_services_requested,
+      :criminal_conviction,
+      :release_on_file,
+      :release_sign_date,
+      :cdbg_required,
+      :cdbg_us_citizen,
+      :cdbg_legal_resident,
+      :cdbg_female_head_of_household,
+      :cdbg_household_size,
+      :cdbg_household_income
     )
   end
 

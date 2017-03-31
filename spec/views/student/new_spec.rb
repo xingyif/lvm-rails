@@ -4,7 +4,8 @@ RSpec.describe 'students/new.html.erb', type: :view do
   describe 'populate page' do
     before do
       @student = Student.create(first_name: 'Joe',
-                                last_name: 'Lally')
+                                last_name: 'Lally',
+                                gender: 'male')
       render
     end
 

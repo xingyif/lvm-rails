@@ -1,5 +1,5 @@
+# rubocop:disable MethodLength
 module ApplicationHelper
-  # rubocop:disable Style/WordArray, MethodLength
   # Generic helper collections
   def us_states
     [

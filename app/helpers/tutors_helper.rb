@@ -1,6 +1,5 @@
-# rubocop:disable ModuleLength
+# rubocop:disable ModuleLength, MethodLength
 module TutorsHelper
-  # rubocop:disable Style/WordArray, MethodLength
   def native_language
     [
       ['English', 'English'],

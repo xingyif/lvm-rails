@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327220238) do
+ActiveRecord::Schema.define(version: 20170328215033) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(version: 20170327220238) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "first_name"
-    t.string   "last_name"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "first_name",                    null: false
+    t.string   "last_name",                     null: false
     t.date     "dob"
-    t.string   "gender"
+    t.string   "gender",                        null: false
     t.string   "address1"
     t.string   "city"
     t.string   "state"
@@ -101,10 +101,32 @@ ActiveRecord::Schema.define(version: 20170327220238) do
     t.string   "native_language"
     t.string   "origin_country"
     t.integer  "availability"
-    t.integer  "tutor_preference"
     t.string   "address2"
     t.integer  "smartt_id"
     t.integer  "affiliate_id"
+    t.string   "status"
+    t.string   "status_date_of_change"
+    t.string   "status_changed_by"
+    t.string   "last_name_id"
+    t.string   "preferred_contact"
+    t.string   "immigrant_status"
+    t.string   "education"
+    t.text     "services_requested"
+    t.text     "additional_services_requested"
+    t.boolean  "criminal_conviction"
+    t.boolean  "release_on_file"
+    t.date     "release_sign_date"
+    t.boolean  "cdbg_required"
+    t.boolean  "cdbg_us_citizen"
+    t.boolean  "cdbg_legal_resident"
+    t.boolean  "cdbg_female_head_of_household"
+    t.integer  "cdbg_household_size"
+    t.integer  "cdbg_household_income"
+    t.integer  "age_preference"
+    t.boolean  "meet_at_local_library"
+    t.string   "where_can_meet"
+    t.integer  "transportation"
+    t.string   "other_preferences"
     t.index ["affiliate_id"], name: "index_students_on_affiliate_id"
   end
 

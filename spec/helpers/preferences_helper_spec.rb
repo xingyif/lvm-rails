@@ -11,7 +11,6 @@ RSpec.describe PreferencesHelper, type: :helper do
       expect(squash(arr)).to eq 15
     end
 
-    # rubocop:disable WordArray
     it 'computes the sum of an array of strings of integers' do
       arr = ['1', '3', '32', '4']
       expect(squash(arr)).to eq 40
