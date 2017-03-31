@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20170331161904) do
-
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -127,6 +125,7 @@ ActiveRecord::Schema.define(version: 20170331161904) do
     t.boolean  "cdbg_female_head_of_household"
     t.integer  "cdbg_household_size"
     t.integer  "cdbg_household_income"
+    t.date     "intake_date"
     t.integer  "age_preference"
     t.boolean  "meet_at_local_library"
     t.string   "where_can_meet"
@@ -162,13 +161,14 @@ ActiveRecord::Schema.define(version: 20170331161904) do
 
   create_table "tutoring_sessions", force: :cascade do |t|
     t.string   "location"
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.text     "session_comment"
     t.integer  "student_id"
     t.integer  "tutor_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "hours"
+    t.date     "start_date"
+    t.date     "end_date"
     t.index ["student_id"], name: "index_tutoring_sessions_on_student_id"
     t.index ["tutor_id"], name: "index_tutoring_sessions_on_tutor_id"
   end

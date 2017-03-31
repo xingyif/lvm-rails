@@ -15,11 +15,14 @@ RSpec.describe TutoringSession, type: :model do
     it 'validates location presence' do
       should validate_presence_of(:location)
     end
-    it 'validates start_time presence' do
-      should validate_presence_of(:start_time)
+    it 'validates hours presence' do
+      should validate_presence_of(:hours)
     end
-    it 'validates end_time presence' do
-      should validate_presence_of(:end_time)
+    it 'validates start_date presence' do
+      should validate_presence_of(:start_date)
+    end
+    it 'validates end_date presence' do
+      should validate_presence_of(:end_date)
     end
   end
 end

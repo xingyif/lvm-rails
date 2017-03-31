@@ -4,13 +4,23 @@
 </p>
 
 <p>
-  <strong>Start time:</strong>
-  <%= @tutoring_session.start_time %>
+  <strong>Hours:</strong>
+  <%= @tutoring_session.hours %>
 </p>
 
 <p>
-  <strong>End time:</strong>
-  <%= @tutoring_session.end_time %>
+  <strong>From Date:</strong>
+  <%= @tutoring_session.start_date %>
+</p>
+
+<p>
+  <strong>To Date:</strong>
+  <%= @tutoring_session.end_date %>
+</p>
+
+<p>
+  <strong>Session Comments:</strong>
+  <%= @tutoring_session.session_comment %>
 </p>
 
 <%= link_to 'Edit', edit_tutoring_session_path(@tutoring_session) %> |

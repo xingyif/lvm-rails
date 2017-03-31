@@ -46,6 +46,8 @@ class TutoringSessionsController < ApplicationController
   end
 
   def tutoring_session_params
-    params.require(:tutoring_session).permit(:location, :start_time, :end_time)
+    params.require(:tutoring_session).permit(:location, :hours,
+                                             :start_date, :end_date,
+                                             :session_comment)
   end
 end

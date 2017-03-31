@@ -9,7 +9,9 @@ RSpec.describe 'tutoring_sessions/edit', type: :view do
     render
 
     expect(rendered).to match(/location/)
-    expect(rendered).to match(/start_time/)
-    expect(rendered).to match(/end_time/)
+    expect(rendered).to match(/hours/)
+    expect(rendered).to match(/start_date/)
+    expect(rendered).to match(/end_date/)
+    expect(rendered).to match(/session_comment/)
   end
 end

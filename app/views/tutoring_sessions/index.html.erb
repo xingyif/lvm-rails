@@ -1,13 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Tutoring Sessions</h1>
 
 <table>
   <thead>
   <tr>
     <th>Location</th>
-    <th>Start time</th>
-    <th>End time</th>
+    <th>Hours</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Comments</th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -16,8 +16,10 @@
   <% @tutoring_sessions.each do |tutoring_session| %>
       <tr>
         <td><%= tutoring_session.location %></td>
-        <td><%= tutoring_session.start_time %></td>
-        <td><%= tutoring_session.end_time %></td>
+        <td><%= tutoring_session.hours %></td>
+        <td><%= tutoring_session.start_date %></td>
+        <td><%= tutoring_session.end_date %></td>
+        <td><%= tutoring_session.session_comment %></td>
         <td><%= link_to 'Show', tutoring_session %> | </td>
         <td><%= link_to 'Edit', edit_tutoring_session_path(tutoring_session) %> | </td>
         <td><%= link_to 'Delete', tutoring_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
