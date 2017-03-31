@@ -6,16 +6,16 @@
   </div>
 </div>
 
-<table>
+<table id="affiliateTable" class"display hover order-column compact" width="100%">
   <thead>
     <tr>
-      <th>Name </th>
-      <th>Address </th>
-      <th>Phone number </th>
-      <th>Email </th>
-      <th>Website </th>
-      <th>Twitter </th>
-      <th colspan="3"></th>
+      <th> Name </th>
+      <th> Address </th>
+      <th> Phone number </th>
+      <th> Email </th>
+      <th> Website </th>
+      <th> Twitter </th>
+      <th>
     </tr>
   </thead>
 
@@ -28,15 +28,41 @@
         <td><%= affiliate.email %></td>
         <td><%= affiliate.website %></td>
         <td><%= affiliate.twitter %></td>
-        <td><%= link_to 'Show ', affiliate %> | </td>
-        <td><%= link_to 'Edit ', edit_affiliate_path(affiliate) %> | </td>
-        <td><%= link_to 'Destroy ', affiliate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="text-right">
+          <%= link_to edit_affiliate_path(affiliate)do %>
+            <button class="btn btn-primary btn-sm">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          <% end %>
+          <%= link_to affiliate_path(affiliate), method: :delete, data: { confirm: 'Are you sure you want to delete this affiliate?' } do %>
+            <button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
 <%= link_to 'Home', root_path %> |
 <%= link_to 'New Affiliate', new_affiliate_path %>
+
+<script>
+// Because turbolinks gets the page from the cache instead of making another
+// GET request, functionality of DataTables is broken.  DataTables thinks it
+// needs to recreate the table, causing a duplicate table to be created and the
+// modal appears on the screen but does not repsond to the close buttons. The
+// solution is when reading from the turbolinks cache to destroy the old
+// DataTables table.
+$(document).ready(function(){
+  var affiliateTable;
+
+  document.addEventListener("turbolinks:load", function() {
+    affiliateTable = $('#affiliateTable').DataTable();
+  });
+
+  document.addEventListener("turbolinks:before-cache", function() {
+    if ($('#affiliateTable_wrapper').length == 1)
+      affiliateTable.destroy();
+  });
+});
+</script>
