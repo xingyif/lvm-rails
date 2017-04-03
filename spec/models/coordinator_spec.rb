@@ -20,13 +20,24 @@ RSpec.describe Coordinator, type: :model do
   end
 
   describe 'validations' do
-    describe 'name' do
+    describe 'first_name' do
       it 'validates presence' do
-        should validate_presence_of(:name)
+        should validate_presence_of(:first_name)
       end
 
       it 'validates length' do
-        should validate_length_of(:name)
+        should validate_length_of(:first_name)
+          .is_at_most(50)
+      end
+    end
+
+    describe 'last_name' do
+      it 'validates presence' do
+        should validate_presence_of(:last_name)
+      end
+
+      it 'validates length' do
+        should validate_length_of(:last_name)
           .is_at_most(50)
       end
     end

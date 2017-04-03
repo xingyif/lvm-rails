@@ -1,13 +1,15 @@
 FactoryGirl.define do
   factory :coordinator do
-    name { Faker::Name.name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     phone_number { Faker::Base.numerify('(###) ###-####') }
     date_of_birth { Faker::Date.between(80.years.ago, 18.years.ago) }
   end
 
   factory :coordinator_with_student, class: Coordinator do
-    name { Faker::Name.name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     phone_number { Faker::Base.numerify('(###) ###-####') }
     date_of_birth { Faker::Date.between(80.years.ago, 18.years.ago) }
@@ -17,7 +19,8 @@ FactoryGirl.define do
   end
 
   factory :coordinator_with_tutor, class: Coordinator do
-    name { Faker::Name.name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     phone_number { Faker::Base.numerify('(###) ###-####') }
     date_of_birth { Faker::Date.between(80.years.ago, 18.years.ago) }
@@ -27,7 +30,8 @@ FactoryGirl.define do
   end
 
   factory :full_coordinator, class: Coordinator do
-    name { Faker::Name.name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     phone_number { Faker::Base.numerify('(###) ###-####') }
     date_of_birth { Faker::Date.between(80.years.ago, 18.years.ago) }
