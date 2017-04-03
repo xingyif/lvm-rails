@@ -20,7 +20,7 @@
 
   <% @tutors.each do |tutor| %>
     <tr>
-      <td><%= tutor.first_name %></td>
+      <td><%= link_to tutor.first_name, tutor_path(tutor.id) %></td>
       <td><%= tutor.last_name %></td>
       <td><%= tutor.home_phone%></td>
       <td><%= tutor.cell_phone%></td>

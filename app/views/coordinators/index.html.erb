@@ -19,7 +19,7 @@
   <tbody>
     <% @coordinators.each do |coordinator| %>
       <tr>
-        <td><%= coordinator.name %></td>
+        <td><%= link_to coordinator.name, coordinator_path(coordinator.id) %></td>
         <td><%= coordinator.email %></td>
         <td><%= coordinator.phone_number %></td>
         <td class="text-right">

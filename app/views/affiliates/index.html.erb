@@ -22,7 +22,7 @@
   <tbody>
     <% @affiliates.each do |affiliate| %>
       <tr>
-        <td><%= affiliate.name %></td>
+        <td><%= link_to affiliate.name, affiliate_path(affiliate.id) %></td>
         <td><%= affiliate.address %>
          <%= affiliate.city %>
          <%= affiliate.state %>
