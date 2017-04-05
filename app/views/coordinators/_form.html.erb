@@ -19,7 +19,11 @@
     <hr>
     <div class="row">
       <div class ="col-md-6">
-        <%= f.input :name, maxlength: 255, required: true %>
+        <%= f.input :first_name, maxlength: 50, required: true %>
+      </div>
+
+      <div class ="col-md-6">
+        <%= f.input :last_name, maxlength: 50, required: true %>
       </div>
 
       <div class = "col-md-6"

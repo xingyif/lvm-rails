@@ -125,14 +125,15 @@ RSpec.describe CoordinatorsController, type: :controller do
         it 'saves the new coordinator in the database' do
           post :update, params: { id: @coordinator.id,
                                   coordinator: @new_coordinator_attrs }
-          expect(Coordinator.last.name).to eq(@new_coordinator_attrs[:name])
+          expect(Coordinator.last.first_name)
+            .to eq(@new_coordinator_attrs[:first_name])
         end
 
         it 'assigns the updated coordinator as @coordinator' do
           post :update, params: { id: @coordinator.id,
                                   coordinator: @new_coordinator_attrs }
-          expect(assigns(:coordinator).name)
-            .to eq(@new_coordinator_attrs[:name])
+          expect(assigns(:coordinator).first_name)
+            .to eq(@new_coordinator_attrs[:first_name])
         end
 
         it 'redirects to the coordinator view' do
