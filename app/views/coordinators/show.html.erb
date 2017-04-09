@@ -26,7 +26,7 @@
                 <small>
                   Affiliate:
                   <% if @coordinator.affiliate_id %>
-                    <label><%= Coordinator.find(@coordinator.affiliate_id).name %></label>
+                    <label><%= Affiliate.find(@coordinator.affiliate_id).name %></label>
                   <% else %>
                     <label>No Affiliate</label>
                   <% end %>

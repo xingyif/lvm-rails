@@ -2,20 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Coordinator, type: :model do
   describe 'associations' do
-    it 'should have many enrollments' do
-      should have_many(:enrollments)
-    end
-
-    it 'students through enrollments' do
-      should have_many(:students).through(:enrollments)
-    end
-
-    it 'should have many volunteer_jobs' do
-      should have_many(:volunteer_jobs)
-    end
-
-    it 'tutors through volunteer_jobs' do
-      should have_many(:tutors).through(:volunteer_jobs)
+    it 'should belond to an affiliate' do
+      should belong_to(:affiliate)
     end
   end
 

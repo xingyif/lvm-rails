@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :enrollment do
     student
-    coordinator
+    affiliate
+    start { Faker::Date.between(1.years.ago, Date.today) }
   end
 end

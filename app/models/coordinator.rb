@@ -1,16 +1,8 @@
 class Coordinator < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PHONE_REGEX = /\A\([0-9]{3}\) [0-9]{3}-[0-9]{4}\z/
-
+  belongs_to :affiliate
   belongs_to :user
-
-  has_many :enrollments
-  has_many :students, through: :enrollments
-
-  has_many :volunteer_jobs
-  has_many :tutors, through: :volunteer_jobs
-
-  has_many :affiliates
 
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },

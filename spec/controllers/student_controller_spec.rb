@@ -18,19 +18,17 @@ RSpec.describe StudentsController, type: :controller do
   describe 'endpoints' do
     describe 'GET #index' do
       before do
-        create(:affiliate, id: 1)
+        affiliate = create(:affiliate)
 
-        create(:tutor, affiliate_id: 1, id: 1)
+        create(:coordinator, affiliate: affiliate)
 
-        create(:coordinator, affiliate_id: 1, id: 1)
+        student1 = create(:student)
+        student2 = create(:student)
 
-        create(:student, id: 1)
-        create(:student, id: 2)
+        create(:enrollment, student: student1, affiliate: affiliate)
 
-        Student.find(1).coordinators << Coordinator.find(1)
-
-        @all_students = [Student.find(1), Student.find(2)]
-        @coordinator_students = [Student.find(1)]
+        @all_students = [student1, student2]
+        @coordinator_students = [student1]
       end
 
       describe 'as admin' do
@@ -56,7 +54,7 @@ RSpec.describe StudentsController, type: :controller do
           sign_in_auth(user)
         end
 
-        it 'populates an array of all students' do
+        it "populates an array of coordinator's students" do
           get :index
           expect(assigns(:students)).to eq(@coordinator_students)
         end
@@ -84,7 +82,7 @@ RSpec.describe StudentsController, type: :controller do
       before do
         user = User.new(role: 2)
         sign_in_auth(user)
-        @student = create(:full_student)
+        @student = create(:matched_student)
       end
 
       it 'populates the specified student' do
@@ -96,12 +94,6 @@ RSpec.describe StudentsController, type: :controller do
         match = Match.where(student_id: @student.id).take
         get :show, params: { id: @student }
         expect(assigns(:match)).to eq(match)
-      end
-
-      it 'populates an enrollment' do
-        enrollment = Enrollment.where(student_id: @student.id).take
-        get :show, params: { id: @student }
-        expect(assigns(:enrollment)).to eq(enrollment)
       end
 
       it 'renders the :show view' do
@@ -303,12 +295,14 @@ RSpec.describe StudentsController, type: :controller do
 
     context 'when tutor_id is nonzero' do
       before do
-        @tutor = create(:tutor)
+        @tutor = create(:employed_tutor)
       end
 
       context 'when the student does not have a tutor' do
         it 'matches the student with the specified tutor' do
-          student = create(:student)
+          student = create(:matched_student)
+          Enrollment.where(student: student)
+                    .update(affiliate_id: @tutor.active_affiliate.id)
           put :set_tutor, params: { tutor_id: @tutor, student_id: student }
           expect(
             Match.where(student_id: student, tutor_id: @tutor).length
@@ -319,12 +313,16 @@ RSpec.describe StudentsController, type: :controller do
       context 'when student has a tutor' do
         before(:each) do
           @student = create(:matched_student)
+          Enrollment.where(student: @student)
+                    .update(affiliate_id: @tutor.active_affiliate.id)
           @old_tutor = Match.where(student_id: @student).take.tutor_id
         end
 
         context "when specified tutor is student's current tutor" do
           before do
             @new_tutor = @old_tutor
+            VolunteerJob.where(tutor: @new_tutor)
+                        .update(affiliate_id: @tutor.active_affiliate.id)
           end
 
           it "does not unmatch the student's current tutor" do
@@ -349,7 +347,9 @@ RSpec.describe StudentsController, type: :controller do
 
         context "when specified tutor is not student's current tutor" do
           before do
-            @new_tutor = create(:tutor)
+            @new_tutor = create(:employed_tutor)
+            VolunteerJob.where(tutor: @new_tutor)
+                        .update(affiliate_id: @tutor.active_affiliate.id)
           end
 
           it "unmatches the student's current tutor" do

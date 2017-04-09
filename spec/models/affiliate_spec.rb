@@ -6,16 +6,20 @@ RSpec.describe Affiliate, type: :model do
       should have_many(:coordinators)
     end
 
-    it 'should have many tutors' do
-      should have_many(:tutors)
+    it 'should have many volunteer_jobs' do
+      should have_many(:volunteer_jobs)
     end
 
-    it 'should have many matches' do
-      should have_many(:matches)
+    it 'should have many tutors through volunteer_jobs' do
+      should have_many(:tutors).through(:volunteer_jobs)
     end
 
-    it 'should have many students' do
-      should have_many(:students)
+    it 'should have many enrollments' do
+      should have_many(:enrollments)
+    end
+
+    it 'should have many students through enrollments' do
+      should have_many(:students).through(:enrollments)
     end
   end
 

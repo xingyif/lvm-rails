@@ -12,7 +12,6 @@ class StudentsController < ApplicationController
   def show
     @student = Student.of(current_user).find(params[:id])
     @match = current_match(params[:id])
-    @enrollment = current_enrollment(params[:id])
   end
 
   def new
@@ -117,7 +116,6 @@ class StudentsController < ApplicationController
       :country_of_birth,
       :availability,
       :smartt_id,
-      :affiliate,
       :status,
       :status_date_of_change,
       :status_changed_by,

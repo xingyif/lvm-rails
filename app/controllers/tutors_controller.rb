@@ -8,14 +8,8 @@ class TutorsController < ApplicationController
 
   def show
     @tutor = Tutor.of(current_user).find(params[:id])
-    @coordinator = coordinator
     @students = students
     @student_options = student_options
-  end
-
-  def coordinator
-    job = VolunteerJob.where(tutor_id: params[:id], end: nil).take
-    job.nil? ? nil : Coordinator.find(job.coordinator_id)
   end
 
   def students
@@ -112,7 +106,6 @@ class TutorsController < ApplicationController
     params.require(:tutor).permit(
       :address1,
       :address2,
-      :affiliate,
       :age_preference,
       :availability,
       :category_preference,

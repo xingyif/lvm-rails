@@ -15,7 +15,7 @@ RSpec.describe Student, type: :model do
     end
 
     it 'coordinators through enrollments' do
-      should have_many(:coordinators).through(:enrollments)
+      should have_many(:affiliates).through(:enrollments)
     end
 
     it 'should have many assessments' do
@@ -246,19 +246,13 @@ RSpec.describe Student, type: :model do
 
   describe '#of' do
     before do
-      create(:affiliate, id: 1)
-      create(:affiliate, id: 2)
+      affiliate = create(:affiliate)
 
-      create(:tutor, affiliate_id: 1, id: 1)
-      create(:coordinator, affiliate_id: 1, id: 1)
+      @student1 = create(:student)
+      @student2 = create(:student)
 
-      create(:student, id: 1)
-      create(:student, id: 2)
-      create(:student, id: 3)
-
-      Student.find(1).tutors << Tutor.find(1)
-      Student.find(1).coordinators << Coordinator.find(1)
-      Student.find(2).coordinators << Coordinator.find(1)
+      create(:coordinator, affiliate: affiliate)
+      create(:enrollment, student: @student1, affiliate: affiliate)
     end
 
     describe 'when current user is tutor' do
@@ -287,7 +281,7 @@ RSpec.describe Student, type: :model do
 
       it 'returns only students of coordinator affiliate' do
         students = Student.of(@user)
-        expect(students.count).to eq(2)
+        expect(students).to eq([@student1])
       end
     end
 
@@ -301,7 +295,7 @@ RSpec.describe Student, type: :model do
 
       it 'returns all students' do
         students = Student.of(@user)
-        expect(students.count).to eq(3)
+        expect(students).to eq([@student1, @student2])
       end
     end
   end

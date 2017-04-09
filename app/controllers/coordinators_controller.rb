@@ -1,12 +1,12 @@
 class CoordinatorsController < ApplicationController
   before_action :ensure_admin!
+  before_action :set_coordinator, only: [:show, :edit, :update, :destroy]
 
   def index
     @coordinators = Coordinator.all
   end
 
   def show
-    @coordinator = Coordinator.find(params[:id])
     @students = students
     @tutors = tutors
   end
@@ -15,9 +15,7 @@ class CoordinatorsController < ApplicationController
     @coordinator = Coordinator.new
   end
 
-  def edit
-    @coordinator = Coordinator.find(params[:id])
-  end
+  def edit; end
 
   def create
     @coordinator = Coordinator.new(coordinator_params)
@@ -30,8 +28,6 @@ class CoordinatorsController < ApplicationController
   end
 
   def update
-    @coordinator = Coordinator.find(params[:id])
-
     if @coordinator.update(coordinator_params)
       redirect_to @coordinator
     else
@@ -40,13 +36,16 @@ class CoordinatorsController < ApplicationController
   end
 
   def destroy
-    @coordinator = Coordinator.find(params[:id])
     @coordinator.destroy
 
     redirect_to coordinators_path
   end
 
   private
+
+  def set_coordinator
+    @coordinator = Coordinator.find(params[:id])
+  end
 
   def coordinator_params
     params.require(:coordinator).permit(
@@ -59,16 +58,14 @@ class CoordinatorsController < ApplicationController
   end
 
   def students
-    match_params = { coordinator_id: params[:id], end: nil }
-    Enrollment.where(match_params).to_a.map do |e|
-      Student.of(current_user).find(e.student_id)
-    end
+    match_params =
+      { affiliate_id: @coordinator.affiliate_id, end: nil }
+    Enrollment.where(match_params).to_a.map { |e| Student.find(e.student_id) }
   end
 
   def tutors
-    match_params = { coordinator_id: params[:id], end: nil }
-    VolunteerJob.where(match_params).to_a.map do |v|
-      Tutor.of(current_user).find(v.tutor_id)
-    end
+    match_params =
+      { affiliate_id: @coordinator.affiliate_id, end: nil }
+    VolunteerJob.where(match_params).to_a.map { |v| Tutor.find(v.tutor_id) }
   end
 end

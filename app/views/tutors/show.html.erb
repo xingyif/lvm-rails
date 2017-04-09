@@ -23,10 +23,10 @@
               <%= @tutor.name %><br>
               <small>
                 Affiliate:
-                <% if @tutor.affiliate_id %>
-                    <label><%= Affiliate.find(@tutor.affiliate_id).name %></label>
+                <% if @tutor.active_affiliate %>
+                  <label> <%= @tutor.active_affiliate.name %> </label>
                 <% else %>
-                    <label>No Affiliate</label>
+                  <label>No Affiliate</label>
                 <% end %>
               </small><br>
               <button class="btn btn-sm btn-<%= @tutor.status_class_indicator %> disabled"><%= @tutor.status.blank? ? "Status Unknown" : @tutor.status %></button>
@@ -128,37 +128,37 @@
             <hr>
 
             <% if @tutor.tutor_comments.length > 0 %>
-                <% for c in @tutor.tutor_comments %>
-                  <div class="panel panel-default">
-                    <ul class="list-group">
-                      <li class="list-group-item">
-                        <div class="row">
-                          <div class="col-xs-6">
-                            <span class="glyphicon glyphicon-time"></span>
-                            <%= c.updated_at.strftime('%D') %> <span class="text-muted"><%= '(Edited)' if c.created_at != c.updated_at %></span>
-                          </div>
-                          <div class="col-xs-6 text-right">
-                            <%= link_to edit_tutor_comment_path(c), class: 'margin-right-sm' do %>
-                              <span class="glyphicon glyphicon-pencil"></span>
-                            <% end %>
-                            <%= link_to c, method: :delete, data: {confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}"} do %>
-                              <span class="glyphicon glyphicon-remove text-danger"></span>
-                            <% end %>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                    <div class="panel-body">
+              <% for c in @tutor.tutor_comments %>
+                <div class="panel panel-default">
+                  <ul class="list-group">
+                    <li class="list-group-item">
                       <div class="row">
-                        <div class="col-xs-12">
-                          <%= c.content %>
+                        <div class="col-xs-6">
+                          <span class="glyphicon glyphicon-time"></span>
+                          <%= c.updated_at.strftime('%D') %> <span class="text-muted"><%= '(Edited)' if c.created_at != c.updated_at %></span>
                         </div>
+                        <div class="col-xs-6 text-right">
+                          <%= link_to edit_tutor_comment_path(c), class: 'margin-right-sm' do %>
+                            <span class="glyphicon glyphicon-pencil"></span>
+                          <% end %>
+                          <%= link_to c, method: :delete, data: {confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}"} do %>
+                            <span class="glyphicon glyphicon-remove text-danger"></span>
+                          <% end %>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <%= c.content %>
                       </div>
                     </div>
                   </div>
-                <% end %>
+                </div>
+              <% end %>
             <% else %>
-                No Tutor Comments
+              No Tutor Comments
             <% end %>
           </div>
         </div>
@@ -174,7 +174,7 @@
               <div class="col-md-6">
                 <div class="pull-right">
                   <%= link_to tutoring_sessions_path do %>
-                      <button class="btn btn-default">Manage</button>
+                    <button class="btn btn-default">Manage</button>
                   <% end %>
                 </div>
               </div>
@@ -183,8 +183,8 @@
         </div>
       </div>
 
-      </div>
     </div>
+  </div>
 
   <div class="col-md-7">
     <div class="row">
@@ -197,14 +197,14 @@
               </div>
               <div class="col-sm-6 text-right">
                 <% if !@student_options.empty? %>
-                    <%= form_tag('add_student', method: 'put') do %>
-                        <%= select_tag(:student_id, options_for_select(@student_options)) %>
-                        <%= submit_tag('Add Student') %>
-                        <%= hidden_field_tag(:tutor_id, @tutor.id) %>
-                        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                    <% end %>
+                  <%= form_tag('add_student', method: 'put') do %>
+                    <%= select_tag(:student_id, options_for_select(@student_options)) %>
+                    <%= submit_tag('Add Student') %>
+                    <%= hidden_field_tag(:tutor_id, @tutor.id) %>
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <% end %>
                 <% else %>
-                    No unmatched students
+                  No unmatched students
                 <% end %>
               </div>
             </div>
@@ -212,22 +212,22 @@
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                </tr>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                  </tr>
                 </thead>
                 <tbody>
-                <% if !@students.empty? %>
+                  <% if !@students.empty? %>
                     <% @students.each do |s| %>
-                        <tr>
-                          <td> <%= s.name %> </td>
-                          <td> <%= s.email %> </td>
-                        </tr>
+                      <tr>
+                        <td> <%= s.name %> </td>
+                        <td> <%= s.email %> </td>
+                      </tr>
                     <% end %>
-                <% else %>
+                  <% else %>
                     No Students
-                <% end %>
+                  <% end %>
                 </tbody>
               </table>
             </div>
@@ -474,17 +474,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <% languages.each do |l| %>
-                    <tr>
-                      <td> <%= l[0] %> </td>
-                      <td> <%= l[1] %> </td>
-                    </tr>
-                  <% end %>
+                    <% languages.each do |l| %>
+                      <tr>
+                        <td> <%= l[0] %> </td>
+                        <td> <%= l[1] %> </td>
+                      </tr>
+                    <% end %>
                   </tbody>
                 </table>
               </div>
             <% else %>
-                No language proficiency data on file.
+              No language proficiency data on file.
             <% end %>
           </div>
         </div>
@@ -531,28 +531,28 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-         <h3>Update Tags</h3>
-       </div>
-       <%= simple_form_for @tutor, url: update_tutor_tags_path(@tutor), method: :patch do |f| %>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Update Tags</h3>
+      </div>
+      <%= simple_form_for @tutor, url: update_tutor_tags_path(@tutor), method: :patch do |f| %>
         <div class="modal-body">
           <div class="row">
-           <div class="col-md-12">
-             <p class="help-block">Select tags from the list or create a new tag by typing in a word or phrase and then hitting the comma key.</p>
-             <%= f.input :all_tags,
-                         label: false,
-                         as: :select,
-                         collection: Tag.order(:name).map{ |i| [i.name, i.name]},
-                         input_html: {multiple: true},
-                         required: false %>
-           </div>
-         </div>
-       </div>
-       <div class="modal-footer">
-         <%= f.button :submit, 'Update', class: "btn btn-primary" %>
-         <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
-       </div>
-     <% end %>
+            <div class="col-md-12">
+              <p class="help-block">Select tags from the list or create a new tag by typing in a word or phrase and then hitting the comma key.</p>
+              <%= f.input :all_tags,
+                label: false,
+                as: :select,
+                collection: Tag.order(:name).map{ |i| [i.name, i.name]},
+                input_html: {multiple: true},
+                required: false %>
+          </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.button :submit, 'Update', class: "btn btn-primary" %>
+          <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        </div>
+      <% end %>
     </div>
   </div>
   <script>initChosenTagSelect("tutor");</script>

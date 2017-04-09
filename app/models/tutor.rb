@@ -1,3 +1,4 @@
+# rubocop:disable ClassLength
 class Tutor < ApplicationRecord
   VALID_EMAIL_REGEX  = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PHONE_REGEX  = /\A\([0-9]{3}\) [0-9]{3}-[0-9]{4}\z/
@@ -11,9 +12,8 @@ class Tutor < ApplicationRecord
   has_many :students, through: :matches
 
   has_many :volunteer_jobs
-  has_many :coordinators, through: :volunteer_jobs
+  has_many :affiliates, through: :volunteer_jobs
 
-  has_many :affiliates
   has_many :tutor_comments
 
   has_many :taggings
@@ -93,6 +93,10 @@ class Tutor < ApplicationRecord
     tags.map(&:name)
   end
 
+  def active_affiliate
+    Affiliate.find(volunteer_jobs.where(end: nil).take.affiliate_id)
+  end
+
   # rubocop:disable CyclomaticComplexity, PerceivedComplexity
   def status_class_indicator
     active  = ['Active']
@@ -110,7 +114,9 @@ class Tutor < ApplicationRecord
   def self.of(user)
     if user.coordinator?
       joins(:volunteer_jobs).where(
-        volunteer_jobs: { coordinator_id: user.coordinator_id }
+        volunteer_jobs: {
+          affiliate_id: Coordinator.find(user.coordinator_id).affiliate_id
+        }
       )
     elsif user.admin?
       all

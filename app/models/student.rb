@@ -9,7 +9,7 @@ class Student < ApplicationRecord
   has_many :assessments
 
   has_many :enrollments
-  has_many :coordinators, through: :enrollments
+  has_many :affiliates, through: :enrollments
 
   has_many :matches
   has_many :tutors, through: :matches
@@ -68,6 +68,10 @@ class Student < ApplicationRecord
     tags.map(&:name)
   end
 
+  def active_affiliate
+    Affiliate.find(enrollments.where(end: nil).take.affiliate_id)
+  end
+
   # rubocop:disable CyclomaticComplexity, PerceivedComplexity
   def status_class_indicator
     active  = ['Active']
@@ -85,7 +89,9 @@ class Student < ApplicationRecord
   def self.of(user)
     if user.coordinator?
       joins(:enrollments).where(
-        enrollments: { coordinator_id: user.coordinator_id }
+        enrollments: {
+          affiliate_id: Coordinator.find(user.coordinator_id).affiliate_id
+        }
       )
     elsif user.admin?
       all

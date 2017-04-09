@@ -5,7 +5,6 @@ require 'tutors_helper'
   Tutor.seed do |t|
     t.address1                = Faker::Address.street_address
     t.address2                = Faker::Address.secondary_address
-    t.affiliate_id            = rand(10) + 1
     t.cell_phone              = Faker::Base.numerify('(###) ###-####')
     t.city                    = Faker::Address.city
     t.country_of_birth        = Faker::Address.country

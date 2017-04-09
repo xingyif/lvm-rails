@@ -10,7 +10,7 @@ RSpec.describe 'tutors/show.html.erb', type: :view do
   describe 'language proficiencies' do
     context 'with no language proficiencies' do
       before do
-        @tutor = create(:tutor)
+        @tutor = create(:employed_tutor)
       end
 
       it 'renders the correct string' do
@@ -22,7 +22,7 @@ RSpec.describe 'tutors/show.html.erb', type: :view do
     context 'with some language proficiencies' do
       before do
         proficiencies = { English: 'Native' }.to_json
-        @tutor = create(:tutor, language_proficiencies: proficiencies)
+        @tutor = create(:employed_tutor, language_proficiencies: proficiencies)
       end
 
       it 'renders the proficiencies correctly' do
@@ -35,7 +35,7 @@ RSpec.describe 'tutors/show.html.erb', type: :view do
 
   describe 'tags' do
     before do
-      @tutor = create(:tutor)
+      @tutor = create(:employed_tutor)
     end
 
     context 'with no tags' do

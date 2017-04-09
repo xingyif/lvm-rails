@@ -52,7 +52,8 @@ FactoryGirl.define do
     training_type %w(ABE ESOL).sample
     zip { Faker::Base.numerify('#####') }
     after(:create) do |tutor|
-      tutor.coordinators << FactoryGirl.create(:coordinator)
+      affiliate = create(:affiliate)
+      create(:volunteer_job, affiliate: affiliate, tutor: tutor)
     end
   end
 end

@@ -3,10 +3,12 @@ class Affiliate < ApplicationRecord
   VALID_ZIP_REGEX = /\A[0-9]{5}\z/
 
   has_many :coordinators
-  has_many :tutors
 
-  has_many :matches
-  has_many :students
+  has_many :volunteer_jobs
+  has_many :tutors, through: :volunteer_jobs
+
+  has_many :enrollments
+  has_many :students, through: :enrollments
 
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },

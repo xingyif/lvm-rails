@@ -14,8 +14,8 @@ RSpec.describe Tutor, type: :model do
       should have_many(:volunteer_jobs)
     end
 
-    it 'coordinators through volunteer_jobs' do
-      should have_many(:coordinators).through(:volunteer_jobs)
+    it 'affiliates through volunteer_jobs' do
+      should have_many(:affiliates).through(:volunteer_jobs)
     end
 
     it 'should have many tutor_comments' do
@@ -378,15 +378,13 @@ RSpec.describe Tutor, type: :model do
 
   describe '#of' do
     before do
-      create(:affiliate, id: 1)
-      create(:affiliate, id: 2)
+      affiliate = create(:affiliate)
 
-      create(:coordinator, affiliate_id: 1, id: 1)
+      @tutor1 = create(:tutor)
+      @tutor2 = create(:tutor)
 
-      create(:tutor, affiliate_id: 1, id: 1)
-      create(:tutor, affiliate_id: 2, id: 2)
-
-      Tutor.find(1).coordinators << Coordinator.find(1)
+      create(:coordinator, affiliate: affiliate)
+      create(:volunteer_job, affiliate: affiliate, tutor: @tutor1)
     end
 
     describe 'when current user is tutor' do
@@ -416,7 +414,7 @@ RSpec.describe Tutor, type: :model do
       it 'returns only tutors of coordinator affiliate' do
         tutors = Tutor.of(@user)
         expect(tutors.count).to eq(1)
-        expect(tutors.first.id).to eq(1)
+        expect(tutors).to eq([@tutor1])
       end
     end
 
@@ -430,7 +428,7 @@ RSpec.describe Tutor, type: :model do
 
       it 'returns all tutors' do
         tutors = Tutor.of(@user)
-        expect(tutors.count).to eq(2)
+        expect(tutors).to eq([@tutor1, @tutor2])
       end
     end
   end

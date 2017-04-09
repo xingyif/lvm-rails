@@ -10,8 +10,7 @@ RSpec.describe TutorsController, type: :controller do
     describe '#student_options' do
       it 'populates a list of unmatched students' do
         @s = create(:student)
-        @matched = create(:student)
-        Match.create(student_id: @matched.id)
+        @matched = create(:matched_student)
         expect(controller.send(:student_options)).to eq [[@s.name, @s.id]]
       end
     end
@@ -20,17 +19,17 @@ RSpec.describe TutorsController, type: :controller do
   describe 'endpoints' do
     describe 'GET #index' do
       before do
-        create(:affiliate, id: 1)
+        affiliate = create(:affiliate)
 
-        create(:coordinator, affiliate_id: 1, id: 1)
+        create(:coordinator, affiliate: affiliate)
 
-        create(:tutor, affiliate_id: 1, id: 1)
-        create(:tutor, affiliate_id: 2, id: 2)
+        tutor1 = create(:tutor)
+        tutor2 = create(:tutor)
 
-        Tutor.find(1).coordinators << Coordinator.find(1)
+        create(:volunteer_job, tutor: tutor1, affiliate: affiliate)
 
-        @all_tutors = [Tutor.find(1), Tutor.find(2)]
-        @coordinator_tutors = [Tutor.find(1)]
+        @all_tutors = [tutor1, tutor2]
+        @coordinator_tutors = [tutor1]
       end
 
       describe 'as admin' do
@@ -93,13 +92,6 @@ RSpec.describe TutorsController, type: :controller do
       it 'populates the specified tutor' do
         get :show, params: { id: @tutor }
         expect(assigns(:tutor)).to eq(@tutor)
-      end
-
-      it 'populates the coordinator of the specified tutor' do
-        job = VolunteerJob.where(tutor_id: @tutor.id).take
-        coordinator = Coordinator.find(job.coordinator_id)
-        get :show, params: { id: @tutor }
-        expect(assigns(:coordinator)).to eq(coordinator)
       end
 
       it 'populates the students of the specified tutor' do
@@ -278,8 +270,11 @@ RSpec.describe TutorsController, type: :controller do
       before do
         user = User.new(role: 2)
         sign_in_auth(user)
+        affiliate = create(:affiliate)
         @tutor = create(:tutor)
         @student = create(:student)
+        create(:volunteer_job, tutor: @tutor, affiliate: affiliate)
+        create(:enrollment, student: @student, affiliate: affiliate)
       end
 
       it 'matches the student with the specified tutor' do

@@ -19,12 +19,12 @@ RSpec.describe CoordinatorsController, type: :controller do
 
       describe 'GET #index' do
         before do
-          @coordinator = create(:full_coordinator)
+          @coordinator = create(:coordinator, affiliate: @affiliate)
         end
 
-        it 'populates the specified coordinator' do
-          get :show, params: { id: @coordinator }
-          expect(assigns(:coordinator)).to eq(@coordinator)
+        it 'populates the coordinators' do
+          get :index
+          expect(assigns(:coordinators)).to eq([@coordinator])
         end
 
         it 'renders the :index view' do
@@ -35,7 +35,12 @@ RSpec.describe CoordinatorsController, type: :controller do
 
       describe 'GET #show' do
         before do
-          @coordinator = create(:full_coordinator)
+          @affiliate = create(:affiliate)
+          @coordinator = create(:coordinator, affiliate: @affiliate)
+          @student = create(:student)
+          @tutor = create(:tutor)
+          create(:volunteer_job, tutor: @tutor, affiliate: @affiliate)
+          create(:enrollment, student: @student, affiliate: @affiliate)
         end
 
         it 'populates the specified coordinator' do
@@ -45,12 +50,12 @@ RSpec.describe CoordinatorsController, type: :controller do
 
         it "populates the specified coordinator's students" do
           get :show, params: { id: @coordinator }
-          expect(assigns(:students)).to eq(@coordinator.students)
+          expect(assigns(:students)).to eq([@student])
         end
 
         it "populates the specified coordinator's tutors" do
           get :show, params: { id: @coordinator }
-          expect(assigns(:tutors)).to eq(@coordinator.tutors)
+          expect(assigns(:tutors)).to eq([@tutor])
         end
 
         it 'renders the :show view' do

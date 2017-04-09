@@ -22,11 +22,11 @@
 </p>
 
 <p>
-  <strong>Coordinator:</strong>
-  <% if !@enrollment.nil? %>
-    <%= Coordinator.find(@enrollment.coordinator_id).name %>
+  <strong>Affiliate:</strong>
+  <% if !@student.active_affiliate.nil? %>
+    <%= @student.active_affiliate.name %>
   <% else %>
-    No Coordinator
+    No Affiliate
   <% end %>
 </p>
 

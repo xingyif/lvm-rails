@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403194336) do
+ActiveRecord::Schema.define(version: 20170409151938) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -50,12 +50,12 @@ ActiveRecord::Schema.define(version: 20170403194336) do
 
   create_table "enrollments", force: :cascade do |t|
     t.integer  "student_id"
-    t.integer  "coordinator_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "affiliate_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.date     "start"
     t.date     "end"
-    t.index ["coordinator_id"], name: "index_enrollments_on_coordinator_id"
+    t.index ["affiliate_id"], name: "index_enrollments_on_affiliate_id"
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20170403194336) do
     t.integer  "availability"
     t.string   "address2"
     t.integer  "smartt_id"
-    t.integer  "affiliate_id"
     t.string   "status"
     t.string   "status_date_of_change"
     t.string   "status_changed_by"
@@ -133,7 +132,6 @@ ActiveRecord::Schema.define(version: 20170403194336) do
     t.integer  "transportation"
     t.string   "other_preferences"
     t.string   "referral_other"
-    t.index ["affiliate_id"], name: "index_students_on_affiliate_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -234,13 +232,11 @@ ActiveRecord::Schema.define(version: 20170403194336) do
     t.integer  "availability"
     t.integer  "age_preference"
     t.integer  "category_preference"
-    t.integer  "affiliate_id"
     t.boolean  "meet_at_local_library"
     t.string   "where_can_meet"
     t.integer  "transportation"
     t.string   "preferred_student_level"
     t.string   "other_preferences"
-    t.index ["affiliate_id"], name: "index_tutors_on_affiliate_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -265,12 +261,12 @@ ActiveRecord::Schema.define(version: 20170403194336) do
 
   create_table "volunteer_jobs", force: :cascade do |t|
     t.integer  "tutor_id"
-    t.integer  "coordinator_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "affiliate_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.date     "start"
     t.date     "end"
-    t.index ["coordinator_id"], name: "index_volunteer_jobs_on_coordinator_id"
+    t.index ["affiliate_id"], name: "index_volunteer_jobs_on_affiliate_id"
     t.index ["tutor_id"], name: "index_volunteer_jobs_on_tutor_id"
   end
 
