@@ -1,5 +1,5 @@
 tutors = [*1..100].shuffle
-affiliates = [*1..10].shuffle
+affiliates = [*1..5].shuffle
 
 100.times do
   VolunteerJob.seed do |v|

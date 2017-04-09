@@ -1,5 +1,5 @@
 students = [*1..100].shuffle
-affiliates = [*1..10].shuffle
+affiliates = [*1..5].shuffle
 
 100.times do
   Enrollment.seed do |e|

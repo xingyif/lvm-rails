@@ -5,6 +5,7 @@ RSpec.describe 'welcome/index.html.erb', type: :view do
     before do
       assign(:see_affiliates, true)
       assign(:see_coordinators, true)
+      assign(:see_matches, true)
       assign(:see_students, true)
       assign(:see_tutors, true)
       render
@@ -31,6 +32,12 @@ RSpec.describe 'welcome/index.html.erb', type: :view do
     describe 'affiliate views' do
       it 'provides a link to the index page' do
         assert_select 'a[href=?]', affiliates_path
+      end
+    end
+
+    describe 'matches views' do
+      it 'provides a link to the index page' do
+        assert_select 'a[href=?]', matches_path
       end
     end
   end
