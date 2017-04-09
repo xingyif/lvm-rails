@@ -159,5 +159,6 @@ module TutorsHelper
                   :employment,
                   :language_proficiencies,
                   :native_language,
-                  :referral
+                  :referral,
+                  :status_options
 end

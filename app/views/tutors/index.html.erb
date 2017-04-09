@@ -9,11 +9,12 @@
 <table id="tutorTable" class="display hover order-column compact" width="100%">
   <thead>
     <tr>
-      <th>First Name </th>
-      <th>Last Name </th>
-      <th>Home Phone </th>
-      <th>Cell Phone </th>
-      <th>Email Preferred</th>
+      <th> First Name </th>
+      <th> Last Name </th>
+      <th> Status </th>
+      <th> Home Phone </th>
+      <th> Cell Phone </th>
+      <th> Email Preferred</th>
       <th></th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
     <tr>
       <td><%= link_to tutor.first_name, tutor_path(tutor.id) %></td>
       <td><%= tutor.last_name %></td>
+      <td><%= tutor.status %></td>
       <td><%= tutor.home_phone%></td>
       <td><%= tutor.cell_phone%></td>
       <td><%= tutor.email_preferred%></td>

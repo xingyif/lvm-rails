@@ -24,6 +24,7 @@ require 'tutors_helper'
     t.race                    = ApplicationHelper.race.sample[0]
     t.smartt_id               = Faker::Base.numerify('####-######')
     t.state                   = ApplicationHelper.us_states.sample[0]
+    t.status                  = TutorsHelper.status_options.sample[0]
     t.zip                     = Faker::Base.numerify('#####')
   end
 end
