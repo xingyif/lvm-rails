@@ -1,51 +1,54 @@
 <div class="row">
-  <div class="col-md-7">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-xs-6">
-                <%= link_to coordinators_path do %>
-                  <span class="glyphicon glyphicon-arrow-left"></span>
-                  <span class="h4">Back</span>
-                <% end %>
+  <div class="col-md-offset-3">
+    <div class="col-md-7">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <%= link_to coordinators_path do %>
+                    <span class="glyphicon glyphicon-arrow-left"></span>
+                    <span class="h4">Back</span>
+                  <% end %>
+                </div>
+
+                <div class="col-xs-6 text-right">
+                  <%= link_to edit_coordinator_path(@coordinator) do %>
+                    <span class="h4">Edit</span>
+                    <span class="glyphicon glyphicon-edit"></span>
+                  <% end %>
+                </div>
               </div>
 
-              <div class="col-xs-6 text-right">
-                <%= link_to edit_coordinator_path(@coordinator) do %>
-                  <span class="h4">Edit</span>
-                  <span class="glyphicon glyphicon-edit"></span>
-                <% end %>
-              </div>
-            </div>
-            <h3 class="text-center">
-              <%= @coordinator.name %><br>
-              <small>
-                Affiliate:
-                <% if @coordinator.affiliate_id %>
+              <h3 class="text-center">
+                <%= @coordinator.name %><br>
+                <small>
+                  Affiliate:
+                  <% if @coordinator.affiliate_id %>
                     <label><%= Coordinator.find(@coordinator.affiliate_id).name %></label>
-                <% else %>
+                  <% else %>
                     <label>No Affiliate</label>
-                <% end %>
-              </small><br>
-            </h3>
+                  <% end %>
+                </small><br>
+              </h3>
 
-            <hr>
+              <hr>
 
-            <div class="row text-center">
-              <div class="col-md-12">
-                <div class="panel panel-default">
-                  <div class="panel-heading">General Information</div>
-                  <div class="panel-body">
-                    <div class="row text-center">
-                      <div class="col-sm-6">
-                        <b>Email Address</b>
-                        <p><%= @coordinator.email %></p>
-                      </div>
-                      <div class="col-sm-6">
-                        <b>Phone Number</b>
-                        <p><%= @coordinator.phone_number %></p>
+              <div class="row text-center">
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">General Information</div>
+                    <div class="panel-body">
+                      <div class="row text-center">
+                        <div class="col-sm-6">
+                          <b>Email Address</b>
+                          <p><%= @coordinator.email %></p>
+                        </div>
+                        <div class="col-sm-6">
+                          <b>Phone Number</b>
+                          <p><%= @coordinator.phone_number %></p>
+                        </div>
                       </div>
                     </div>
                   </div>
