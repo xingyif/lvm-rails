@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20170403194336) do
     t.datetime "updated_at",                    null: false
     t.string   "first_name",                    null: false
     t.string   "last_name",                     null: false
-    t.date     "dob"
+    t.date     "date_of_birth"
     t.string   "gender",                        null: false
     t.string   "address1"
     t.string   "city"
@@ -95,15 +95,15 @@ ActiveRecord::Schema.define(version: 20170403194336) do
     t.string   "work_phone"
     t.boolean  "work_ok"
     t.boolean  "work_lvm_ok"
-    t.string   "alternate_number"
-    t.string   "emergency_name"
-    t.string   "emergency_number"
+    t.string   "other_phone"
+    t.string   "emergency_contact_name"
+    t.string   "emergency_contact_phone"
     t.string   "referral"
-    t.string   "why_lvm"
+    t.text     "why_lvm"
     t.string   "race"
-    t.boolean  "is_hispanic"
+    t.boolean  "hispanic_or_latino"
     t.string   "native_language"
-    t.string   "origin_country"
+    t.string   "country_of_birth"
     t.integer  "availability"
     t.string   "address2"
     t.integer  "smartt_id"
@@ -112,11 +112,11 @@ ActiveRecord::Schema.define(version: 20170403194336) do
     t.string   "status_date_of_change"
     t.string   "status_changed_by"
     t.string   "last_name_id"
-    t.string   "preferred_contact"
+    t.string   "preferred_contact_method"
     t.string   "immigrant_status"
     t.string   "education"
-    t.text     "services_requested"
-    t.text     "additional_services_requested"
+    t.text     "core_service_request"
+    t.text     "additional_service_request"
     t.boolean  "criminal_conviction"
     t.boolean  "release_on_file"
     t.date     "release_sign_date"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170403194336) do
     t.string   "where_can_meet"
     t.integer  "transportation"
     t.string   "other_preferences"
+    t.string   "referral_other"
     t.index ["affiliate_id"], name: "index_students_on_affiliate_id"
   end
 

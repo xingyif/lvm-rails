@@ -20,22 +20,7 @@ class Student < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  # validates :dob, presence: true
   validates :gender, presence: true
-  # validates :smartt_id, presence: true
-  # validates :address1, presence: true
-  # validates :address2, presence: true
-  # validates :city, presence: true
-  # validates :state, presence: true
-  # validates :zip, presence: true
-  # validates :home_phone, presence: true
-  # validates :cell_phone, presence: true
-  # # validate occupation or title
-  # validates :native_language, presence: true
-  # # other language proficiency
-  # validates :race, presence: true
-  # validates :is_hispanic, presence: true
-  # validates :origin_country, presence: true
   validates :cell_phone,   format: { with: VALID_PHONE_REGEX },
                            allow_blank: true
   validates :home_phone,   format: { with: VALID_PHONE_REGEX },
@@ -44,10 +29,10 @@ class Student < ApplicationRecord
                            allow_blank: true
   validates :work_phone, format: { with: VALID_PHONE_REGEX },
                          allow_blank: true
-  validates :alternate_number,  format: { with: VALID_PHONE_REGEX },
-                                allow_blank: true
-  validates :emergency_number,  format: { with: VALID_PHONE_REGEX },
-                                allow_blank: true
+  validates :other_phone,  format: { with: VALID_PHONE_REGEX },
+                           allow_blank: true
+  validates :emergency_contact_phone,  format: { with: VALID_PHONE_REGEX },
+                                       allow_blank: true
   validates :smartt_id,    format: { with: VALID_SMARTT_REGEX },
                            allow_blank: true
   validates :zip,          format: { with: VALID_ZIP_REGEX },

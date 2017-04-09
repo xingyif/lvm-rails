@@ -1,32 +1,41 @@
-<%= form_for :student, url: students_path do |f| %>
-
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@student.errors.count, "error") %> prohibited
-        this student from being saved:
-      </h2>
-      <ul>
-        <% @student.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+<div class="row">
+  <div class="col-md-3 hidden-sm hidden-xs">
+    <div class="affix" id="form-navigation">
+      <h5>Form Navigation</h5>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#lvmInfo">LVM Information</a></li>
+        <li><a href="#contactInfo">Contact Information</a></li>
+        <li><a href="#personalInfo">Personal Information</a></li>
+        <li><a href="#preferences">Preferences</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#referral">Referral & Services</a></li>
+        <li><a href="#cdbg">CDBG Information</a></li>
       </ul>
     </div>
-  <% end %>
+  </div>
+  <div class="col-md-6">
+    <div class="pull-left">
+      <%= link_to students_path do %>
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        <span class="h4">Back</span>
+      <% end %>
+    </div>
 
-  <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </p>
+    <div class="pull-right">
+      <span class="h4">Add New Student</span>
+    </div>
+  </div>
+</div>
 
-  <p>
-    <%= link_to 'New Student Assessment', new_assessment_path %>
-  </p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <hr>
+    <%= simple_form_for :student, url: students_path do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
+  </div>
+</div>
 
-  <p>
-    <%= f.submit %>
-  </p>
-
-<% end %>
-
-<%= link_to 'Back', students_path %>
+<script>
+  $('body').scrollspy({ target: "#form-navigation" });
+</script>

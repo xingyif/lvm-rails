@@ -9,12 +9,6 @@ RSpec.describe 'students/edit.html.erb', type: :view do
       render
     end
 
-    describe 'presence of title' do
-      it 'checks for title' do
-        expect(rendered).to match(/Editing student/)
-      end
-    end
-
     describe 'presence of name label' do
       it 'checks for name label' do
         expect(rendered).to match(/First name/)

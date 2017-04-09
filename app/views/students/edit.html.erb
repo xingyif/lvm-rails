@@ -1,34 +1,42 @@
-<h1>Editing student</h1>
-
-<%= form_for :student, url: student_path(@student), method: :patch do |f| %>
-
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@student.errors.count, "error") %> prohibited
-        this student from being saved:
-      </h2>
-      <ul>
-        <% @student.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+<div class="row">
+  <div class="col-md-3 hidden-sm hidden-xs">
+    <div class="affix" id="form-navigation">
+      <h5>Form Navigation</h5>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#lvmInfo">LVM Information</a></li>
+        <li><a href="#contactInfo">Contact Information</a></li>
+        <li><a href="#personalInfo">Personal Information</a></li>
+        <li><a href="#preferences">Preferences</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#referral">Referral & Services</a></li>
+        <li><a href="#cdbg">CDBG Information</a></li>
       </ul>
     </div>
-  <% end %>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to students_path do %>
+          <span class="glyphicon glyphicon-arrow-left"></span>
+          <span class="h4">Back</span>
+        <% end %>
+      </div>
+      <div class="col-xs-6 text-right">
+        <span class="h4">Edit Student</span>
+      </div>
+    </div>
+    
+    <hr>
 
-  <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </p>
+    <%= simple_form_for :student, url: student_path(@student), method: :patch do |f| %>
 
-  <p>
-    <%= link_to 'Edit Student Assessments', assessments_path %>
-  </p>
+      <%= render partial: 'form', locals: {f: f} %>
 
-  <p>
-    <%= f.submit %>
-  </p>
+    <% end %>
 
-<% end %>
+  </div>
+</div>
 
-<%= link_to 'Back', students_path %>
+<script>
+  $('body').scrollspy({ target: "#form-navigation" });
+</script>

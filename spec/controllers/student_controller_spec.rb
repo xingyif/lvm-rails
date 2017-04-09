@@ -164,6 +164,26 @@ RSpec.describe StudentsController, type: :controller do
       end
     end
 
+    describe 'PATCH #update_tags' do
+      before do
+        @student = create(:student)
+        @params = { id: @student.id, student: { 'all_tags' => ['', 'test'] } }
+      end
+
+      context 'with valid attributes' do
+        it 'updates the tags for a student' do
+          patch :update_tags, params: @params
+          expect(Student.last.tags).to eq([Tag.last])
+          expect(Tag.last.name).to eq 'test'
+        end
+
+        it 'redirects to the student view' do
+          post :update, params: @params
+          expect(response).to redirect_to(@student)
+        end
+      end
+    end
+
     describe 'DELETE #destroy' do
       it 'destroys the student' do
         student = create(:student)

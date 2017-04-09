@@ -534,7 +534,7 @@
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
          <h3>Update Tags</h3>
        </div>
-       <%= simple_form_for @tutor, url: update_tags_path(@tutor), method: :patch do |f| %>
+       <%= simple_form_for @tutor, url: update_tutor_tags_path(@tutor), method: :patch do |f| %>
         <div class="modal-body">
           <div class="row">
            <div class="col-md-12">
@@ -555,5 +555,5 @@
      <% end %>
     </div>
   </div>
-  <script>initChosenTagSelect();</script>
+  <script>initChosenTagSelect("tutor");</script>
 </div>

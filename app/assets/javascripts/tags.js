@@ -1,7 +1,9 @@
-var tagSelect = "#tutor_all_tags";
-var chosenSelect = "#tutor_all_tags_chosen";
+var tagSelect;
+var chosenSelect;
 
-function initChosenTagSelect() {
+function initChosenTagSelect(element) {
+  tagSelect = "#" + element + "_all_tags";
+  chosenSelect = "#" + element + "_all_tags_chosen";
   $(tagSelect).chosen({
     allow_single_deselect: true,
     width: '100%',

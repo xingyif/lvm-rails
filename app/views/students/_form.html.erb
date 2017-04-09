@@ -1,12 +1,12 @@
 
-<% if @tutor.errors.any? %>
+<% if @student.errors.any? %>
   <div id="error_explanation">
     <h2>
-      <%= pluralize(@tutor.errors.count, "error") %> prohibited
-      this tutor from being saved:
+      <%= pluralize(@student.errors.count, "error") %> prohibited
+      this student from being saved:
     </h2>
     <ul>
-    <% @tutor.errors.full_messages.each do |msg| %>
+    <% @student.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>
@@ -37,7 +37,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <label class="control-label select optional" for="tutor_all_tags">Tags</label>
+        <label class="control-label select optional" for="student_all_tags">Tags</label>
         <p class="help-block">Select tags from the list or create a new tag by typing in a word or phrase and then hitting the comma key.</p>
         <%= f.input :all_tags,
                     label: false,
@@ -48,7 +48,7 @@
       </div>
     </div>
   </section>
-
+  
   <section id="contactInfo">
     <h4>Contact Information</h4>
     <hr>
@@ -106,11 +106,7 @@
 
     <div class="row">
       <div class="col-md-6">
-        <%= f.input :email_preferred, as: :string, label: "Preferred email", maxlength: 255, required: false, input_html: { class: "mask_email" } %>
-      </div>
-
-      <div class="col-md-6">
-        <%= f.input :email_other, as: :string, label: "Other email", maxlength: 255, required: false, input_html: { class: "mask_email" } %>
+        <%= f.input :email, as: :string, label: "Email", maxlength: 255, required: false, input_html: { class: "mask_email" } %>
       </div>
     </div>
 
@@ -122,37 +118,8 @@
       <div class="col-md-4">
         <%= f.input :emergency_contact_phone, maxlength: 14, placeholder: "(###) ###-####", required: false, input_html: { class: "mask_phone" } %>
       </div>
-
-      <div class="col-md-4">
-        <%= f.input :emergency_contact_email, as: :string, maxlength: 255, required: false, input_html: { class: "mask_email" } %>
-      </div>
     </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label class="control-label"> Contact Method Preferences </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <%= f.input :preferred_contact_method, collection: general_contact_preferences, label: "General Contact", required: false %>
-      </div>
-
-      <div class="col-md-4">
-        <%= f.input :preferred_contact_class_listing, collection: roster_contact_preferences, label: "Class Roster", required: false %>
-      </div>
-
-      <div class="col-md-4">
-        <%= f.input :preferred_contact_data_collection, collection: general_contact_preferences, label: "Data Collection", required: false %>
-      </div>
-    </div>
-  </section>
-
+    
   <section id="personalInfo">
     <h4>Personal Information</h4>
     <hr>
@@ -194,10 +161,67 @@
       <div class="col-md-4">
         <%= f.input :country_of_birth, as: :string, maxlength: 255, required: false %>
       </div>
-
     </div>
   </section>
 
+    <hr>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="control-label"> Contact Method Preferences </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :preferred_contact_method, collection: general_contact_preferences, label: "General Contact", required: false %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label"> Mail </label>
+          <%= f.input :mail_ok, as: :boolean, input_html: {checked: false}, label: "mail ok?", required: false %>
+       </div>
+      </div>
+      
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label"> Email </label>
+          <%= f.input :email_ok, as: :boolean, input_html: {checked: false}, label: "email ok?", required: false %>
+       </div>
+      </div>
+      
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label"> Cell Phone </label>
+          <%= f.input :cell_ok, as: :boolean, input_html: {checked: false}, label: "cell ok?", required: false %>
+          <%= f.input :cell_lvm_ok, as: :boolean, input_html: {checked: false}, label: "lvm ok?", required: false %>
+       </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label"> Home Phone </label>
+          <%= f.input :home_ok, as: :boolean, input_html: {checked: false}, label: "home ok?", required: false %>
+          <%= f.input :home_lvm_ok, as: :boolean, input_html: {checked: false}, label: "lvm ok?", required: false %>
+       </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label class="control-label"> Work Phone </label>
+          <%= f.input :work_ok, as: :boolean, input_html: {checked: false}, label: "work ok?", required: false %>
+          <%= f.input :work_lvm_ok, as: :boolean, input_html: {checked: false}, label: "lvm ok?", required: false %>
+       </div>
+      </div>
+      
+    </div>
+  </section>
 
   <section id="preferences">
     <h4>Tutoring Preferences</h4>
@@ -207,32 +231,22 @@
         <%= f.input :availability,
                     as: :check_boxes,
                     collection: availability_times,
-                    checked: @tutor.current_availability_array,
+                    checked: @student.current_availability_array,
                     required: false %>
       </div>
       <div class="col-md-3">
         <%= f.input :age_preference,
                     as: :check_boxes,
                     collection: age_preference,
-                    checked: @tutor.age_preference_array,
+                    checked: @student.age_preference_array,
                     label: "Student Preference",
                     required: false %>
       </div>
       <div class="col-md-6">
-        <%= f.input :category_preference,
-                    as: :check_boxes,
-                    collection: category_preference,
-                    checked: @tutor.category_preference_array,
-                    label: "I feel comfortable working with the following student categories:",
-                    required: false %>
-        <%= f.input :preferred_student_level,
-                    collection: preferred_student_level,
-                    label: "Preferred Student Level",
-                    required: false %>
-        <%= f.input :transporation,
+        <%= f.input :transportation,
                     as: :check_boxes,
                     collection: transportation_preference,
-                    checked: @tutor.transportation_preference_array,
+                    checked: @student.transportation_preference_array,
                     label: "What kind of transportation will you be using to get to tutoring sessions?",
                     required: false %>
         <%= f.input :meet_at_local_library, as: :radio_buttons, label: 'Can you meet at the local library?', required: false %>
@@ -244,9 +258,9 @@
       </div>
     </div>
   </section>
-
-  <section id="experience">
-    <h4>Education and Experience</h4>
+  
+  <section id="background">
+    <h4>Background</h4>
     <hr>
     <div class="row">
       <div class="col-md-4">
@@ -267,26 +281,20 @@
         <%= f.input :release_sign_date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", required: false %>
       </div>
     </div>
-
+    
     <div class="row">
       <div class="col-md-4">
-        <%= f.input :orientation_date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", required: false %>
-      </div>
-
-      <div class="col-md-4">
-        <%= f.input :training_date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", required: false %>
-      </div>
-
-      <div class="col-md-4">
         <div class="form-group">
-          <label class="control-label radio-label"> Training Type </label>
-          <%= f.collection_radio_buttons :training_type, [[:abe, 'ABE'] ,[:esol, 'ESOL']], :first, :last %>
+          <label class="control-label radio-label"> Immigrant or US Native </label>
+          <%= f.collection_radio_buttons :immigrant_status, [[:true, 'immigrant'] ,[:false, 'US native']], :first, :last %>
         </div>
       </div>
     </div>
-
+  </section>
+  
+  <section id="referral">
+    <h4>Referral & Services</h4>
     <hr>
-
     <div class="row">
       <div class="col-md-4">
         <%= f.input :referral, collection: referral, required: false %>
@@ -300,88 +308,72 @@
         <%= f.input :education, collection: education, required: false %>
       </div>
     </div>
-
+    
     <div class="row">
-      <div class="col-md-6">
-        <%= f.input :colleges_attended, as: :text, required: false %>
-      </div>
-
-      <div class="col-md-6">
-        <%= f.input :educational_accomplishments, as: :text, required: false %>
+      <div class="col-md-12">
+          <%= f.input :why_lvm, as: :text, label: 'Why LVM?', required: false %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :previous_teaching_experience, as: :text, required: false %>
-      </div>
-
-      <div class="col-md-6">
-        <%= f.input :previous_volunteer_experience, as: :text, required: false %>
-      </div>
-    </div>
-
+    
     <hr>
-
+    
     <div class="row">
       <div class="col-md-6">
-        <%= f.input :teachable_subjects, as: :text, required: false %>
+        <%= f.input :core_service_request, collection: services, required: false %>
       </div>
-
+      
       <div class="col-md-6">
-        <%= f.input :hobbies, as: :text, required: false %>
+        <%= f.input :additional_service_request, as: :string, required: false %>
       </div>
     </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :employment_status, collection: employment, required: false %>
-      </div>
-
-      <div class="col-md-6">
-        <%= f.input :occupation, label: "Specific Occupation", maxlength: 255, required: false %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :employer_name, maxlength: 255, required: false %>
-      </div>
-
-      <div class="col-md-6">
-        <%= f.input :past_occupation, maxlength: 255, required: false %>
-      </div>
-    </div>
+    
   </section>
-
-  <section id="languageProficiencies">
-    <h4>Language Proficiencies</h4>
+  
+  <section id="cdbg">
+    <h4>CDBG Information</h4>
     <hr>
-    <%= simple_fields_for :language_proficiencies do |o| %>
-      <% native_language.each_with_index do |l, idx| %>
-        <% lang = l[0] %>
-        <% if idx % 4 == 0 %>
-          <div class="row">
-        <% end %>
-        <div class="col-md-3">
-          <div class="form-group">
-            <div> <%= lang %> </div>
-            <div class="input-group">
-              <div class="collection_radio_buttons">
-                <%= o.select lang, language_proficiency %>
-              </div>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label radio-label"> CBDG required </label>
+          <%= f.collection_radio_buttons :cdbg_required, [[:true, 'Yes'] ,[:false, 'No']], :first, :last %>
         </div>
-        <% if idx % 4 == 3 %>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
-  </section>
+      </div>
 
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label radio-label"> US citizen </label>
+          <%= f.collection_radio_buttons :cdbg_us_citizen, [[:true, 'Yes'] ,[:false, 'No']], :first, :last %>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label radio-label"> Legal resident (green card or other)</label>
+          <%= f.collection_radio_buttons :cdbg_legal_resident, [[:true, 'Yes'] ,[:false, 'No']], :first, :last %>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="control-label radio-label"> Female head of household </label>
+          <%= f.collection_radio_buttons :cdbg_female_head_of_household, [[:true, 'Yes'] ,[:false, 'No']], :first, :last %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :cdbg_household_size, label: " Houshold size ", placeholder: '0', as: :integer, maxlength: 2, required: false %>
+      </div>
+      
+      <div class="col-md-6">
+        <%= f.input :cdbg_household_income, label: " Household income ", collection: income_ranges, required: false %>
+      </div>
+    </div>
+    
+  </section>
+  
   <section>
     <%= f.button :submit %>
   </section>
@@ -396,12 +388,4 @@
   $('.mask_email').inputmask({ alias: "email" });
 </script>
 
-<%= javascript_tag do %>
-  var lp = JSON.parse('<%= @tutor.language_proficiencies? ? @tutor.language_proficiencies.html_safe : {} %>');
-  for (var language in lp) {
-    var proficiency = lp[language];
-    $("#language_proficiencies_" + language).val(proficiency);
-  }
-<% end %>
-
-<script>initChosenTagSelect("tutor");</script>
+<script>initChosenTagSelect("student");</script>

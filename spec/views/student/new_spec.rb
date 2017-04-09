@@ -35,8 +35,8 @@ RSpec.describe 'students/new.html.erb', type: :view do
 
     xdescribe 'name text entry field filled' do
       it 'checks for presence of filled in text field' do
-        fill_in 'student_name', with: 'JoeJoe'
-        expect(rendered).to have_field('student_name', text: 'JoeJoe')
+        fill_in 'student_first_name', with: 'JoeJoe'
+        expect(rendered).to have_field('student_first_name', text: 'JoeJoe')
       end
     end
   end

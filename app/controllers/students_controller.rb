@@ -21,8 +21,8 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.new(student_params)
     calculate_preferences(params)
+    @student = Student.new(student_params)
 
     if @student.save
       redirect_to @student
@@ -32,14 +32,21 @@ class StudentsController < ApplicationController
   end
 
   def update
-    @student = Student.find(params[:id])
     calculate_preferences(params)
+    @student = Student.find(params[:id])
 
     if @student.update(student_params)
       redirect_to @student
     else
       render 'edit'
     end
+  end
+
+  def update_tags
+    @student = Student.find(params[:id])
+    @student.all_tags = params[:student][:all_tags]
+
+    redirect_to tutor_path(@student)
   end
 
   def destroy
@@ -75,7 +82,7 @@ class StudentsController < ApplicationController
     params.require(:student).permit(
       :first_name,
       :last_name,
-      :dob,
+      :date_of_birth,
       :gender,
       :address1,
       :address2,
@@ -92,17 +99,18 @@ class StudentsController < ApplicationController
       :home_ok,
       :home_lvm_ok,
       :work_phone,
+      :work_ok,
       :work_lvm_ok,
-      :work_lvm_ok,
-      :alternate_number,
-      :emergency_name,
-      :emergency_number,
+      :other_phone,
+      :emergency_contact_name,
+      :emergency_contact_phone,
       :referral,
+      :referral_other,
       :why_lvm,
       :race,
-      :is_hispanic,
+      :hispanic_or_latino,
       :native_language,
-      :origin_country,
+      :country_of_birth,
       :availability,
       :smartt_id,
       :affiliate,
@@ -110,11 +118,11 @@ class StudentsController < ApplicationController
       :status_date_of_change,
       :status_changed_by,
       :last_name_id,
-      :preferred_contact,
+      :preferred_contact_method,
       :immigrant_status,
       :education,
-      :services_requested,
-      :additional_services_requested,
+      :core_service_request,
+      :additional_service_request,
       :criminal_conviction,
       :release_on_file,
       :release_sign_date,
@@ -123,7 +131,15 @@ class StudentsController < ApplicationController
       :cdbg_legal_resident,
       :cdbg_female_head_of_household,
       :cdbg_household_size,
-      :cdbg_household_income
+      :cdbg_household_income,
+      :intake_date,
+      :age_preference,
+      :meet_at_local_library,
+      :where_can_meet,
+      :transportation,
+      :other_preferences,
+      :referral_other,
+      all_tags: []
     )
   end
 
