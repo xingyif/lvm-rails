@@ -1,27 +1,81 @@
-<p>
-  <strong>Location:</strong>
-  <%= @tutoring_session.location %>
-</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-10">
+                <%= link_to tutoring_sessions_path(tutor_id: @tutor.id) do %>
+                  <span class="glyphicon glyphicon-arrow-left"></span>
+                  <% if current_user.tutor? %>
+                    <span class="h4">My Tutoring Sessions</span>
+                  <% else %>
+                    <span class="h4"><%= @tutor.name %>'s Tutoring Sessions</span>
+                  <% end %>
+                <% end %>
+              </div>
 
-<p>
-  <strong>Hours:</strong>
-  <%= @tutoring_session.hours %>
-</p>
+              <div class="col-md-2 text-right">
+                <%= link_to edit_tutoring_session_path(@tutoring_session) do %>
+                  <span class="h4">Edit</span>
+                  <span class="glyphicon glyphicon-edit"></span>
+                <% end %>
+              </div>
 
-<p>
-  <strong>From Date:</strong>
-  <%= @tutoring_session.start_date %>
-</p>
+            </div>
 
-<p>
-  <strong>To Date:</strong>
-  <%= @tutoring_session.end_date %>
-</p>
+            <hr>
 
-<p>
-  <strong>Session Comments:</strong>
-  <%= @tutoring_session.session_comment %>
-</p>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h2> Tutoring Session </h2>
+              </div>
+            </div>
 
-<%= link_to 'Edit', edit_tutoring_session_path(@tutoring_session) %> |
-<%= link_to 'Back to All Tutoring Sessions', tutoring_sessions_path %>
+            <hr>
+
+              <div class="row">
+                <% if current_user.tutor? %>
+                  <div class="col-md-12 text-center">
+                    <h4> Student: <%= @student.name %> </h4>
+                  </div>
+                <% else %>
+                  <div class="col-md-5 col-md-offset-1">
+                    <h4> Tutor: <%= link_to @tutor.name, tutor_path(@tutor.id) %> </h4>
+                  </div>
+                  <div class="col-md-5 text-right">
+                    <h4> Student: <%= link_to @student.name, student_path(@student.id) %> </h4>
+                  </div>
+                <% end %>
+              </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-5 col-md-offset-1">
+                <h4> Location </h4>
+                <p> <%= @tutoring_session.location %> </p>
+              </div>
+              <div class="col-md-5 text-right">
+                <h4> Hours </h4>
+                <p> <%= @tutoring_session.hours %> </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 col-md-offset-1">
+                <h4> Start Date </h4>
+                <p> <%= @tutoring_session.start_date.strftime('%a, %B %d %Y') %> </p>
+              </div>
+              <div class="col-md-5 text-right">
+                <h4> End Date </h4>
+                <p> <%= @tutoring_session.end_date.strftime('%a, %B %d %Y') %> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

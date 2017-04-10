@@ -1,6 +1,37 @@
-<h1>Editing Tutoring Session</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <%= link_to tutoring_session_path(@tutoring_session) do %>
+                  <span class="glyphicon glyphicon-arrow-left"></span>
+                  <span class="h4"> Back To Tutoring Session </span>
+                <% end %>
+              </div>
+            </div>
+            <hr>
 
-<%= render 'form', tutoring_session: @tutoring_session %>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h2> Editing Tutoring Session <br>
+                  <% if !current_user.tutor? %>
+                    <small> For <%= link_to @tutor.name, tutor_path(@tutor.id) %> </small>
+                  <% end %>
+                  <h2>
+              </div>
+            </div>
 
-<%= link_to 'Show', @tutoring_session %> |
-<%= link_to 'Edit', tutoring_sessions_path %>
+            <hr>
+
+            <%= simple_form_for :tutoring_session, url: tutoring_session_path(@tutoring_session), method: :patch do |f| %>
+              <%= render partial: 'form', locals: {f: f} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

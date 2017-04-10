@@ -173,15 +173,12 @@ ActiveRecord::Schema.define(version: 20170413221343) do
   create_table "tutoring_sessions", force: :cascade do |t|
     t.string   "location"
     t.text     "session_comment"
-    t.integer  "student_id"
-    t.integer  "tutor_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "hours"
     t.date     "start_date"
     t.date     "end_date"
-    t.index ["student_id"], name: "index_tutoring_sessions_on_student_id"
-    t.index ["tutor_id"], name: "index_tutoring_sessions_on_tutor_id"
+    t.integer  "match_id"
   end
 
   create_table "tutors", force: :cascade do |t|

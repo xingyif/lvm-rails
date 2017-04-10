@@ -111,8 +111,11 @@ class Tutor < ApplicationRecord
     klass
   end
 
+  # rubocop:disable MethodLength
   def self.of(user)
-    if user.coordinator?
+    if user.tutor?
+      where(id: user.tutor_id) # Needs to be a relation, not a single record
+    elsif user.coordinator?
       joins(:volunteer_jobs).where(
         volunteer_jobs: {
           affiliate_id: Coordinator.find(user.coordinator_id).affiliate_id

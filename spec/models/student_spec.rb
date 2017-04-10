@@ -250,23 +250,28 @@ RSpec.describe Student, type: :model do
 
       @student1 = create(:student)
       @student2 = create(:student)
+      @tutor = create(:tutor)
+
+      create(:volunteer_job, tutor: @tutor, affiliate: affiliate)
+      create(:enrollment, student: @student1, affiliate: affiliate)
+
+      create(:match, student: @student1, tutor: @tutor)
 
       create(:coordinator, affiliate: affiliate)
-      create(:enrollment, student: @student1, affiliate: affiliate)
     end
 
     describe 'when current user is tutor' do
       before do
-        @user = User.new(tutor_id: 1,
+        @user = User.new(tutor_id: @tutor,
                          role: 0,
                          email: 't@b.co',
                          password: 'abcdef',
                          password_confirmation: 'abcdef')
       end
 
-      it 'returns no students' do
+      it 'returns matched students' do
         students = Student.of(@user)
-        expect(students).to be(nil)
+        expect(students.count).to be(1)
       end
     end
 

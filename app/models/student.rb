@@ -23,22 +23,22 @@ class Student < ApplicationRecord
   validates :gender, presence: true
   validates :last_name, presence: true
 
-  validates :cell_phone,   format: { with: VALID_PHONE_REGEX },
-                           allow_blank: true
-  validates :home_phone,   format: { with: VALID_PHONE_REGEX },
-                           allow_blank: true
+  validates :cell_phone, format: { with: VALID_PHONE_REGEX },
+                         allow_blank: true
+  validates :home_phone, format: { with: VALID_PHONE_REGEX },
+                         allow_blank: true
   validates :last_name_id, format: { with: LAST_NAME_ID_REGEX },
                            allow_blank: true
   validates :work_phone, format: { with: VALID_PHONE_REGEX },
                          allow_blank: true
-  validates :other_phone,  format: { with: VALID_PHONE_REGEX },
-                           allow_blank: true
+  validates :other_phone, format: { with: VALID_PHONE_REGEX },
+                          allow_blank: true
   validates :emergency_contact_phone,  format: { with: VALID_PHONE_REGEX },
                                        allow_blank: true
-  validates :smartt_id,    format: { with: VALID_SMARTT_REGEX },
-                           allow_blank: true
-  validates :zip,          format: { with: VALID_ZIP_REGEX },
-                           allow_blank: true
+  validates :smartt_id, format: { with: VALID_SMARTT_REGEX },
+                        allow_blank: true
+  validates :zip, format: { with: VALID_ZIP_REGEX },
+                  allow_blank: true
   validates :email, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false },
@@ -88,8 +88,11 @@ class Student < ApplicationRecord
     klass
   end
 
+  # rubocop:disable MethodLength
   def self.of(user)
-    if user.coordinator?
+    if user.tutor?
+      joins(:matches).where(matches: { tutor_id: 1 })
+    elsif user.coordinator?
       joins(:enrollments).where(
         enrollments: {
           affiliate_id: Coordinator.find(user.coordinator_id).affiliate_id

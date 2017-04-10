@@ -1,15 +1,64 @@
-<%= simple_form_for(@tutoring_session) do |f| %>
-    <%= f.error_notification %>
+<% if @tutoring_session.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@tutoring_session.errors.count, "error") %> prohibited
+      this tutor from being saved:
+    </h2>
+    <ul>
+      <% @tutoring_session.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
-    <div class="form-inputs">
-      <%= f.input :location %>
-      <%= f.input :hours %>
-      <%= f.input :start_date %>
-      <%= f.input :end_date %>
-      <%= f.input :session_comment %>
+<form role="form">
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-12">
+        <% if @current_match %>
+          <%= f.input :match_id, disabled: true, collection: @students, selected: @current_match.id %>
+        <% else %>
+          <%= f.input :match_id, collection: @students %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :location %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :hours, as: :integer %>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :start_date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", required: false %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :end_date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", required: false %>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :session_comment %>
+      </div>
     </div>
 
     <div class="form-actions">
       <%= f.button :submit %>
     </div>
-<% end %>
+  </div>
+
+  <%= f.hidden_field :tutor_id, value: @tutor.id %>
+</form>
+
+<script> $('.datepicker').datepicker({ 'dateFormat': 'yy-mm-dd' }); </script>

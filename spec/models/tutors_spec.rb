@@ -389,16 +389,17 @@ RSpec.describe Tutor, type: :model do
 
     describe 'when current user is tutor' do
       before do
-        @user = User.new(tutor_id: 1,
+        @user = User.new(tutor_id: @tutor1.id,
                          role: 0,
                          email: 't@b.co',
                          password: 'abcdef',
                          password_confirmation: 'abcdef')
       end
 
-      it 'returns no tutors' do
-        tutors = Student.of(@user)
-        expect(tutors).to be(nil)
+      it 'returns only the self' do
+        tutors = Tutor.of(@user)
+        expect(tutors.first).to eq(@tutor1)
+        expect(tutors.length).to eq(1)
       end
     end
 

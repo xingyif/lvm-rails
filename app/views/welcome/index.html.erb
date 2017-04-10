@@ -4,6 +4,12 @@
   </div>
 
   <div class='row centered'>
+    <% if @see_tutoring_sessions %>
+      <div class='col-md-2 text-center'>
+        <%= link_to 'My Sessions', { controller: 'tutoring_sessions', tutor_id: @tutor_id }, class: 'button' %>
+      </div>
+    <% end %>
+
     <% if @see_students %>
       <div class='col-md-2 text-center'>
         <%= link_to 'Students', { controller: 'students' }, class: 'button' %>
