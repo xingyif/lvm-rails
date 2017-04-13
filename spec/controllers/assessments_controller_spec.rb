@@ -5,8 +5,10 @@ RSpec.describe AssessmentsController, type: :controller do
   describe 'endpoints' do
     before do
       sign_in_auth
-      @assessment = create(:assessment)
+      @student = create(:student)
+      @assessment = create(:assessment, student: @student)
       @assessment_attrs = attributes_for(:assessment)
+      @assessment_attrs[:student_id] = @student.id
     end
 
     describe 'GET #index' do

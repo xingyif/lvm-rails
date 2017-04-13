@@ -1,4 +1,29 @@
 <p>
+  <strong>Student Name:</strong>
+  <%= Assessment.find(@assessment.student_id).name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @assessment.category %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @assessment.name %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @assessment.level %>
+</p>
+
+<p>
+  <strong>Assessment Type:</strong>
+  <%= @assessment.assessment_type %>
+</p>
+
+<p>
   <strong>Score:</strong>
   <%= @assessment.score %>
 </p>
@@ -8,10 +33,6 @@
   <%= @assessment.date %>
 </p>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @assessment.subject %>
-</p>
 
 <%= link_to 'Edit', edit_assessment_path(@assessment) %> |
 <%= link_to 'Back to Assessments', assessments_path %>

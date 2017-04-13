@@ -2,18 +2,19 @@ require 'rails_helper'
 
 RSpec.describe 'assessments/edit', type: :view do
   before(:each) do
-    @assessment = assign(:assessment, Assessment.create!(
-                                        score: '97',
-                                        date: '2017-03-02',
-                                        subject: 'English'
-    ))
+    @assessment = create(:assessment, name: 'TABE 10',
+                                      assessment_type: 'Does not apply',
+                                      student: create(:student))
   end
 
   it 'renders the edit assessment form' do
     render
 
-    expect(rendered).to match(/score/)
-    expect(rendered).to match(/date/)
-    expect(rendered).to match(/subject/)
+    expect(rendered).to match(@assessment.score)
+    expect(rendered).to match(@assessment.date.strftime('%Y-%m-%d'))
+    expect(rendered).to match(@assessment.category)
+    expect(rendered).to match(@assessment.level)
+    expect(rendered).to match(@assessment.name)
+    expect(rendered).to match(@assessment.assessment_type)
   end
 end

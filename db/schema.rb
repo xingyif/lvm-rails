@@ -29,10 +29,13 @@ ActiveRecord::Schema.define(version: 20170409151938) do
   create_table "assessments", force: :cascade do |t|
     t.string   "score"
     t.date     "date"
-    t.string   "subject"
+    t.string   "category"
     t.integer  "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.string   "level"
+    t.string   "assessment_type"
     t.index ["student_id"], name: "index_assessments_on_student_id"
   end
 

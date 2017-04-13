@@ -3,9 +3,12 @@
 <table>
   <thead>
     <tr>
+      <th>Category</th>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Assessment Type</th>
       <th>Score</th>
-      <th>Assessment date</th>
-      <th>Subject</th>
+      <th>Assessment Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,9 +16,12 @@
   <tbody>
     <% @assessments.each do |assessment| %>
       <tr>
+        <td><%= assessment.category %></td>
+        <td><%= assessment.name %></td>
+        <td><%= assessment.level %></td>
+        <td><%= assessment.assessment_type %></td>
         <td><%= assessment.score %></td>
         <td><%= assessment.date %></td>
-        <td><%= assessment.subject %></td>
         <td><%= link_to 'Show', assessment %></td>
         <td><%= link_to 'Edit', edit_assessment_path(assessment) %></td>
         <td><%= link_to 'Delete', assessment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

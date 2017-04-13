@@ -4,6 +4,6 @@ FactoryGirl.define do
     hours { Faker::Number.between(1, 10) }
     start_date { Faker::Date.between(5.years.ago, 1.day.ago) }
     end_date { Faker::Date.between(5.years.ago, 1.day.ago) }
-    session_comment { Faker::Friends.quote }
+    session_comment { 'Good Session' }
   end
 end
