@@ -68,7 +68,12 @@ class TutorsController < ApplicationController
 
   def student_options
     matched_student_ids = Match.where(end: nil).to_a.map(&:student_id)
-    all_students_arr = Student.of(current_user).to_a
+    all_students_arr =
+      Student.of(current_user).joins(:enrollments).where(
+        enrollments: {
+          affiliate_id: @tutor.active_affiliate.id
+        }
+      ).to_a
     untutored_students = all_students_arr
                          .reject { |s| matched_student_ids.include? s.id }
     untutored_students.map { |t| [t.name, t.id] }

@@ -1,20 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe StudentsController, type: :controller do
-  describe 'helpers' do
-    before do
-      user = User.new(role: 2)
-      sign_in_auth(user)
-    end
-
-    describe '#tutor_options' do
-      it 'populates a list of available tutors' do
-        @t = create(:tutor)
-        expect(controller.send(:tutor_options)[1]).to eq [@t.name, @t.id]
-      end
-    end
-  end
-
   describe 'endpoints' do
     describe 'GET #index' do
       before do
@@ -82,12 +68,26 @@ RSpec.describe StudentsController, type: :controller do
       before do
         user = User.new(role: 2)
         sign_in_auth(user)
-        @student = create(:matched_student)
+        affiliate = create(:affiliate)
+        @student = create(:student)
+        @tutor = create(:tutor)
+        create(:tutor)
+
+        create(:volunteer_job, tutor: @tutor, affiliate: affiliate)
+        create(:enrollment, student: @student, affiliate: affiliate)
       end
 
       it 'populates the specified student' do
         get :show, params: { id: @student }
         expect(assigns(:student)).to eq(@student)
+      end
+
+      it 'populates tutor options' do
+        get :show, params: { id: @student }
+
+        expect(assigns(:tutor_options)).to eq(
+          [['No Tutor', 0], [@tutor.name, @tutor.id]]
+        )
       end
 
       it 'popultes a match' do

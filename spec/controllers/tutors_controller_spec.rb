@@ -1,21 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe TutorsController, type: :controller do
-  describe 'helpers' do
-    before do
-      user = User.new(role: 2)
-      sign_in_auth(user)
-    end
-
-    describe '#student_options' do
-      it 'populates a list of unmatched students' do
-        @s = create(:student)
-        @matched = create(:matched_student)
-        expect(controller.send(:student_options)).to eq [[@s.name, @s.id]]
-      end
-    end
-  end
-
   describe 'endpoints' do
     describe 'GET #index' do
       before do
@@ -84,9 +69,22 @@ RSpec.describe TutorsController, type: :controller do
 
     describe 'GET #show' do
       before do
-        @tutor = create(:employed_tutor)
         user = User.new(role: 2)
         sign_in_auth(user)
+
+        affiliate = create(:affiliate)
+        @student = create(:student)
+        @tutor = create(:tutor)
+
+        create(:student) # not the same affiliate
+        s2 = create(:student) # already being tutored
+        t2 = create(:tutor) # to tutor s2
+
+        create(:volunteer_job, tutor: @tutor, affiliate: affiliate)
+        create(:volunteer_job, tutor: t2, affiliate: affiliate)
+        create(:enrollment, student: @student, affiliate: affiliate)
+        create(:enrollment, student: s2, affiliate: affiliate)
+        create(:match, student: s2, tutor: t2)
       end
 
       it 'populates the specified tutor' do
@@ -100,6 +98,14 @@ RSpec.describe TutorsController, type: :controller do
 
         get :show, params: { id: @tutor }
         expect(assigns(:students)).to eq(students)
+      end
+
+      it 'populates possible further student matches' do
+        get :show, params: { id: @tutor }
+
+        expect(assigns(:student_options)).to eq(
+          [[@student.name, @student.id]]
+        )
       end
 
       it 'renders the :show view' do

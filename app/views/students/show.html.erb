@@ -5,14 +5,14 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-6">
+              <div class="col-xs-9">
                 <%= link_to students_path do %>
                   <span class="glyphicon glyphicon-arrow-left"></span>
                   <span class="h4">Back To Students</span>
                 <% end %>
               </div>
 
-              <div class="col-xs-6 text-right">
+              <div class="col-xs-3 text-right">
                 <%= link_to edit_student_path(@student) do %>
                   <span class="h4">Edit</span>
                   <span class="glyphicon glyphicon-edit"></span>
@@ -65,22 +65,22 @@
                 <% if !@student.home_phone.blank? %>
                   <p>Home: <%= @student.home_phone %>
                   <br><span class="glyphicon glyphicon-bell"></span>
-                  <%= @student.home_ok ? 
+                  <%= @student.home_ok ?
                      (@student.home_lvm_ok ? 'LVM' : 'Non-LMV') + ' Contact Ok':
                      'Contact NOT Ok' %></p>
                 <% end %>
                 <% if !@student.cell_phone.blank? %>
                   <p>Cell: <%= @student.cell_phone %>
                   <br><span class="glyphicon glyphicon-bell"></span>
-                  <%= @student.cell_ok ? 
+                  <%= @student.cell_ok ?
                      (@student.cell_lvm_ok ? 'LVM' : 'Non-LMV') + ' Contact Ok':
                      'Contact NOT Ok' %></p>
                 <% end %>
                 <% if !@student.other_phone.blank? %>
                   <p>Other: <%= @student.other_phone %>
                   <br><span class="glyphicon glyphicon-bell"></span>
-                  <%= @student.work_ok ? 
-                     (@student.work_lvm_ok ? 'LVM' : 'Non-LMV') + ' Contact Ok': 
+                  <%= @student.work_ok ?
+                     (@student.work_lvm_ok ? 'LVM' : 'Non-LMV') + ' Contact Ok':
                      'Contact NOT Ok' %></p>
                 <% end %>
               </div>
@@ -120,7 +120,13 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-6">
-                <h4>Tutor</h4>
+                <h4>Tutor:
+                  <% if !@match.nil? %>
+                    <%= link_to Tutor.find(@match.tutor_id).name, tutor_path(@match.tutor_id)%>
+                  <% else %>
+                    No Tutor
+                  <% end %>
+                </h4>
               </div>
               <div class="col-sm-6 text-right">
                 <% if !@tutor_options.nil? %>
@@ -134,16 +140,6 @@
                   No unmatched tutors
                 <% end %>
               </div>
-            </div>
-            <hr>
-            <div>
-              <% if !@match.nil? %>
-                <strong>Tutor: </strong>
-                <%= @match.tutor_id %>
-                
-              <% else %>
-                No Tutor
-              <% end %>
             </div>
           </div>
         </div>
@@ -344,7 +340,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-xs-12">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -365,7 +361,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-xs-12">
         <div class="panel panel-default">
           <div class="panel-body">
