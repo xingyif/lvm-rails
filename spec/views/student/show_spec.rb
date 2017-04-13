@@ -51,4 +51,32 @@ RSpec.describe 'students/show.html.erb', type: :view do
       end
     end
   end
+
+  describe 'tags' do
+    before do
+      @student = create(:matched_student)
+    end
+
+    context 'with no tags' do
+      it 'renders the correct string' do
+        render
+        expect(rendered).to match(/No tags added./)
+      end
+    end
+
+    context 'with some tags' do
+      before do
+        @tag1 = Tag.create(name: 'testing tags')
+        @tag2 = Tag.create(name: 'one two three')
+        Tagging.create(tag_id: @tag1.id, student_id: @student.id)
+        Tagging.create(tag_id: @tag2.id, student_id: @student.id)
+      end
+
+      it 'renders the tags correctly' do
+        render
+        expect(rendered).to match(/testing tags/)
+        expect(rendered).to match(/one two three/)
+      end
+    end
+  end
 end

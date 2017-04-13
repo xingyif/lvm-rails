@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
   def show
     @student = Student.of(current_user).find(params[:id])
     @match = current_match(params[:id])
+    @tutor_options = tutor_options
   end
 
   def new

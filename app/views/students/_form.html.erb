@@ -176,7 +176,7 @@
 
     <div class="row">
       <div class="col-md-4">
-        <%= f.input :preferred_contact_method, collection: general_contact_preferences, label: "General Contact", required: false %>
+        <%= f.input :preferred_contact_method, collection: general_contact_preferences, label: "Preferred Contact", required: false %>
       </div>
     </div>
     
@@ -286,7 +286,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label class="control-label radio-label"> Immigrant or US Native </label>
-          <%= f.collection_radio_buttons :immigrant_status, [[:true, 'immigrant'] ,[:false, 'US native']], :first, :last %>
+          <%= f.collection_radio_buttons :immigrant_status, [[:true, 'Immigrant'] ,[:false, 'US native']], :first, :last %>
         </div>
       </div>
     </div>

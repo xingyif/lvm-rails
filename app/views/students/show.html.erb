@@ -1,34 +1,427 @@
-<p>
-  <strong>Name:</strong>
-  <%= @student.name %>
-</p>
+<div class="row">
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6">
+                <%= link_to students_path do %>
+                  <span class="glyphicon glyphicon-arrow-left"></span>
+                  <span class="h4">Back To Students</span>
+                <% end %>
+              </div>
 
-<p>
-  <strong><%= link_to 'Assessments', assessments_path %></strong>
-</p>
+              <div class="col-xs-6 text-right">
+                <%= link_to edit_student_path(@student) do %>
+                  <span class="h4">Edit</span>
+                  <span class="glyphicon glyphicon-edit"></span>
+                <% end %>
+              </div>
+            </div>
+            <h3 class="text-center">
+              <%= @student.name %><br>
+              <small>
+                Affiliate:
+                <% if @student.active_affiliate %>
+                  <label> <%= @student.active_affiliate.name %> </label>
+                <% else %>
+                  <label>No Affiliate</label>
+                <% end %>
+              </small><br>
+              <button class="btn btn-sm btn-<%= @student.status_class_indicator %> disabled"><%= @student.status.blank? ? "Status Unknown" : @student.status %></button>
+            </h3>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6">
+                <span class="text-muted">SMARTT ID: </span><b><%= @student.smartt_id %></b>
+              </div>
+              <div class="col-sm-6">
+                <span class="text-muted">Last Name ID: </span><b><%= @student.last_name_id %></b>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-home"></span>
+              </div>
+              <div class="col-xs-10">
+                <% if @student.address1? %>
+                  <%= @student.address1 %><%= @student.address2 ? ', ' + @student.address2 : '' %><br>
+                  <%= @student.city %>,  <%= @student.state %> <%= @student.zip %>
+                  <br><span class="glyphicon glyphicon-bell"></span>
+                  Mail Contact <%= @student.mail_ok ? '' : 'NOT' %> Ok</p>
+                <% else %>
+                  No Address on File
+                <% end %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-earphone"></span>
+              </div>
+              <div class="col-xs-10">
+                <% if !@student.home_phone.blank? %>
+                  <p>Home: <%= @student.home_phone %>
+                  <br><span class="glyphicon glyphicon-bell"></span>
+                  <%= @student.home_ok ? 
+                     (@student.home_lvm_ok ? 'LVM' : 'Non-LMV') + ' Contact Ok':
+                     'Contact NOT Ok' %></p>
+                <% end %>
+                <% if !@student.cell_phone.blank? %>
+                  <p>Cell: <%= @student.cell_phone %>
+                  <br><span class="glyphicon glyphicon-bell"></span>
+                  <%= @student.cell_ok ? 
+                     (@student.cell_lvm_ok ? 'LVM' : 'Non-LMV') + ' Contact Ok':
+                     'Contact NOT Ok' %></p>
+                <% end %>
+                <% if !@student.other_phone.blank? %>
+                  <p>Other: <%= @student.other_phone %>
+                  <br><span class="glyphicon glyphicon-bell"></span>
+                  <%= @student.work_ok ? 
+                     (@student.work_lvm_ok ? 'LVM' : 'Non-LMV') + ' Contact Ok': 
+                     'Contact NOT Ok' %></p>
+                <% end %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-envelope"></span>
+              </div>
+              <div class="col-xs-10">
+                <p><%= @student.email %>
+                <br><span class="glyphicon glyphicon-bell"></span>
+                Email Contact <%= @student.email_ok ? '' : 'NOT' %> Ok</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-xs-6">
+                <span>Preferred Contact:</span>
+              </div>
+              <div class="col-xs-6">
+                <%= @student.preferred_contact_method? ?
+                    @student.preferred_contact_method : 'Not Specified' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Tutor:</strong>
-  <%= form_tag('set_tutor', method: 'put') do %>
-    <% if !@match.nil? %>
-      <%= select_tag(:tutor_id, options_for_select(tutor_options, @match.tutor_id)) %>
-    <% else %>
-      <%= select_tag(:tutor_id, options_for_select(tutor_options)) %>
-    <% end %>
-    <%= submit_tag('Set Tutor') %>
-    <%= hidden_field_tag(:student_id, @student.id) %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <% end %>
-</p>
+    </div>
+  </div>
 
-<p>
-  <strong>Affiliate:</strong>
-  <% if !@student.active_affiliate.nil? %>
-    <%= @student.active_affiliate.name %>
-  <% else %>
-    No Affiliate
-  <% end %>
-</p>
+  <div class="col-md-7">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>Tutor</h4>
+              </div>
+              <div class="col-sm-6 text-right">
+                <% if !@tutor_options.nil? %>
+                  <%= form_tag('set_tutor', method: 'put') do %>
+                    <%= select_tag(:tutor_id, options_for_select(@tutor_options)) %>
+                    <%= submit_tag('Set Tutor') %>
+                    <%= hidden_field_tag(:student_id, @student.id) %>
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <% end %>
+                <% else %>
+                  No unmatched tutors
+                <% end %>
+              </div>
+            </div>
+            <hr>
+            <div>
+              <% if !@match.nil? %>
+                <strong>Tutor: </strong>
+                <%= @match.tutor_id %>
+                
+              <% else %>
+                No Tutor
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>General Information</h4>
+            <hr>
+
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Background</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-4">
+                        <b>Date of Birth</b>
+                        <p><%= @student.date_of_birth ? @student.date_of_birth.strftime('%D') : '' %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Gender</b>
+                        <p><%= @student.gender ? @student.gender.capitalize : '' %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Hispanic?</b>
+                        <p><%= @student.hispanic_or_latino ? 'Yes' : 'No' %></p>
+                      </div>
+                    </div>
+                    <div class="row text-center">
+                      <div class="col-sm-4">
+                        <b>Native Language</b>
+                        <p><%= @student.native_language %></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Race</b>
+                        <p><%= @student.race%></p>
+                      </div>
+                      <div class="col-sm-4">
+                        <b>Birth Country</b>
+                        <p><%= @student.country_of_birth %></p>
+                      </div>
+                    </div>
+                    <div class="row text-center">
+                      <div class="col-sm-6">
+                        <b>Education Level:</b>
+                        <p><%= @student.education %></p>
+                      </div>
+                      <div class="col-sm-6">
+                        <b>Immigrant Status:</b>
+                        <p><%= @student.immigrant_status ? 'Immigrant' : 'US Native' %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-center">
+              <div class="col-xs-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Referal</div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Referral:</label><br>
+                        <% if @student.referral.blank? || @student.referral == 'Other' %>
+                          <%= @student.referral_other %>
+                        <% else %>
+                          <%= @student.referral %>
+                        <% end %>
+                      </div>
+                      <div class="col-md-8">
+                        <label>Why Lvm?</label><br>
+                        <%= @student.why_lvm %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-center">
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">CDBG Information</div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <% if @student.cdbg_required? %>
+                        <div class="row text-center">
+                          <div class="col-sm-4">
+                            <b>US Citizen?</b>
+                            <p><%= @student.cdbg_us_citizen ? 'Yes' : 'No' %></p>
+                          </div>
+                          <div class="col-sm-4">
+                            <b>Legal Resident?</b>
+                            <p><%= @student.cdbg_legal_resident ? 'Yes' : 'No' %></p>
+                          </div>
+                          <div class="col-sm-4">
+                            <b>Female Head of Household?</b>
+                            <p><%= @student.cdbg_female_head_of_household ? 'Yes' : 'No' %></p>
+                          </div>
+                        </div>
+                        <div class="row text-center">
+                          <div class="col-sm-6">
+                            <b>Household Size:</b>
+                            <p><%= @student.cdbg_household_size ?
+                                   @student.cdbg_household_size : 'Not Specified' %></p>
+                          </div>
+                          <div class="col-sm-6">
+                            <b>Household Income:</b>
+                            <p><%= @student.cdbg_household_income ?
+                                   @student.cdbg_household_income : 'Not Specified' %></p>
+                          </div>
+                        </div>
+                      <% else %>
+                        <div class="col-xs-12">
+                          CDBG Not Required
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Crimial Record</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <% if @student.criminal_conviction.blank? && @student.release_on_file.blank? %>
+                        <div class="col-xs-12">
+                          No criminal conviction information on file.
+                        </div>
+                      <% else %>
+                        <% if !@student.criminal_conviction.blank? %>
+                          <div class="col-sm-4">
+                            <b>Criminal Conviction?</b>
+                            <p><%= @student.criminal_conviction ? 'Yes' : 'No' %></p>
+                          </div>
+                        <% end %>
+                        <% if !@student.release_on_file.blank? %>
+                          <div class="col-sm-4">
+                            <b>Release on file?</b>
+                            <p><%= @student.release_on_file ? 'Yes' : 'No' %></p>
+                          </div>
+                        <% end %>
+                        <% if !@student.release_sign_date.blank? %>
+                          <div class="col-sm-4">
+                            <b>Release Sign Date</b>
+                            <p><%= @student.release_sign_date.strftime('%D') %></p>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Tags</h4>
+              </div>
+
+              <div class="col-md-6">
+                <div class="pull-right">
+                  <%= link_to student_path(@student), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#add-tag'} do %>
+                    <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Tags</button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="text-center">
+              <% if !@student.all_tags.empty? %>
+                <% @student.all_tags.each do |name| %>
+                  <span class='tag'><%= name %></span>
+                <% end %>
+              <% else %>
+                <span>No tags added.</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Attendance</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-right">
+                  <%= link_to tutoring_sessions_path do %>
+                    <button class="btn btn-default">Manage</button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4 class="text-center">Emergency Contact</h4>
+            <hr>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-user"></span>
+              </div>
+              <div class="col-xs-10">
+                <%= @student.emergency_contact_name %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-2 text-center">
+                <span class="glyphicon glyphicon-earphone"></span>
+              </div>
+              <div class="col-xs-10">
+                <%= @student.emergency_contact_phone %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="add-tag" class="modal fade" role="dialog" aria-labelledby="addTag" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Update Tags</h3>
+      </div>
+      <%= simple_form_for @student, url: update_student_tags_path(@student), method: :patch do |f| %>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="help-block">Select tags from the list or create a new tag by typing in a word or phrase and then hitting the comma key.</p>
+              <%= f.input :all_tags,
+                label: false,
+                as: :select,
+                collection: Tag.order(:name).map{ |i| [i.name, i.name]},
+                input_html: {multiple: true},
+                required: false %>
+          </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.button :submit, 'Update', class: "btn btn-primary" %>
+          <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <script>initChosenTagSelect("student");</script>
+</div>
