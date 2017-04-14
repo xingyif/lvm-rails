@@ -1,0 +1,13 @@
+{
+  "name": "Literacy Volunteers of MA",
+  "description": "Administration portal for LVM",
+  "repository": "https://github.com/LiteracyVolunteersOfMA/lvm-rails",
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ]
+}
