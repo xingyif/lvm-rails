@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :assessments
   resources :coordinators
   resources :students
+  resources :student_comments
   resources :tutors
   resources :tutor_comments
   resources :tutoring_sessions

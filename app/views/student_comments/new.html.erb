@@ -1,26 +1,26 @@
 <div class="col-md-6 col-md-offset-3">
   <div class="row">
     <div class="col-md-12">
-      <%= link_to tutor_path(@tutor) do %>
+      <%= link_to student_path(@student) do %>
         <span class="glyphicon glyphicon-arrow-left"></span>
-        <span class="h4">Back To Tutor</span>
+        <span class="h4">Back To Student</span>
       <% end %>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h2>Edit Tutor Comment</h2>
+      <h2>New Student Comment</h2>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h4>For Tutor: <%= @tutor.name %></h4>
+      <h4>For Student: <%= @student.name %></h4>
     </div>
   </div>
 
   <hr>
 
-  <%= simple_form_for :tutor_comment, url: tutor_comment_path(@tutor_comment), method: :patch do |f| %>
+  <%= simple_form_for :student_comment, url: student_comments_path, method: :post do |f| %>
     <%= render partial: 'form', locals: {f: f} %>
   <% end %>
 
