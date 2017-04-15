@@ -1,21 +1,35 @@
 class AssessmentsController < ApplicationController
   before_action :set_assessment, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb 'Home', :root_path
+
   # GET /assessments
   def index
+    add_breadcrumb 'Assessments'
+
     @assessments = Assessment.all
   end
 
   # GET /assessments/1
-  def show; end
+  def show
+    add_breadcrumb 'Assessments', assessments_path
+    add_breadcrumb 'Assessment'
+  end
 
   # GET /assessments/new
   def new
+    add_breadcrumb 'Assessments', assessments_path
+    add_breadcrumb 'New Assessment'
+
     @assessment = Assessment.new
   end
 
   # GET /assessments/1/edit
-  def edit; end
+  def edit
+    add_breadcrumb 'Assessments', assessments_path
+    add_breadcrumb 'Assessment', assessment_path(@assessment)
+    add_breadcrumb 'Edit'
+  end
 
   # POST /assessments
   def create

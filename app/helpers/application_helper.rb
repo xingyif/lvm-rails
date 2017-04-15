@@ -1,4 +1,3 @@
-# rubocop:disable MethodLength
 module ApplicationHelper
   # Generic helper collections
   def us_states

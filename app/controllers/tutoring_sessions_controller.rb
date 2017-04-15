@@ -3,7 +3,11 @@ class TutoringSessionsController < ApplicationController
   before_action :set_tutor_or_match, only: [:index, :new]
   before_action :set_tutoring_session, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb 'Home', :root_path
+
   def index
+    add_breadcrumb 'Tutoring Sessions'
+
     if @tutor
       @tutoring_sessions = TutoringSession.joins(:match).where(
         matches: { tutor_id: @tutor.id }
@@ -15,9 +19,15 @@ class TutoringSessionsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    add_breadcrumb 'Tutoring Sessions', tutoring_sessions_path
+    add_breadcrumb 'Tutoring Session'
+  end
 
   def new
+    add_breadcrumb 'Tutoring Sessions', tutoring_sessions_path
+    add_breadcrumb 'New Tutoring Session'
+
     if params[:student_id] && params[:tutor_id]
       @student = Student.find(params[:student_id])
       @current_match = Match.where(
@@ -30,6 +40,10 @@ class TutoringSessionsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb 'Tutoring Sessions', tutoring_sessions_path
+    add_breadcrumb 'Tutoring Session', tutoring_session_path(@tutoring_session)
+    add_breadcrumb 'New Tutoring Session'
+
     tutor_id = Match.find(@tutoring_session.match_id).tutor_id
     @students = Match.where(tutor_id: tutor_id)
                      .map { |m| [m.student.name, m.id] }

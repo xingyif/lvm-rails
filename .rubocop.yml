@@ -23,6 +23,12 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'db/fixtures/*.rb'
 
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
 Documentation:
   Enabled: false
 
@@ -31,6 +37,6 @@ Style/BlockComments:
 
 Metrics/AbcSize:
   Max: 30
-  
+
 Style/WordArray:
   Enabled: false

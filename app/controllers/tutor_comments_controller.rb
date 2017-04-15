@@ -1,9 +1,16 @@
 class TutorCommentsController < ApplicationController
   before_action :set_tutor_comment, only: [:edit, :update, :destroy]
 
+  add_breadcrumb 'Home', :root_path
+
   def new
-    @tutor_comment = TutorComment.new
     @tutor = Tutor.of(current_user).find(params[:tutor])
+
+    add_breadcrumb 'Tutors', tutors_path
+    add_breadcrumb @tutor.name, tutor_path(@tutor)
+    add_breadcrumb 'New Tutor Comment'
+
+    @tutor_comment = TutorComment.new
   end
 
   def create
@@ -19,6 +26,10 @@ class TutorCommentsController < ApplicationController
 
   def edit
     @tutor = Tutor.of(current_user).find(@tutor_comment.tutor_id)
+
+    add_breadcrumb 'Tutors', tutors_path
+    add_breadcrumb @tutor.name, tutor_path(@tutor)
+    add_breadcrumb 'Edit Comment'
   end
 
   def update

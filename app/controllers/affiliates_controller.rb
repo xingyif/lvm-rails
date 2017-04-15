@@ -2,21 +2,35 @@ class AffiliatesController < ApplicationController
   before_action :set_affiliate, only: [:show, :edit, :update, :destroy]
   before_action :ensure_admin!
 
+  add_breadcrumb 'Home', :root_path
+
   # GET /affiliates
   def index
+    add_breadcrumb 'Affiliates'
+
     @affiliates = Affiliate.all
   end
 
   # GET /affiliates/1
-  def show; end
+  def show
+    add_breadcrumb 'Affiliates', affiliates_path
+    add_breadcrumb @affiliate.name
+  end
 
   # GET /affiliates/new
   def new
+    add_breadcrumb 'Affiliates', affiliates_path
+    add_breadcrumb 'New Affiliate'
+
     @affiliate = Affiliate.new
   end
 
   # GET /affiliates/1/edit
-  def edit; end
+  def edit
+    add_breadcrumb 'Affiliates', affiliates_path
+    add_breadcrumb @affiliate.name, affiliate_path(@affiliate)
+    add_breadcrumb 'Edit'
+  end
 
   # POST /affiliates
   def create

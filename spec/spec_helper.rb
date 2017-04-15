@@ -4,6 +4,12 @@ require 'shoulda/matchers'
 require 'support/controller_helpers'
 require 'support/database_cleaner'
 
+# These two lines are required for breadcrumbs_on_rails, probably because
+# something is wrong with the gem. As of the time of writing, there is an open
+# issue for it here: https://github.com/weppos/breadcrumbs_on_rails/issues/108
+require 'active_support/concern'
+require 'rails'
+
 ENV['RAILS_ENV'] ||= 'test'
 
 Coveralls.wear!('rails')

@@ -1,4 +1,3 @@
-# rubocop:disable ClassLength
 class Tutor < ApplicationRecord
   VALID_EMAIL_REGEX  = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PHONE_REGEX  = /\A\([0-9]{3}\) [0-9]{3}-[0-9]{4}\z/
@@ -111,7 +110,6 @@ class Tutor < ApplicationRecord
     klass
   end
 
-  # rubocop:disable MethodLength
   def self.of(user)
     if user.tutor?
       where(id: user.tutor_id) # Needs to be a relation, not a single record

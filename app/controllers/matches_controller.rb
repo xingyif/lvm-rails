@@ -1,5 +1,9 @@
 class MatchesController < ApplicationController
+  add_breadcrumb 'Home', :root_path
+
   def index
+    add_breadcrumb 'Matches'
+
     if current_user.admin?
       @matches = Match.all
     elsif current_user.coordinator?

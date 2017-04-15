@@ -49,7 +49,6 @@ module PreferencesHelper
   EVENING_SAT   = 2**19
   EVENING_SUN   = 2**20
 
-  # rubocop:disable MethodLength
   def availability_times
     [
       ['8AM - 12PM Monday', MORNING_MON],

@@ -88,7 +88,6 @@ class Student < ApplicationRecord
     klass
   end
 
-  # rubocop:disable MethodLength
   def self.of(user)
     if user.tutor?
       joins(:matches).where(matches: { tutor_id: 1 })

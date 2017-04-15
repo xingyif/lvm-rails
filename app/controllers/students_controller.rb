@@ -1,26 +1,38 @@
-# rubocop:disable ClassLength, MethodLength
 class StudentsController < ApplicationController
   before_action :ensure_coordinator_or_admin!
+  before_action :set_student, only: [:show, :edit]
   helper_method :tutor?
 
+  add_breadcrumb 'Home', :root_path
+
   def index
+    add_breadcrumb 'Students', students_path
+
     @show_new_student_link = !current_user.role.zero?
     @students = Student.of(current_user)
   end
 
   def show
-    @student = Student.of(current_user).find(params[:id])
+    add_breadcrumb 'Students', students_path
+    add_breadcrumb @student.name
+
     @match = current_match(params[:id])
     @tutor_options = tutor_options
   end
 
   def new
+    add_breadcrumb 'Students', students_path
+    add_breadcrumb 'New Student'
+
     @student = Student.new
   end
 
   def edit
+    add_breadcrumb 'Students', students_path
+    add_breadcrumb @student.name, student_path(@student)
+    add_breadcrumb 'Edit'
+
     @can_edit = !current_user.role.zero?
-    @student = Student.of(current_user).find(params[:id])
   end
 
   def create
@@ -143,6 +155,10 @@ class StudentsController < ApplicationController
       :referral_other,
       all_tags: []
     )
+  end
+
+  def set_student
+    @student = Student.of(current_user).find(params[:id])
   end
 
   def tutor_options

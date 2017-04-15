@@ -1,4 +1,3 @@
-# rubocop:disable MethodLength
 module StudentsHelper
   def income_ranges
     [

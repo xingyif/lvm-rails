@@ -1,9 +1,16 @@
 class StudentCommentsController < ApplicationController
   before_action :set_student_comment, only: [:edit, :update, :destroy]
 
+  add_breadcrumb 'Home', :root_path
+
   def new
-    @student_comment = StudentComment.new
     @student = Student.of(current_user).find(params[:student])
+
+    add_breadcrumb 'Students', students_path
+    add_breadcrumb @student.name, student_path(@student)
+    add_breadcrumb 'New Student Comment'
+
+    @student_comment = StudentComment.new
   end
 
   def create
@@ -20,6 +27,10 @@ class StudentCommentsController < ApplicationController
 
   def edit
     @student = Student.of(current_user).find(@student_comment.student_id)
+
+    add_breadcrumb 'Students', students_path
+    add_breadcrumb @student.name, student_path(@student)
+    add_breadcrumb 'Edit Comment'
   end
 
   def update

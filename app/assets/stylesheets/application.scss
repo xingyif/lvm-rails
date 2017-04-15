@@ -24,6 +24,10 @@ body {
   position: relative;
 }
 
+.navbar {
+  background-color: #f0f0f0;
+}
+
 .navbar-brand {
   padding-top: 4px;
   padding-bottom: 4px;
@@ -37,6 +41,24 @@ body {
 .navbar-right {
   padding-right: 0px;
   margin-right: 0px;
+}
+
+.navbar-secondary {
+  margin: -20px 0 20px;
+  height: 23px;
+  background-color: #fcfcfc;
+  border-bottom: 1px solid #e7e7e7;
+
+  .breadcrumb {
+    padding: 0 0 0 20px;
+    margin: 0;
+    border: 0;
+    background: none;
+  }
+
+  .logged_in_as {
+    padding-right: 30px;
+  }
 }
 
 .dashboard {

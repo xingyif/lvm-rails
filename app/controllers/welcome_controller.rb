@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  add_breadcrumb 'Home'
+
   def index
     @see_tutoring_sessions = current_user.tutor?
     @tutor_id = current_user.tutor_id

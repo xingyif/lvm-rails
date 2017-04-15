@@ -17,8 +17,14 @@ RSpec.describe Tag, type: :model do
   end
 
   describe 'validations' do
-    it 'should validate the uniqueness of name' do
-      should validate_uniqueness_of(:name)
+    describe 'name' do
+      it 'should validate the uniqueness' do
+        should validate_uniqueness_of(:name)
+      end
+
+      it 'should validate length > 0' do
+        should validate_length_of(:name).is_at_least(1)
+      end
     end
   end
 

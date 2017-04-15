@@ -2,20 +2,34 @@ class CoordinatorsController < ApplicationController
   before_action :ensure_admin!
   before_action :set_coordinator, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb 'Home', :root_path
+
   def index
+    add_breadcrumb 'Coordinators'
+
     @coordinators = Coordinator.all
   end
 
   def show
+    add_breadcrumb 'Coordinators', coordinators_path
+    add_breadcrumb @coordinator.name
+
     @students = students
     @tutors = tutors
   end
 
   def new
+    add_breadcrumb 'Coordinators', coordinators_path
+    add_breadcrumb 'New'
+
     @coordinator = Coordinator.new
   end
 
-  def edit; end
+  def edit
+    add_breadcrumb 'Coordinators', coordinators_path
+    add_breadcrumb @coordinator.name, coordinator_path(@coordinator)
+    add_breadcrumb 'Edit'
+  end
 
   def create
     @coordinator = Coordinator.new(coordinator_params)

@@ -1,22 +1,21 @@
-# rubocop:disable ClassLength
 class TutorsController < ApplicationController
   before_action :ensure_coordinator_or_admin!
+  before_action :set_tutor, only: [:show, :edit]
+
+  add_breadcrumb 'Home', :root_path
 
   def index
+    add_breadcrumb 'Tutors'
+
     @tutors = Tutor.of(current_user)
   end
 
   def show
-    @tutor = Tutor.of(current_user).find(params[:id])
+    add_breadcrumb 'Tutors', tutors_path
+    add_breadcrumb @tutor.name
+
     @students = students
     @student_options = student_options
-  end
-
-  def students
-    match_params = { tutor_id: params[:id], end: nil }
-    Match.where(match_params).to_a.map do |m|
-      Student.of(current_user).find(m.student_id)
-    end
   end
 
   def update_tags
@@ -27,14 +26,18 @@ class TutorsController < ApplicationController
   end
 
   def new
+    add_breadcrumb 'Tutors', tutors_path
+    add_breadcrumb 'New Tutor'
+
     @tutor = Tutor.new
   end
 
   def edit
-    @tutor = Tutor.of(current_user).find(params[:id])
+    add_breadcrumb 'Tutors', tutors_path
+    add_breadcrumb @tutor.name, tutor_path(@tutor)
+    add_breadcrumb 'Edit'
   end
 
-  # rubocop:disable MethodLength
   def create
     calculate_preferences(params)
     clean_params = update_params_with_proficiencies(tutor_params.clone, params)
@@ -66,19 +69,6 @@ class TutorsController < ApplicationController
     redirect_to tutors_path
   end
 
-  def student_options
-    matched_student_ids = Match.where(end: nil).to_a.map(&:student_id)
-    all_students_arr =
-      Student.of(current_user).joins(:enrollments).where(
-        enrollments: {
-          affiliate_id: @tutor.active_affiliate.id
-        }
-      ).to_a
-    untutored_students = all_students_arr
-                         .reject { |s| matched_student_ids.include? s.id }
-    untutored_students.map { |t| [t.name, t.id] }
-  end
-
   def add_student
     student_id = params[:student_id]
     tutor_id = params[:tutor_id]
@@ -87,25 +77,6 @@ class TutorsController < ApplicationController
   end
 
   private
-
-  def calculate_preferences(params)
-    times = params[:tutor][:availability]
-    age = params[:tutor][:age_preference]
-    category = params[:tutor][:category_preference]
-    transportation = params[:tutor][:transportation]
-
-    params[:tutor][:availability] = PreferencesHelper.squash(times)
-    params[:tutor][:age_preference] = PreferencesHelper.squash(age)
-    params[:tutor][:category_preference] = PreferencesHelper.squash(category)
-    params[:tutor][:transportation] = PreferencesHelper.squash(transportation)
-  end
-
-  def update_params_with_proficiencies(clean_params, params)
-    clean_params['language_proficiencies'] =
-      params.to_unsafe_h['language_proficiencies'].to_json ||
-      params['tutor']['language_proficiencies'].to_json
-    clean_params
-  end
 
   def tutor_params
     params.require(:tutor).permit(
@@ -173,5 +144,48 @@ class TutorsController < ApplicationController
       :zip,
       all_tags: []
     )
+  end
+
+  def students
+    match_params = { tutor_id: params[:id], end: nil }
+    Match.where(match_params).to_a.map do |m|
+      Student.of(current_user).find(m.student_id)
+    end
+  end
+
+  def student_options
+    matched_student_ids = Match.where(end: nil).to_a.map(&:student_id)
+    all_students_arr =
+      Student.of(current_user).joins(:enrollments).where(
+        enrollments: {
+          affiliate_id: @tutor.active_affiliate.id
+        }
+      ).to_a
+    untutored_students = all_students_arr
+                         .reject { |s| matched_student_ids.include? s.id }
+    untutored_students.map { |t| [t.name, t.id] }
+  end
+
+  def calculate_preferences(params)
+    times = params[:tutor][:availability]
+    age = params[:tutor][:age_preference]
+    category = params[:tutor][:category_preference]
+    transportation = params[:tutor][:transportation]
+
+    params[:tutor][:availability] = PreferencesHelper.squash(times)
+    params[:tutor][:age_preference] = PreferencesHelper.squash(age)
+    params[:tutor][:category_preference] = PreferencesHelper.squash(category)
+    params[:tutor][:transportation] = PreferencesHelper.squash(transportation)
+  end
+
+  def update_params_with_proficiencies(clean_params, params)
+    clean_params['language_proficiencies'] =
+      params.to_unsafe_h['language_proficiencies'].to_json ||
+      params['tutor']['language_proficiencies'].to_json
+    clean_params
+  end
+
+  def set_tutor
+    @tutor = Tutor.of(current_user).find(params[:id])
   end
 end

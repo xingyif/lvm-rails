@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'breadcrumbs_on_rails', '~> 3.0.1'
 gem 'coveralls', require: false
 gem 'devise', '~> 4.2'
 gem 'faker', '~> 1.7'

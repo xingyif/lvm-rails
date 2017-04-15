@@ -2,7 +2,11 @@ class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
   before_action :ensure_coordinator_or_admin!, only: [:index, :show]
 
+  add_breadcrumb 'Home', :root_path
+
   def index
+    add_breadcrumb 'Tags'
+
     @tags = Tag.all
   end
 
@@ -41,7 +45,6 @@ class TagsController < ApplicationController
     redirect_to tags_url, notice: 'Tag was successfully deleted.'
   end
 
-  # rubocop:disable MethodLength
   def create
     @tag = Tag.new(tag_params)
 
