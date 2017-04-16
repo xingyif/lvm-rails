@@ -1,6 +1,16 @@
-<h1>Editing Assessment</h1>
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-center">
+      Edit Assessment
+    </h1>
+  </div>
+</div>
 
-<%= render 'form', assessment: @assessment %>
-
-<%= link_to 'Show', @assessment %> |
-<%= link_to 'Back to Assessments', assessments_path %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <hr>
+    <%= simple_form_for :assessment, url: assessment_path(@assessment), method: :patch do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
+  </div>
+</div>
