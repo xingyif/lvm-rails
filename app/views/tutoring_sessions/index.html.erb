@@ -60,13 +60,16 @@
   </tbody>
 </table>
 
-<%= link_to 'Home', root_path %> |
-<% if current_user.tutor? %>
-  <%= link_to "New Tutoring Session", new_tutoring_session_path(tutor_id: @tutor.id) %>
-<% elsif @student %>
-  <%= link_to "New Tutoring Session For #{@tutor.first_name} and #{@student.first_name}", new_tutoring_session_path(tutor_id: @tutor.id, student_id: @student.id) %>
-<% else %>
-  <%= link_to "New Tutoring Session For #{@tutor.name}", new_tutoring_session_path(tutor_id: @tutor.id) %>
+<%= link_to 'Home', root_path %>
+<% if !@match.nil? %>
+  |
+  <% if current_user.tutor? %>
+    <%= link_to "New Tutoring Session", new_tutoring_session_path(tutor_id: @tutor.id) %>
+  <% elsif @student %>
+    <%= link_to "New Tutoring Session For #{@tutor.first_name} and #{@student.first_name}", new_tutoring_session_path(tutor_id: @tutor.id, student_id: @student.id) %>
+  <% else %>
+    <%= link_to "New Tutoring Session For #{@tutor.name}", new_tutoring_session_path(tutor_id: @tutor.id) %>
+  <% end %>
 <% end %>
 
 <script>
