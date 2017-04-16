@@ -9,4 +9,12 @@ class Tag < ApplicationRecord
   def count
     Tagging.where(tag_id: id).count
   end
+
+  def created_string
+    created_at.strftime('%D')
+  end
+
+  def updated_string
+    updated_at.strftime('%D')
+  end
 end

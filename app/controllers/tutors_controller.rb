@@ -7,7 +7,29 @@ class TutorsController < ApplicationController
   def index
     add_breadcrumb 'Tutors'
 
-    @tutors = Tutor.of(current_user)
+    @new_button = {
+      text: 'Create New Tutor',
+      url: new_tutor_path
+    }
+    @clickable_rows = true
+    @page_title = 'Tutors'
+    @models = Tutor.of(current_user)
+    @headers = [
+      'First Name',
+      'Last Name',
+      'Status',
+      'Home Phone',
+      'Cell Phone',
+      'Email'
+    ]
+    @columns = [
+      'first_name',
+      'last_name',
+      'status',
+      'home_phone',
+      'cell_phone',
+      'email_preferred'
+    ]
   end
 
   def show

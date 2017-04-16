@@ -25,7 +25,7 @@ RSpec.describe TutorsController, type: :controller do
 
         it 'populates an array of all tutors' do
           get :index
-          expect(assigns(:tutors)).to eq(@all_tutors)
+          expect(assigns(:models)).to eq(@all_tutors)
         end
 
         it 'renders the :index view' do
@@ -43,7 +43,7 @@ RSpec.describe TutorsController, type: :controller do
 
         it 'populates an array of affiliate tutors' do
           get :index
-          expect(assigns(:tutors)).to eq(@coordinator_tutors)
+          expect(assigns(:models)).to eq(@coordinator_tutors)
         end
 
         it 'renders the :index view' do

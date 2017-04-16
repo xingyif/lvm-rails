@@ -15,4 +15,20 @@ class TutoringSession < ApplicationRecord
     return if !start_date || !end_date || start_date <= end_date
     errors.add(:end_date, 'may not be before start date.')
   end
+
+  def student_first_name
+    Student.find(Match.find(match_id).student_id).first_name
+  end
+
+  def student_last_name
+    Student.find(Match.find(match_id).student_id).last_name
+  end
+
+  def tutor_first_name
+    Tutor.find(Match.find(match_id).tutor_id).first_name
+  end
+
+  def tutor_last_name
+    Tutor.find(Match.find(match_id).tutor_id).last_name
+  end
 end

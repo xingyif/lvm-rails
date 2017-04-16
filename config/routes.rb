@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   get 'matches', to: 'matches#index', as: 'matches'
 
+  get 'tutoring_sessions/tutor/:id', to: 'tutoring_sessions#tutor_index', as: 'tutors_tutoring_sessions'
+  get 'tutoring_sessions/student/:id', to: 'tutoring_sessions#student_index', as: 'students_tutoring_sessions'
+
   resources :affiliates
   resources :assessments
   resources :coordinators

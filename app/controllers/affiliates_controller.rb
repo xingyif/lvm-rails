@@ -8,7 +8,29 @@ class AffiliatesController < ApplicationController
   def index
     add_breadcrumb 'Affiliates'
 
-    @affiliates = Affiliate.all
+    @new_button = {
+      text: 'Create New Affiliate',
+      url: new_affiliate_path
+    }
+    @clickable_rows = true
+    @page_title = 'Affiliates'
+    @models = Affiliate.all
+    @headers = [
+      'Name',
+      'Address',
+      'Phone Number',
+      'Email',
+      'Website',
+      'Twitter'
+    ]
+    @columns = [
+      'name',
+      'full_address',
+      'phone_number',
+      'email',
+      'website',
+      'twitter'
+    ]
   end
 
   # GET /affiliates/1

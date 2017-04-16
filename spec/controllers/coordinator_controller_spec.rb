@@ -24,7 +24,7 @@ RSpec.describe CoordinatorsController, type: :controller do
 
         it 'populates the coordinators' do
           get :index
-          expect(assigns(:coordinators)).to eq([@coordinator])
+          expect(assigns(:models)).to eq([@coordinator])
         end
 
         it 'renders the :index view' do

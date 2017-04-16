@@ -25,7 +25,7 @@ RSpec.describe StudentsController, type: :controller do
 
         it 'populates an array of all students' do
           get :index
-          expect(assigns(:students)).to eq(@all_students)
+          expect(assigns(:models)).to eq(@all_students)
         end
 
         it 'renders the :index view' do
@@ -42,7 +42,7 @@ RSpec.describe StudentsController, type: :controller do
 
         it "populates an array of coordinator's students" do
           get :index
-          expect(assigns(:students)).to eq(@coordinator_students)
+          expect(assigns(:models)).to eq(@coordinator_students)
         end
 
         it 'renders the :index view' do

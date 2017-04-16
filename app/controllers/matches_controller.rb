@@ -4,14 +4,24 @@ class MatchesController < ApplicationController
   def index
     add_breadcrumb 'Matches'
 
-    if current_user.admin?
-      @matches = Match.all
-    elsif current_user.coordinator?
-      @matches = Match.where(
-        affiliate_id: Coordinator.find(
-          current_user.coordinator_id
-        ).affiliate_id
-      )
-    end
+    @clickable_rows = false
+    @page_title = 'Matches'
+    @models = Match.of(current_user)
+    @headers = [
+      'Student First Name',
+      'Student Last Name',
+      'Tutor First Name',
+      'Tutor Last Name',
+      'Start Date',
+      'End Date'
+    ]
+    @columns = [
+      'student_first_name',
+      'student_last_name',
+      'tutor_first_name',
+      'tutor_last_name',
+      'start',
+      'end'
+    ]
   end
 end

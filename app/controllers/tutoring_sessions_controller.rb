@@ -5,18 +5,54 @@ class TutoringSessionsController < ApplicationController
 
   add_breadcrumb 'Home', :root_path
 
-  def index
+  def student_index
     add_breadcrumb 'Tutoring Sessions'
 
-    if @tutor
-      @tutoring_sessions = TutoringSession.joins(:match).where(
-        matches: { tutor_id: @tutor.id }
-      )
-    elsif @match
-      @tutor = Tutor.of(current_user).find(@match.tutor_id)
-      @student = Student.of(current_user).find(@match.student_id)
-      @tutoring_sessions = TutoringSession.where(match_id: @match.id)
-    end
+    @clickable_rows = true
+    @page_title = 'Tutoring Sessions'
+    @student = Student.of(current_user).find(params[:id])
+    @models = TutoringSession.joins(:match).where(
+      matches: { student_id: @student.id }
+    )
+    @headers = [
+      'Tutor First Name',
+      'Tutor Last Name',
+      'Start Date',
+      'End Date',
+      'Total Hours'
+    ]
+    @columns = [
+      'tutor_first_name',
+      'tutor_last_name',
+      'start_date',
+      'end_date',
+      'hours'
+    ]
+  end
+
+  def tutor_index
+    add_breadcrumb 'Tutoring Sessions'
+
+    @clickable_rows = true
+    @page_title = 'Tutoring Sessions'
+    @tutor = Tutor.of(current_user).find(params[:id])
+    @models = TutoringSession.joins(:match).where(
+      matches: { tutor_id: @tutor.id }
+    )
+    @headers = [
+      'Tutor First Name',
+      'Tutor Last Name',
+      'Start Date',
+      'End Date',
+      'Total Hours'
+    ]
+    @columns = [
+      'student_first_name',
+      'student_last_name',
+      'start_date',
+      'end_date',
+      'hours'
+    ]
   end
 
   def show
@@ -24,25 +60,10 @@ class TutoringSessionsController < ApplicationController
     add_breadcrumb 'Tutoring Session'
   end
 
-  def new
-    add_breadcrumb 'Tutoring Sessions', tutoring_sessions_path
-    add_breadcrumb 'New Tutoring Session'
-
-    if params[:student_id] && params[:tutor_id]
-      @student = Student.find(params[:student_id])
-      @current_match = Match.where(
-        student_id: params[:student_id], tutor_id: params[:tutor_id], end: nil
-      ).take
-    end
-    @students = Match.where(tutor_id: params[:tutor_id], end: nil)
-                     .map { |m| [m.student.name, m.id] }
-    @tutoring_session = TutoringSession.new
-  end
-
   def edit
     add_breadcrumb 'Tutoring Sessions', tutoring_sessions_path
     add_breadcrumb 'Tutoring Session', tutoring_session_path(@tutoring_session)
-    add_breadcrumb 'New Tutoring Session'
+    add_breadcrumb 'Edit'
 
     tutor_id = Match.find(@tutoring_session.match_id).tutor_id
     @students = Match.where(tutor_id: tutor_id)

@@ -19,4 +19,8 @@ class Affiliate < ApplicationRecord
   validates :zip, presence: true, format: { with: VALID_ZIP_REGEX }
   validates :state, presence: true
   validates :city, presence: true
+
+  def full_address
+    "#{address}, #{city} #{state}, #{zip}"
+  end
 end

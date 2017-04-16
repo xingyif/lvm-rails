@@ -7,7 +7,25 @@ class CoordinatorsController < ApplicationController
   def index
     add_breadcrumb 'Coordinators'
 
-    @coordinators = Coordinator.all
+    @new_button = {
+      text: 'Create New Coordinator',
+      url: new_coordinator_path
+    }
+    @clickable_rows = true
+    @page_title = 'Coordinators'
+    @models = Coordinator.all
+    @headers = [
+      'First Name',
+      'Last Name',
+      'Email',
+      'Phone Number'
+    ]
+    @columns = [
+      'first_name',
+      'last_name',
+      'email',
+      'phone_number'
+    ]
   end
 
   def show

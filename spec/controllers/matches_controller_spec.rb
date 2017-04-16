@@ -24,30 +24,11 @@ RSpec.describe MatchesController, type: :controller do
         before do
           user = User.new(role: 2)
           sign_in_auth(user)
-          allow(controller).to receive(:current_user).and_return(user)
         end
 
         it 'populates an array of all matches' do
           get :index
-          expect(assigns(:matches)).to eq([@match1, @match2])
-        end
-
-        it 'renders the :index view' do
-          get :index
-          expect(response).to render_template :index
-        end
-      end
-
-      describe 'as coordinator' do
-        before do
-          user = User.new(role: 1, coordinator_id: 1)
-          sign_in_auth(user)
-          allow(controller).to receive(:current_user).and_return(user)
-        end
-
-        it 'populates an array of relevant matches' do
-          get :index
-          expect(assigns(:matches)).to eq([@match1])
+          expect(assigns(:models)).to eq([@match1, @match2])
         end
 
         it 'renders the :index view' do

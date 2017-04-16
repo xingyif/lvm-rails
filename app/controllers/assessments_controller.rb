@@ -7,7 +7,29 @@ class AssessmentsController < ApplicationController
   def index
     add_breadcrumb 'Assessments'
 
-    @assessments = Assessment.all
+    @new_button = {
+      text: 'Create New Assessment',
+      url: new_assessment_path
+    }
+    @clickable_rows = true
+    @page_title = 'Assessments'
+    @models = Assessment.all
+    @headers = [
+      'Name',
+      'Category',
+      'Level',
+      'Type',
+      'Score',
+      'Date'
+    ]
+    @columns = [
+      'name',
+      'category',
+      'level',
+      'assessment_type',
+      'score',
+      'date'
+    ]
   end
 
   # GET /assessments/1

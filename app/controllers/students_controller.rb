@@ -8,8 +8,29 @@ class StudentsController < ApplicationController
   def index
     add_breadcrumb 'Students', students_path
 
-    @show_new_student_link = !current_user.role.zero?
-    @students = Student.of(current_user)
+    @new_button = {
+      text: 'Create New Student',
+      url: new_student_path
+    }
+    @clickable_rows = true
+    @page_title = 'Students'
+    @models = Student.of(current_user)
+    @headers = [
+      'First Name',
+      'Last Name',
+      'Email',
+      'Home Phone',
+      'Cell Phone',
+      'Work Phone'
+    ]
+    @columns = [
+      'first_name',
+      'last_name',
+      'email',
+      'home_phone',
+      'cell_phone',
+      'work_phone'
+    ]
   end
 
   def show

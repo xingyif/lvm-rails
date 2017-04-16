@@ -97,18 +97,15 @@ body {
 }
 
 .index-header {
-  background-color: grey;
-  background-color:#ededed;
-  background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-  font-size: 30px;
-  height: 50px;
-  line-height: 50px;
-  margin-bottom: 10px;
-  margin-top: -15px;
+  font-size: 40px;
+  margin: 5px;
+}
+
+#indexTable tbody tr.clickable {
+  cursor: pointer;
+}
+.index-new-button {
+  margin-bottom: 15px;
 }
 
 .simple_form.tutor {
@@ -273,9 +270,5 @@ span.tag {
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close:hover {
   background: none;
-  text-decoration: none;
-}
-
-td > a:hover, td > a:focus {
   text-decoration: none;
 }

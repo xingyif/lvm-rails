@@ -29,4 +29,32 @@ class Match < ApplicationRecord
     return unless existing_matches.count > 0
     errors.add(:student_id, 'Student and tutor are already matched')
   end
+
+  def student_first_name
+    Student.find(student_id).first_name
+  end
+
+  def student_last_name
+    Student.find(student_id).last_name
+  end
+
+  def tutor_first_name
+    Tutor.find(tutor_id).first_name
+  end
+
+  def tutor_last_name
+    Tutor.find(tutor_id).last_name
+  end
+
+  def self.of(user)
+    if user.admin?
+      all
+    elsif user.coordinator?
+      where(
+        affiliate_id: Coordinator.find(
+          current_user.coordinator_id
+        ).affiliate_id
+      )
+    end
+  end
 end

@@ -21,7 +21,7 @@ RSpec.describe TagsController, type: :controller do
         it 'populates an array of all tags' do
           tags = [create(:tag)]
           get :index
-          expect(assigns(:tags)).to eq(tags)
+          expect(assigns(:models)).to eq(tags)
         end
 
         it 'renders the :index view' do

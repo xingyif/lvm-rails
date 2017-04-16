@@ -14,7 +14,7 @@ RSpec.describe AssessmentsController, type: :controller do
     describe 'GET #index' do
       it 'populates an array of assessments' do
         get :index
-        expect(assigns(:assessments)).to eq([@assessment])
+        expect(assigns(:models)).to eq([@assessment])
       end
 
       it 'renders the index template' do

@@ -7,7 +7,21 @@ class TagsController < ApplicationController
   def index
     add_breadcrumb 'Tags'
 
-    @tags = Tag.all
+    @clickable_rows = false
+    @page_title = 'Tags'
+    @models = Tag.all
+    @headers = [
+      'Name',
+      'Count',
+      'Created',
+      'Updated'
+    ]
+    @columns = [
+      'name',
+      'count',
+      'created_string',
+      'updated_string'
+    ]
   end
 
   def show

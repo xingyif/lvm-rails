@@ -21,7 +21,7 @@ RSpec.describe AffiliatesController, type: :controller do
         it 'populates an array of all affiliate' do
           affiliates = [create(:affiliate)]
           get :index
-          expect(assigns(:affiliates)).to eq(affiliates)
+          expect(assigns(:models)).to eq(affiliates)
         end
 
         it 'renders the :index view' do

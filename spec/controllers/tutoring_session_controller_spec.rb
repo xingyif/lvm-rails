@@ -9,16 +9,16 @@ RSpec.describe TutoringSessionsController, type: :controller do
 
       @tutor1 = create(:tutor)
       @tutor2 = create(:tutor)
-      student1 = create(:student)
+      @student1 = create(:student)
       student2 = create(:student)
       affiliate = create(:affiliate)
 
       create(:volunteer_job, tutor: @tutor1, affiliate: affiliate)
-      create(:enrollment, student: student1, affiliate: affiliate)
+      create(:enrollment, student: @student1, affiliate: affiliate)
       create(:volunteer_job, tutor: @tutor2, affiliate: affiliate)
       create(:enrollment, student: student2, affiliate: affiliate)
 
-      @m1 = create(:match, student: student1, tutor: @tutor1)
+      @m1 = create(:match, student: @student1, tutor: @tutor1)
       @m2 = create(:match, student: student2, tutor: @tutor2)
 
       create(:tutoring_session, match: @m2)
@@ -28,15 +28,27 @@ RSpec.describe TutoringSessionsController, type: :controller do
       @tutoring_session_attrs[:tutor_id] = @tutor1.id
     end
 
-    describe 'GET #index' do
+    describe 'GET #tutor_index' do
       it 'populates an array of tutoring_session for specified tutor' do
-        get :index, params: { tutor_id: @tutor1.id }
-        expect(assigns(:tutoring_sessions)).to eq([@tutoring_session])
+        get :tutor_index, params: { id: @tutor1.id }
+        expect(assigns(:models)).to eq([@tutoring_session])
       end
 
       it 'renders the index template' do
-        get :index, params: { tutor_id: @tutor1.id }
-        expect(response).to render_template('index')
+        get :tutor_index, params: { id: @tutor1.id }
+        expect(response).to render_template('tutor_index')
+      end
+    end
+
+    describe 'GET #student_index' do
+      it 'populates an array of tutoring_session for specified student' do
+        get :student_index, params: { id: @student1.id }
+        expect(assigns(:models)).to eq([@tutoring_session])
+      end
+
+      it 'renders the index template' do
+        get :student_index, params: { id: @student1.id }
+        expect(response).to render_template('student_index')
       end
     end
 
@@ -49,30 +61,6 @@ RSpec.describe TutoringSessionsController, type: :controller do
       it 'renders the :show view' do
         get :show, params: { id: @tutoring_session, tutor_id: @tutor1.id }
         expect(response).to render_template('show')
-      end
-    end
-
-    describe 'GET #new' do
-      it 'creates a new tutoring_session' do
-        get :new, params: { tutor_id: @tutor1.id }
-        expect(assigns(:tutoring_session)).to be_a_new(TutoringSession)
-      end
-
-      it 'renders the :new view' do
-        get :new, params: { tutor_id: @tutor1.id }
-        expect(response).to render_template('new')
-      end
-    end
-
-    describe 'GET #edit' do
-      it 'modifies the specific tutoring_session' do
-        get :edit, params: { id: @tutoring_session }
-        expect(assigns(:tutoring_session)).to eq(@tutoring_session)
-      end
-
-      it 'render the :edit view' do
-        get :edit, params: { id: @tutoring_session }
-        expect(response).to render_template('edit')
       end
     end
 
