@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :student do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
+    first_name { Faker::Name.first_name.delete("'") }
+    last_name { Faker::Name.last_name.delete("'") }
     gender { ['female', 'male', 'other'].sample }
   end
 
   factory :matched_student, class: Student do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
+    first_name { Faker::Name.first_name.delete("'") }
+    last_name { Faker::Name.last_name.delete("'") }
     gender { ['female', 'male', 'other'].sample }
     after(:create) do |student|
       affiliate = create(:affiliate)
