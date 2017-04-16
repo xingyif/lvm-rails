@@ -1,28 +1,17 @@
-<div class="col-md-6 col-md-offset-3">
-  <div class="row">
-    <div class="col-md-12">
-      <%= link_to student_path(@student) do %>
-        <span class="glyphicon glyphicon-arrow-left"></span>
-        <span class="h4">Back To Student</span>
-      <% end %>
-    </div>
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-center">
+      New Student Comment <br>
+      <small> For <%= @student.name %> </small>
+    </h1>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>New Student Comment</h2>
-    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <hr>
+    <%= simple_form_for :student_comment, url: student_comments_path, method: :post do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h4>For Student: <%= @student.name %></h4>
-    </div>
-  </div>
-
-  <hr>
-
-  <%= simple_form_for :student_comment, url: student_comments_path, method: :post do |f| %>
-    <%= render partial: 'form', locals: {f: f} %>
-  <% end %>
-
-  <hr>
 </div>
