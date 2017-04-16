@@ -173,7 +173,7 @@
               </div>
               <div class="col-md-6">
                 <div class="pull-right">
-                  <%= link_to(tutoring_sessions_path(tutor_id: @tutor.id)) do  %>
+                  <%= link_to(tutors_tutoring_sessions_path(@tutor)) do  %>
                     <button class="btn btn-default">Manage</button>
                   <% end %>
                 </div>

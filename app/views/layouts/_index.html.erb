@@ -4,6 +4,12 @@
       <div class="panel-body">
         <h1 class="index-header text-center">
           <%= @page_title %>
+          <% if @page_title_subtext %>
+            <br>
+            <small>
+              <%= @page_title_subtext %>
+            </small>
+          <% end %>
         </h1>
       </div>
     </div>

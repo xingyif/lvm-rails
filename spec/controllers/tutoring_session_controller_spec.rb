@@ -148,10 +148,7 @@ RSpec.describe TutoringSessionsController, type: :controller do
 
       it 'redirects to tutoring_session :index view' do
         delete :destroy, params: { id: @tutoring_session }
-        expect(response).to redirect_to tutoring_sessions_path(
-          tutor_id: @tutor1.id,
-          notice: 'Tutoring session was successfully destroyed.'
-        )
+        expect(response).to redirect_to tutors_tutoring_sessions_path(@tutor1)
       end
     end
   end

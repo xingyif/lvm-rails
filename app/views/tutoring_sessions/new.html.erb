@@ -1,64 +1,36 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-12">
-                <% if @student %>
-                  <%= link_to tutoring_sessions_path(match_id: @current_match.id) do %>
-                    <span class="glyphicon glyphicon-arrow-left"></span>
-                    <span class="h4">Back to <%= @tutor.first_name %> and <%= @student.first_name %>'s Tutoring Sessions</span>
-                  <% end %>
-                <% else %>
-                  <%= link_to tutoring_sessions_path(tutor_id: @tutor.id) do %>
-                    <span class="glyphicon glyphicon-arrow-left"></span>
-                    <% if current_user.tutor? %>
-                      <span class="h4">Back to My Tutoring Sessions</span>
-                    <% else %>
-                      <span class="h4">Back to <%= @tutor.name %>'s Tutoring Sessions</span>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-            <hr>
-
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <h2> New Tutoring Session <br>
-                  <% if current_user.tutor? %>
-                    <small> For <%= @tutor.name %> </small>
-                  <% elsif @student %>
-                    <small> For <%= link_to @tutor.name, tutor_path(@tutor.id) %> and <%= link_to @student.name, student_path(@student.id) %> </small>
-                  <% else %>
-                    <small> For <%= link_to @tutor.name, tutor_path(@tutor.id) %> </small>
-                  <% end %>
-                <h2>
-              </div>
-            </div>
-
-            <hr>
-
-            <% if !@students.count.zero? %>
-              <%= simple_form_for :tutoring_session, url: tutoring_sessions_path do |f| %>
-                <%= render partial: 'form', locals: {f: f} %>
-              <% end %>
-            <% else %>
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <% if current_user.tutor? %>
-                    <p class="text-danger"> You have no active matches. </p>
-                  <% else %>
-                    <p class="text-danger"> This tutor has no active matches. Please match this tutor to add a tutoring session. </p>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="index-header text-center">
+              New Tutoring Session <br>
+              <small> For <%= @tutor.name %> </small>
+            </h1>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% if !@students.count.zero? %>
+      <%= simple_form_for :tutoring_session, url: tutoring_sessions_path do |f| %>
+        <%= render partial: 'form', locals: {f: f} %>
+      <% end %>
+    <% else %>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <% if current_user.tutor? %>
+            <p class="text-danger"> You have no active matches. </p>
+          <% else %>
+            <p class="text-danger"> This tutor has no active matches. Please match this tutor to add a tutoring session. </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

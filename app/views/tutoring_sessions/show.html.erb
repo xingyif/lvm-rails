@@ -1,54 +1,57 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="index-header text-center">
+              Tutoring Session <br>
+              <small> For <%= @tutor.name %> </small>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row show-button-row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to edit_tutoring_session_path(@tutoring_session) do %>
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span> Edit
+          </button>
+        <% end %>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <%= link_to tutoring_session_path(@tutoring_session), method: :delete, data: { confirm: 'Are you sure you want to delete this tutoring session?' } do %>
+          <button class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="row">
-              <div class="col-md-10">
-                <%= link_to tutoring_sessions_path(tutor_id: @tutor.id) do %>
-                  <span class="glyphicon glyphicon-arrow-left"></span>
-                  <% if current_user.tutor? %>
-                    <span class="h4">My Tutoring Sessions</span>
-                  <% else %>
-                    <span class="h4"><%= @tutor.name %>'s Tutoring Sessions</span>
-                  <% end %>
-                <% end %>
-              </div>
-
-              <div class="col-md-2 text-right">
-                <%= link_to edit_tutoring_session_path(@tutoring_session) do %>
-                  <span class="h4">Edit</span>
-                  <span class="glyphicon glyphicon-edit"></span>
-                <% end %>
-              </div>
-
-            </div>
-
-            <hr>
-
-            <div class="row">
               <div class="col-md-12 text-center">
-                <h2> Tutoring Session </h2>
-              </div>
-            </div>
-
-            <hr>
-
-              <div class="row">
                 <% if current_user.tutor? %>
-                  <div class="col-md-12 text-center">
-                    <h4> Student: <%= @student.name %> </h4>
-                  </div>
+                  <h3> With Student: <%= @student.name %> </h3>
                 <% else %>
-                  <div class="col-md-5 col-md-offset-1">
-                    <h4> Tutor: <%= link_to @tutor.name, tutor_path(@tutor.id) %> </h4>
-                  </div>
-                  <div class="col-md-5 text-right">
-                    <h4> Student: <%= link_to @student.name, student_path(@student.id) %> </h4>
-                  </div>
+                  <h3> With Student: <%= link_to @student.name, student_path(@student.id) %> </h3>
                 <% end %>
               </div>
+            </div>
 
             <hr>
 
@@ -71,6 +74,13 @@
               <div class="col-md-5 text-right">
                 <h4> End Date </h4>
                 <p> <%= @tutoring_session.end_date.strftime('%a, %B %d %Y') %> </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-11 col-md-offset-1">
+                <h4> Comment </h4>
+                <p> <%= @tutoring_session.session_comment %> <p/>
               </div>
             </div>
           </div>

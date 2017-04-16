@@ -1,16 +1,28 @@
 class TutoringSessionsController < ApplicationController
   before_action :guard_against_tutors
-  before_action :set_tutor_or_match, only: [:index, :new]
   before_action :set_tutoring_session, only: [:show, :edit, :update, :destroy]
 
   add_breadcrumb 'Home', :root_path
 
   def student_index
-    add_breadcrumb 'Tutoring Sessions'
+    # While this lives in the tutoring sessions controller, it appears on the
+    # front end as if it's entirely different. Namely, it looks like it's a
+    # sub-view of the Student (see breadcrumbs below). This releives some
+    # complications regarding enabling seamless navigation through this
+    # controller as if the user was viewing this in the context of a student
+    # versus a tutor. Please note that the user cannot edit or otherwise
+    # manipulate any data on this page. To modify anything they must do so
+    # through the tutor path.
 
-    @clickable_rows = true
-    @page_title = 'Tutoring Sessions'
     @student = Student.of(current_user).find(params[:id])
+
+    add_breadcrumb 'Students', students_path
+    add_breadcrumb @student.name, student_path(@student)
+    add_breadcrumb 'Student Attendance'
+
+    @clickable_rows = false
+    @page_title = 'Student Attendance'
+    @page_title_subtext = "For #{@student.name}"
     @models = TutoringSession.joins(:match).where(
       matches: { student_id: @student.id }
     )
@@ -31,11 +43,17 @@ class TutoringSessionsController < ApplicationController
   end
 
   def tutor_index
-    add_breadcrumb 'Tutoring Sessions'
+    @tutor = Tutor.of(current_user).find(params[:id])
 
+    add_breadcrumb "Tutoring Sessions for #{@tutor.name}"
+
+    @new_button = {
+      text: 'Create New Tutoring Session',
+      url: new_tutoring_session_path(tutor_id: @tutor)
+    }
     @clickable_rows = true
     @page_title = 'Tutoring Sessions'
-    @tutor = Tutor.of(current_user).find(params[:id])
+    @page_title_subtext = "For #{@tutor.name}"
     @models = TutoringSession.joins(:match).where(
       matches: { tutor_id: @tutor.id }
     )
@@ -55,17 +73,45 @@ class TutoringSessionsController < ApplicationController
     ]
   end
 
+  def new
+    if current_user.tutor?
+      @tutor = Tutor.find(current_user.tutor_id)
+    elsif params[:tutor_id]
+      @tutor = Tutor.of(current_user).where(id: params[:tutor_id]).take
+    end
+
+    add_breadcrumb "Tutoring Sessions for #{@tutor.name}",
+                   tutors_tutoring_sessions_path(@tutor)
+    add_breadcrumb 'New Tutoring Session'
+
+    @tutoring_session = TutoringSession.new
+
+    @students = Match.where(tutor_id: @tutor).map do |m|
+      [m.student.name, m.id]
+    end
+  end
+
   def show
-    add_breadcrumb 'Tutoring Sessions', tutoring_sessions_path
+    if current_user.tutor?
+      @tutor = Tutor.find(current_user.tutor_id)
+    elsif params[:tutor_id]
+      @tutor = Tutor.of(current_user)
+                    .find(Match.find(@tutoring_session.match_id).tutor_id)
+    end
+
+    add_breadcrumb "Tutoring Sessions for #{@tutor.name}",
+                   tutors_tutoring_sessions_path(@tutor)
     add_breadcrumb 'Tutoring Session'
   end
 
   def edit
-    add_breadcrumb 'Tutoring Sessions', tutoring_sessions_path
+    add_breadcrumb "Tutoring Sessions for #{@tutor.name}",
+                   tutors_tutoring_sessions_path(@tutor)
     add_breadcrumb 'Tutoring Session', tutoring_session_path(@tutoring_session)
     add_breadcrumb 'Edit'
 
     tutor_id = Match.find(@tutoring_session.match_id).tutor_id
+    @current_student_id = Match.find(@tutoring_session.match_id).student_id
     @students = Match.where(tutor_id: tutor_id)
                      .map { |m| [m.student.name, m.id] }
   end
@@ -94,10 +140,15 @@ class TutoringSessionsController < ApplicationController
 
   def destroy
     @tutoring_session.destroy
-    redirect_to tutoring_sessions_path(
-      tutor_id: @tutor.id,
-      notice: 'Tutoring session was successfully destroyed.'
-    )
+
+    if current_user.tutor?
+      @tutor = Tutor.find(current_user.tutor_id)
+    elsif params[:tutor_id]
+      @tutor = Tutor.of(current_user)
+                    .find(Match.find(@tutoring_session.match_id).tutor_id)
+    end
+
+    redirect_to tutors_tutoring_sessions_path(@tutor)
   end
 
   private
@@ -122,18 +173,6 @@ class TutoringSessionsController < ApplicationController
                   .find(params.to_unsafe_h['tutoring_session']['tutor_id'])
     @students = Match.where(tutor_id: @tutor.id)
                      .map { |m| [m.student.name, m.id] }
-  end
-
-  def set_tutor_or_match
-    if current_user.tutor?
-      @tutor = Tutor.find(current_user.tutor_id)
-    elsif params[:tutor_id]
-      @tutor = Tutor.of(current_user).where(id: params[:tutor_id]).take
-    elsif params[:match_id]
-      @match = Match.find(params[:match_id])
-    end
-
-    kick_out unless @tutor || @match
   end
 
   def tutoring_session_params
