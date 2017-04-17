@@ -17,11 +17,6 @@ RSpec.describe 'affiliates/show', type: :view do
     expect(rendered).to match(@affiliate.address)
   end
 
-  it 'contains the Back link' do
-    render
-    assert_select 'a[href=?]', affiliates_path
-  end
-
   it 'contains the Edit link' do
     render
     assert_select 'a[href=?]', edit_affiliate_path(@affiliate)

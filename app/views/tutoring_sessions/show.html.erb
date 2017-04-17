@@ -6,7 +6,7 @@
           <div class="col-md-12">
             <h1 class="index-header text-center">
               Tutoring Session <br>
-              <small> For <%= @tutor.name %> </small>
+              <small> For <%= link_to @tutor.name, @tutor %> </small>
             </h1>
           </div>
         </div>
@@ -56,29 +56,29 @@
             <hr>
 
             <div class="row">
-              <div class="col-md-5 col-md-offset-1">
+              <div class="col-md-6 text-center">
                 <h4> Location </h4>
                 <p> <%= @tutoring_session.location %> </p>
               </div>
-              <div class="col-md-5 text-right">
+              <div class="col-md-6 text-center">
                 <h4> Hours </h4>
                 <p> <%= @tutoring_session.hours %> </p>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-5 col-md-offset-1">
+              <div class="col-md-6 text-center">
                 <h4> Start Date </h4>
                 <p> <%= @tutoring_session.start_date.strftime('%a, %B %d %Y') %> </p>
               </div>
-              <div class="col-md-5 text-right">
+              <div class="col-md-6 text-center">
                 <h4> End Date </h4>
                 <p> <%= @tutoring_session.end_date.strftime('%a, %B %d %Y') %> </p>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-11 col-md-offset-1">
+              <div class="col-md-12 text-center">
                 <h4> Comment </h4>
                 <p> <%= @tutoring_session.session_comment %> <p/>
               </div>

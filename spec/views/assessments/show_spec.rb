@@ -10,7 +10,7 @@ RSpec.describe 'assessments/show' do
   it 'displays the attributes in <p>' do
     render
     expect(rendered).to match(@assessment.score)
-    expect(rendered).to match(@assessment.date.strftime('%Y-%m-%d'))
+    expect(rendered).to match(@assessment.date.strftime('%M %d, %Y'))
     expect(rendered).to match(@assessment.category)
     expect(rendered).to match(@assessment.level)
     expect(rendered).to match(@assessment.name)

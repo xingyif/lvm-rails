@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   patch 'students/:id/tags/update', to: 'students#update_tags', as: 'update_student_tags'
 
   get 'matches', to: 'matches#index', as: 'matches'
-  get 'match/:id', to: 'matches#show', as: 'match'
+  get 'matches/:id', to: 'matches#show', as: 'match'
 
   get 'tutoring_sessions/tutor/:id', to: 'tutoring_sessions#tutor_index', as: 'tutors_tutoring_sessions'
   get 'tutoring_sessions/student/:id', to: 'tutoring_sessions#student_index', as: 'students_attendance'

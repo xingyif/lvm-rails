@@ -1,6 +1,6 @@
-matches = [*1..150]
+matches = [*1..100]
 
-150.times do
+100.times do
   TutoringSession.seed do |t|
     t.match_id        = matches.sample
     t.start_date      = Date.today - 1
