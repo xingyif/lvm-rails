@@ -221,7 +221,7 @@
                   <% if !@students.empty? %>
                     <% @students.each do |s| %>
                       <tr>
-                        <td> <%= s.name %> </td>
+                        <td> <%= link_to s.name, s %> </td>
                         <td> <%= s.email %> </td>
                       </tr>
                     <% end %>
