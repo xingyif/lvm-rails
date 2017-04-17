@@ -1,49 +1,88 @@
-<div class="dashboard">
-  <div class='row centered'>
-    <h1> Welcome </h1>
-  </div>
-
-  <div class='row centered'>
-    <% if @see_tutoring_sessions %>
-      <div class='col-md-2 text-center'>
-        <%= link_to 'My Sessions', tutors_tutoring_sessions_path(current_user.tutor_id), class: 'button' %>
-      </div>
-    <% end %>
-
-    <% if @see_students %>
-      <div class='col-md-2 text-center'>
-        <%= link_to 'Students', students_path, class: 'button' %>
-      </div>
-    <% end %>
-
-    <% if @see_tutors %>
-      <div class='col-md-2 text-center'>
-        <%= link_to 'Tutors', tutors_path, class: 'button' %>
-      </div>
-    <% end %>
-
-    <% if @see_matches %>
-      <div class='col-md-2 text-center'>
-        <%= link_to 'Matches', matches_path, class: 'button' %>
-      </div>
-    <% end %>
-
-    <% if @see_coordinators %>
-      <div class='col-md-2 text-center'>
-        <%= link_to 'Coordinators', coordinators_path, class: 'button' %>
-      </div>
-    <% end %>
-
-    <% if @see_affiliates %>
-      <div class='col-md-2 text-center'>
-        <%= link_to 'Affiliates', affiliates_path, class: 'button' %>
-      </div>
-    <% end %>
-
-    <% if @see_affiliates %>
-      <div class='col-md-2 text-center'>
-        <%= link_to 'Deleted Students', deleted_students_path, class: 'button' %>
-      </div>
-    <% end %>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h1> Welcome! </h1>
+    <hr>
   </div>
 </div>
+
+<% if @see_tutoring_sessions %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= link_to tutors_tutoring_sessions_path(current_user.tutor_id) do %>
+        <button type="button" class="btn btn-info btn-lg btn-block"> My Sessions </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if @see_students %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= link_to students_path do %>
+        <button type="button" class="btn btn-success btn-lg btn-block"> Students </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<% if @see_tutors %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= link_to tutors_path do %>
+        <button type="button" class="btn btn-success btn-lg btn-block"> Tutors </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<% if @see_matches %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= link_to matches_path do %>
+        <button type="button" class="btn btn-warning btn-lg btn-block"> Matches </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<% if @see_coordinators %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= link_to coordinators_path do %>
+        <button type="button" class="btn btn-info btn-lg btn-block"> Coordinators </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<% if @see_affiliates %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= link_to affiliates_path do %>
+        <button type="button" class="btn btn-info btn-lg btn-block"> Affiliates </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<% if @see_deleted_students %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <%= link_to deleted_students_path do %>
+        <button type="button" class="btn btn-danger btn-lg btn-block"> Deleted Students </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<hr>

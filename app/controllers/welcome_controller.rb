@@ -9,5 +9,6 @@ class WelcomeController < ApplicationController
     @see_matches = current_user.role > 0
     @see_coordinators = current_user.role == 2
     @see_affiliates = current_user.role == 2
+    @see_deleted_students = current_user.role == 2
   end
 end
