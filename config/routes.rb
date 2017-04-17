@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   put 'students/set_tutor'
   put 'tutors/add_student'
+  patch 'tutors/remove_student'
   patch 'tutors/:id/tags/update', to: 'tutors#update_tags', as: 'update_tutor_tags'
   patch 'students/:id/tags/update', to: 'students#update_tags', as: 'update_student_tags'
 
