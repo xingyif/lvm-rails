@@ -4,7 +4,7 @@ class MatchesController < ApplicationController
   def index
     add_breadcrumb 'Matches'
 
-    @clickable_rows = false
+    @clickable_rows = true
     @page_title = 'Matches'
     @models = Match.of(current_user)
     @headers = [
@@ -23,5 +23,14 @@ class MatchesController < ApplicationController
       'start',
       'end'
     ]
+  end
+
+  def show
+    add_breadcrumb 'Matches', matches_path
+    add_breadcrumb 'Match'
+
+    @match = Match.find(params[:id])
+    @student = Student.of(current_user).find(@match.student_id)
+    @tutor = Tutor.of(current_user).find(@match.tutor_id)
   end
 end

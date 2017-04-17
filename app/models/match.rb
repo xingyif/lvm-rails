@@ -25,8 +25,8 @@ class Match < ApplicationRecord
       student_id: student.id,
       tutor_id: tutor.id,
       end: nil
-    )
-    return unless existing_matches.count > 0
+    ).where.not(id: id)
+    return if existing_matches.count.zero?
     errors.add(:student_id, 'Student and tutor are already matched')
   end
 

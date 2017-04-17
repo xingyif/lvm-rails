@@ -1,7 +1,55 @@
-<p>
-  <strong>Name:</strong>
-  <%= @student.name %>
-</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="index-header text-center">
+              Match
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6 text-center">
+                <h3> Student <br>
+                  <small> <%= link_to @student.name, student_path(@student.id) %> </small>
+                </h3>
+              </div>
+
+              <div class="col-md-6 text-center">
+                <h3> Tutor <br>
+                  <small> <%= link_to @tutor.name, tutor_path(@tutor.id) %> </small>
+                </h3>
+              </div>
+            </div>
+
+            <div class="col-md-6 text-center">
+              <h3> Start Date <br>
+                <small> <%= @match.start %></small>
+              </h3>
+            </div>
+
+            <div class="col-md-6 text-center">
+              <h3> End Date <br>
+                <% if @match.end %>
+                  <small> <%= @match.start %></small>
+                <% end %>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
