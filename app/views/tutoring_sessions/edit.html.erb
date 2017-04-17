@@ -1,22 +1,15 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="index-header text-center">
-              Edit Tutoring Session <br>
-              <small> For <%= link_to @tutor.name, @tutor %> </small>
-            </h1>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="col-md-12">
+    <h1 class="text-center">
+      Edit Tutoring Session<br>
+      <small> For <%= link_to @tutor.name, @tutor %> </small>
+    </h1>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <hr>
     <%= simple_form_for :tutoring_session, url: tutoring_session_path(@tutoring_session), method: :patch do |f| %>
       <%= render partial: 'form', locals: {f: f} %>
     <% end %>

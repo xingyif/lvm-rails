@@ -1,28 +1,17 @@
-<div class="col-md-6 col-md-offset-3">
-  <div class="row">
-    <div class="col-md-12">
-      <%= link_to tutor_path(@tutor) do %>
-        <span class="glyphicon glyphicon-arrow-left"></span>
-        <span class="h4">Back To Tutor</span>
-      <% end %>
-    </div>
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-center">
+      Edit Tutor Comment<br>
+      <small> For <%= link_to @tutor.name, @tutor %> </small>
+    </h1>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Edit Tutor Comment</h2>
-    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <hr>
+    <%= simple_form_for :tutor_comment, url: tutor_comment_path(@tutor_comment), method: :patch do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h4>For Tutor: <%= @tutor.name %></h4>
-    </div>
-  </div>
-
-  <hr>
-
-  <%= simple_form_for :tutor_comment, url: tutor_comment_path(@tutor_comment), method: :patch do |f| %>
-    <%= render partial: 'form', locals: {f: f} %>
-  <% end %>
-
-  <hr>
 </div>
