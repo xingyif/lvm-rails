@@ -1,5 +1,28 @@
+<div class="row show-button-row">
+  <div class="col-md-6 col-md-offset-2">
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to edit_tutor_path(@tutor) do %>
+            <button class="btn btn-primary">
+              <span class="glyphicon glyphicon-pencil"></span> Edit
+            </button>
+        <% end %>
+      </div>
+
+      <div class="col-md-offset-6 text-right">
+        <%= link_to tutor_path(@tutor), method: :delete, data: { confirm: 'Are you sure you want to delete this affiliate?' } do %>
+            <button class="btn btn-danger">
+              <span class="glyphicon glyphicon-trash"></span> Delete
+            </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-8 col-md-offset-2">
     <div class="row">
       <div class="col-xs-12">
         <div class="panel panel-default">
@@ -108,85 +131,10 @@
         </div>
       </div>
 
-
-      <div class="col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-6">
-                <h4>Comments</h4>
-              </div>
-
-              <div class="col-md-6">
-                <div class="pull-right">
-                  <%= link_to new_tutor_comment_path(tutor: @tutor) do %>
-                    <button class="btn btn-default">Add</button>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <hr>
-
-            <% if @tutor.tutor_comments.length > 0 %>
-              <% for c in @tutor.tutor_comments %>
-                <div class="panel panel-default">
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <div class="row">
-                        <div class="col-xs-6">
-                          <span class="glyphicon glyphicon-time"></span>
-                          <%= c.updated_at.strftime('%D') %> <span class="text-muted"><%= '(Edited)' if c.created_at != c.updated_at %></span>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                          <%= link_to edit_tutor_comment_path(c), class: 'margin-right-sm' do %>
-                            <span class="glyphicon glyphicon-pencil"></span>
-                          <% end %>
-                          <%= link_to c, method: :delete, data: {confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}"} do %>
-                            <span class="glyphicon glyphicon-remove text-danger"></span>
-                          <% end %>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <%= c.content %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% else %>
-              No Tutor Comments
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-6">
-                <h4>Attendance</h4>
-              </div>
-              <div class="col-md-6">
-                <div class="pull-right">
-                  <%= link_to(tutors_tutoring_sessions_path(@tutor)) do  %>
-                    <button class="btn btn-default">Manage</button>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
-  <div class="col-md-7">
+  <div class="col-md-7  col-md-offset-2">
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-default">
@@ -522,6 +470,82 @@
           </div>
         </div>
       </div>
+
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Comments</h4>
+              </div>
+
+              <div class="col-md-6">
+                <div class="pull-right">
+                  <%= link_to new_tutor_comment_path(tutor: @tutor) do %>
+                      <button class="btn btn-default">Add</button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <% if @tutor.tutor_comments.length > 0 %>
+                <% for c in @tutor.tutor_comments %>
+                    <div class="panel panel-default">
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <span class="glyphicon glyphicon-time"></span>
+                              <%= c.updated_at.strftime('%D') %> <span class="text-muted"><%= '(Edited)' if c.created_at != c.updated_at %></span>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                              <%= link_to edit_tutor_comment_path(c), class: 'margin-right-sm' do %>
+                                  <span class="glyphicon glyphicon-pencil"></span>
+                              <% end %>
+                              <%= link_to c, method: :delete, data: {confirm: "Delete the following tutor comment for #{@tutor.name}?\nContent: #{c.content}"} do %>
+                                  <span class="glyphicon glyphicon-remove text-danger"></span>
+                              <% end %>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <%= c.content %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+            <% else %>
+                No Tutor Comments
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Attendance</h4>
+              </div>
+            </div>
+            <hr>
+              <div class="col-md-6">
+                <div class="pull-right">
+                  <%= link_to(tutors_tutoring_sessions_path(@tutor)) do  %>
+                      <button class="btn btn-default">Manage</button>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
     </div>
   </div>
