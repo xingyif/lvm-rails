@@ -39,5 +39,11 @@
         <%= link_to 'Affiliates', affiliates_path, class: 'button' %>
       </div>
     <% end %>
+
+    <% if @see_affiliates %>
+      <div class='col-md-2 text-center'>
+        <%= link_to 'Deleted Students', deleted_students_path, class: 'button' %>
+      </div>
+    <% end %>
   </div>
 </div>

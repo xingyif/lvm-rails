@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413221343) do
+ActiveRecord::Schema.define(version: 20170417170021) do
 
   create_table "affiliates", force: :cascade do |t|
     t.string   "name"
@@ -143,6 +143,8 @@ ActiveRecord::Schema.define(version: 20170413221343) do
     t.integer  "transportation"
     t.string   "other_preferences"
     t.string   "referral_other"
+    t.date     "deleted_on"
+    t.integer  "deleted_by"
   end
 
   create_table "taggings", force: :cascade do |t|

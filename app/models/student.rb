@@ -74,6 +74,10 @@ class Student < ApplicationRecord
     Affiliate.find(enrollments.where(end: nil).take.affiliate_id)
   end
 
+  def deleted_by_email
+    User.find(deleted_by).email
+  end
+
   # rubocop:disable CyclomaticComplexity, PerceivedComplexity
   def status_class_indicator
     active  = ['Active']
@@ -96,9 +100,13 @@ class Student < ApplicationRecord
         enrollments: {
           affiliate_id: Coordinator.find(user.coordinator_id).affiliate_id
         }
-      )
-    elsif user.admin?
+      ).where(deleted_on: nil)
+    else
       all
     end
+  end
+
+  def self.deleted_of(user)
+    where.not(deleted_on: nil) if user.admin?
   end
 end

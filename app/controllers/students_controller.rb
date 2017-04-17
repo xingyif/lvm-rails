@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
   add_breadcrumb 'Home', :root_path
 
   def index
-    add_breadcrumb 'Students', students_path
+    add_breadcrumb 'Students'
 
     @new_button = {
       text: 'Create New Student',
@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
     }
     @clickable_rows = true
     @page_title = 'Students'
-    @models = Student.of(current_user)
+    @models = Student.of(current_user).where(deleted_on: nil)
     @headers = [
       'First Name',
       'Last Name',
@@ -33,8 +33,33 @@ class StudentsController < ApplicationController
     ]
   end
 
+  def deleted_index
+    ensure_admin!
+    add_breadcrumb 'Deleted Students'
+
+    @clickable_rows = true
+    @page_title = 'Deleted Students'
+    @models = Student.deleted_of(current_user)
+    @headers = [
+      'First Name',
+      'Last Name',
+      'Deleted On',
+      'Deleted By'
+    ]
+    @columns = [
+      'first_name',
+      'last_name',
+      'deleted_on',
+      'deleted_by_email'
+    ]
+  end
+
   def show
-    add_breadcrumb 'Students', students_path
+    if @student.deleted_on
+      add_breadcrumb 'Deleted Students', deleted_students_path
+    else
+      add_breadcrumb 'Students', students_path
+    end
     add_breadcrumb @student.name
 
     @match = current_match(params[:id])
@@ -83,6 +108,31 @@ class StudentsController < ApplicationController
     @student.all_tags = params[:student][:all_tags]
 
     redirect_to tutor_path(@student)
+  end
+
+  def reinstate
+    @student = Student.of(current_user).find(params[:id])
+    @student.update(
+      deleted_on: nil,
+      deleted_by: nil
+    )
+
+    redirect_to @student
+  end
+
+  def delete
+    @student = Student.of(current_user).find(params[:id])
+    unmatch_current_tutor(@student)
+    @student.update(
+      deleted_on: Date.today,
+      deleted_by: current_user.id
+    )
+
+    if current_user.admin?
+      redirect_to @student
+    else
+      redirect_to students_path
+    end
   end
 
   def destroy

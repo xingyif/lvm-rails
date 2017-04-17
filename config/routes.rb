@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   get 'tutoring_sessions/tutor/:id', to: 'tutoring_sessions#tutor_index', as: 'tutors_tutoring_sessions'
   get 'tutoring_sessions/student/:id', to: 'tutoring_sessions#student_index', as: 'students_attendance'
 
+  patch 'students/:id/delete', to: 'students#delete', as: 'student_delete'
+  patch 'students/:id/reinstate', to: 'students#reinstate', as: 'student_reinstate'
+  get 'deleted_students', to: 'students#deleted_index', as: 'deleted_students'
+
   resources :affiliates
   resources :assessments
   resources :coordinators

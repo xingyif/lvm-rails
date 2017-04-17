@@ -5,17 +5,27 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-9">
-                <%= link_to students_path do %>
-                  <span class="glyphicon glyphicon-arrow-left"></span>
-                  <span class="h4">Back To Students</span>
+              <div class="col-xs-5">
+                <%= link_to edit_student_path(@student) do %>
+                  <button class="btn btn-primary">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit Student
+                  </button>
                 <% end %>
               </div>
 
-              <div class="col-xs-3 text-right">
-                <%= link_to edit_student_path(@student) do %>
-                  <span class="h4">Edit</span>
-                  <span class="glyphicon glyphicon-edit"></span>
+              <div class="col-xs-7 text-right">
+                <% if @student.deleted_on %>
+                  <%= link_to student_reinstate_path(@student), method: :patch, data: { confirm: "Are you sure you want to reinstate #{@student.name}?" } do %>
+                    <button class="btn btn-success">
+                      <span class="glyphicon glyphicon-check"></span> Reinstate Student
+                    </button>
+                  <% end %>
+                <% else %>
+                  <%= link_to student_delete_path(@student), method: :patch, data: { confirm: "Are you sure you want to delete #{@student.name}?" } do %>
+                    <button class="btn btn-danger">
+                      <span class="glyphicon glyphicon-trash"></span> Delete Student
+                    </button>
+                  <% end %>
                 <% end %>
               </div>
             </div>
@@ -170,35 +180,37 @@
 
   <div class="col-md-7">
     <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <h4>Tutor:
-                  <% if !@match.nil? %>
-                    <%= link_to Tutor.find(@match.tutor_id).name, tutor_path(@match.tutor_id)%>
+      <% if !@student.deleted_on %>
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>Tutor:
+                    <% if !@match.nil? %>
+                      <%= link_to Tutor.find(@match.tutor_id).name, tutor_path(@match.tutor_id)%>
+                    <% else %>
+                      No Tutor
+                    <% end %>
+                  </h4>
+                </div>
+                <div class="col-sm-6 text-right">
+                  <% if !@tutor_options.nil? %>
+                    <%= form_tag('set_tutor', method: 'put') do %>
+                      <%= select_tag(:tutor_id, options_for_select(@tutor_options)) %>
+                      <%= submit_tag('Set Tutor') %>
+                      <%= hidden_field_tag(:student_id, @student.id) %>
+                      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <% end %>
                   <% else %>
-                    No Tutor
+                    No unmatched tutors
                   <% end %>
-                </h4>
-              </div>
-              <div class="col-sm-6 text-right">
-                <% if !@tutor_options.nil? %>
-                  <%= form_tag('set_tutor', method: 'put') do %>
-                    <%= select_tag(:tutor_id, options_for_select(@tutor_options)) %>
-                    <%= submit_tag('Set Tutor') %>
-                    <%= hidden_field_tag(:student_id, @student.id) %>
-                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                  <% end %>
-                <% else %>
-                  No unmatched tutors
-                <% end %>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
 
       <div class="col-md-12">
         <div class="panel panel-default">
