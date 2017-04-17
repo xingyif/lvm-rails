@@ -1,26 +1,3 @@
-<div class="row show-button-row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="row">
-      <div class="col-md-6">
-        <%= link_to edit_student_path(@student) do %>
-            <button class="btn btn-primary">
-              <span class="glyphicon glyphicon-pencil"></span> Edit
-            </button>
-        <% end %>
-      </div>
-
-      <div class="col-md-offset-12 text-right">
-        <%= link_to student_path(@student), method: :delete, data: { confirm: 'Are you sure you want to delete this student?' } do %>
-            <button class="btn btn-danger">
-              <span class="glyphicon glyphicon-trash"></span> Delete
-            </button>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <div class="row">
   <div class="col-md-9 col-md-offset-2">
     <div class="row">
@@ -29,20 +6,22 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-xs-9">
-                <%= link_to students_path do %>
-                  <span class="glyphicon glyphicon-arrow-left"></span>
-                  <span class="h4">Back To Students</span>
+                <%= link_to edit_student_path(@student) do %>
+                    <button class="btn btn-primary">
+                      <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </button>
                 <% end %>
               </div>
 
               <div class="col-xs-3 text-right">
-                <%= link_to edit_student_path(@student) do %>
-                  <span class="h4">Edit</span>
-                  <span class="glyphicon glyphicon-edit"></span>
+                <%= link_to student_path(@student), method: :delete, data: { confirm: 'Are you sure you want to delete this student?' } do %>
+                    <button class="btn btn-danger">
+                      <span class="glyphicon glyphicon-trash"></span> Delete
+                    </button>
                 <% end %>
               </div>
             </div>
-            <h3 class="text-center">
+            <h2 class="text-center">
               <%= @student.name %><br>
               <small>
                 Affiliate:
@@ -53,7 +32,7 @@
                 <% end %>
               </small><br>
               <button class="btn btn-sm btn-<%= @student.status_class_indicator %> disabled"><%= @student.status.blank? ? "Status Unknown" : @student.status %></button>
-            </h3>
+            </h2>
             <hr>
             <div class="row">
               <div class="col-sm-6">
