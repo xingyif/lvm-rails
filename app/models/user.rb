@@ -26,4 +26,26 @@ class User < ApplicationRecord
     return unless coordinator_id && tutor_id
     errors.add(:account_type, "Can't be tutor and coordinator")
   end
+
+  def last_sign_in_string
+    if last_sign_in_at
+      last_sign_in_at.strftime('%B %d, %Y')
+    else
+      'Never Signed In'
+    end
+  end
+
+  def created_at_string
+    created_at.strftime('%B %d, %Y')
+  end
+
+  def role_string
+    if role.zero?
+      'Tutor'
+    elsif role == 1
+      'Coordinator'
+    else
+      'Admin'
+    end
+  end
 end

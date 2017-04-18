@@ -66,6 +66,17 @@
                 <p> <%= @coordinator.date_of_birth.strftime("%B %d, %Y") %> </p>
               </div>
             </div>
+
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h4> Attached User Account</h4>
+                  <% if @user %>
+                    <p> <%= link_to @user.email, @user %> </p>
+                  <% else %>
+                    <p> No Account Attached
+                  <% end %>
+                </div>
+              </div>
           </div>
         </div>
       </div>

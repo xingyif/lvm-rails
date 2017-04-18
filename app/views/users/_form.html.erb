@@ -1,0 +1,77 @@
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@user.errors.count, "error") %> prohibited
+      this user account from being saved:
+    </h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form role="form">
+  <%= f.hidden_field :user_id, value: @user.id %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :email, as: :string, label: "Email Address", maxlength: 255, required: false, input_html: { class: "mask_email" } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :password, label: "Password", required: true, as: :password, input_html: { autocomplete: "off" } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :password_confirmation, label: "Confirm Password", required: true, as: :password, input_html: { autocomplete: "off" } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :role, collection: @role_options %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :tutor_id, label: "Tutor Name", collection: @tutors %>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.input :coordinator_id, label: "Coordinator Name", collection: @coordinators %>
+    </div>
+  </div>
+
+  <%= f.button :submit %>
+</form>
+
+<script>
+$('.mask_email').inputmask({ alias: 'email' });
+
+$('#user_role').change(function(e) {
+  var role = $(e.currentTarget).val();
+
+  $('#user_tutor_id').attr({disabled: true});
+  $('#user_coordinator_id').attr({disabled: true});
+
+  if (role == '0') {
+    $('#user_coordinator_id').val('');
+    $('#user_tutor_id').attr({disabled: false});
+  } else if (role == '1') {
+    $('#user_tutor_id').val('');
+    $('#user_coordinator_id').attr({disabled: false});
+  } else if (role == '1') {
+    $('#user_tutor_id').val('');
+    $('#user_coordinator_id').val('');
+  }
+});
+
+$('#user_role').trigger('change');
+</script>

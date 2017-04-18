@@ -1,100 +1,114 @@
-<div class="row">
-  <div class="col-md-12 text-center">
-    <h1> Welcome! </h1>
-    <hr>
+<div class="dashboard">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1> Welcome! </h1>
+      <hr>
+    </div>
   </div>
+
+  <% if @is_tutor %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to tutors_tutoring_sessions_path(current_user.tutor_id) do %>
+          <button type="button" class="btn btn-info btn-lg btn-block"> My Sessions </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @is_coordinator || @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to students_path do %>
+          <button type="button" class="btn btn-success btn-lg btn-block"> Students </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <% if @is_coordinator || @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to tutors_path do %>
+          <button type="button" class="btn btn-success btn-lg btn-block"> Tutors </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <% if @is_coordinator || @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to matches_path do %>
+          <button type="button" class="btn btn-warning btn-lg btn-block"> Matches </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <% if @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to coordinators_path do %>
+          <button type="button" class="btn btn-info btn-lg btn-block"> Coordinators </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <% if @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to affiliates_path do %>
+          <button type="button" class="btn btn-info btn-lg btn-block"> Affiliates </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <% if @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to users_path do %>
+          <button type="button" class="btn btn-primary btn-lg btn-block"> User Accounts </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <% if @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to deleted_students_path do %>
+          <button type="button" class="btn btn-danger btn-lg btn-block"> Deleted Students </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <% if @is_admin %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <%= link_to deleted_tutors_path do %>
+          <button type="button" class="btn btn-danger btn-lg btn-block"> Deleted Tutors </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <hr>
 </div>
-
-<% if @see_tutoring_sessions %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to tutors_tutoring_sessions_path(current_user.tutor_id) do %>
-        <button type="button" class="btn btn-info btn-lg btn-block"> My Sessions </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<% if @see_students %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to students_path do %>
-        <button type="button" class="btn btn-success btn-lg btn-block"> Students </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @see_tutors %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to tutors_path do %>
-        <button type="button" class="btn btn-success btn-lg btn-block"> Tutors </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @see_matches %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to matches_path do %>
-        <button type="button" class="btn btn-warning btn-lg btn-block"> Matches </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @see_coordinators %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to coordinators_path do %>
-        <button type="button" class="btn btn-info btn-lg btn-block"> Coordinators </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @see_affiliates %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to affiliates_path do %>
-        <button type="button" class="btn btn-info btn-lg btn-block"> Affiliates </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @see_deleted_students %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to deleted_students_path do %>
-        <button type="button" class="btn btn-danger btn-lg btn-block"> Deleted Students </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @see_deleted_tutors %>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= link_to deleted_tutors_path do %>
-        <button type="button" class="btn btn-danger btn-lg btn-block"> Deleted Tutors </button>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<hr>

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-center">
+      New User Account
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <hr>
+    <%= simple_form_for :user, url: admin_users_create_path, method: :post do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
+  </div>
+</div>

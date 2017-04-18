@@ -34,6 +34,7 @@ class CoordinatorsController < ApplicationController
 
     @students = students
     @tutors = tutors
+    @user = User.where(coordinator_id: @coordinator.id).take
   end
 
   def new

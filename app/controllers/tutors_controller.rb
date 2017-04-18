@@ -63,6 +63,7 @@ class TutorsController < ApplicationController
 
     @students = students
     @student_options = student_options
+    @user = User.where(tutor_id: @tutor.id).take
   end
 
   def reinstate
@@ -240,7 +241,7 @@ class TutorsController < ApplicationController
         enrollments: {
           affiliate_id: @tutor.active_affiliate.id
         }
-      ).to_a
+      ).order(:first_name).to_a
     untutored_students = all_students_arr
                          .reject { |s| matched_student_ids.include? s.id }
     untutored_students.map { |t| [t.name, t.id] }

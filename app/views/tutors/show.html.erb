@@ -1,4 +1,4 @@
-div class="row">
+<div class="row">
   <div class="col-md-3">
     <div class="row">
       <div class="col-xs-12">
@@ -41,7 +41,22 @@ div class="row">
               </small><br>
               <button class="btn btn-sm btn-<%= @tutor.status_class_indicator %> disabled"><%= @tutor.status.blank? ? "Status Unknown" : @tutor.status %></button>
             </h3>
+
             <hr>
+
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h4> Attached User Account</h4>
+                  <% if @user %>
+                    <p> <%= link_to @user.email, @user %> </p>
+                  <% else %>
+                    <p> No Account Attached
+                  <% end %>
+                </div>
+              </div>
+
+            <hr>
+
             <div class="row">
               <div class="col-sm-6">
                 <span class="text-muted">SMARTT ID: </span><b><%= @tutor.smartt_id %></b>
