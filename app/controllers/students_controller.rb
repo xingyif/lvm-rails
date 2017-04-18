@@ -233,11 +233,12 @@ class StudentsController < ApplicationController
   end
 
   def tutor_options
-    tutors = Tutor.of(current_user).joins(:volunteer_jobs).where(
-      volunteer_jobs: {
-        affiliate_id: @student.active_affiliate.id
-      }
-    ).to_a.map { |t| [t.name, t.id] }
+    tutors = Tutor.of(current_user).where(deleted_on: nil)
+                  .joins(:volunteer_jobs).where(
+                    volunteer_jobs: {
+                      affiliate_id: @student.active_affiliate.id
+                    }
+                  ).to_a.map { |t| [t.name, t.id] }
     tutors.insert(0, ['No Tutor', 0])
   end
 

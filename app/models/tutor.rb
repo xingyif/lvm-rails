@@ -82,6 +82,10 @@ class Tutor < ApplicationRecord
     transportation ? PreferencesHelper.explode(transportation) : []
   end
 
+  def deleted_by_email
+    User.find(deleted_by).email
+  end
+
   def all_tags=(names)
     self.tags = names.reject(&:empty?).uniq.map do |name|
       Tag.where(name: name.strip).first_or_create!
@@ -118,9 +122,13 @@ class Tutor < ApplicationRecord
         volunteer_jobs: {
           affiliate_id: Coordinator.find(user.coordinator_id).affiliate_id
         }
-      )
+      ).where(deleted_on: nil)
     elsif user.admin?
       all
     end
+  end
+
+  def self.deleted_of(user)
+    where.not(deleted_on: nil) if user.admin?
   end
 end

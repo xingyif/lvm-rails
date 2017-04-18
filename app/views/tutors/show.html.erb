@@ -5,17 +5,27 @@ div class="row">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-9">
-                <%= link_to tutors_path do %>
-                  <span class="glyphicon glyphicon-arrow-left"></span>
-                  <span class="h4">Back to All Tutors</span>
+              <div class="col-xs-5">
+                <%= link_to edit_tutor_path(@tutor) do %>
+                  <button class="btn btn-primary">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit Tutor
+                  </button>
                 <% end %>
               </div>
 
-              <div class="col-xs-3 text-right">
-                <%= link_to edit_tutor_path(@tutor) do %>
-                  <span class="h4">Edit</span>
-                  <span class="glyphicon glyphicon-edit"></span>
+              <div class="col-xs-7 text-right">
+                <% if @tutor.deleted_on %>
+                  <%= link_to tutor_reinstate_path(@tutor), method: :patch, data: { confirm: "Are you sure you want to reinstate #{@tutor.name}?" } do %>
+                    <button class="btn btn-success">
+                      <span class="glyphicon glyphicon-check"></span> Reinstate Tutor
+                    </button>
+                  <% end %>
+                <% else %>
+                  <%= link_to tutor_delete_path(@tutor), method: :patch, data: { confirm: "Are you sure you want to delete #{@tutor.name}?" } do %>
+                    <button class="btn btn-danger">
+                      <span class="glyphicon glyphicon-trash"></span> Delete Tutor
+                    </button>
+                  <% end %>
                 <% end %>
               </div>
             </div>

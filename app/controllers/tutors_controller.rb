@@ -13,7 +13,7 @@ class TutorsController < ApplicationController
     }
     @clickable_rows = true
     @page_title = 'Tutors'
-    @models = Tutor.of(current_user)
+    @models = Tutor.of(current_user).where(deleted_on: nil)
     @headers = [
       'First Name',
       'Last Name',
@@ -32,12 +32,62 @@ class TutorsController < ApplicationController
     ]
   end
 
+  def deleted_index
+    ensure_admin!
+    add_breadcrumb 'Deleted Tutors'
+
+    @clickable_rows = true
+    @page_title = 'Deleted Tutors'
+    @models = Tutor.deleted_of(current_user)
+    @headers = [
+      'First Name',
+      'Last Name',
+      'Deleted On',
+      'Deleted By'
+    ]
+    @columns = [
+      'first_name',
+      'last_name',
+      'deleted_on',
+      'deleted_by_email'
+    ]
+  end
+
   def show
-    add_breadcrumb 'Tutors', tutors_path
+    if @tutor.deleted_on
+      add_breadcrumb 'Deleted Tutors', deleted_tutors_path
+    else
+      add_breadcrumb 'Tutors', tutors_path
+    end
     add_breadcrumb @tutor.name
 
     @students = students
     @student_options = student_options
+  end
+
+  def reinstate
+    @tutor = Tutor.of(current_user).find(params[:id])
+    @tutor.update(
+      deleted_on: nil,
+      deleted_by: nil
+    )
+
+    redirect_to @tutor
+  end
+
+  def delete
+    @tutor = Tutor.of(current_user).find(params[:id])
+    unmatch_all_matches
+    @tutor.update(
+      deleted_on: Date.today,
+      deleted_by: current_user.id
+    )
+
+    if current_user.admin?
+      redirect_to @tutor
+    else
+      redirect_to tutors_path
+    end
   end
 
   def update_tags
@@ -213,6 +263,12 @@ class TutorsController < ApplicationController
       params.to_unsafe_h['language_proficiencies'].to_json ||
       params['tutor']['language_proficiencies'].to_json
     clean_params
+  end
+
+  def unmatch_all_matches
+    Match.where(tutor_id: @tutor, end: nil).each do |m|
+      m.update(end: Date.today)
+    end
   end
 
   def set_tutor

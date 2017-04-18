@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   patch 'students/:id/reinstate', to: 'students#reinstate', as: 'student_reinstate'
   get 'deleted_students', to: 'students#deleted_index', as: 'deleted_students'
 
+
+  patch 'tutors/:id/delete', to: 'tutors#delete', as: 'tutor_delete'
+  patch 'tutors/:id/reinstate', to: 'tutors#reinstate', as: 'tutor_reinstate'
+  get 'deleted_tutors', to: 'tutors#deleted_index', as: 'deleted_tutors'
+
   resources :affiliates
   resources :assessments
   resources :coordinators
