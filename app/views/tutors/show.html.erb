@@ -235,6 +235,7 @@
                 </div>
               </div>
               <hr>
+              <% if !@students.empty? %>
               <div class="table-responsive">
                 <table class="table table-striped">
                   <thead>
@@ -244,7 +245,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% if !@students.empty? %>
                       <% @students.each do |s| %>
                         <tr>
                           <td> <%= link_to s.name, s %> </td>
@@ -258,12 +258,12 @@
                           </td>
                         </tr>
                       <% end %>
-                    <% else %>
-                      No Students
-                    <% end %>
                   </tbody>
                 </table>
               </div>
+              <% else %>
+                No Students
+              <% end %>
             </div>
           </div>
         </div>
