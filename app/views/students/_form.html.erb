@@ -24,7 +24,7 @@
       </div>
 
       <div class="col-md-4">
-        <%= f.input :last_name_id, label: "Last name ID", placeholder: "#####", maxlength: 5, required: false %>
+        <%= f.input :last_name_id, label: "Last name ID", placeholder: "#####", maxlength: 5, required: false, input_html: { class: "last_name_id" } %>
       </div>
 
       <div class="col-md-4">
@@ -48,7 +48,7 @@
       </div>
     </div>
   </section>
-  
+
   <section id="contactInfo">
     <h4>Contact Information</h4>
     <hr>
@@ -119,7 +119,7 @@
         <%= f.input :emergency_contact_phone, maxlength: 14, placeholder: "(###) ###-####", required: false, input_html: { class: "mask_phone" } %>
       </div>
     </div>
-    
+
   <section id="personalInfo">
     <h4>Personal Information</h4>
     <hr>
@@ -179,25 +179,25 @@
         <%= f.input :preferred_contact_method, collection: general_contact_preferences, label: "Preferred Contact", required: false %>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-1">
       </div>
-      
+
       <div class="col-md-2">
         <div class="form-group">
           <label class="control-label"> Mail </label>
           <%= f.input :mail_ok, as: :boolean, input_html: {checked: false}, label: "mail ok?", required: false %>
        </div>
       </div>
-      
+
       <div class="col-md-2">
         <div class="form-group">
           <label class="control-label"> Email </label>
           <%= f.input :email_ok, as: :boolean, input_html: {checked: false}, label: "email ok?", required: false %>
        </div>
       </div>
-      
+
       <div class="col-md-2">
         <div class="form-group">
           <label class="control-label"> Cell Phone </label>
@@ -219,7 +219,7 @@
           <%= f.input :work_lvm_ok, as: :boolean, input_html: {checked: false}, label: "lvm ok?", required: false %>
        </div>
       </div>
-      
+
     </div>
   </section>
 
@@ -258,7 +258,7 @@
       </div>
     </div>
   </section>
-  
+
   <section id="background">
     <h4>Background</h4>
     <hr>
@@ -281,7 +281,7 @@
         <%= f.input :release_sign_date, input_html: { class: 'datepicker' }, placeholder: "YYYY-MM-DD", required: false %>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
@@ -291,7 +291,7 @@
       </div>
     </div>
   </section>
-  
+
   <section id="referral">
     <h4>Referral & Services</h4>
     <hr>
@@ -308,27 +308,27 @@
         <%= f.input :education, collection: education, required: false %>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-12">
           <%= f.input :why_lvm, as: :text, label: 'Why LVM?', required: false %>
       </div>
     </div>
-    
+
     <hr>
-    
+
     <div class="row">
       <div class="col-md-6">
         <%= f.input :core_service_request, collection: services, required: false %>
       </div>
-      
+
       <div class="col-md-6">
         <%= f.input :additional_service_request, as: :string, required: false %>
       </div>
     </div>
-    
+
   </section>
-  
+
   <section id="cdbg">
     <h4>CDBG Information</h4>
     <hr>
@@ -346,14 +346,14 @@
           <%= f.collection_radio_buttons :cdbg_us_citizen, [[:true, 'Yes'] ,[:false, 'No']], :first, :last %>
         </div>
       </div>
-      
+
       <div class="col-md-3">
         <div class="form-group">
           <label class="control-label radio-label"> Legal resident (green card or other)</label>
           <%= f.collection_radio_buttons :cdbg_legal_resident, [[:true, 'Yes'] ,[:false, 'No']], :first, :last %>
         </div>
       </div>
-      
+
       <div class="col-md-3">
         <div class="form-group">
           <label class="control-label radio-label"> Female head of household </label>
@@ -361,19 +361,19 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-6">
         <%= f.input :cdbg_household_size, label: " Houshold size ", placeholder: '0', as: :integer, maxlength: 2, required: false %>
       </div>
-      
+
       <div class="col-md-6">
         <%= f.input :cdbg_household_income, label: " Household income ", collection: income_ranges, required: false %>
       </div>
     </div>
-    
+
   </section>
-  
+
   <section>
     <%= f.button :submit %>
   </section>
@@ -385,6 +385,7 @@
   $('.mask_zip').inputmask("99999", { "placeholder": "#" });
   $('.mask_phone').inputmask("(999) 999-9999", { "placeholder": "#" });
   $('.mask_smartt_id').inputmask("9999-999999", { "placeholder": "#" });
+  $('.last_name_id').inputmask("99999", { "placeholder": "#" });
   $('.mask_email').inputmask({ alias: "email" });
 </script>
 
