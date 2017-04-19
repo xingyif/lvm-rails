@@ -58,11 +58,11 @@ class TutorsController < ApplicationController
       add_breadcrumb 'Deleted Tutors', deleted_tutors_path
     else
       add_breadcrumb 'Tutors', tutors_path
+      @students = students
+      @student_options = student_options
     end
     add_breadcrumb @tutor.name
 
-    @students = students
-    @student_options = student_options
     @user = User.where(tutor_id: @tutor.id).take
   end
 

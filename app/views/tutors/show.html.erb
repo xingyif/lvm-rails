@@ -44,16 +44,16 @@
 
             <hr>
 
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <h4> Attached User Account</h4>
-                  <% if @user %>
-                    <p> <%= link_to @user.email, @user %> </p>
-                  <% else %>
-                    <p> No Account Attached
-                  <% end %>
-                </div>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h4> Attached User Account</h4>
+                <% if @user %>
+                  <p> <%= link_to @user.email, @user %> </p>
+                <% else %>
+                  <p> No Account Attached
+                <% end %>
               </div>
+            </div>
 
             <hr>
 
@@ -213,59 +213,61 @@
 
   <div class="col-md-7">
     <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-sm-6">
-                <h4>Students</h4>
-              </div>
-              <div class="col-sm-6 text-right">
-                <% if !@student_options.empty? %>
-                  <%= form_tag('add_student', method: 'put') do %>
-                    <%= select_tag(:student_id, options_for_select(@student_options)) %>
-                    <%= submit_tag('Add Student') %>
-                    <%= hidden_field_tag(:tutor_id, @tutor.id) %>
-                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                  <% end %>
-                <% else %>
-                  No unmatched students
-                <% end %>
-              </div>
-            </div>
-            <hr>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% if !@students.empty? %>
-                    <% @students.each do |s| %>
-                      <tr>
-                        <td> <%= link_to s.name, s %> </td>
-                        <td> <%= s.email %> </td>
-                        <td> <%= form_tag('remove_student', method: 'patch') do %>
-                               <%= submit_tag('Remove Student') %>
-                               <%= hidden_field_tag(:tutor_id, @tutor.id) %>
-                               <%= hidden_field_tag(:student_id, s.id) %>
-                               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                             <% end %>
-                        </td>
-                      </tr>
+      <% if !@tutor.deleted_on %>
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>Students</h4>
+                </div>
+                <div class="col-sm-6 text-right">
+                  <% if !@student_options.empty? %>
+                    <%= form_tag('add_student', method: 'put') do %>
+                      <%= select_tag(:student_id, options_for_select(@student_options)) %>
+                      <%= submit_tag('Add Student') %>
+                      <%= hidden_field_tag(:tutor_id, @tutor.id) %>
+                      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                     <% end %>
                   <% else %>
-                    No Students
+                    No unmatched students
                   <% end %>
-                </tbody>
-              </table>
+                </div>
+              </div>
+              <hr>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if !@students.empty? %>
+                      <% @students.each do |s| %>
+                        <tr>
+                          <td> <%= link_to s.name, s %> </td>
+                          <td> <%= s.email %> </td>
+                          <td> <%= form_tag('remove_student', method: 'patch') do %>
+                            <%= submit_tag('Remove Student') %>
+                            <%= hidden_field_tag(:tutor_id, @tutor.id) %>
+                            <%= hidden_field_tag(:student_id, s.id) %>
+                            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                          <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    <% else %>
+                      No Students
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
 
       <div class="col-md-12">
         <div class="panel panel-default">

@@ -304,4 +304,18 @@ RSpec.describe Student, type: :model do
       end
     end
   end
+
+  describe 'methods' do
+    describe 'deleted_by_email' do
+      it 'returns the email of the user who deleted the student' do
+        user = User.create(role: 2,
+                           email: 't@b.co',
+                           password: 'abcdef',
+                           password_confirmation: 'abcdef')
+
+        student = create(:student, deleted_by: user.id)
+        expect(student.deleted_by_email).to eq(user.email)
+      end
+    end
+  end
 end

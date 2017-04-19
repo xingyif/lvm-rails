@@ -67,4 +67,74 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'methods' do
+    describe '#last_sign_in_string' do
+      describe 'having signed in' do
+        it 'produces the proper date string' do
+          user = User.new(role: 0,
+                          email: 'a@b.com',
+                          password: 'abcdef',
+                          password_confirmation: 'abcdef',
+                          last_sign_in_at: Time.at(949_320_000))
+
+          expect(user.last_sign_in_string).to eq '2000-01-31'
+        end
+
+        describe 'never having signed in' do
+          it 'produces the proper notice string' do
+            user = User.new(role: 0,
+                            email: 'a@b.com',
+                            password: 'abcdef',
+                            password_confirmation: 'abcdef')
+
+            expect(user.last_sign_in_string).to eq 'Never Signed In'
+          end
+        end
+      end
+    end
+
+    describe '#updated_string' do
+      it 'produces the proper date string' do
+        user = User.new(role: 0,
+                        email: 'a@b.com',
+                        password: 'abcdef',
+                        password_confirmation: 'abcdef',
+                        created_at: Time.at(949_320_000))
+        expect(user.created_at_string).to eq '2000-01-31'
+      end
+    end
+
+    describe '#role_string' do
+      describe 'tutor' do
+        it 'produces the proper role string' do
+          user = User.new(role: 0,
+                          email: 'a@b.com',
+                          password: 'abcdef',
+                          password_confirmation: 'abcdef')
+          expect(user.role_string).to eq 'Tutor'
+        end
+      end
+
+      describe 'coordinator' do
+        it 'produces the proper role string' do
+          user = User.new(role: 1,
+                          email: 'a@b.com',
+                          password: 'abcdef',
+                          password_confirmation: 'abcdef')
+          expect(user.role_string).to eq 'Coordinator'
+        end
+      end
+
+      describe 'admin' do
+        it 'produces the proper role string' do
+          user = User.new(role: 2,
+                          email: 'a@b.com',
+                          password: 'abcdef',
+                          password_confirmation: 'abcdef')
+          expect(user.role_string).to eq 'Admin'
+        end
+      end
+    end
+  end
 end

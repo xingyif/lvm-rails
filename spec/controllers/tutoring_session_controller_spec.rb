@@ -28,18 +28,6 @@ RSpec.describe TutoringSessionsController, type: :controller do
       @tutoring_session_attrs[:tutor_id] = @tutor1.id
     end
 
-    describe 'GET #tutor_index' do
-      it 'populates an array of tutoring_session for specified tutor' do
-        get :tutor_index, params: { id: @tutor1.id }
-        expect(assigns(:models)).to eq([@tutoring_session])
-      end
-
-      it 'renders the index template' do
-        get :tutor_index, params: { id: @tutor1.id }
-        expect(response).to render_template('tutor_index')
-      end
-    end
-
     describe 'GET #student_index' do
       it 'populates an array of tutoring_session for specified student' do
         get :student_index, params: { id: @student1.id }
@@ -52,7 +40,50 @@ RSpec.describe TutoringSessionsController, type: :controller do
       end
     end
 
+    describe 'GET #tutor_index' do
+      it 'populates an array of tutoring_session for specified tutor' do
+        get :tutor_index, params: { id: @tutor1.id }
+        expect(assigns(:models)).to eq([@tutoring_session])
+      end
+
+      it 'renders the index template' do
+        get :tutor_index, params: { id: @tutor1.id }
+        expect(response).to render_template('tutor_index')
+      end
+    end
+
+    describe 'GET #new' do
+      it 'populates the specified tutor' do
+        get :new, params: { tutor_id: @tutor1.id }
+        expect(assigns(:tutor)).to eq(@tutor1)
+      end
+
+      it 'populates a new tutoring session' do
+        get :new, params: { tutor_id: @tutor1.id }
+        expect(assigns(:tutoring_session)).to be_a_new(TutoringSession)
+      end
+
+      it 'populates students from matches' do
+        get :new, params: { tutor_id: @tutor1.id }
+        expect(assigns(:students)).to eq([[@student1.name, @student1.id]])
+      end
+
+      it 'renders the :new view' do
+        get :new, params: { tutor_id: @tutor1.id }
+        expect(response).to render_template :new
+      end
+    end
+
     describe 'GET #show' do
+      describe 'when accessed incorrectly by a tutor' do
+        it 'redirects the tutor to root view' do
+          user = User.new(role: 0, tutor_id: @tutor1.id)
+          sign_in_auth(user)
+          get :show, params: { id: @tutoring_session, tutor_id: @tutor2.id }
+          expect(response).to redirect_to root_path
+        end
+      end
+
       it 'shows the specified tutoring_session' do
         get :show, params: { id: @tutoring_session, tutor_id: @tutor1.id }
         expect(assigns(:tutoring_session)).to eq(@tutoring_session)
@@ -61,6 +92,23 @@ RSpec.describe TutoringSessionsController, type: :controller do
       it 'renders the :show view' do
         get :show, params: { id: @tutoring_session, tutor_id: @tutor1.id }
         expect(response).to render_template('show')
+      end
+    end
+
+    describe 'GET #edit' do
+      it 'populates the correct current_student_id' do
+        get :edit, params: { id: @tutoring_session.id }
+        expect(assigns(:current_student_id)).to be(@tutor1.id)
+      end
+
+      it 'populates the correct students' do
+        get :edit, params: { id: @tutoring_session.id }
+        expect(assigns(:students)).to eq([[@student1.name, @student1.id]])
+      end
+
+      it 'renders the edit view' do
+        get :edit, params: { id: @tutoring_session.id }
+        expect(response).to render_template :edit
       end
     end
 

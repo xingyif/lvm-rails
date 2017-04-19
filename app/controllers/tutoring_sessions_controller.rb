@@ -74,11 +74,8 @@ class TutoringSessionsController < ApplicationController
   end
 
   def new
-    if current_user.tutor?
-      @tutor = Tutor.find(current_user.tutor_id)
-    elsif params[:tutor_id]
-      @tutor = Tutor.of(current_user).where(id: params[:tutor_id]).take
-    end
+    tutor_id = current_user.tutor_id || params[:tutor_id]
+    @tutor = Tutor.of(current_user).find(tutor_id)
 
     add_breadcrumb "Tutoring Sessions for #{@tutor.name}",
                    tutors_tutoring_sessions_path(@tutor)
@@ -92,12 +89,8 @@ class TutoringSessionsController < ApplicationController
   end
 
   def show
-    if current_user.tutor?
-      @tutor = Tutor.find(current_user.tutor_id)
-    elsif params[:tutor_id]
-      @tutor = Tutor.of(current_user)
-                    .find(Match.find(@tutoring_session.match_id).tutor_id)
-    end
+    @tutor = Tutor.of(current_user)
+                  .find(Match.find(@tutoring_session.match_id).tutor_id)
 
     add_breadcrumb "Tutoring Sessions for #{@tutor.name}",
                    tutors_tutoring_sessions_path(@tutor)
@@ -140,13 +133,8 @@ class TutoringSessionsController < ApplicationController
 
   def destroy
     @tutoring_session.destroy
-
-    if current_user.tutor?
-      @tutor = Tutor.find(current_user.tutor_id)
-    elsif params[:tutor_id]
-      @tutor = Tutor.of(current_user)
-                    .find(Match.find(@tutoring_session.match_id).tutor_id)
-    end
+    @tutor = Tutor.of(current_user)
+                  .find(Match.find(@tutoring_session.match_id).tutor_id)
 
     redirect_to tutors_tutoring_sessions_path(@tutor)
   end

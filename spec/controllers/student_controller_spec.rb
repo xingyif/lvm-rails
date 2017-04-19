@@ -64,41 +64,138 @@ RSpec.describe StudentsController, type: :controller do
       end
     end
 
+    describe 'GET #deleted_index' do
+      before do
+        affiliate = create(:affiliate)
+
+        create(:coordinator, affiliate: affiliate)
+
+        student1 = create(:student, deleted_on: Date.today, deleted_by: 1)
+        create(:student)
+
+        create(:enrollment, student: student1, affiliate: affiliate)
+
+        @all_students = [student1]
+        @coordinator_students = [student1]
+      end
+
+      describe 'as admin' do
+        before do
+          user = User.new(role: 2)
+          sign_in_auth(user)
+        end
+
+        it 'populates an array of all deleted students' do
+          get :deleted_index
+          expect(assigns(:models)).to eq(@all_students)
+        end
+
+        it 'renders the :index view' do
+          get :deleted_index
+          expect(response).to render_template :deleted_index
+        end
+      end
+
+      describe 'as coordinator' do
+        before do
+          user = User.new(role: 1, coordinator_id: 1)
+          sign_in_auth(user)
+        end
+
+        it 'redirects to the welcome view' do
+          get :deleted_index
+          expect(response).to redirect_to root_path
+        end
+      end
+
+      describe 'as tutor' do
+        before do
+          user = User.new(role: 0, tutor_id: 1)
+          sign_in_auth(user)
+        end
+
+        it 'redirects to the welcome view' do
+          get :deleted_index
+          expect(response).to redirect_to root_path
+        end
+      end
+    end
+
     describe 'GET #show' do
       before do
         user = User.new(role: 2)
         sign_in_auth(user)
         affiliate = create(:affiliate)
         @student = create(:student)
+        @student2 = create(:student, deleted_on: Date.today, deleted_by: 1)
         @tutor = create(:tutor)
         create(:tutor)
 
         create(:volunteer_job, tutor: @tutor, affiliate: affiliate)
         create(:enrollment, student: @student, affiliate: affiliate)
+        create(:enrollment, student: @student2, affiliate: affiliate)
+
+        create(:match, student: @student, tutor: @tutor)
       end
 
-      it 'populates the specified student' do
-        get :show, params: { id: @student }
-        expect(assigns(:student)).to eq(@student)
+      describe 'a deleted student' do
+        it 'populates the specified student' do
+          get :show, params: { id: @student2 }
+          expect(assigns(:student)).to eq(@student2)
+        end
+
+        it 'shows the correct breadcrumbs' do
+          allow(controller).to receive(:add_breadcrumb)
+          get :show, params: { id: @student2 }
+          expect(controller).to have_received(:add_breadcrumb)
+            .with('Home', :root_path, {}).ordered
+          expect(controller).to have_received(:add_breadcrumb)
+            .with('Deleted Students', deleted_students_path).ordered
+          expect(controller).to have_received(:add_breadcrumb)
+            .with(@student2.name).ordered
+        end
+
+        it 'renders the :show view' do
+          get :show, params: { id: @student2 }
+          expect(response).to render_template :show
+        end
       end
 
-      it 'populates tutor options' do
-        get :show, params: { id: @student }
+      describe 'a non-deleted student' do
+        it 'populates the specified student' do
+          get :show, params: { id: @student }
+          expect(assigns(:student)).to eq(@student)
+        end
 
-        expect(assigns(:tutor_options)).to eq(
-          [['No Tutor', 0], [@tutor.name, @tutor.id]]
-        )
-      end
+        it 'populates tutor options' do
+          get :show, params: { id: @student }
 
-      it 'popultes a match' do
-        match = Match.where(student_id: @student.id).take
-        get :show, params: { id: @student }
-        expect(assigns(:match)).to eq(match)
-      end
+          expect(assigns(:tutor_options)).to eq(
+            [['No Tutor', 0], [@tutor.name, @tutor.id]]
+          )
+        end
 
-      it 'renders the :show view' do
-        get :show, params: { id: @student }
-        expect(response).to render_template :show
+        it 'popultes a match' do
+          match = Match.where(student_id: @student.id).take
+          get :show, params: { id: @student }
+          expect(assigns(:match)).to eq(match)
+        end
+
+        it 'shows the correct breadcrumbs' do
+          allow(controller).to receive(:add_breadcrumb)
+          get :show, params: { id: @student }
+          expect(controller).to have_received(:add_breadcrumb)
+            .with('Home', :root_path, {}).ordered
+          expect(controller).to have_received(:add_breadcrumb)
+            .with('Students', students_path).ordered
+          expect(controller).to have_received(:add_breadcrumb)
+            .with(@student.name).ordered
+        end
+
+        it 'renders the :show view' do
+          get :show, params: { id: @student }
+          expect(response).to render_template :show
+        end
       end
     end
   end
@@ -374,6 +471,71 @@ RSpec.describe StudentsController, type: :controller do
             ).to eq(1)
           end
         end
+      end
+    end
+  end
+
+  describe 'PATCH #reinstate' do
+    before do
+      user = User.new(role: 2)
+      sign_in_auth(user)
+      @student = create(:student, deleted_on: Date.today, deleted_by: 1)
+    end
+
+    it 'updates the tutor correctly' do
+      patch :reinstate, params: { id: @student.id }
+      expect(Student.find(@student.id).deleted_on).to be nil
+      expect(Student.find(@student.id).deleted_by).to be nil
+    end
+
+    it 'redirects to the student view' do
+      patch :reinstate, params: { id: @student.id }
+      expect(response).to redirect_to(student_path(@student.id))
+    end
+  end
+
+  describe 'PATCH #delete' do
+    describe 'for admin' do
+      before do
+        @user = User.new(role: 2)
+        sign_in_auth(@user)
+        @student = create(:student)
+      end
+
+      it 'updates the student correctly' do
+        patch :delete, params: { id: @student.id }
+        expect(Student.find(@student.id).deleted_on.strftime('%F'))
+          .to eq Date.today.strftime('%F')
+        expect(Student.find(@student.id).deleted_by).to be @user.id
+      end
+
+      it 'redirects to the student view' do
+        patch :delete, params: { id: @student.id }
+        expect(response).to redirect_to(student_path(@student.id))
+      end
+    end
+
+    describe 'as coordinator' do
+      before do
+        affiliate = create(:affiliate)
+        coordinator = create(:coordinator, affiliate: affiliate)
+        @student = create(:student)
+        create(:enrollment, student: @student, affiliate: affiliate)
+
+        @user = User.new(role: 1, coordinator_id: coordinator.id)
+        sign_in_auth(@user)
+      end
+
+      it 'updates the student correctly' do
+        patch :delete, params: { id: @student.id }
+        expect(Student.find(@student.id).deleted_on.strftime('%F'))
+          .to eq Date.today.strftime('%F')
+        expect(Student.find(@student.id).deleted_by).to be @user.id
+      end
+
+      it 'redirects to the students index view' do
+        patch :delete, params: { id: @student.id }
+        expect(response).to redirect_to(students_path)
       end
     end
   end

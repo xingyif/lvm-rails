@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :affiliate do
     name { Faker::Name.name.delete("'") }
-    address { Faker::Address.street_address }
+    address { Faker::Address.street_address.delete("'") }
     phone_number { Faker::Base.numerify('(###) ###-####') }
     email { Faker::Internet.email }
     zip { Faker::Base.numerify('#####') }

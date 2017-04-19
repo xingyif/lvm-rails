@@ -39,14 +39,14 @@ RSpec.describe Tag, type: :model do
 
   describe '#created_string' do
     it 'produces the proper date string' do
-      @tag = create(:tag, created_at: Time.at(949_296_800))
+      @tag = create(:tag, created_at: Time.at(949_320_000))
       expect(@tag.created_string).to eq '2000-01-31'
     end
   end
 
   describe '#updated_string' do
     it 'produces the proper date string' do
-      @tag = create(:tag, updated_at: Time.at(949_296_800))
+      @tag = create(:tag, updated_at: Time.at(949_320_000))
       expect(@tag.updated_string).to eq '2000-01-31'
     end
   end

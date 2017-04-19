@@ -433,4 +433,18 @@ RSpec.describe Tutor, type: :model do
       end
     end
   end
+
+  describe 'methods' do
+    describe 'deleted_by_email' do
+      it 'returns the email of the user who deleted the tutor' do
+        user = User.create(role: 2,
+                           email: 't@b.co',
+                           password: 'abcdef',
+                           password_confirmation: 'abcdef')
+
+        tutor = create(:tutor, deleted_by: user.id)
+        expect(tutor.deleted_by_email).to eq(user.email)
+      end
+    end
+  end
 end

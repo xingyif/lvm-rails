@@ -106,4 +106,14 @@ RSpec.describe Affiliate, type: :model do
       end
     end
   end
+
+  describe 'methods' do
+    describe 'full_address' do
+      it 'returns the full address' do
+        a = create(:affiliate)
+        expect(a.full_address)
+          .to eq("#{a.address}, #{a.city} #{a.state}, #{a.zip}")
+      end
+    end
+  end
 end

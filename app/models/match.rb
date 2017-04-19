@@ -52,7 +52,7 @@ class Match < ApplicationRecord
     elsif user.coordinator?
       where(
         affiliate_id: Coordinator.find(
-          current_user.coordinator_id
+          user.coordinator_id
         ).affiliate_id
       )
     end

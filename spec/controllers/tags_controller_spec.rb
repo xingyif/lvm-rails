@@ -75,6 +75,22 @@ RSpec.describe TagsController, type: :controller do
             expect(response).to redirect_to(tags_path)
           end
         end
+
+        context 'with invalid attributes' do
+          before do
+            allow_any_instance_of(Tag).to receive(:update) { false }
+          end
+
+          it 'assigns the existing tutor as @tag' do
+            post :update, params: { id: @tag, tag: @new_tag_attrs }
+            expect(assigns(:tutor)).to eq(@tutor)
+          end
+
+          it 're-renders the :edit view' do
+            post :update, params: { id: @tag, tag: @new_tag_attrs }
+            expect(response).to redirect_to tags_path
+          end
+        end
       end
 
       describe 'DELETE #destroy' do

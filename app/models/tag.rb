@@ -11,10 +11,10 @@ class Tag < ApplicationRecord
   end
 
   def created_string
-    created_at.strftime('%D')
+    created_at.strftime('%F')
   end
 
   def updated_string
-    updated_at.strftime('%D')
+    updated_at.strftime('%F')
   end
 end

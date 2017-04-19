@@ -85,7 +85,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    prms = if user_params[:password_confirmation] == ''
+    prms = if user_params[:password_confirmation].nil? ||
+              user_params[:password_confirmation] == ''
              user_params.except(:password, :password_confirmation)
            else
              user_params

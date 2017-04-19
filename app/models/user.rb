@@ -29,14 +29,14 @@ class User < ApplicationRecord
 
   def last_sign_in_string
     if last_sign_in_at
-      last_sign_in_at.strftime('%B %d, %Y')
+      last_sign_in_at.strftime('%F')
     else
       'Never Signed In'
     end
   end
 
   def created_at_string
-    created_at.strftime('%B %d, %Y')
+    created_at.strftime('%F')
   end
 
   def role_string

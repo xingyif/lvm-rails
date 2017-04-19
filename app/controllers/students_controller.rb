@@ -59,11 +59,10 @@ class StudentsController < ApplicationController
       add_breadcrumb 'Deleted Students', deleted_students_path
     else
       add_breadcrumb 'Students', students_path
+      @tutor_options = tutor_options
+      @match = current_match(params[:id])
     end
     add_breadcrumb @student.name
-
-    @match = current_match(params[:id])
-    @tutor_options = tutor_options
   end
 
   def new
@@ -267,9 +266,5 @@ class StudentsController < ApplicationController
 
   def current_match(student_id)
     Match.where(student_id: student_id, end: nil).take
-  end
-
-  def current_enrollment(student_id)
-    Enrollment.where(student_id: student_id, end: nil).take
   end
 end
