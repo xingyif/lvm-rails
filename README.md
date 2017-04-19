@@ -10,8 +10,6 @@ This is a service learning project for CS4500 Spring 2017.
 
 See the live version here: https://lvm-rails.herokuapp.com/
 
-This repo was initially intended to be a spike to test the feasibility of starting from scratch.
-
 **Instructions detailed for MacOS; however, it can easily be adapted to linux/unix environments**
 
 To get started, fork and clone down the repo as defined in the [git flow article](https://cs5500.ccs.neu.edu/confluence/display/CS4500Sp16TEAM4/Git+Workflow).
@@ -93,12 +91,40 @@ rails server
 
 The application should be running and accessible at `http://localhost:3000`!
 
+## Explanation of relevant Rake (Ruby Make) Tasks:
+
+```
+rake db:drop
+```
+Drop the database.
+
+```
+rake db:create
+```
+Create a new database
+
+```
+rake db:migrate
+```
+Run all of the migration files in `db/migrate` in order. This brings the
+`schema.rb` file, which describes the database, up to date with the files in
+the directory.
+
+```
+rake db:seed_fu
+```
+Use the files in `db/fixtures/` to seed the development database.
+
 ## Seeding the database
 Run `rake db:seed_fu` to seed the database with:
-* 20 students
-* 20 tutors
-* 20 coordinators
-* A random assortment of relationships between students/tutors/coordinators
+* 5 Affiliates
+* 13 Coordinators
+* 100 Tutors
+* 100 Students
+* 100 Student/Tutor Matches
+* 100 Tutoring Sessions
+* 20 Student Assessments
+* 20 Tags
 * 3 user accounts
   * tutor@email.com (role: tutor)
   * coordinator@email.com (role: coordinator)
