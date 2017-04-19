@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-md-12">
     <h1 class="text-center">
-      Edit Tutoring Session<br>
-      <small> For <%= link_to @tutor.name, @tutor %> </small>
+      Edit Tutoring Session
+      <% if !current_user.tutor? %>
+        <br> <small> For <%= link_to @tutor.name, @tutor %> </small>
+      <% end %>
     </h1>
   </div>
 </div>
