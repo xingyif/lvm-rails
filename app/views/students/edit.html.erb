@@ -15,14 +15,11 @@
   </div>
   <div class="col-md-6">
     <div class="row">
-      <div class="col-xs-6">
-        <%= link_to students_path do %>
-          <span class="glyphicon glyphicon-arrow-left"></span>
-          <span class="h4">Back To Students</span>
-        <% end %>
-      </div>
-      <div class="col-xs-6 text-right">
-        <span class="h4">Edit Student</span>
+      <div class="col-md-12">
+        <h1 class="text-center">
+          Edit Student<br>
+          <small> <%= link_to @student.name, @student%> </small>
+        </h1>
       </div>
     </div>
 

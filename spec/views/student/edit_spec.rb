@@ -21,12 +21,6 @@ RSpec.describe 'students/edit.html.erb', type: :view do
       end
     end
 
-    describe 'links' do
-      it 'checks for link back' do
-        assert_select 'a[href=?]', students_path
-      end
-    end
-
     describe 'save button' do
       it 'checks for presence of save button' do
         expect(rendered).to have_button('Save Student')

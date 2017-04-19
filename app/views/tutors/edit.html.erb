@@ -14,16 +14,14 @@
   </div>
   <div class="col-md-6">
     <div class="row">
-      <div class="col-xs-6">
-        <%= link_to tutors_path do %>
-          <span class="glyphicon glyphicon-arrow-left"></span>
-          <span class="h4">Back To Tutors</span>
-        <% end %>
-      </div>
-      <div class="col-xs-6 text-right">
-        <span class="h4">Edit Tutor</span>
+      <div class="col-md-12">
+        <h1 class="text-center">
+          Edit Tutor<br>
+          <small> <%= link_to @tutor.name, @tutor%> </small>
+        </h1>
       </div>
     </div>
+
     <hr>
 
     <%= simple_form_for :tutor, url: tutor_path(@tutor), method: :patch do |f| %>
