@@ -14,7 +14,7 @@ See the live version here: https://lvm-rails.herokuapp.com/
 
 To get started, fork and clone down the repo as defined in the [git flow article](https://cs5500.ccs.neu.edu/confluence/display/CS4500Sp16TEAM4/Git+Workflow).
 
-## Getting Setup
+## Getting Set Up
 
 This section will walk through the installation of everything you'll need to get up and running. We'll be installing:
 
@@ -114,6 +114,12 @@ the directory.
 rake db:seed_fu
 ```
 Use the files in `db/fixtures/` to seed the development database.
+
+
+```
+rake db:reseed
+```
+Drops, creates, migrates, and reseeds the database.
 
 ## Seeding the database
 Run `rake db:seed_fu` to seed the database with:
