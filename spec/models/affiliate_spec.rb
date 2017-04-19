@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Affiliate, type: :model do
   describe 'associations' do
     it 'should have many coordinators' do
-      should have_many(:coordinators)
+      should have_many(:coordinator)
     end
 
     it 'should have many volunteer_jobs' do
