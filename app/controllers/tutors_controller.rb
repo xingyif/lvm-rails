@@ -30,6 +30,11 @@ class TutorsController < ApplicationController
       'cell_phone',
       'email_preferred'
     ]
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @models.to_csv, filename: "tutors-#{Date.today}.csv" }
+    end
   end
 
   def deleted_index
