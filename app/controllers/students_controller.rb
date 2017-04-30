@@ -31,7 +31,10 @@ class StudentsController < ApplicationController
       'cell_phone',
       'work_phone'
     ]
-
+    @download_button = {
+      text: 'Download All',
+      url: students_path(format: :csv)
+    }
     respond_to do |format|
       format.html
       format.csv { send_data @models.to_csv, filename: "students-#{Date.today}.csv" }
