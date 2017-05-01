@@ -37,7 +37,9 @@ class StudentsController < ApplicationController
     }
     respond_to do |format|
       format.html
+      # rubocop:disable LineLength
       format.csv { send_data @models.to_csv, filename: "students-#{Date.today}.csv" }
+      # rubocop:enable LineLength
     end
   end
 
