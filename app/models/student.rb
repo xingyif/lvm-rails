@@ -111,7 +111,7 @@ class Student < ApplicationRecord
   end
 
   def self.to_csv
-    attributes = %w{first_name last_name email home_phone cell_phone work_phone}
+    attributes = Student.column_names
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
